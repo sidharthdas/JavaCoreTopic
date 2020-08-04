@@ -6,15 +6,31 @@ public class User {
 	private String name;
 	private String email;
 	private String address;
+	private int mark;
 	
 	
 
-	public User(int id, String name, String email, String address) {
+	public User(int id, String name, String email, String address, int mark) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.address = address;
+		this.mark = mark;
 	}
+	
+	
+
+	public int getMark() {
+		return mark;
+	}
+
+
+
+	public void setMark(int mark) {
+		this.mark = mark;
+	}
+
+
 
 	public int getId() {
 		return id;
@@ -47,5 +63,15 @@ public class User {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
+
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", address=" + address + ", mark=" + mark
+				+ "]";
+	}
+	
+	
 
 }
