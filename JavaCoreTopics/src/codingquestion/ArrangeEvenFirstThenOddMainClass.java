@@ -23,20 +23,33 @@ public class ArrangeEvenFirstThenOddMainClass {
 		numbers.add(12);
 		numbers.add(13);
 		
-		List<Integer> numbersPrime = new ArrayList<>();
-		List<Integer> numbersOdd = new ArrayList<>();
-
-		for(int i : numbers) {
-			if(ArrangeEvenFirstThenOddMainClass.isPrime(i)) {
-				numbersPrime.add(i);
+		List<Integer> newList = new ArrayList<Integer>(numbers.size());
+		int i = 0;
+		int k = numbers.size() -1 ;
+		while(i < numbers.size()) {
+			if(!isPrime(numbers.get(i))){
+				newList.add(numbers.get(i));
 			}else {
-				numbersOdd.add(i);
+				newList.add(k, numbers.get(i));
+				k--;
 			}
+			i++;
 		}
 		
-		numbers = Stream.concat(numbersOdd.stream(), numbersPrime.stream()).collect(Collectors.toList());
+		System.out.println(newList);
 		
-		System.out.println(numbers);
+		/*
+		 * List<Integer> numbersPrime = new ArrayList<>(); List<Integer> numbersOdd =
+		 * new ArrayList<>();
+		 * 
+		 * for(int i : numbers) { if(ArrangeEvenFirstThenOddMainClass.isPrime(i)) {
+		 * numbersPrime.add(i); }else { numbersOdd.add(i); } }
+		 * 
+		 * numbers = Stream.concat(numbersOdd.stream(),
+		 * numbersPrime.stream()).collect(Collectors.toList());
+		 * 
+		 * System.out.println(numbers);
+		 */
 
 	}
 
