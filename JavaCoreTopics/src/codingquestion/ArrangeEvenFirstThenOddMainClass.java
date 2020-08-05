@@ -2,8 +2,6 @@ package codingquestion;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ArrangeEvenFirstThenOddMainClass {
 
@@ -23,20 +21,23 @@ public class ArrangeEvenFirstThenOddMainClass {
 		numbers.add(12);
 		numbers.add(13);
 		
-		List<Integer> newList = new ArrayList<Integer>(numbers.size());
+		int[] arr = new int[numbers.size()];
+		
 		int i = 0;
-		int k = numbers.size() -1 ;
+		int k = numbers.size() - 1;
 		while(i < numbers.size()) {
 			if(!isPrime(numbers.get(i))){
-				newList.add(numbers.get(i));
+				arr[i] = numbers.get(i);
 			}else {
-				newList.add(k, numbers.get(i));
+				arr[k] = numbers.get(i);
 				k--;
 			}
 			i++;
 		}
 		
-		System.out.println(newList);
+		for(int j : arr) {
+			System.out.print(arr[j]+" ");
+		}
 		
 		/*
 		 * List<Integer> numbersPrime = new ArrayList<>(); List<Integer> numbersOdd =
