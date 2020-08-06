@@ -1,48 +1,50 @@
 package bst;
 
-class Node {
 
+
+class Node{
+	
 	int data;
 	Node left;
 	Node right;
 }
 
-class BST {
-
+class BST{
+	
 	public Node createNewNode(int data) {
 		Node node = new Node();
 		node.data = data;
 		node.left = null;
 		node.right = null;
-
+		
 		return node;
 	}
-
+	
 	public Node insert(Node node, int data) {
-
-		if (node == null) {
+		
+		if(node == null) {
 			return createNewNode(data);
 		}
-		if (data < node.data) {
+		if(data < node.data) {
 			node.left = insert(node.left, data);
-		} else if (data >= node.data) {
+		}else if(data >= node.data) {
 			node.right = insert(node.right, data);
 		}
-
+		
 		return node;
 	}
-
+	
 	public boolean checkNode(Node node, int data) {
-		if (node == null) {
+		if(node == null) {
 			return false;
 		}
 		boolean isPresent = false;
-		while (node != null) {
-			if (data < node.data) {
+		while(node != null) {
+			if(data < node.data) {
 				node = node.left;
-			} else if (data > node.data) {
+			}else if(data > node.data) {
 				node = node.right;
-			} else if (node.data == data) {
+			}else if(node.data == data){
 				isPresent = true;
 				break;
 			}
@@ -54,26 +56,19 @@ class BST {
 		if(node == null) {
 			return;
 		}
-		inOrder(node.left);
-		System.out.print(node.data+ " ");
-		inOrder(node.right);
 		
-	}
-	public void preOrder(Node node) {
-		if(node == null) {
-			return;
-		}
+		inOrder(node.left);
+
+		inOrder(node.right);
 		System.out.print(node.data+ " ");
-		preOrder(node.left);
-		preOrder(node.right);
 	}
 }
 
 public class BSTApp {
-
+	
 	public static void main(String[] args) {
 		BST a = new BST();
-
+		
 		Node root = null;
 		root = a.insert(root, 10);
 		root = a.insert(root, 20);
@@ -85,9 +80,9 @@ public class BSTApp {
 		root = a.insert(root, 80);
 		root = a.insert(root, 90);
 		root = a.insert(root, 100);
-
-		System.out.println(a.checkNode(root, 100));
-
+		
+		System.out.println(a.checkNode(root, 80));
+		a.inOrder(root);
 	}
 
 }
