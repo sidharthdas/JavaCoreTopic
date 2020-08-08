@@ -83,6 +83,9 @@ public class BSTApp {
 		
 		System.out.println(a.checkNode(root, 80));
 		a.inOrder(root);
+		
+		String str = "hello";
+		str.hashCode();
 	}
 
 }
