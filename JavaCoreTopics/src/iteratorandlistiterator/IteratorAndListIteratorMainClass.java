@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.stream.Collectors;
 
 public class IteratorAndListIteratorMainClass {
 	public static void main(String[] args) {
@@ -25,6 +26,8 @@ public class IteratorAndListIteratorMainClass {
 		
 		
 		ListIterator<String> listIt = names.listIterator();
+		
+		names.stream().collect(Collectors.toList());
 		
 		listIt.next();
 		listIt.next();
