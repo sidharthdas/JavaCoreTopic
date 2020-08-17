@@ -19,6 +19,7 @@ public class MultiThreadingMainClass {
 		Thread t4 = new Thread(t3);
 		
 		t.start();
+		//t.start(); Illigal thread state exception
 		t1.start();
 		t4.start();
 		
