@@ -12,5 +12,8 @@ public class B extends A{
 	public void test() {
 		System.out.println("In test method of B class");
 	}
-
+	
+	public void test3() {
+		System.out.println("in test 3 method of B class");
+	}
 }

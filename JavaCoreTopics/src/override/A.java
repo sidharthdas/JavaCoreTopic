@@ -13,5 +13,9 @@ public class A {
 	public void test() {
 		System.out.println("In test method of A class");
 	}
+	
+	public void test1() {
+		System.out.println("In test1 method of A class");
+	}
 
 }
