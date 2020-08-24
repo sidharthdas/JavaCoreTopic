@@ -53,7 +53,7 @@ public class MethodReferenceMainClass {
 		map.put("rita", 105);
 		
 		
-
+		
 		Map<String, Integer> newMap = map.entrySet().stream().filter(x -> x.getValue() > 100)
 				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 		
