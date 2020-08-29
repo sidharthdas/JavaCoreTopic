@@ -1,0 +1,39 @@
+package practice4.obejctcreation;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
+class Student{
+	public void test() {
+		System.out.println("in test method of student class");
+	}
+	
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		return super.clone();
+	}
+	
+}
+
+public class MainClass {
+	
+	public static void main(String[] args) throws InstantiationException, IllegalAccessException, CloneNotSupportedException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {
+		
+		Student s1 = new Student();
+		s1.test();
+		
+		Student s2 = Student.class.newInstance();
+		s2.test();
+		
+		Student s3 = (Student) s2.clone();
+		s3.test();
+		
+		Constructor c = Student.class.getConstructor(); 
+		
+		Student s4 = (Student) c.newInstance();
+		s4.test();
+		
+	}
+
+}
