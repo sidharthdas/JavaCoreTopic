@@ -3,7 +3,7 @@ package practice4.obejctcreation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-class Student{
+class Student implements Cloneable{
 	public void test() {
 		System.out.println("in test method of student class");
 	}
@@ -29,10 +29,11 @@ public class MainClass {
 		Student s3 = (Student) s2.clone();
 		s3.test();
 		
-		Constructor c = Student.class.getConstructor(); 
-		
-		Student s4 = (Student) c.newInstance();
-		s4.test();
+		/*
+		 * Constructor c = Student.class.getConstructor();
+		 * 
+		 * Student s4 = (Student) c.newInstance(); s4.test();
+		 */
 		
 	}
 
