@@ -58,6 +58,31 @@ class Node {
 	 }
 	 
 	 
+	 //Remove 40 from linkedlist
+	 public LinkedList remove(int num, LinkedList list) {
+		 if(list.head == null) {
+			 return null;
+		 }
+		 if(list.head.data == num) {
+			 list.head = list.head.next;
+			 return list;
+		 }
+		 
+		 Node currNode = list.head;
+		 
+		 while(currNode.next != null) {
+			 if(currNode.next.data == num) {
+				 Node node = currNode.next.next;
+				 currNode.next  = node;
+				 break;
+			 }
+			 currNode = currNode.next;
+		 }
+		 
+		 return list;
+	 }
+	 
+	 
 	 
 	 public void printList(LinkedList l) {
 		 if(l.head == null) {
@@ -86,6 +111,11 @@ public class LinkedListMainClass {
 		list = list.insertAtFirst(70, list);
 		
 		list = list.insertAfter(list.head.next, 5, list);
+		
+		list.printList(list);
+		
+		System.out.println("removing 40");
+		list = list.remove(10, list);
 		
 		list.printList(list);
 		

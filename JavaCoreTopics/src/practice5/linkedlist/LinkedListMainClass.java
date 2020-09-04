@@ -10,7 +10,7 @@ class Node {
 		this.data = data;
 	}
 }
-
+ 
 class LinkedList {
 
 	Node head = null;
