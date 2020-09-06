@@ -18,7 +18,7 @@ public class SquareRootMainClass {
 	public static void main(String[] args) {
 		
 		
-		System.out.println(squareRoot(4));
+		System.out.println(squareRoot(9));
 	}
 
 }
