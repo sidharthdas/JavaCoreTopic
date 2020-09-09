@@ -18,6 +18,9 @@ public class Child extends Base{
 	}
 	
 	
-	
+	@Override
+	public void getValue() throws ArithmeticException{
+		
+	}
 
 }
