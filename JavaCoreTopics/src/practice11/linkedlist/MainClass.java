@@ -1,6 +1,4 @@
-package practice10.linkedlist;
-
-import java.util.HashSet;
+package practice11.linkedlist;
 
 class Node {
 	int data;
@@ -20,15 +18,14 @@ class LinkedList {
 		if (list.head == null) {
 			list.head = newNode;
 		} else {
-
-			Node last = list.head;
-			while (last.next != null) {
-				last = last.next;
+			Node currNode = list.head;
+			while (currNode.next != null) {
+				currNode = currNode.next;
 			}
-			last.next = newNode;
+			currNode.next = newNode;
 		}
-
 		return list;
+
 	}
 
 	public LinkedList insertAtFirst(LinkedList list, int data) {
@@ -39,22 +36,38 @@ class LinkedList {
 			newNode.next = list.head;
 			list.head = newNode;
 		}
-
 		return list;
 	}
 
-	public LinkedList insertAfter(LinkedList list, Node prevNode, int data) {
+	public LinkedList insertAfterGivenElement(LinkedList list, int prevData, int data) {
+		if (list.head == null) {
+			return null;
+		}
+		Node currNode = list.head;
+		while (currNode != null) {
+			if (currNode.data == prevData) {
+				Node node = new Node(data);
+				Node nextNode = currNode.next;
+				node.next = nextNode;
+				currNode.next = node;
+				break;
+			}
+		}
+		return list;
+	}
+
+	public LinkedList insertAfterGivenNode(LinkedList list, Node prevNode, int data) {
 		if (list.head == null) {
 			return null;
 		}
 		if (prevNode == null) {
 			return null;
 		}
-		Node newNode = new Node(data);
 
-		newNode.next = prevNode.next;
-		prevNode.next = newNode;
+		Node node = new Node(data);
 
+		node.next = prevNode.next;
+		prevNode.next = node;
 		return list;
 	}
 
@@ -65,7 +78,6 @@ class LinkedList {
 		if (list.head.data == data) {
 			list.head = list.head.next;
 		} else {
-
 			Node currNode = list.head;
 			while (currNode.next != null) {
 				if (currNode.next.data == data) {
@@ -73,6 +85,7 @@ class LinkedList {
 					currNode.next = node;
 					break;
 				}
+
 				currNode = currNode.next;
 			}
 		}
@@ -90,74 +103,13 @@ class LinkedList {
 			System.out.print(" " + currNode.data);
 			currNode = currNode.next;
 		}
+
 	}
-
-	public boolean checkCircular(LinkedList list) {
-		if (list.head == null) {
-			return false;
-		}
-		HashSet<Node> check = new HashSet<>();
-		Node currNode = list.head;
-		while (currNode != null) {
-			if (check.contains(currNode)) {
-				return true;
-			}
-
-			check.add(currNode);
-			currNode = currNode.next;
-		}
-
-		return false;
-	}
-	//reverse a linkedlist
-	public LinkedList reverse(LinkedList list) {
-		if (list.head == null) {
-			return null;
-		}
-
-		Node prevNode = null;
-		Node currNode = list.head;
-		Node nextNode = null;
-
-		while (currNode != null) {
-			nextNode = currNode.next;
-			currNode.next = prevNode;
-			prevNode = currNode;
-			currNode = nextNode;
-		}
-
-		list.head = prevNode;
-
-		return list;
-	}
-	
-	//insert before element
-	public LinkedList insertAfterElement(LinkedList list, int prevElement, int data) {
-		if(list.head == null) {
-			return null;
-		}
-		Node currNode = list.head;
-		
-		while(currNode != null) {
-			if(currNode.data == prevElement) {
-				Node prevNode = currNode;
-				Node node = new Node(data);
-				node.next = prevNode.next;
-				prevNode.next = node;
-				break;
-			}
-			currNode = currNode.next;
-		}
-		
-		return list;
-	}
-	
-
 }
 
 public class MainClass {
-
 	public static void main(String[] args) {
+
 		LinkedList list = new LinkedList();
 
 		list = list.insertAtFirst(list, 10);
@@ -168,7 +120,7 @@ public class MainClass {
 		list = list.insertAtFirst(list, 60);
 		list = list.insertAtFirst(list, 70);
 
-		list = list.insertAfter(list, list.head.next, 5);
+		list = list.insertAfterGivenNode(list, list.head.next, 5);
 
 		list.print(list);
 		System.out.println();
@@ -180,9 +132,10 @@ public class MainClass {
 		 * 
 		 * list = list.reverse(list); list.print(list); System.out.println();
 		 */
-		
-		list = list.insertAfterElement(list, 70, 100);
+
+		list = list.insertAfterGivenElement(list, 70, 100);
 		list.print(list);
+
 	}
 
 }
