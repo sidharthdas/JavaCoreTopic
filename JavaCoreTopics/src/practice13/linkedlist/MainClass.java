@@ -1,4 +1,4 @@
-package practice11.linkedlist;
+package practice13.linkedlist;
 
 class Node {
 	int data;
@@ -10,7 +10,6 @@ class Node {
 }
 
 class LinkedList {
-
 	Node head = null;
 
 	public LinkedList insertAtEnd(LinkedList list, int data) {
@@ -24,6 +23,7 @@ class LinkedList {
 			}
 			currNode.next = newNode;
 		}
+
 		return list;
 
 	}
@@ -36,38 +36,31 @@ class LinkedList {
 			newNode.next = list.head;
 			list.head = newNode;
 		}
+
 		return list;
 	}
 
-	public LinkedList insertAfterGivenElement(LinkedList list, int prevData, int data) {
+	public LinkedList insertAt(LinkedList list, int prevData, int data) {
 		if (list.head == null) {
 			return null;
 		}
-		Node currNode = list.head;
-		while (currNode != null) {
-			if (currNode.data == prevData) {
-				Node node = new Node(data);
-				Node nextNode = currNode.next;
-				node.next = nextNode;
-				currNode.next = node;
-				break;
+		Node newNode = new Node(data);
+		if (list.head.data == prevData) {
+			newNode.next = list.head.next;
+			list.head = newNode;
+		} else {
+			Node currNode = list.head;
+			while (currNode.next == null) {
+				if (currNode.data == prevData) {
+					Node node = currNode.next;
+					newNode.next = node;
+					currNode.next = newNode;
+
+				}
+				currNode = currNode.next;
 			}
-		}
-		return list;
-	}
 
-	public LinkedList insertAfterGivenNode(LinkedList list, Node prevNode, int data) {
-		if (list.head == null) {
-			return null;
 		}
-		if (prevNode == null) {
-			return null;
-		}
-
-		Node node = new Node(data);
-
-		node.next = prevNode.next;
-		prevNode.next = node;
 		return list;
 	}
 
@@ -83,56 +76,30 @@ class LinkedList {
 				if (currNode.next.data == data) {
 					Node node = currNode.next.next;
 					currNode.next = node;
-					break;
 				}
-
 				currNode = currNode.next;
 			}
 		}
 
 		return list;
+
 	}
 
 	public void print(LinkedList list) {
 		if (list.head == null) {
 			return;
 		}
-
 		Node currNode = list.head;
 		while (currNode != null) {
-			System.out.print(" " + currNode.data);
+			System.out.print(currNode.data + " ");
 			currNode = currNode.next;
 		}
-
-	}
-
-	public boolean isLoop(LinkedList list) {
-		if (list.head == null) {
-			return false;
-		}
-
-		Node slow = null;
-		Node fast = null;
-
-		slow = fast = list.head;
-
-		while (fast.next != null && fast.next.next != null) {
-			slow = slow.next;
-			fast = fast.next.next;
-
-			if (slow.data == fast.data) {
-				return true;
-			}
-		}
-
-		return false;
-
 	}
 }
 
 public class MainClass {
-	public static void main(String[] args) {
 
+	public static void main(String[] args) {
 		LinkedList list = new LinkedList();
 
 		list = list.insertAtFirst(list, 10);
@@ -143,7 +110,7 @@ public class MainClass {
 		list = list.insertAtFirst(list, 60);
 		list = list.insertAtFirst(list, 70);
 
-		list = list.insertAfterGivenNode(list, list.head.next, 5);
+		list = list.insertAt(list, 30, 5);
 
 		list.print(list);
 		System.out.println();
@@ -153,14 +120,6 @@ public class MainClass {
 
 		list.print(list);
 		System.out.println();
-		list.head.next.next.next.next = list.head;
-		System.out.println(list.isLoop(list));
-
-		/*
-		 * list = list.reverse(list); list.print(list); System.out.println();
-		 * 
-		 * list = list.insertAfterGivenElement(list, 70, 100); list.print(list);
-		 */
 
 	}
 
