@@ -7,7 +7,7 @@ public final class Employee {
 	
 	private final int empId;
 	private final String empName;
-	private final List<Integer> list;
+	private final ArrayList<Integer> list;
 	
 	
 	public Employee(int empId, String empName, List<Integer> list) {
@@ -26,8 +26,8 @@ public final class Employee {
 	public String getEmpName() {
 		return empName;
 	}
-	public List<Integer> getList() {
-		return list;
+	public ArrayList<Integer> getList() {
+		return (ArrayList<Integer>) list.clone();
 	}
 	
 	
