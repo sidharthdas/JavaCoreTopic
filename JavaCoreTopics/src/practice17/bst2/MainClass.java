@@ -1,4 +1,14 @@
-package practice16.bst;
+/**
+ * 
+ */
+package practice17.bst2;
+
+
+
+/**
+ * @author sidharthdas
+ *
+ */
 
 class Node {
 	int data;
@@ -8,7 +18,7 @@ class Node {
 
 class BST {
 
-	private Node createNode(int data) {
+	private Node create(int data) {
 		Node node = new Node();
 		node.data = data;
 		node.left = null;
@@ -19,8 +29,9 @@ class BST {
 
 	public Node insert(Node node, int data) {
 		if (node == null) {
-			return createNode(data);
+			return create(data);
 		}
+
 		if (data < node.data) {
 			node.left = insert(node.left, data);
 		} else if (data > node.data) {
@@ -34,7 +45,9 @@ class BST {
 		if (node == null) {
 			return false;
 		}
+
 		boolean isPresent = false;
+
 		while (node != null) {
 			if (data < node.data) {
 				node = node.left;
@@ -70,19 +83,25 @@ class BST {
 				}
 			} else {
 				Node successor = getSuccessor(node);
-				node.right = remove(node.right, successor.data);
+				node.right = remove(node, successor.data);
 			}
 		}
 
 		return node;
 	}
 
+	/**
+	 * @param node
+	 * @return
+	 */
 	private Node getSuccessor(Node node) {
 		// TODO Auto-generated method stub
 		if (node == null) {
 			return null;
 		}
+
 		Node temp = node.right;
+
 		while (temp != null) {
 			temp = temp.left;
 		}
@@ -103,15 +122,16 @@ class BST {
 		} else {
 			return right + 1;
 		}
+
 	}
 
-	public Node mirrorImage(Node node) {
+	public Node mirror(Node node) {
 		if (node == null) {
 			return null;
 		}
 
-		Node left = mirrorImage(node.left);
-		Node right = mirrorImage(node.right);
+		Node left = mirror(node.left);
+		Node right = mirror(node.right);
 
 		node.left = right;
 		node.right = left;
@@ -123,6 +143,7 @@ class BST {
 		if (node == null) {
 			return;
 		}
+
 		inOrder(node.left);
 		System.out.print(node.data + " ");
 		inOrder(node.right);
@@ -134,6 +155,7 @@ class BST {
 		}
 		System.out.print(node.data + " ");
 		preOrder(node.left);
+
 		preOrder(node.right);
 	}
 
@@ -143,13 +165,14 @@ class BST {
 		}
 
 		postOrder(node.left);
+
 		postOrder(node.right);
 		System.out.print(node.data + " ");
 	}
 }
 
 public class MainClass {
-
+	
 	public static void main(String[] args) {
 		BST a = new BST();
 
@@ -182,9 +205,8 @@ public class MainClass {
 		System.out.println();
 		System.out.println("Height of BST : " + a.height(root));
 
-		root = a.mirrorImage(root);
+		root = a.mirror(root);
 		a.inOrder(root);
-
 	}
 
 }
