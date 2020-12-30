@@ -3,7 +3,7 @@
  */
 package practice17.bst2;
 
-
+import java.util.ArrayList;
 
 /**
  * @author sidharthdas
@@ -207,6 +207,8 @@ public class MainClass {
 
 		root = a.mirror(root);
 		a.inOrder(root);
+		
+		ArrayList lis = new ArrayList();
 	}
 
 }

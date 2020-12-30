@@ -1,9 +1,8 @@
 /**
  * 
  */
-package practice18.bst;
+package practice19.bst;
 
-import java.util.HashSet;
 
 /**
  * @author sidharthdas
@@ -14,23 +13,13 @@ class Node {
 	int data;
 	Node left;
 	Node right;
-
 }
 
 class BST {
 
-	private Node createNode(int data) {
-		Node node = new Node();
-		node.data = data;
-		node.left = null;
-		node.right = null;
-
-		return node;
-	}
-
 	public Node insert(Node node, int data) {
 		if (node == null) {
-			return createNode(data);
+			return create(data);
 		}
 
 		if (data < node.data) {
@@ -42,25 +31,17 @@ class BST {
 		return node;
 	}
 
-	public boolean checkNode(Node node, int data) {
-		if (node == null) {
-			return false;
-		}
-
-		boolean isPresent = false;
-
-		while (node != null) {
-			if (data < node.data) {
-				node = node.left;
-			} else if (data > node.data) {
-				node = node.right;
-			} else {
-				isPresent = true;
-				break;
-			}
-		}
-
-		return isPresent;
+	/**
+	 * @param data
+	 * @return
+	 */
+	private Node create(int data) {
+		// TODO Auto-generated method stub
+		Node node = new Node();
+		node.data = data;
+		node.left = null;
+		node.right = null;
+		return node;
 	}
 
 	public Node remove(Node node, int data) {
@@ -73,21 +54,23 @@ class BST {
 		} else if (data > node.data) {
 			node.right = remove(node.right, data);
 		} else {
+
 			if (node.left == null || node.right == null) {
 				Node temp = null;
 				temp = node.left == null ? node.right : node.left;
+
 				if (temp == null) {
 					return null;
 				} else {
 					return temp;
 				}
 			} else {
+
 				Node successor = getSuccessor(node);
 				node.right = remove(node.right, successor.data);
 			}
 		}
 		return node;
-
 	}
 
 	/**
@@ -137,13 +120,34 @@ class BST {
 		return node;
 	}
 
+	public boolean check(Node node, int data) {
+		if (node == null) {
+			return false;
+
+		}
+
+		boolean isPresent = false;
+
+		while (node != null) {
+			if (data < node.data) {
+				node = node.left;
+			} else if (data > node.data) {
+				node = node.right;
+			} else {
+				isPresent = true;
+				break;
+			}
+		}
+
+		return isPresent;
+	}
+
 	public void inOrder(Node node) {
 		if (node == null) {
 			return;
 		}
-
 		inOrder(node.left);
-		System.out.print(node.data + " ");
+		System.out.print(" " + node.data);
 		inOrder(node.right);
 	}
 
@@ -151,8 +155,7 @@ class BST {
 		if (node == null) {
 			return;
 		}
-		System.out.print(node.data + " ");
-
+		System.out.print(" " + node.data);
 		preOrder(node.left);
 
 		preOrder(node.right);
@@ -162,18 +165,17 @@ class BST {
 		if (node == null) {
 			return;
 		}
-
 		postOrder(node.left);
 
 		postOrder(node.right);
-		System.out.print(node.data + " ");
+		System.out.print(" " + node.data);
 	}
-
 }
 
 public class MainClass {
 	
 	public static void main(String[] args) {
+		
 		BST a = new BST();
 
 		Node root = null;
@@ -188,7 +190,7 @@ public class MainClass {
 		root = a.insert(root, 90);
 		root = a.insert(root, 100);
 
-		System.out.println(a.checkNode(root, 80));
+		System.out.println(a.check(root, 80));
 		System.out.println("inorder");
 		a.inOrder(root);
 
@@ -207,8 +209,6 @@ public class MainClass {
 
 		root = a.mirror(root);
 		a.inOrder(root);
-		
-		HashSet sss = new HashSet();
 	}
 
 }
