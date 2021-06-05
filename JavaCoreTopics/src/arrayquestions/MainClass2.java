@@ -1,5 +1,6 @@
 package arrayquestions;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -26,7 +27,12 @@ public class MainClass2 {
 		Map<Integer, Integer> newMap = map.entrySet().stream().filter(x -> x.getValue() > 1)
 				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 		
-		System.out.println(newMap);
+		
+		/*
+		 * Map<Integer, Integer> newMap1 =
+		 * map.entrySet().stream().sorted(Comparator.comparing(Map.Entry::getValue)).
+		 * collect(Coll) System.out.println(newMap);
+		 */
 
 	}
 

@@ -128,16 +128,17 @@ public class LinkedListMainClass {
 
 		list.print(list);
 
-		//System.out.println("removing 40");
-		//list = list.remove(50, list);
+		System.out.println("removing 40");
+		list = list.remove(50, list);
 		
 		System.out.println();
 
-		list.print(list);
+		//list.print(list);
 		
 		System.out.println();
 		
 		list.insertAfterParticular(list, 30, 10);
+		
 		
 		list.print(list);
 

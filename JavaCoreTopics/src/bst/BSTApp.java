@@ -1,6 +1,7 @@
 package bst;
 
-
+import java.util.ArrayList;
+import java.util.List;
 
 class Node{
 	
@@ -10,6 +11,8 @@ class Node{
 }
 
 class BST{
+	
+	List<Integer> num = new ArrayList<>();
 	
 	public Node createNewNode(int data) {
 		Node node = new Node();
@@ -58,9 +61,14 @@ class BST{
 		}
 		
 		inOrder(node.left);
-
-		inOrder(node.right);
 		System.out.print(node.data+ " ");
+		num.add(node.data);
+		inOrder(node.right);
+		
+	}
+	
+	public void preDestory() {
+		this.num = new ArrayList<>();
 	}
 }
 
@@ -81,11 +89,14 @@ public class BSTApp {
 		root = a.insert(root, 90);
 		root = a.insert(root, 100);
 		
-		System.out.println(a.checkNode(root, 80));
 		a.inOrder(root);
 		
-		String str = "hello";
-		str.hashCode();
+		System.out.println("----------------------------");
+		
+		System.out.println(a.num);
+		a.preDestory();
+		
+		System.out.println(a.num);
 	}
 
 }
