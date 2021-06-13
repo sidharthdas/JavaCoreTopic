@@ -2,7 +2,7 @@ package abstractClass;
 
 public abstract class AbstractClass {
 
-	private int i;
+	private int i; //variable
 
 	public int getI() {
 		return i;
