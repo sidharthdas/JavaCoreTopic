@@ -45,6 +45,16 @@ class BST {
 		result.add(node.data);
 		inOrder(node.right);
 	}
+
+	public void inOrderLeft(Node node) {
+		if (node == null) {
+			return;
+		}
+		inOrder(node.left);
+		System.out.print(node.data + " ");
+	}
+
+	//public
 }
 
 public class GFGBST {
@@ -52,14 +62,34 @@ public class GFGBST {
 	public static void main(String[] args) {
 // TODO Auto-generated method stub
 
-		int[] nums = { 5, 2, 3, 1 };
+		/*int[] nums = { 5, 2, 3, 1 };
 
 		int[] finalRes = sortArray(nums);
 		
 		System.out.println("Size is : " + finalRes.length);
 		for (int i : finalRes) {
 			System.out.println(i);
-		}
+		}*/
+
+		Node root = null;
+		BST b = new BST();
+		root = b.insertNewNode(root, 40);
+		root = b.insertNewNode(root, 10);
+		root = b.insertNewNode(root, 80);
+		root = b.insertNewNode(root, 90);
+		root = b.insertNewNode(root, 200);
+		root = b.insertNewNode(root, 110);
+		root = b.insertNewNode(root, 600);
+		root = b.insertNewNode(root, 210);
+		root = b.insertNewNode(root, 30);
+		root = b.insertNewNode(root, 20);
+
+		b.inOrderLeft(root);
+
+
+
+
+
 
 	}
 
