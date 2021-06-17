@@ -23,7 +23,7 @@ public class MainClass2 {
 		List<Integer> l1 = null;
 		for (int i = 0; i < size; i++) {
 
-			if (i == 0) {
+			if (i == 0) { //sidharthdas
 				l1 = new ArrayList<>();
 				l1.add(arr[i]);
 				// flag = true;
