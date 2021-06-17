@@ -13,7 +13,8 @@ public class MainClass2 {
 
 		int[] arr1 = {5,8,7,12,14,3,9};
 		MainClass2.test(arr1, div, digit);
-//Sidharth Das
+//Sidharth Das//
+		
 	}
 
 	public static void test(int[] arr, int div, int digit) {
