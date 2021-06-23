@@ -8,8 +8,7 @@ package JUNE.BSTWithFullImplementation;
  *
  */
 
-/*
- * BST - Binary Search Tree.
+/* * BST - Binary Search Tree.
  *     1. Insert a node
  *     2. Remove a node
  *     3. inOrder
@@ -22,6 +21,9 @@ package JUNE.BSTWithFullImplementation;
  *    10. Mirror image of BST
 
  * */
+    //For BST please follow this package JUNE.BSTWithFullImplementation
+
+
 
 class Node {
 
