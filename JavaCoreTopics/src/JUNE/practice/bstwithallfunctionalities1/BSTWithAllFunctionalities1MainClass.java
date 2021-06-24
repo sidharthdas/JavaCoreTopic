@@ -1,29 +1,21 @@
-/**
- *
- */
-package JUNE.BSTWithFullImplementation;
+package JUNE.practice.bstwithallfunctionalities1;
 
 /**
- * @author sidharthdas
- *
+ * @author sidharthdas on 24/06/21.
  */
 
-/* * BST - Binary Search Tree.
- *     1. Insert a node
- *     2. Remove a node
- *     3. inOrder
- *     4. preOrder
- *     5. postOrder
- *     6. print left side of node
- *     7. print right side of node
- *     8. Descending order
- *     9. Height of BST
- *    10. Mirror image of BST
+/*-> For BST please follow this package JUNE.BSTWithFullImplementation
 
- * */
-    //For BST please follow this package JUNE.BSTWithFullImplementation
-
-
+Insert a node
+Remove a node
+inOrder
+preOrder
+postOrder
+Print left side of node
+Print right side of node
+Descending order
+Height of BST
+Mirror image of BST*/
 
 class Node {
 
@@ -33,15 +25,14 @@ class Node {
 }
 
 class BST {
-    // 1.
+
     public Node insert ( Node node, int data ) {
         if (node == null) {
             return createNewNode(data);
         }
-
         if (data < node.data) {
             node.left = insert(node.left, data);
-        } else if(data > node.data) {
+        } else if (data > node.data) {
             node.right = insert(node.right, data);
         }
 
@@ -57,19 +48,19 @@ class BST {
         return node;
     }
 
-    // 2.
-    public Node remove(Node node, int data){
-        if(node == null){
+    public Node remove ( Node node, int data ) {
+        if (node == null) {
             return null;
         }
-        if(data < node.data){
+        if (data < node.data) {
             node.left = remove(node.left, data);
-        }else if(data > node.data){
+        } else if (data > node.data) {
             node.right = remove(node.right, data);
-        }else{
-            if(node.left == null){
+        } else {
+
+            if (node.left == null) {
                 return node.right;
-            }else if(node.right == null){
+            } else if (node.right == null) {
                 return node.left;
             }
 
@@ -80,97 +71,87 @@ class BST {
     }
 
     private int getSuccessor ( Node node ) {
-        int minV = node.data;
-        while(node.left!= null){
-            minV = node.left.data;
+        int minValue = node.data;
+        while (node.left != null) {
+            minValue = node.left.data;
             node = node.left;
         }
-        return minV;
+        return minValue;
     }
 
-    // 3.
     public void inOrder ( Node node ) {
         if (node == null) {
             return;
         }
         inOrder(node.left);
-        System.out.print(node.data + " ");
+        System.out.print(" " + node.data);
         inOrder(node.right);
     }
 
-    // 4.
     public void preOrder ( Node node ) {
         if (node == null) {
             return;
         }
-        System.out.print(node.data + " ");
+        System.out.print(" " + node.data);
         preOrder(node.left);
         preOrder(node.right);
     }
 
-    // 5.
     public void postOrder ( Node node ) {
         if (node == null) {
             return;
         }
         postOrder(node.left);
         postOrder(node.right);
-        System.out.print(node.data + " ");
+        System.out.print(" " + node.data);
     }
 
-    // 6.
     public void leftSide ( Node node ) {
         if (node == null) {
             return;
         }
         leftSide(node.left);
-        System.out.print(node.data + " ");
-
+        System.out.print(" " + node.data);
     }
 
-    // 7.
     public void rightSide ( Node node ) {
         if (node == null) {
             return;
         }
         rightSide(node.right);
-        System.out.print(node.data + " ");
-
+        System.out.print(" " + node.data);
     }
 
-    // 8.
     public void descendingOrder ( Node node ) {
         if (node == null) {
             return;
         }
         descendingOrder(node.right);
-        System.out.print(node.data + " ");
+        System.out.print(" " + node.data);
         descendingOrder(node.left);
     }
 
-    // 9.
-    public int height(Node node) {
-        if(node == null){
+    public int height ( Node node ) {
+        if (node == null) {
             return 0;
         }
         int left = height(node.left);
         int right = height(node.right);
 
-        if(left > right){
+        if (left > right) {
             return left + 1;
-        }else{
-            return right +1;
+        } else {
+            return right + 1;
         }
     }
 
-    // 10.
-    public Node mirror(Node node){
-        if(node == null){
+    public Node mirrorImage ( Node node ) {
+        if (node == null) {
             return null;
         }
 
-        Node left = mirror(node.left);
-        Node right = mirror(node.right);
+        Node left = mirrorImage(node.left);
+        Node right = mirrorImage(node.right);
 
         node.left = right;
         node.right = left;
@@ -178,44 +159,9 @@ class BST {
         return node;
     }
 
-    //Testing
-    public Node delete(Node root, int data){
-        if(root == null){
-            return null;
-        }
-        if(data < root.data){
-            root.left = delete(root.left, data);
-        }else if(data > root.data){
-            root.right = delete(root.right, data);
-        }else{
-            if(root.left == null){
-                return root.right;
-            }else if(root.right == null){
-                return root.left;
-            }
-
-            root.data = getMinValue(root);
-
-        }
-
-        return null;
-    }
-    //Testing
-    private int getMinValue ( Node root ) {
-        int minV = root.data;
-
-        while(root.left != null){
-            minV = root.left.data;
-            root = root.left;
-        }
-
-        return minV;
-    }
-
-
 }
 
-public class BSTWithFullImplementationMainClass {
+public class BSTWithAllFunctionalities1MainClass {
 
     public static void main ( String[] args ) {
 
@@ -234,6 +180,7 @@ public class BSTWithFullImplementationMainClass {
         root = b.insert(root, 8933);
         root = b.insert(root, 8449);
         root = b.insert(root, 85559);
+
 
         System.out.println("Printing inOrder");
         b.inOrder(root);
@@ -268,11 +215,15 @@ public class BSTWithFullImplementationMainClass {
         System.out.println();
 
         System.out.println("Mirror Image:");
-        root = b.mirror(root);
+        root = b.mirrorImage(root);
         b.inOrder(root);
         System.out.println();
 
 
-    }
 
+
+
+
+
+    }
 }
