@@ -16,4 +16,5 @@
 10. Mirror image of BST
 
 -> For Callable, Future Object and ExecutorService Implementation, please refer JUNE.callableImplementation
+
 -> For Singleton, please refer JUNE.practice1.singleton
