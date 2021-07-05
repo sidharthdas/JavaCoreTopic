@@ -1,4 +1,4 @@
-package bin.leetcode;
+package srcJUNE.leetcode;
 
 import java.util.ArrayList;
 import java.util.List;

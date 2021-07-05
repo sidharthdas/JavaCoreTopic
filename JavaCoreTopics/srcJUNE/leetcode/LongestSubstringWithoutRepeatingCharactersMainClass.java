@@ -1,6 +1,4 @@
-package bin.leetcode;
-
-import sun.jvm.hotspot.tools.SysPropsDumper;
+package srcJUNE.leetcode;
 
 import java.util.ArrayList;
 import java.util.List;
