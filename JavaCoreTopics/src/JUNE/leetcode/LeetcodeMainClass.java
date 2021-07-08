@@ -37,6 +37,23 @@ public class LeetcodeMainClass {
 
         System.out.println(leetcodeMainClass.dayOfYear("2019-02-10"));
 
+        System.out.println();
+
+        char[] s = {'h', 'e', 'l', 'l', 'o'};
+
+        leetcodeMainClass.reverseString(s);
+
+        for (char ii : s) {
+            System.out.print(ii);
+        }
+
+
+        String s1 = "codeleet";
+        int[] indices = {4, 5, 6, 7, 0, 2, 1, 3};
+
+        System.out.println(leetcodeMainClass.restoreString(s1, indices));
+
+
     }
 
 
@@ -324,29 +341,28 @@ public class LeetcodeMainClass {
         map.put(12, 31);
 
 
-
         String[] dateArr = date.split("-");
 
         boolean checkLeap = checkLeapYear(Integer.parseInt(dateArr[0]));
-        int month = Integer.parseInt(dateArr[1]) -1;
+        int month = Integer.parseInt(dateArr[1]) - 1;
 
-        if(month == 0){
+        if (month == 0) {
             return Integer.parseInt(dateArr[2]);
         }
 
         totalDays = 0;
 
-        for(Map.Entry<Integer, Integer> m : map.entrySet()){
-            if(m.getKey() <= month){
+        for (Map.Entry< Integer, Integer > m : map.entrySet()) {
+            if (m.getKey() <= month) {
                 totalDays += m.getValue();
             }
         }
 
-        if(checkLeap && Integer.parseInt(dateArr[1] ) > 2){
+        if (checkLeap && Integer.parseInt(dateArr[1]) > 2) {
             totalDays += 1;
         }
 
-        return (totalDays +Integer.parseInt(dateArr[2]));
+        return (totalDays + Integer.parseInt(dateArr[2]));
 
 
     }
@@ -368,20 +384,19 @@ public class LeetcodeMainClass {
     }
 
 
-
-    public String reverseWords(String s) {
+    public String reverseWords ( String s ) {
         String[] str = s.split(" ");
         String[] strArr = new String[str.length];
 
-        for(int i = 0; i < str.length; i++){
+        for (int i = 0; i < str.length; i++) {
             String rev = reverseAString(str[i]);
             strArr[i] = rev;
         }
         String res = "";
-        for(int i = 0; i < strArr.length; i++){
-            if(i == 0){
-                res +=strArr[i];
-            }else{
+        for (int i = 0; i < strArr.length; i++) {
+            if (i == 0) {
+                res += strArr[i];
+            } else {
                 res = res + " " + strArr[i];
             }
         }
@@ -395,11 +410,172 @@ public class LeetcodeMainClass {
         String s1 = "";
         String[] str = s.split("");
 
-        for(int i = str.length-1; i>=0; i--) {
+        for (int i = str.length - 1; i >= 0; i--) {
             s1 += str[i];
         }
 
         return s1;
     }
 
+
+    public void reverseString ( char[] s ) {
+        int size = s.length;
+
+        int noOfIteration = size / 2;
+
+        int startIndex = 0;
+        int endIndex = size - 1;
+
+        for (int i = 0; i < noOfIteration; i++) {
+            char c = s[startIndex];
+            s[startIndex] = s[endIndex];
+            s[endIndex] = c;
+
+            startIndex += 1;
+            endIndex -= 1;
+        }
+    }
+
+    public int[] runningSum ( int[] nums ) {
+        int size = nums.length;
+        int[] result = new int[size];
+        int sum = 0;
+        for (int i = 0; i < size; i++) {
+            sum += nums[i];
+            result[i] = sum;
+        }
+
+        return result;
+    }
+
+
+    public int[] shuffle ( int[] nums, int n ) {
+
+        int[] res = new int[2 * n];
+        int xIndex = 0;
+        int yIndex = n;
+
+        int startingIndex = 0;
+
+        for (int i = 0; i < n; i++) {
+            res[startingIndex] = nums[xIndex];
+            xIndex += 1;
+            startingIndex += 1;
+            res[startingIndex] = nums[yIndex];
+            yIndex += 1;
+            startingIndex += 1;
+        }
+        return res;
+    }
+
+
+    public int maximumWealth ( int[][] accounts ) {
+        // int size = accounts.length;
+        int heightWealth = 0;
+        for (int[] a : accounts) {
+
+            int sum = 0;
+            for (int a1 : a) {
+                sum += a1;
+            }
+
+            if (heightWealth < sum) {
+                heightWealth = sum;
+            }
+
+
+        }
+
+        return heightWealth;
+
+    }
+
+    public String restoreString ( String s, int[] indices ) {
+
+        int size = indices.length;
+        // String str = String.valueOf(indices);
+        List< Integer > str = new ArrayList<>();
+        for (int i : indices) {
+            str.add(i);
+        }
+        String res = "";
+        for (int i = 0; i < size; i++) {
+            int ind = str.indexOf(i);
+            res += s.charAt(ind);
+        }
+
+        return res;
+
+    }
+
+    public String truncateSentence ( String s, int k ) {
+
+        String[] str = s.split(" ");
+        String res = "";
+        for (int i = 0; i < k; i++) {
+            if (i == 0) {
+                res += str[i];
+            } else {
+                res += " " + str[i];
+            }
+
+        }
+        return res;
+
+    }
+
+    public int singleNumber ( int[] nums ) {
+        Map< Integer, Integer > map = new HashMap<>();
+
+        for (int i : nums) {
+            if (map.containsKey(i)) {
+                map.put(i, map.get(i) + 1);
+            } else {
+                map.put(i, 1);
+            }
+        }
+
+
+        for (Map.Entry< Integer, Integer > m : map.entrySet()) {
+
+            if (m.getValue() == 1) {
+                return m.getKey();
+            }
+
+        }
+
+        return 0;
+    }
+
+    public int[] getSumAbsoluteDifferences ( int[] nums ) {
+        int size = nums.length;
+        int res[] = new int[size];
+        int count = 0;
+        for (int i = 0; i < size; i++) {
+            int absoluteSum = 0;
+
+            for (int j = 0; j < size; j++) {
+
+                int r = nums[i] - nums[j];
+
+                if (r < 0) {
+                    r = r * (-1);
+                }
+                absoluteSum += r;
+            }
+            res[count] = absoluteSum;
+            count += 1;
+
+        }
+    return res;
+    }
+
+
+    public int divide(int dividend, int divisor) {
+        BigInteger b1 = new BigInteger(String.valueOf(dividend));
+        BigInteger b2= new BigInteger(String.valueOf(divisor));
+
+        return Integer.parseInt(String.valueOf(b1.divide(b2)));
+
+    }
 }
