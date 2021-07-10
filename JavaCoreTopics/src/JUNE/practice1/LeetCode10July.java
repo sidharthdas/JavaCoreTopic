@@ -13,11 +13,10 @@ public class LeetCode10July {
         int[] arr = {2, 2, 2, 3, 3};
 
 
-        int[] nums = {4, 1, -1, 2, -1, 2, 3};
-        int k = 2;
-        //  System.out.println(leetCode10July.topKFrequent(nums, k).length);
-        int[] l = {3, 2, 1, 5, 6, 4};
-        System.out.println(leetCode10July.findKthLargest(l, 2));
+        int[] nums = {-1, -1};
+        int k = 1;
+        System.out.println(leetCode10July.addDigits(1));
+
     }
 
     public int numIdenticalPairs ( int[] nums ) {
@@ -289,20 +288,44 @@ public class LeetCode10July {
             return resArr;
         }
 
+
+        List< List< Integer > > mainList = new ArrayList<>();
+
         for (Map.Entry< Integer, Integer > mmm : map1.entrySet()) {
-            if (ind < map1.size()) {
-                list.add(mmm.getKey());
-                count += 1;
-                ind += 1;
+            List< Integer > li = new ArrayList<>();
+            li.add(mmm.getKey());
+            li.add(mmm.getValue());
+            mainList.add(li);
+        }
+
+
+        Comparator< List< Integer > > comparator = ( List< Integer > o1, List< Integer > o2 ) -> {
+            if (o1.get(1) > o2.get(1)) {
+                return -1;
+            } else if (o1.get(1) < o2.get(1)) {
+                return 1;
+            } else {
+                return 0;
+            }
+        };
+
+        Collections.sort(mainList, comparator);
+        System.out.println(mainList);
+
+        int[] finalI = new int[k];
+        int count1 = 0;
+        if(k < mainList.size()){
+            while(k != 0){
+                finalI[count1] = mainList.get(count1).get(0);
+                count1++;
+                k--;
             }
         }
-        int res[] = new int[list.size()];
 
-        for (int i = 0; i < list.size(); i++) {
-            res[i] = list.get(i);
-        }
 
-        return res;
+
+
+        return finalI;
 
     }
 
@@ -338,7 +361,7 @@ public class LeetCode10July {
         };
 
         Collections.sort(list, comparator);
-        // System.out.println(list);
+         System.out.println(list);
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(2));
         }
@@ -348,13 +371,13 @@ public class LeetCode10July {
     public List< Integer > countSmaller ( int[] nums ) {
 
         int count = 0;
-        List<Integer> list = new ArrayList<>();
+        List< Integer > list = new ArrayList<>();
         int length = nums.length;
         for (int i = 0; i < length; i++) {
-            int j = i +1;
-            while(j < length){
-                if(nums[i] > nums[j]){
-                    count+=1;
+            int j = i + 1;
+            while (j < length) {
+                if (nums[i] > nums[j]) {
+                    count += 1;
                 }
                 j++;
             }
@@ -363,6 +386,47 @@ public class LeetCode10July {
         }
 
         return list;
+
+    }
+
+    public int[] productExceptSelf ( int[] nums ) {
+        int size = nums.length;
+        int[] res = new int[size];
+
+        for (int i = 0; i < size; i++) {
+            int product = 1;
+            for (int j = 0; j < size; j++) {
+                if (i != j) {
+                    product *= nums[j];
+                }
+            }
+            res[i] = product;
+            product = 1;
+        }
+
+        return res;
+    }
+    public int addDigits(int num) {
+        String s = String.valueOf(num);
+        int mainRest = 0;
+        int sum = 0;
+        int size = s.length();
+        if(size == 1){
+            return num;
+        }
+        while(s.length()!= 1){
+            String[] str = s.split("");
+            for(String s1 : str){
+                sum += Integer.parseInt(s1);
+            }
+            s = String.valueOf(sum);
+            mainRest = sum;
+            sum = 0;
+        }
+        return mainRest;
+    }
+
+    public int nthUglyNumber(int n, int a, int b, int c) {
 
     }
 }
