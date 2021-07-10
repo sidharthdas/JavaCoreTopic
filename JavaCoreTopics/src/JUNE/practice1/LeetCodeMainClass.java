@@ -10,13 +10,20 @@ public class LeetCodeMainClass {
 
     public static void main ( String[] args ) {
 
-        LeetCodeMainClass leetCodeMainClass = new LeetCodeMainClass();
+       /* LeetCodeMainClass leetCodeMainClass = new LeetCodeMainClass();
 
         leetCodeMainClass.largestNumber(new int[]{3, 30, 34, 5, 9});
 
         int[] a1 = {1, 2, 2, 1};
         int[] a2 = {2, 2};
-        leetCodeMainClass.intersection(a1, a2);
+        leetCodeMainClass.intersection(a1, a2);*/
+
+        String s = "abcde";
+        String goal = "cdeab";
+
+        LeetCodeMainClass leetCodeMainClass = new LeetCodeMainClass();
+        leetCodeMainClass.rotateString(s, goal);
+
 
     }
 
@@ -201,7 +208,7 @@ public class LeetCodeMainClass {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 if (i != j) {
-                    if(words[i].contains(words[j])){
+                    if (words[i].contains(words[j])) {
                         list.add(words[j]);
                     }
                 }
@@ -215,9 +222,56 @@ public class LeetCodeMainClass {
 
     }
 
-    public String reverseOnlyLetters(String s) {
+    public String reverseOnlyLetters ( String s ) {
+        String[] newS1 = s.split("-");
+        System.out.println(newS1);
+        String newS2 = "";
+        for (String s3 : newS1) {
+            newS2 += s3;
+        }
+        String[] newSrr = newS2.split("");
+        int size = newSrr.length;
+        String sRev = "";
+        for (int i = size - 1; i >= 0; i--) {
+            sRev += newSrr[i];
+        }
 
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '-') {
+                String newSS = sRev.substring(0, i) + "-";
+                sRev = newSS + sRev.substring(1);
+                System.out.println(sRev);
+            }
+        }
+        System.out.println(sRev);
+        return sRev;
+    }
 
+    public boolean rotateString ( String s, String goal ) {
+        if (s.length() != goal.length()) {
+            return false;
+        }
+        if (s.equals(goal)) {
+            return false;
+        }
+
+        int size = s.length() / 2;
+        int start = 0;
+        int end = s.length() - 1;
+        boolean flag = false;
+        String res = s;
+        for (int i = 0; i < end; i++) {
+            char c = res.charAt(0);
+            res +=  c;
+            res = res.substring(1, res.length());
+            System.out.println(res);
+            if (res.equals(goal)) {
+                flag = true;
+                break;
+            }
+        }
+
+        return flag;
     }
 
 }
