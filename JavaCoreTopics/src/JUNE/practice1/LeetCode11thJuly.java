@@ -7,6 +7,25 @@ import java.util.stream.Collectors;
 /**
  * @author sidharthdas on 11/07/21.
  */
+
+
+class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode () {
+    }
+
+    ListNode ( int val ) {
+        this.val = val;
+    }
+
+    ListNode ( int val, ListNode next ) {
+        this.val = val;
+        this.next = next;
+    }
+}
+
 public class LeetCode11thJuly {
 
     public static void main ( String[] args ) {
@@ -18,6 +37,17 @@ public class LeetCode11thJuly {
         LeetCode11thJuly leetCode11thJuly = new LeetCode11thJuly();
         System.out.println(leetCode11thJuly.arrayRankTransform(a));
 
+        ListNode head1 = new ListNode();
+        head1.val=7;
+        head1.next = new ListNode(7, new ListNode(7,new ListNode(7, new ListNode(7, new ListNode(7, new ListNode(7, null))))));
+
+
+        ListNode n = leetCode11thJuly.removeElements(head1, 7);
+
+        while(n != null){
+            System.out.println(n.val);
+            n = n.next;
+        }
     }
 
     public List< List< Integer > > threeSum ( int[] nums ) {
@@ -270,36 +300,36 @@ public class LeetCode11thJuly {
         int size = words.length;
         Map< String, Integer > map = new HashMap<>();
         for (String s : words) {
-            if(map.containsKey(s)){
-                map.put(s, map.get(s)+1);
-            }else{
+            if (map.containsKey(s)) {
+                map.put(s, map.get(s) + 1);
+            } else {
                 map.put(s, 1);
             }
         }
 
-        List<Integer> list = new ArrayList<>();
-        for(Map.Entry<String, Integer> m : map.entrySet()){
+        List< Integer > list = new ArrayList<>();
+        for (Map.Entry< String, Integer > m : map.entrySet()) {
             list.add(m.getValue());
         }
 
         Collections.sort(list);
         int sizeofList = list.size();
-        List<Integer> valuesAperK = new ArrayList<>();
+        List< Integer > valuesAperK = new ArrayList<>();
         int s = k;
-        for(int i = sizeofList -1; i >=0; i--){
+        for (int i = sizeofList - 1; i >= 0; i--) {
 
-            if(s != 0){
+            if (s != 0) {
                 valuesAperK.add(list.get(i));
-                s -=1;
+                s -= 1;
             }
 
         }
         valuesAperK = valuesAperK.stream().collect(Collectors.toSet()).stream().collect(Collectors.toList());
-        List<String> mainList = new ArrayList<>();
+        List< String > mainList = new ArrayList<>();
 
-        for(int i : valuesAperK){
-            for(Map.Entry<String, Integer> m : map.entrySet()){
-                if(m.getValue() == i){
+        for (int i : valuesAperK) {
+            for (Map.Entry< String, Integer > m : map.entrySet()) {
+                if (m.getValue() == i) {
                     mainList.add(m.getKey());
                 }
             }
@@ -308,7 +338,82 @@ public class LeetCode11thJuly {
         return mainList;
     }
 
-    public String frequencySort(String s) {
+    public String frequencySort ( String s ) {
 
+        String[] str = s.split("");
+
+        Map< String, Integer > map = new HashMap<>();
+        for (String ss : str) {
+            if (map.containsKey(ss)) {
+                map.put(ss, map.get(ss) + 1);
+            } else {
+                map.put(ss, 1);
+            }
+        }
+
+        List< Integer > list = new ArrayList<>();
+        for (Map.Entry< String, Integer > m : map.entrySet()) {
+            list.add(m.getValue());
+        }
+
+        Collections.sort(list);
+        int sizeofList = list.size();
+        String res = "";
+        for (int i = sizeofList - 1; i >= 0; i--) {
+            for (Map.Entry< String, Integer > m : map.entrySet()) {
+                if (m.getValue() == list.get(i)) {
+                    for (int j = 0; j < m.getValue(); j++) {
+                        res += m.getKey();
+
+                    }
+                }
+            }
+        }
+
+
+        return res;
+
+    }
+
+    public boolean isPowerOfThree ( int n ) {
+        int count = 0;
+        while (n != 1) {
+            if (n % 3 == 0) {
+                n = n / 3;
+                count += 1;
+            } else {
+                return false;
+            }
+
+        }
+        return true;
+    }
+
+
+    public ListNode removeElements ( ListNode head, int val ) {
+        if (head == null) {
+            return null;
+        }
+
+        if(head.val == val){
+            ListNode node = head.next;
+            head = node;
+        }
+        System.out.println(head.val);
+        ListNode currNode = head;
+
+        while(currNode != null){
+            if(currNode.next.val == val){
+                if(currNode.next.next != null) {
+                    ListNode node = currNode.next.next;
+                    currNode.next = node;
+                }else{
+                    currNode.next = null;
+                }
+            }
+            currNode = currNode.next;
+        }
+
+        return head;
     }
 }
