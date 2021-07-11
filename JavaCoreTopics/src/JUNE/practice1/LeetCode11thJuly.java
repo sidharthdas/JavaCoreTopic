@@ -11,12 +11,12 @@ public class LeetCode11thJuly {
 
     public static void main ( String[] args ) {
 
-        int[] a = {3, 0, 1};
+        int[] a = {37, 12, 28, 9, 100, 56, 80, 5, 12};
 
         //System.out.println(-2147483648 - 2147483647);
 
         LeetCode11thJuly leetCode11thJuly = new LeetCode11thJuly();
-        System.out.println(leetCode11thJuly.findTheDifference("a", "aa"));
+        System.out.println(leetCode11thJuly.arrayRankTransform(a));
 
     }
 
@@ -178,7 +178,7 @@ public class LeetCode11thJuly {
             if (map2.containsKey(m.getKey())) {
                 if (m.getValue() >= map2.get(m.getKey()) || m.getValue() <= map2.get(m.getKey())) {
                     int smallestValue = m.getValue() >= map2.get(m.getKey()) ? map2.get(m.getKey()) : m.getValue();
-                    for(int i = 0; i < smallestValue-1; i++){
+                    for (int i = 0; i < smallestValue - 1; i++) {
                         list.add(m.getKey());
                     }
                     list.add(m.getKey());
@@ -195,7 +195,120 @@ public class LeetCode11thJuly {
         return res;
     }
 
-    public List<List<Integer>> minimumAbsDifference(int[] arr) {
+    public int[] arrayRankTransform ( int[] arr ) {
+        if (arr.length == 0) {
+            return new int[]{0};
+        }
+        int size = arr.length;
+        int[] res = new int[size];
+
+
+        List< Integer > list = new ArrayList<>();
+        for (int i : arr) {
+            list.add(i);
+        }
+        Collections.sort(list);
+
+        List< Integer > indexes = new ArrayList<>();
+
+        int count = 1;
+        int inde = 0;
+        int prevValue = list.get(0);
+        for (int i : list) {
+
+            if (inde == 0) {
+                indexes.add(count);
+                inde = 1;
+            } else {
+                if (i == prevValue) {
+                    indexes.add(count);
+                } else {
+                    count += 1;
+                    indexes.add(count);
+                }
+            }
+            prevValue = i;
+        }
+        int start = 0;
+        for (int i : arr) {
+            int index = list.indexOf(i);
+            int x = indexes.get(index);
+            res[start] = x;
+            start += 1;
+
+        }
+
+
+        return res;
+    }
+
+    public boolean hasGroupsSizeX ( int[] deck ) {
+
+        if (deck.length == 1) {
+            return true;
+        }
+        Map< Integer, Integer > map = new HashMap<>();
+        for (int i : deck) {
+            if (map.containsKey(i)) {
+                map.put(i, map.get(i) + 1);
+
+            } else {
+                map.put(i, 1);
+            }
+
+        }
+        int value = map.get(deck[0]);
+        for (Map.Entry< Integer, Integer > m : map.entrySet()) {
+            if (m.getValue() != value) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public List< String > topKFrequent ( String[] words, int k ) {
+        int size = words.length;
+        Map< String, Integer > map = new HashMap<>();
+        for (String s : words) {
+            if(map.containsKey(s)){
+                map.put(s, map.get(s)+1);
+            }else{
+                map.put(s, 1);
+            }
+        }
+
+        List<Integer> list = new ArrayList<>();
+        for(Map.Entry<String, Integer> m : map.entrySet()){
+            list.add(m.getValue());
+        }
+
+        Collections.sort(list);
+        int sizeofList = list.size();
+        List<Integer> valuesAperK = new ArrayList<>();
+        int s = k;
+        for(int i = sizeofList -1; i >=0; i--){
+
+            if(s != 0){
+                valuesAperK.add(list.get(i));
+                s -=1;
+            }
+
+        }
+        valuesAperK = valuesAperK.stream().collect(Collectors.toSet()).stream().collect(Collectors.toList());
+        List<String> mainList = new ArrayList<>();
+
+        for(int i : valuesAperK){
+            for(Map.Entry<String, Integer> m : map.entrySet()){
+                if(m.getValue() == i){
+                    mainList.add(m.getKey());
+                }
+            }
+        }
+        Collections.sort(mainList);
+        return mainList;
+    }
+
+    public String frequencySort(String s) {
 
     }
 }
