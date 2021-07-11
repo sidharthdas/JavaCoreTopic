@@ -9,13 +9,9 @@ public class LeetCode10July {
 
     public static void main ( String[] args ) {
         LeetCode10July leetCode10July = new LeetCode10July();
-        // System.out.println(leetCode10July.totalMoney(10));
-        int[] arr = {2, 2, 2, 3, 3};
+        int n = 3, a = 2, b = 3, c = 5;
 
-
-        int[] nums = {-1, -1};
-        int k = 1;
-        System.out.println(leetCode10July.addDigits(1));
+        System.out.println(leetCode10July.nthUglyNumber(n, a,b,c));
 
     }
 
@@ -314,15 +310,13 @@ public class LeetCode10July {
 
         int[] finalI = new int[k];
         int count1 = 0;
-        if(k < mainList.size()){
-            while(k != 0){
+        if (k < mainList.size()) {
+            while (k != 0) {
                 finalI[count1] = mainList.get(count1).get(0);
                 count1++;
                 k--;
             }
         }
-
-
 
 
         return finalI;
@@ -361,7 +355,7 @@ public class LeetCode10July {
         };
 
         Collections.sort(list, comparator);
-         System.out.println(list);
+        System.out.println(list);
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(2));
         }
@@ -406,17 +400,18 @@ public class LeetCode10July {
 
         return res;
     }
-    public int addDigits(int num) {
+
+    public int addDigits ( int num ) {
         String s = String.valueOf(num);
         int mainRest = 0;
         int sum = 0;
         int size = s.length();
-        if(size == 1){
+        if (size == 1) {
             return num;
         }
-        while(s.length()!= 1){
+        while (s.length() != 1) {
             String[] str = s.split("");
-            for(String s1 : str){
+            for (String s1 : str) {
                 sum += Integer.parseInt(s1);
             }
             s = String.valueOf(sum);
@@ -426,7 +421,23 @@ public class LeetCode10July {
         return mainRest;
     }
 
-    public int nthUglyNumber(int n, int a, int b, int c) {
+    public int nthUglyNumber ( int n, int a, int b, int c ) {
+        int count = 1;
+        int start = 1;
+        while (true) {
+
+            if (start % a == 0 || start % b == 0 || start % c == 0) {
+                if (count == n) {
+                    return start;
+                } else {
+                    start += 1;
+                    count += 1;
+                }
+            }else{
+                start +=1;
+            }
+
+        }
 
     }
 }
