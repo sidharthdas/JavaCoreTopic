@@ -95,7 +95,7 @@ public class LeetcodeMainClass {
 
     public boolean isPalindrome ( String s ) {
 
-        String str = s.replaceAll("[^a-zA-Z0-9]", "");
+            String str = s.replaceAll("[^a-zA-Z0-9]", "");
         str = str.toLowerCase();
         String reverseString = "";
         System.out.println();

@@ -1,5 +1,6 @@
 package JUNE.practice1;
 
+
 import java.math.BigInteger;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -35,19 +36,15 @@ public class LeetCode11thJuly {
         //System.out.println(-2147483648 - 2147483647);
 
         LeetCode11thJuly leetCode11thJuly = new LeetCode11thJuly();
-        System.out.println(leetCode11thJuly.arrayRankTransform(a));
-
-        ListNode head1 = new ListNode();
-        head1.val=7;
-        head1.next = new ListNode(7, new ListNode(7,new ListNode(7, new ListNode(7, new ListNode(7, new ListNode(7, null))))));
 
 
-        ListNode n = leetCode11thJuly.removeElements(head1, 7);
+        int[] arr = {1};
 
-        while(n != null){
-            System.out.println(n.val);
-            n = n.next;
-        }
+        //System.out.println("flow".equals("flow"));
+
+        System.out.println(leetCode11thJuly.myAtoi("+1"));
+
+
     }
 
     public List< List< Integer > > threeSum ( int[] nums ) {
@@ -391,29 +388,397 @@ public class LeetCode11thJuly {
 
 
     public ListNode removeElements ( ListNode head, int val ) {
+
+        int count = 0;
+        int sameValCount = 0;
+        ListNode n = head;
+        while (n != null) {
+            count += 1;
+            n = n.next;
+        }
+
+        ListNode n1 = head;
+        while (n1 != null) {
+            if (n1.val == val) {
+                sameValCount += 1;
+
+            }
+            n1 = n1.next;
+        }
+
+        if (count == 1) {
+            if (head.val == val) {
+                head = null;
+                return head;
+            } else {
+                return head;
+            }
+        }
+
+        if (count == sameValCount) {
+            head = null;
+            return head;
+        }
         if (head == null) {
             return null;
         }
 
-        if(head.val == val){
+        if (head.val == val) {
             ListNode node = head.next;
             head = node;
         }
         System.out.println(head.val);
         ListNode currNode = head;
 
-        while(currNode != null){
-            if(currNode.next.val == val){
-                if(currNode.next.next != null) {
-                    ListNode node = currNode.next.next;
-                    currNode.next = node;
-                }else{
-                    currNode.next = null;
+        while (currNode != null) {
+            System.out.println(currNode.val);
+            if (currNode.next != null) {
+                System.out.println(currNode.next.val);
+                if (currNode.next.val == val) {
+                    if (currNode.next.next != null) {
+                        ListNode node = currNode.next.next;
+                        currNode.next = node;
+                    } else {
+                        currNode.next = null;
+                    }
                 }
+
             }
             currNode = currNode.next;
         }
 
         return head;
     }
+
+    public boolean isPalindrome ( ListNode head ) {
+        if (head == null) {
+            return false;
+        }
+
+        String s = "";
+
+        while (head != null) {
+            s += head.val;
+            head = head.next;
+        }
+        String res = "";
+        String str[] = s.split("");
+        int size = s.length();
+        for (int i = size - 1; i >= 0; i--) {
+            res += str[i];
+        }
+
+        return res.equals(s) ? true : false;
+    }
+
+    public ListNode mergeTwoLists ( ListNode l1, ListNode l2 ) {
+        List< Integer > nums = new ArrayList<>();
+        while (l1 != null) {
+            nums.add(l1.val);
+        }
+        while (l2 != null) {
+            nums.add(l2.val);
+        }
+
+        Collections.sort(nums);
+        ListNode node;
+        for (int i : nums) {
+
+        }
+
+        return null;
+    }
+
+    private ListNode insert ( ListNode node, int val ) {
+        return null;
+    }
+
+    public String longestCommonPrefix ( String[] strs ) {
+        List< String > list = new ArrayList<>();
+
+        Comparator< String > comparator = ( String o1, String o2 ) -> {
+            if (o1.length() > o2.length()) {
+                return 1;
+            } else if (o1.length() < o2.length()) {
+                return -1;
+            } else {
+                return 0;
+            }
+        };
+
+        for (String s : strs) {
+            list.add(s);
+        }
+
+        Collections.sort(list, comparator);
+
+        String longestCommonSubString = list.get(0);
+        System.out.println(longestCommonSubString);
+        int longestCommonSubStringSize = longestCommonSubString.length();
+        int length = strs.length;
+        for (int i = 0; i < length; i++) {
+            System.out.println(list.get(i));
+            System.out.println(list.get(i).equals(longestCommonSubString) == false);
+            if (list.get(i).equals(longestCommonSubString) == false) {
+                while (!list.get(i).substring(0, longestCommonSubStringSize).equals(longestCommonSubString)) {
+                    longestCommonSubStringSize = longestCommonSubStringSize - 1;
+                    System.out.println(longestCommonSubStringSize);
+                    longestCommonSubString = longestCommonSubString.substring(0, longestCommonSubStringSize);
+                    System.out.println(longestCommonSubString);
+                }
+            }
+        }
+
+        return longestCommonSubString;
+    }
+
+
+    public ListNode removeNthFromEnd ( ListNode head, int n ) {
+        ListNode prev = null;
+        ListNode current = head;
+        ListNode next = null;
+
+        while (current != null) {
+            next = current.next;
+            prev = current;
+            current = next;
+        }
+
+        head = prev;
+
+        int pos = 0;
+        ListNode currNode = head;
+        while (currNode != null) {
+            pos += 1;
+
+            if (pos == n) {
+
+            }
+
+
+        }
+        return null;
+    }
+
+    public int[] searchRange ( int[] nums, int target ) {
+        int[] res = new int[2];
+
+        List< Integer > list = new ArrayList<>();
+        Map< Integer, Integer > map = new HashMap<>();
+        for (int i : nums) {
+            list.add(i);
+        }
+
+        for (int i : nums) {
+            if (map.containsKey(i)) {
+                map.put(i, map.get(i) + 1);
+            } else {
+                map.put(i, 1);
+            }
+        }
+
+        if (map.containsKey(target)) {
+            if (map.get(target) == 1) {
+                int i = list.indexOf(target);
+                res = new int[]{i, i};
+                return res;
+            } else {
+
+                int i = list.indexOf(target);
+                res = new int[]{i, i + map.get(target) - 1};
+                return res;
+            }
+
+        } else {
+            res = new int[]{-1, -1};
+            return res;
+        }
+
+    }
+
+    public int fib ( int n ) {
+
+        List< Integer > list = new ArrayList<>();
+        list.add(0);
+        list.add(1);
+
+        if (n == 1) {
+            return 0;
+        }
+        if (n == 2) {
+            return 1;
+        }
+
+        int count = n;
+        int prevvalue = 1;
+        int prevPrevvalue = 0;
+
+        while (list.size() != n) {
+            int newVal = prevvalue + prevPrevvalue;
+            list.add(newVal);
+            prevPrevvalue = prevvalue;
+            prevvalue = newVal;
+        }
+
+        return list.get(list.size() - 1);
+
+    }
+
+    public int fib4 ( int n ) {
+
+        List< Integer > list = new ArrayList<>();
+        list.add(0);
+        list.add(1);
+
+        if (n == 1) {
+            return 0;
+        }
+        if (n == 2) {
+            return 1;
+        }
+
+        int count = n;
+        int prevvalue = 1;
+        int prevPrevvalue = 0;
+        int sum = 1;
+
+
+        while (list.size() != n) {
+            int newVal = prevvalue + prevPrevvalue;
+            sum = sum + newVal;
+            list.add(newVal);
+            prevPrevvalue = prevvalue;
+            prevvalue = sum;
+        }
+
+        return sum;
+
+    }
+
+    public int search ( int[] nums, int target ) {
+        Node root = null;
+        int size = nums.length;
+        BST B = new BST();
+        for (int i = 0; i < size; i++) {
+            root = B.insert(root, nums[i]);
+        }
+
+        return B.checkNode(root, target);
+    }
+
+    class Node {
+
+        int data;
+        Node left;
+        Node right;
+    }
+
+    class BST {
+        public Node insert ( Node node, int data ) {
+            if (node == null) {
+                return createNewNode(data);
+            }
+            if (data < node.data) {
+                node.left = insert(node.left, data);
+            } else if (data > node.data) {
+                node.right = insert(node.right, data);
+            }
+
+            return node;
+        }
+
+        private Node createNewNode ( int data ) {
+            Node node = new Node();
+            node.data = data;
+            node.left = null;
+            node.right = null;
+
+            return node;
+        }
+
+        public int checkNode ( Node node, int data ) {
+            if (node == null) {
+                return -1;
+            }
+
+            boolean flag = false;
+            int index = 0;
+            while (node != null) {
+                if (data < node.data) {
+                    node = node.left;
+                    index += 1;
+                } else if (data > node.data) {
+                    node = node = node.right;
+                    index += 1;
+                } else {
+                    flag = true;
+                    break;
+                }
+            }
+
+            if (flag == true) {
+                return index;
+            } else {
+                return -1;
+            }
+        }
+    }
+
+    public int myAtoi ( String s ) {
+
+        s = s.replaceAll("\\s", "");
+
+        List< Integer > list = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+        System.out.println(s.charAt(0));
+        System.out.println(list.contains(s.charAt(0)));
+        int count = 0;
+        try {
+            int i = Integer.parseInt(String.valueOf(s.charAt(0)));
+            count += 1;
+        } catch (Exception e) {
+        }
+        if (count == 0) {
+            if (s.charAt(0) == '-' || s.charAt(0) == '+') {
+                int z = 0;
+                try {
+                    int i = Integer.parseInt(String.valueOf(s.charAt(1)));
+                    z += 1;
+                } catch (Exception e) {
+                }
+
+                if(z == 0){
+                    return 0;
+                }else{
+                    s = s.replaceAll("[^0-9-]", "");
+                    BigInteger b = new BigInteger(s);
+                    if(b.compareTo(new BigInteger(String.valueOf(0))) < 0){
+                        if(b.compareTo(new BigInteger(String.valueOf(-2147483648))) < 0){
+                            return -2147483648;
+                        }
+                    }
+                    return Integer.parseInt(s);
+                }
+            } else {
+                return 0;
+            }
+
+        }
+        s = s.replaceAll("[^0-9-]", "");
+        if(s.contains(".")){
+            return (int)Math.round(Float.parseFloat(s));
+        }
+        BigInteger b = new BigInteger(s);
+        if(b.compareTo(new BigInteger(String.valueOf(0))) < 0){
+            if(b.compareTo(new BigInteger(String.valueOf(-2147483648))) < 0){
+                return -2147483648;
+            }
+        }
+        return Integer.parseInt(s);
+    }
 }
+
+
+
+
+
+
