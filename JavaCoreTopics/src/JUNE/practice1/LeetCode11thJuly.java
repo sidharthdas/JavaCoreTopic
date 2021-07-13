@@ -38,11 +38,11 @@ public class LeetCode11thJuly {
         LeetCode11thJuly leetCode11thJuly = new LeetCode11thJuly();
 
 
-        int[] arr = {1};
+        int[] arr = {1,3,4,2,2};
 
         //System.out.println("flow".equals("flow"));
 
-        System.out.println(leetCode11thJuly.myAtoi("+1"));
+        System.out.println(leetCode11thJuly.findDuplicate(arr));
 
 
     }
@@ -746,13 +746,13 @@ public class LeetCode11thJuly {
                 } catch (Exception e) {
                 }
 
-                if(z == 0){
+                if (z == 0) {
                     return 0;
-                }else{
+                } else {
                     s = s.replaceAll("[^0-9-]", "");
                     BigInteger b = new BigInteger(s);
-                    if(b.compareTo(new BigInteger(String.valueOf(0))) < 0){
-                        if(b.compareTo(new BigInteger(String.valueOf(-2147483648))) < 0){
+                    if (b.compareTo(new BigInteger(String.valueOf(0))) < 0) {
+                        if (b.compareTo(new BigInteger(String.valueOf(-2147483648))) < 0) {
                             return -2147483648;
                         }
                     }
@@ -764,18 +764,63 @@ public class LeetCode11thJuly {
 
         }
         s = s.replaceAll("[^0-9-]", "");
-        if(s.contains(".")){
-            return (int)Math.round(Float.parseFloat(s));
+        if (s.contains(".")) {
+            return (int) Math.round(Float.parseFloat(s));
         }
         BigInteger b = new BigInteger(s);
-        if(b.compareTo(new BigInteger(String.valueOf(0))) < 0){
-            if(b.compareTo(new BigInteger(String.valueOf(-2147483648))) < 0){
+        if (b.compareTo(new BigInteger(String.valueOf(0))) < 0) {
+            if (b.compareTo(new BigInteger(String.valueOf(-2147483648))) < 0) {
                 return -2147483648;
             }
         }
         return Integer.parseInt(s);
     }
+
+    public void deleteNode ( ListNode node ) {
+
+        if (node == null) {
+            return;
+        }
+
+        if (node.next != null) {
+            int d = node.next.val;
+            ListNode node1 = node.next.next;
+
+            node.val = d;
+            node.next = node1;
+
+            node = null;
+        }
+
+    }
+
+    public int findDuplicate ( int[] nums ) {
+
+        Map< Integer, Integer > map = new HashMap<>();
+
+        for (int i : nums) {
+            if (map.containsKey(i)) {
+                map.put(i, map.get(i)+1);
+            } else {
+                map.put(i, 1);
+            }
+        }
+        for(Map.Entry<Integer, Integer> m : map.entrySet()){
+            System.out.println(m.getKey() +" : "+m.getValue());
+        }
+
+        Map< Integer, Integer > map1 = map.entrySet().stream().filter(x -> x.getValue() > 1).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        for(Map.Entry<Integer, Integer> m : map1.entrySet()){
+            System.out.println(m.getKey() +" : "+m.getValue());
+        }
+        return map1.keySet().stream().collect(Collectors.toList()).get(0);
+
+    }
+
+
 }
+
+
 
 
 

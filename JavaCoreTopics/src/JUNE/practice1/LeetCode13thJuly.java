@@ -1,0 +1,323 @@
+package JUNE.practice1;
+
+import java.util.*;
+
+/**
+ * @author sidharthdas on 12/07/21.
+ */
+
+
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+
+    TreeNode () {
+    }
+
+    TreeNode ( int val ) {
+        this.val = val;
+    }
+
+    TreeNode ( int val, TreeNode left, TreeNode right ) {
+        this.val = val;
+        this.left = left;
+        this.right = right;
+    }
+}
+
+public class LeetCode13thJuly {
+
+    public static void main ( String[] args ) {
+        LeetCode13thJuly leetCode13thJuly = new LeetCode13thJuly();
+        int[] nums = {0, 0, 1};
+       // leetCode13thJuly.moveZeroes(nums);
+
+        //LeetCode13thJuly.printDivisors(28);
+
+
+        System.out.println(leetCode13thJuly.validMountainArray(new int[]{9,8,7,6,5,4,3,2,1,0}));
+    }
+
+    public int kthSmallest ( TreeNode root, int k ) {
+
+        BST1 b = new BST1();
+        b.inOrder(root);
+        Collections.sort(b.list);
+        return b.list.get(k);
+
+
+    }
+
+    public void moveZeroes ( int[] nums ) {
+        int length = nums.length;
+
+        for (int i = 0; i < length; i++) {
+            if (nums[i] == 0) {
+                int z = i;
+                for (int j = i + 1; j < length; j++) {
+
+                    int num = nums[z];
+                    nums[z] = nums[j];
+                    nums[j] = num;
+                    z++;
+                }
+            }
+        }
+
+
+    }
+
+    public boolean canConstruct ( String ransomNote, String magazine ) {
+        String[] ransomNoteArr = ransomNote.split("");
+        String[] magazineArr = magazine.split("");
+
+        Map< String, Integer > ransomNoteMap = new HashMap<>();
+
+        for (String s : ransomNoteArr) {
+            if (ransomNoteMap.containsKey(s)) {
+                ransomNoteMap.put(s, ransomNoteMap.get(s) + 1);
+            } else {
+                ransomNoteMap.put(s, 1);
+            }
+        }
+        Map< String, Integer > magazineMap = new HashMap<>();
+
+        for (String s : magazineArr) {
+            if (magazineMap.containsKey(s)) {
+                magazineMap.put(s, magazineMap.get(s) + 1);
+            } else {
+                magazineMap.put(s, 1);
+            }
+        }
+
+        boolean flag = true;
+
+        for (Map.Entry< String, Integer > m : ransomNoteMap.entrySet()) {
+            if (magazineMap.containsKey(m.getKey())) {
+                if (magazineMap.get(m.getKey()) >= m.getValue()) {
+
+                } else {
+                    flag = false;
+                    break;
+                }
+
+            } else {
+                flag = false;
+                break;
+            }
+        }
+
+        return flag;
+    }
+
+    public int firstUniqChar ( String s ) {
+
+        char[] crr = s.toCharArray();
+        Map< Character, Integer > map = new LinkedHashMap<>();
+        for (char i : crr) {
+            if (map.containsKey(i)) {
+                map.put(i, map.get(i) + 1);
+            } else {
+                map.put(i, 1);
+            }
+        }
+
+        for (Map.Entry< Character, Integer > m : map.entrySet()) {
+            if (m.getValue() == 1) {
+                int index = s.indexOf(m.getKey());
+                return index;
+            }
+        }
+        return -1;
+    }
+
+    public boolean checkPerfectNumber(int num) {
+        List< Integer > list = new ArrayList<>();
+
+        for(int i = 1; i * i < num; i++)
+        {
+            if (num % i == 0)
+                list.add(i);
+        }
+        for(int i = (int)Math.sqrt(num);
+            i >= 1; i--)
+        {
+            if (num % i == 0)
+                list.add(num/i);
+        }
+
+        list.remove(num);
+        int sum = list.stream().filter(x-> x!= num).reduce(0, Integer::sum);
+
+        return sum == num ? true : false;
+    }
+
+    public static void printDivisors(int n)
+    {
+        for(int i = 1; i * i < n; i++)
+        {
+            if (n % i == 0)
+                System.out.print(i + " ");
+        }
+        for(int i = (int)Math.sqrt(n);
+            i >= 1; i--)
+        {
+            if (n % i == 0)
+                System.out.print(n / i + " ");
+        }
+    }
+
+    public boolean judgeSquareSum(int c) {
+        if(c == 1){
+            return true;
+        }
+        int n = c/2;
+
+        for(int i = 0; i <=n; i++){
+            for(int j = 0; j <=n; j++){
+                int res = (i * i) + (j * j);
+                if(res == c){
+                    return true;
+                }
+
+            }
+        }
+
+        return false;
+    }
+
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        List<Integer> nums = new ArrayList<>();
+        while(l1 != null){
+            nums.add(l1.val);
+
+        }
+        while(l2 != null){
+            nums.add(l2.val);
+
+        }
+        Collections.sort(nums);
+
+        ListNode head = null;
+
+        ListNode curNode = null;
+
+        for(int i : nums){
+
+            ListNode n = new ListNode();
+            n.val = i;
+
+            if(head == null){
+                head = n;
+                curNode = n;
+            }else{
+               ListNode cNode = head;
+               while(cNode.next!= null){
+                   cNode = cNode.next;
+               }
+               cNode.next = n;
+
+            }
+        }
+        l1 = head;
+        return l1;
+    }
+
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        int totalSize = 0;
+        int index = 0;
+        ListNode currNode = head;
+        while(currNode!= null){
+            totalSize+=1;
+            currNode = currNode.next;
+        }
+        ListNode cNode = head;
+        while(cNode !=null){
+            index += 1;
+
+            int s = totalSize - index;
+            if(s == n){
+               ListNode n1  =  cNode.next.next;
+               cNode.next = n1;
+               break;
+            }
+            cNode = cNode.next;
+        }
+
+        return  head;
+
+    }
+
+    public boolean validMountainArray(int[] arr) {
+        List<Integer> acc = new ArrayList<>();
+        List<Integer> desc = new ArrayList<>();
+        int arrLength = arr.length;
+        if(arrLength == 2){
+            if(arr[0] >= arr[1]){
+                return false;
+            }else{
+                return true;
+            }
+        }
+        int descStartingIndex = 0;
+        int num = 0;
+        for(int i = 0; i < arrLength; i++){
+            if(i == 0){
+                acc.add(arr[i]);
+            }else{
+                if(acc.get(i-1) < arr[i]){
+                    acc.add(arr[i]);
+                }else if(acc.get(i-1) == arr[i]){
+                    return false;
+
+                }else{
+                    descStartingIndex = i;
+                    num = arr[i];
+                    break;
+                }
+            }
+        }
+        int k = 1;
+        for(int i = descStartingIndex; i < arrLength; i++){
+            if(i == descStartingIndex){
+                desc.add(arr[i]);
+
+            }else{
+                if(desc.get(k-1) > arr[i]){
+                    desc.add(arr[i]);
+                    k++;
+                }else if(desc.get(k-1) == arr[i]){
+                    return false;
+
+                }else{
+                    return false;
+                }
+            }
+        }
+
+
+        int totalSize = acc.size() + desc.size();
+
+        if(totalSize == arrLength){
+            if(acc.size() == 0 || desc.size() == 0){
+                return false;
+            }
+        }
+        return totalSize == arrLength ? true : false;
+    }
+}
+
+class BST1 {
+    List< Integer > list = new ArrayList<>();
+
+    public void inOrder ( TreeNode head ) {
+        if (head == null) {
+            return;
+        }
+        inOrder(head.left);
+        list.add(head.val);
+        inOrder(head.right);
+
+    }
+}
