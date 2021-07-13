@@ -36,7 +36,8 @@ public class LeetCode13thJuly {
         //LeetCode13thJuly.printDivisors(28);
 
 
-        System.out.println(leetCode13thJuly.longestCommonSubsequence("ezupkr", "ubmrapg"));
+        //System.out.println(leetCode13thJuly.longestCommonSubsequence("oxcpqrsvwf", "shmtulqrypy"));
+        System.out.println("This1".substring("This1".length() - 1, "This1".length()));
     }
 
     public int kthSmallest ( TreeNode root, int k ) {
@@ -350,18 +351,143 @@ public class LeetCode13thJuly {
         }
 
         return 0;
+
+
     }
 
-    class BST1 {
-        List< Integer > list = new ArrayList<>();
 
-        public void inOrder ( TreeNode head ) {
-            if (head == null) {
-                return;
+    public TreeNode removeLeafNodes ( TreeNode root, int target ) {
+
+        if (root == null) {
+            return null;
+        }
+
+        if (target < root.val) {
+            root.left = removeLeafNodes(root.left, target);
+        } else if (target > root.val) {
+            root.right = removeLeafNodes(root.right, target);
+        } else {
+            if (root.right == null) {
+                return root.left;
+            } else if (root.left == null) {
+                return root.right;
             }
-            inOrder(head.left);
-            list.add(head.val);
-            inOrder(head.right);
+            root.val = getSuccessor(root);
+            root.right = removeLeafNodes(root.right, root.val);
+        }
+        return root;
+
+    }
+
+    private int getSuccessor ( TreeNode root ) {
+        int minV = root.val;
+        while (root.left != null) {
+            minV = root.left.val;
+            root = root.left;
+        }
+        return minV;
+    }
+
+    public int findPeakElement ( int[] nums ) {
+        int length = nums.length;
+        for (int i = 0; i < length; i++) {
+            if (i == 0) {
+                continue;
+            } else {
+                if (i + 1 < length) {
+                    if (nums[i] > nums[i - 1] && nums[i] > nums[i + 1]) {
+                        return i;
+                    }
+                }
+            }
+        }
+        return -1;
+    }
+
+    public String sortSentence ( String s ) {
+
+        String[] str = s.split(" ");
+
+        int length = str.length;
+
+        Map< Integer, String > map = new TreeMap<>();
+
+        for (int i = 0; i < length; i++) {
+            int len = str[i].length();
+            map.put(Integer.parseInt(str[i].substring(len - 1, len)), str[i].substring(0, len - 1));
+        }
+
+        String finalString = "";
+
+        for (int i = 1; i <= length; i++) {
+            if (i == 1) {
+                finalString += map.get(i);
+            } else {
+                finalString += " " + map.get(i);
+            }
+        }
+        String res = "";
+        for (Map.Entry< Integer, String > m : map.entrySet()) {
+            if (res.equals("")) {
+                res += m.getValue();
+            } else {
+                res += " " + m.getValue();
+            }
 
         }
-    }}
+
+        return res;
+    }
+
+    public int[] sortArrayByParity ( int[] nums ) {
+        int len = nums.length;
+        int[] res = new int[len];
+
+        int starting = 0;
+        int end = len - 1;
+
+        for (int i = 0; i < len; i++) {
+            if (nums[i] % 2 == 0) {
+                res[starting] = nums[i];
+                starting += 1;
+            } else {
+                res[end] = nums[i];
+                end -= 1;
+            }
+        }
+        return res;
+
+    }
+
+    public double average ( int[] salary ) {
+
+        int len = salary.length;
+
+        Arrays.sort(salary);
+
+        int sum = 0;
+
+        for (int i = 1; i < len - 1; i++) {
+            sum += salary[i];
+        }
+
+        double d = Double.valueOf(String.valueOf(sum)) / Double.valueOf(String.valueOf((len-2)));
+        return d;
+
+    }
+}
+
+class BST1 {
+    List< Integer > list = new ArrayList<>();
+
+    public void inOrder ( TreeNode head ) {
+        if (head == null) {
+            return;
+        }
+        inOrder(head.left);
+        list.add(head.val);
+        inOrder(head.right);
+
+    }
+}
+
