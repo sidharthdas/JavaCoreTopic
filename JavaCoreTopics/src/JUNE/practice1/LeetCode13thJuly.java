@@ -31,12 +31,12 @@ public class LeetCode13thJuly {
     public static void main ( String[] args ) {
         LeetCode13thJuly leetCode13thJuly = new LeetCode13thJuly();
         int[] nums = {0, 0, 1};
-       // leetCode13thJuly.moveZeroes(nums);
+        // leetCode13thJuly.moveZeroes(nums);
 
         //LeetCode13thJuly.printDivisors(28);
 
 
-        System.out.println(leetCode13thJuly.validMountainArray(new int[]{9,8,7,6,5,4,3,2,1,0}));
+        System.out.println(leetCode13thJuly.longestCommonSubsequence("ezupkr", "ubmrapg"));
     }
 
     public int kthSmallest ( TreeNode root, int k ) {
@@ -132,52 +132,47 @@ public class LeetCode13thJuly {
         return -1;
     }
 
-    public boolean checkPerfectNumber(int num) {
+    public boolean checkPerfectNumber ( int num ) {
         List< Integer > list = new ArrayList<>();
 
-        for(int i = 1; i * i < num; i++)
-        {
+        for (int i = 1; i * i < num; i++) {
             if (num % i == 0)
                 list.add(i);
         }
-        for(int i = (int)Math.sqrt(num);
-            i >= 1; i--)
-        {
+        for (int i = (int) Math.sqrt(num);
+             i >= 1; i--) {
             if (num % i == 0)
-                list.add(num/i);
+                list.add(num / i);
         }
 
         list.remove(num);
-        int sum = list.stream().filter(x-> x!= num).reduce(0, Integer::sum);
+        int sum = list.stream().filter(x -> x != num).reduce(0, Integer::sum);
 
         return sum == num ? true : false;
     }
 
-    public static void printDivisors(int n)
-    {
-        for(int i = 1; i * i < n; i++)
-        {
+    public static void printDivisors ( int n ) {
+        for (int i = 1; i * i < n; i++) {
             if (n % i == 0)
                 System.out.print(i + " ");
         }
-        for(int i = (int)Math.sqrt(n);
-            i >= 1; i--)
-        {
+        for (int i = (int) Math.sqrt(n);
+             i >= 1; i--) {
             if (n % i == 0)
                 System.out.print(n / i + " ");
         }
     }
 
-    public boolean judgeSquareSum(int c) {
-        if(c == 1){
+    public boolean judgeSquareSum ( int c ) {
+        if (c == 1) {
             return true;
         }
-        int n = c/2;
+        int n = c / 2;
 
-        for(int i = 0; i <=n; i++){
-            for(int j = 0; j <=n; j++){
+        for (int i = 0; i <= n; i++) {
+            for (int j = 0; j <= n; j++) {
                 int res = (i * i) + (j * j);
-                if(res == c){
+                if (res == c) {
                     return true;
                 }
 
@@ -187,13 +182,13 @@ public class LeetCode13thJuly {
         return false;
     }
 
-    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-        List<Integer> nums = new ArrayList<>();
-        while(l1 != null){
+    public ListNode mergeTwoLists ( ListNode l1, ListNode l2 ) {
+        List< Integer > nums = new ArrayList<>();
+        while (l1 != null) {
             nums.add(l1.val);
 
         }
-        while(l2 != null){
+        while (l2 != null) {
             nums.add(l2.val);
 
         }
@@ -203,20 +198,20 @@ public class LeetCode13thJuly {
 
         ListNode curNode = null;
 
-        for(int i : nums){
+        for (int i : nums) {
 
             ListNode n = new ListNode();
             n.val = i;
 
-            if(head == null){
+            if (head == null) {
                 head = n;
                 curNode = n;
-            }else{
-               ListNode cNode = head;
-               while(cNode.next!= null){
-                   cNode = cNode.next;
-               }
-               cNode.next = n;
+            } else {
+                ListNode cNode = head;
+                while (cNode.next != null) {
+                    cNode = cNode.next;
+                }
+                cNode.next = n;
 
             }
         }
@@ -224,54 +219,54 @@ public class LeetCode13thJuly {
         return l1;
     }
 
-    public ListNode removeNthFromEnd(ListNode head, int n) {
+    public ListNode removeNthFromEnd ( ListNode head, int n ) {
         int totalSize = 0;
         int index = 0;
         ListNode currNode = head;
-        while(currNode!= null){
-            totalSize+=1;
+        while (currNode != null) {
+            totalSize += 1;
             currNode = currNode.next;
         }
         ListNode cNode = head;
-        while(cNode !=null){
+        while (cNode != null) {
             index += 1;
 
             int s = totalSize - index;
-            if(s == n){
-               ListNode n1  =  cNode.next.next;
-               cNode.next = n1;
-               break;
+            if (s == n) {
+                ListNode n1 = cNode.next.next;
+                cNode.next = n1;
+                break;
             }
             cNode = cNode.next;
         }
 
-        return  head;
+        return head;
 
     }
 
-    public boolean validMountainArray(int[] arr) {
-        List<Integer> acc = new ArrayList<>();
-        List<Integer> desc = new ArrayList<>();
+    public boolean validMountainArray ( int[] arr ) {
+        List< Integer > acc = new ArrayList<>();
+        List< Integer > desc = new ArrayList<>();
         int arrLength = arr.length;
-        if(arrLength == 2){
-            if(arr[0] >= arr[1]){
+        if (arrLength == 2) {
+            if (arr[0] >= arr[1]) {
                 return false;
-            }else{
+            } else {
                 return true;
             }
         }
         int descStartingIndex = 0;
         int num = 0;
-        for(int i = 0; i < arrLength; i++){
-            if(i == 0){
+        for (int i = 0; i < arrLength; i++) {
+            if (i == 0) {
                 acc.add(arr[i]);
-            }else{
-                if(acc.get(i-1) < arr[i]){
+            } else {
+                if (acc.get(i - 1) < arr[i]) {
                     acc.add(arr[i]);
-                }else if(acc.get(i-1) == arr[i]){
+                } else if (acc.get(i - 1) == arr[i]) {
                     return false;
 
-                }else{
+                } else {
                     descStartingIndex = i;
                     num = arr[i];
                     break;
@@ -279,18 +274,18 @@ public class LeetCode13thJuly {
             }
         }
         int k = 1;
-        for(int i = descStartingIndex; i < arrLength; i++){
-            if(i == descStartingIndex){
+        for (int i = descStartingIndex; i < arrLength; i++) {
+            if (i == descStartingIndex) {
                 desc.add(arr[i]);
 
-            }else{
-                if(desc.get(k-1) > arr[i]){
+            } else {
+                if (desc.get(k - 1) > arr[i]) {
                     desc.add(arr[i]);
                     k++;
-                }else if(desc.get(k-1) == arr[i]){
+                } else if (desc.get(k - 1) == arr[i]) {
                     return false;
 
-                }else{
+                } else {
                     return false;
                 }
             }
@@ -299,25 +294,74 @@ public class LeetCode13thJuly {
 
         int totalSize = acc.size() + desc.size();
 
-        if(totalSize == arrLength){
-            if(acc.size() == 0 || desc.size() == 0){
+        if (totalSize == arrLength) {
+            if (acc.size() == 0 || desc.size() == 0) {
                 return false;
             }
         }
         return totalSize == arrLength ? true : false;
     }
-}
 
-class BST1 {
-    List< Integer > list = new ArrayList<>();
-
-    public void inOrder ( TreeNode head ) {
-        if (head == null) {
-            return;
+    public int longestCommonSubsequence ( String text1, String text2 ) {
+        if (text1.equals(text2)) {
+            return text1.length();
         }
-        inOrder(head.left);
-        list.add(head.val);
-        inOrder(head.right);
+        char[] text1Arr = text1.toCharArray();
+        char[] text2Arr = text2.toCharArray();
 
+        //Arrays.sort(text1Arr);
+        //Arrays.sort(text2Arr);
+
+        int length1 = text1Arr.length;
+        int length2 = text2Arr.length;
+
+        String s1 = String.valueOf(text1Arr);
+        String s2 = String.valueOf(text2Arr);
+
+        if (length1 > length2) {
+            int size = 0;
+            for (int i = 0; i < length2; i++) {
+                if (s1.contains(s2.charAt(i) + "")) {
+                    size += 1;
+                } else {
+                    if (size != 0) {
+                        break;
+                    }
+                }
+            }
+            return size;
+
+
+        } else if (length1 <= length2) {
+            int size = 0;
+            for (int i = 0; i < length1; i++) {
+                if (s2.contains(s1.charAt(i) + "")) {
+                    size += 1;
+                } else {
+                    if (size != 0) {
+                        break;
+                    }
+
+                }
+            }
+            return size;
+
+
+        }
+
+        return 0;
     }
-}
+
+    class BST1 {
+        List< Integer > list = new ArrayList<>();
+
+        public void inOrder ( TreeNode head ) {
+            if (head == null) {
+                return;
+            }
+            inOrder(head.left);
+            list.add(head.val);
+            inOrder(head.right);
+
+        }
+    }}
