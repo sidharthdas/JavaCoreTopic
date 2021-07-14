@@ -18,3 +18,13 @@
 -> For Callable, Future Object and ExecutorService Implementation, please refer JUNE.callableImplementation
 
 -> For Singleton, please refer JUNE.practice1.singleton
+
+To sort a map with respect to its value using Stream API.
+
+```final Map< String, Integer > sortedByCount = map.entrySet()
+        .stream()
+        .sorted((Map.Entry.< String, Integer >comparingByValue().reversed()))
+        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, ( e1, e2 ) -> e1, LinkedHashMap::new));
+
+
+
