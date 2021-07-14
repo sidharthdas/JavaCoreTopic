@@ -1,6 +1,7 @@
 package JUNE.practice1;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author sidharthdas on 14/07/21.
@@ -185,7 +186,7 @@ public class LeetCode14thJuly {
         int[] res = new int[2];
 
         for (Map.Entry< Integer, Integer > map : m.entrySet()) {
-            if(map.getValue() == 2){
+            if (map.getValue() == 2) {
                 res[0] = map.getKey();
                 break;
             }
@@ -197,65 +198,65 @@ public class LeetCode14thJuly {
 
     }
 
-    public int repeatedNTimes(int[] nums) {
+    public int repeatedNTimes ( int[] nums ) {
 
-        Map<Integer, Integer> map = new HashMap<>();
+        Map< Integer, Integer > map = new HashMap<>();
 
-        for(int i : nums){
+        for (int i : nums) {
 
-            if(map.containsKey(i)){
-                map.put(i, map.get(i)+1);
-            }else{
+            if (map.containsKey(i)) {
+                map.put(i, map.get(i) + 1);
+            } else {
                 map.put(i, 1);
             }
 
         }
 
 
-        for(Map.Entry<Integer, Integer> M : map.entrySet()){
-            if(M.getValue() > 1){
+        for (Map.Entry< Integer, Integer > M : map.entrySet()) {
+            if (M.getValue() > 1) {
                 return M.getKey();
             }
         }
         return 0;
     }
 
-    public boolean uniqueOccurrences(int[] arr) {
+    public boolean uniqueOccurrences ( int[] arr ) {
 
-        Map<Integer, Integer> map = new HashMap<>();
+        Map< Integer, Integer > map = new HashMap<>();
 
-        for(int i : arr){
+        for (int i : arr) {
 
-            if(map.containsKey(i)){
-                map.put(i, map.get(i)+1);
-            }else{
+            if (map.containsKey(i)) {
+                map.put(i, map.get(i) + 1);
+            } else {
                 map.put(i, 1);
             }
 
         }
-        List<Integer> list = new ArrayList<>();
-        for(Map.Entry<Integer, Integer> M : map.entrySet()){
+        List< Integer > list = new ArrayList<>();
+        for (Map.Entry< Integer, Integer > M : map.entrySet()) {
             list.add(M.getValue());
         }
 
-        Set<Integer> set = new HashSet<>(list);
+        Set< Integer > set = new HashSet<>(list);
 
         return set.size() == list.size();
     }
 
-    public String[] findWords(String[] words) {
+    public String[] findWords ( String[] words ) {
 
         String firstRow = "qwertyuiop";
         String secondRow = "asdfghjkl";
         String thirdRow = "zxcvbnm";
 
-        for(String s : words){
-            int count =0;
+        for (String s : words) {
+            int count = 0;
 
             String[] str = s.split("");
 
-            Set<String> set = new HashSet<>();
-            for(String s1 : str){
+            Set< String > set = new HashSet<>();
+            for (String s1 : str) {
                 set.add(s1);
             }
 
@@ -263,5 +264,75 @@ public class LeetCode14thJuly {
         }
 
         return null;
+    }
+
+    public String mostCommonWord ( String paragraph, String[] banned ) {
+
+        paragraph = paragraph.replaceAll(".", "");
+
+        paragraph = paragraph.toLowerCase();
+
+        List< String > list = new ArrayList<>();
+        for (String s : banned) {
+            list.add(s);
+        }
+
+        String[] strPara = paragraph.split(" ");
+        Map< String, Integer > map = new HashMap<>();
+        for (String s1 : strPara) {
+            if (map.containsKey(s1)) {
+                map.put(s1, map.get(s1) + 1);
+            } else {
+                map.put(s1, 1);
+            }
+        }
+
+        map.remove(" ");
+        map.remove("");
+
+        final Map< String, Integer > sortedByCount = map.entrySet()
+                .stream()
+                .sorted((Map.Entry.< String, Integer >comparingByValue().reversed()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, ( e1, e2 ) -> e1, LinkedHashMap::new));
+
+        for(Map.Entry<String, Integer> m : sortedByCount.entrySet()){
+
+            if(!list.contains(m.getKey())){
+                return m.getKey();
+            }
+        }
+        return null;
+    }
+
+    public String frequencySort1(String s) {
+        String[] str = s.split("");
+
+        Map< String, Integer > map = new HashMap<>();
+        for (String ss: str) {
+            if(map.containsKey(ss)){
+                map.put(ss, map.get(ss)+1);
+            }else{
+                map.put(ss, 1);
+            }
+        }
+
+        final Map< String, Integer > sortedByCount = map.entrySet()
+                .stream()
+                .sorted((Map.Entry.< String, Integer >comparingByValue()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, ( e1, e2 ) -> e1, LinkedHashMap::new));
+
+        String res = "";
+
+        for(Map.Entry<String, Integer> m : sortedByCount.entrySet()){
+            for(int i = 0; i < m.getValue(); i ++ ){
+                res += m.getKey();
+            }
+        }
+
+        return res;
+    }
+
+    public int busyStudent(int[] startTime, int[] endTime, int queryTime) {
+
     }
 }
