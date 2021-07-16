@@ -564,13 +564,122 @@ public class LeetCode14thJuly {
         return count;
     }
 
-    public int diagonalSum(int[][] mat) {
+    public int diagonalSum ( int[][] mat ) {
+
+        if (mat.length == 1) {
+            return mat[0][0];
+        }
 
         int size = mat.length;
+        int sum = 0;
+
         int count = 0;
-        for(int i = 0; i < size; i++){
+        int backCount = size - 1;
+        for (int i = 0; i < size; i++) {
+            sum += mat[i][count];
+            count++;
+        }
+
+        for (int i = size - 1; i >= 0; i--) {
+            sum += mat[i][backCount];
+            backCount--;
 
         }
 
+        if (size % 2 != 0) {
+            if (size == 3) {
+                sum = sum - mat[1][1];
+            } else {
+                int index = sum / 2;
+                sum = sum - mat[index][index];
+            }
+        }
+        return sum;
+    }
+
+    public int arraySign ( int[] nums ) {
+        BigInteger prod = new BigInteger(String.valueOf(1));
+        for (int i : nums) {
+            prod = prod.multiply(new BigInteger(String.valueOf(i)));
+        }
+        System.out.println(prod);
+        int i = prod.compareTo(new BigInteger(String.valueOf(0)));
+
+        if (i < 0) {
+            return -1;
+
+        } else if (i > 0) {
+            return 1;
+        } else {
+            return 0;
+        }
+
+    }
+
+    public int findTheDistanceValue ( int[] arr1, int[] arr2, int d ) {
+
+        int len1 = arr1.length;
+        int len2 = arr2.length;
+
+        int count = 0;
+
+        for (int i = 0; i < len1; i++) {
+            for (int j = 0; j < len2; j++) {
+                int z = Math.abs(arr1[i] - arr2[j]);
+                if (z <= d) {
+                    System.out.println("a1:" + arr1[i] + " a2:" + arr2[j]);
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    public String[] findRelativeRanks ( int[] score ) {
+
+        List< Integer > list = new ArrayList<>();
+        Comparator< Integer > comparator = ( Integer o1, Integer o2 ) -> {
+            if (o1 > o2) {
+                return -1;
+            } else {
+                return 1;
+            }
+        };
+
+        for (int i : score) {
+            list.add(i);
+        }
+
+        Collections.sort(list);
+
+        int restval = 4;
+
+
+        Map< Integer, String > map = new HashMap<>();
+        int size = list.size();
+        for (int i = 0; i < size; i++) {
+            if (i == 0) {
+                map.put(list.get(i), "Gold Medal");
+            } else if (i == 1) {
+                map.put(list.get(i), "Silver Medal");
+            } else if (i == 2) {
+                map.put(list.get(i), "Bronze Medal");
+            } else {
+                map.put(list.get(i), String.valueOf(restval));
+                restval += 1;
+            }
+        }
+        for(Map.Entry<Integer, String> m : map.entrySet()){
+            System.out.println(m.getKey()+" : "+m.getValue());
+        }
+
+
+        String[] res = new String[size];
+
+        for(int i = 0; i < size; i++){
+            res[i] = map.get(score[i]);
+        }
+
+        return  res;
     }
 }
