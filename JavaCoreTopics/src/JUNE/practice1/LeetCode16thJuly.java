@@ -457,4 +457,14 @@ public class LeetCode16thJuly {
     }
 
 
+    public void test(){
+
+        List<Integer> list = new ArrayList<>();
+
+        for(int i : list){
+
+        }
+    }
+
+
 }
