@@ -3,10 +3,7 @@ package JUNE.practice1;
 import org.w3c.dom.ls.LSInput;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -110,7 +107,13 @@ public class LeetCode16thJuly {
 
 
         LeetCode16thJuly leetCode16thJuly = new LeetCode16thJuly();
-        System.out.println(leetCode16thJuly.plusOne(new int[]{1,2,3}));
+        //System.out.println(leetCode16thJuly.plusOne(new int[]{1, 2, 3}));
+
+        int i= 20;
+
+        System.out.println( i );
+
+
 
 
     }
@@ -436,7 +439,7 @@ public class LeetCode16thJuly {
         return res;
     }
 
-    public List<Integer> addToArrayForm(int[] num, int k) {
+    public List< Integer > addToArrayForm ( int[] num, int k ) {
         String s = "";
         for (int i : num) {
             s = s + String.valueOf(i);
@@ -447,9 +450,9 @@ public class LeetCode16thJuly {
 
         String s2 = String.valueOf(b);
         String str[] = s2.split("");
-        List<Integer> finalList = new ArrayList<>();
+        List< Integer > finalList = new ArrayList<>();
 
-        for(String a : str){
+        for (String a : str) {
             finalList.add(Integer.parseInt(a));
         }
 
@@ -457,13 +460,155 @@ public class LeetCode16thJuly {
     }
 
 
-    public void test(){
+    public void test () {
 
-        List<Integer> list = new ArrayList<>();
+        List< Integer > list = new ArrayList<>();
 
-        for(int i : list){
+        for (int i : list) {
 
         }
+    }
+
+    public int maxProduct ( int[] nums ) {
+        List< Integer > list = new ArrayList<>();
+        int size = nums.length;
+
+        for (int i : nums) {
+            list.add(i);
+        }
+        Collections.sort(list);
+        if (size >= 2) {
+            return ((list.get(size - 1) - 1) - (list.get(size - 2) - 1));
+        } else {
+            return -1;
+        }
+    }
+
+    public List< Integer > selfDividingNumbers ( int left, int right ) {
+        List< Integer > list = new ArrayList<>();
+
+        for (int i = left; i <= right; i++) {
+
+
+            String s = String.valueOf(i);
+            if (s.length() == 1) {
+                list.add(i);
+            } else {
+                String[] st = s.split("");
+
+                boolean flag = true;
+                for (String s1 : st) {
+
+                    if(Integer.valueOf(s1) == 0){
+                        flag = false;
+                        break;
+                    }
+
+                    if (i % Integer.valueOf(s1) != 0) {
+                        flag = false;
+                        break;
+                    }
+
+                }
+
+                if (flag) {
+                    list.add(i);
+                }
+            }
+
+        }
+        return list;
+    }
+
+    public int heightChecker(int[] heights) {
+        int count = 0;
+
+        List<Integer> list = new ArrayList<>();
+        for(int i : heights){
+            list.add(i);
+
+        }
+        int size = heights.length;
+        Collections.sort(list);
+
+        for(int i = 0; i < size ; i++){
+            if(heights[i] != list.get(i)){
+                count+=1;
+            }
+        }
+        return count;
+    }
+
+
+    public boolean isSumEqual(String firstWord, String secondWord, String targetWord) {
+
+        Map<String, Integer> map = new HashMap<>();
+        map.put("a", 0);
+        map.put("b", 1);
+        map.put("c", 2);
+        map.put("d", 3);
+        map.put("e", 4);
+        map.put("f", 5);
+        map.put("g", 6);
+        map.put("h", 7);
+        map.put("i", 8);
+        map.put("j", 9);
+
+        map.put("k", 10);
+        map.put("l", 11);
+        map.put("m", 12);
+        map.put("n", 13);
+        map.put("o", 14);
+        map.put("p", 15);
+        map.put("q", 16);
+        map.put("r", 17);
+        map.put("s", 18);
+        map.put("t", 19);
+
+        map.put("u", 20);
+        map.put("v", 21);
+        map.put("w", 22);
+        map.put("x", 23);
+        map.put("y", 24);
+        map.put("z", 25);
+
+        String firstWordS = "";
+        String firstWordtr[] = firstWord.split("");
+        for(String s : firstWordtr){
+            firstWordS += map.get(s);
+        }
+
+        String secondWordS = "";
+        String secondWordtr[] = secondWord.split("");
+        for(String s : secondWordtr){
+            secondWordS += map.get(s);
+        }
+
+        String targetWordS = "";
+        String targetWordtr[] = targetWord.split("");
+        for(String s : targetWordtr){
+            targetWordS += map.get(s);
+        }
+
+        BigInteger b1 = new BigInteger(firstWordS);
+        BigInteger b2 = new BigInteger(secondWordS);
+        BigInteger b3 = new BigInteger(targetWordS);
+
+        if(b1.add(b2).equals(b3)){
+            return true;
+        }
+
+
+        return false;
+
+    }
+
+    public List<String> commonChars(String[] words) {
+
+        Map<String, Integer> map = new HashMap<>();
+
+
+
     }
 
 
