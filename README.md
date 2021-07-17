@@ -1,6 +1,6 @@
 # JavaCoreTopic
 
-
+-> For Java core topics, refer package JavaCoreTopics17thJul
 -> For BST please follow this package JUNE.BSTWithFullImplementation
  
  
