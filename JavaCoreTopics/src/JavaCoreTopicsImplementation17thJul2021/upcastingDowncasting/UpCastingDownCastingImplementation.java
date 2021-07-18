@@ -1,4 +1,4 @@
-package JUNE.upcastingDowncasting;
+package JavaCoreTopicsImplementation17thJul2021.upcastingDowncasting;
 
 /**
  * @author sidharthdas on 25/06/21.
@@ -10,11 +10,11 @@ public class UpCastingDownCastingImplementation {
         //IN UPCASTING - ALL METHOD OF PARENT CLASS EXCEPT OVERRIDE METHOD
         System.out.println("Up casting:---");
         Parent p = new Child();
-       p.ptest3();
-       p.ptest2();
-       p.padd();
+        p.ptest2();
+        p.ptest3();
+        p.padd();
 
-        //DOWNCASTING - All method of Parent and all method of child but not the over-hiding method(the method which is overrided in Child class)
+        //DOWNCASTING -
         System.out.println("Down casting:---");
         Parent p1 = new Child();
         Child c1 = (Child) p1;
