@@ -1,7 +1,9 @@
 # JavaCoreTopic
 
 -> For Java core topics, refer package JavaCoreTopicsImplementation17thJul2021
+
 -> For BST please follow this package JUNE.BSTWithFullImplementation
+
 -> For java8 functional interface, refer JavaCoreTopicsImplementation17thJul2021.java8FunctionalInterfaces.
  
  
