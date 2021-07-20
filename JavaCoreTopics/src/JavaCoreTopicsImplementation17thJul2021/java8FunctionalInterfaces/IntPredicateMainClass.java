@@ -1,5 +1,7 @@
 package JavaCoreTopicsImplementation17thJul2021.java8FunctionalInterfaces;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.IntPredicate;
 import java.util.function.Predicate;
 
@@ -16,7 +18,6 @@ public class IntPredicateMainClass {
         * Autoboxing and autounboxing is happening, which may lead to performance issue, to overcome that we have anaother FunctionalInterface.
         * i.e. IntPredicate
         * */
-
         IntPredicate intPredicate = y -> y%2 ==0;
         System.out.println(intPredicate.test(20));
     }
