@@ -1,0 +1,14 @@
+
+Functional Interface:
+
+Main Functional Interfaces are:
+
+1. Predicate<T>  --- test(T t) --- boolean --- and(), or(), negate()
+2. Function<T, R> --- apply(T t) --- R --- andThen(), compose()
+3. Consumer<T> --- accept(T t) --- void --- andThen()
+4. Supplier<R> --- get() --- R
+
+-Primitive Predicate Type:
+    1. IntPredicate --- test(int i) --- boolean --- and(), or(), negate()
+    2. DoublePredicate --- test(Double d) --- boolean --- and(), or(), negate()
+    3. LongPredicate --- test(Long l) --- boolean --- and(), or(), negate()
