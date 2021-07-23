@@ -8,7 +8,8 @@ import java.io.Serializable;
 public class Employee  implements Serializable {
 
 
-
+     // User-defined SerialVersionUID
+     private static final long SerialVersionUID = 10l;
      int id = 10;
      transient String ename = "Sidharth";
 
