@@ -1,8 +1,6 @@
 package JUNE.practice23rdJuly.test;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -28,6 +26,11 @@ public class HasMapMain {
 
         System.out.println(sorted);
         System.out.println(revSorted);
+
+        List<Integer> list= Arrays.asList(1,2,3,4,5,6,7);
+
+        int j = list.stream().reduce(0, Integer::sum);
+        System.out.println(j);
 
 
     }
