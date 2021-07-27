@@ -1,4 +1,4 @@
-package JavaCoreTopicsImplementation17thJul2021.sorthashmapValueWise;
+package JavaCoreTopicsImplementation17thJul2021.sortingTechniquesJava8.sorthashmapValueWise;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -12,11 +12,24 @@ public class HashMapMainClass {
 
     public static void main ( String[] args ) {
 
+
+
         Map<String, Integer> map = new HashMap<>();
 
         final Map< String, Integer > sortedByCount = map.entrySet()
                 .stream()
                 .sorted((Map.Entry.< String, Integer >comparingByValue().reversed()))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, ( e1, e2 ) -> e1, LinkedHashMap::new));
+
+
+
+        map.entrySet().stream().sorted(Map.Entry.comparingByValue()).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new
+        ));
+
+
+
+
+
+
     }
 }
