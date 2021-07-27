@@ -1,4 +1,4 @@
-package JavaCoreTopicsImplementation17thJul2021.practice;
+package JavaCoreTopicsImplementation17thJul2021.sortingUsingStream;
 
 /**
  * @author sidharthdas on 27/07/21.

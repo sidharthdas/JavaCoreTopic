@@ -1,4 +1,4 @@
-package JavaCoreTopicsImplementation17thJul2021.practice;
+package JavaCoreTopicsImplementation17thJul2021.sortingUsingStream;
 
 import java.util.Arrays;
 import java.util.Comparator;
