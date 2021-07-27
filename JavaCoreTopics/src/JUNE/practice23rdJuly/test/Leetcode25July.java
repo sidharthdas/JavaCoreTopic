@@ -239,7 +239,24 @@ class LinkL {
         }
     }
 
+    public int firstMissingPositive(int[] nums) {
 
+        Arrays.sort(nums);
+
+        int size = nums.length;
+        List<Integer> list = new ArrayList<>();
+        for(int i : nums){
+            list.add(i);
+        }
+
+        for(int i = 1; i <= nums[size-1];i++){
+            if(!list.contains(i)){
+                return i;
+
+            }
+        }
+return 0;
+    }
     public ListNode insertAtEnd ( ListNode node, int data ) {
         ListNode newNode = new ListNode();
         if (node == null) {
