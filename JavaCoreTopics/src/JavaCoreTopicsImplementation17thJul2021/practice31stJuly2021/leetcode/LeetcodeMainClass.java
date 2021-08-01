@@ -1,12 +1,31 @@
 package JavaCoreTopicsImplementation17thJul2021.practice31stJuly2021.leetcode;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.math.BigInteger;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
  * @author sidharthdas on 31/07/21.
  */
+
+
+class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode () {
+    }
+
+    ListNode ( int val ) {
+        this.val = val;
+    }
+
+    ListNode ( int val, ListNode next ) {
+        this.val = val;
+        this.next = next;
+    }
+}
+
 public class LeetcodeMainClass {
 
 
@@ -15,26 +34,118 @@ public class LeetcodeMainClass {
 
     }
 
-    public List<Boolean> kidsWithCandies( int[] candies, int extraCandies) {
+    public List< Boolean > kidsWithCandies ( int[] candies, int extraCandies ) {
 
         int size = candies.length;
-        List<Integer> candiesList = new ArrayList<>();
-        for(int i : candies){
+        List< Integer > candiesList = new ArrayList<>();
+        for (int i : candies) {
             candiesList.add(i);
         }
-        List<Boolean> list = new ArrayList<>();
+        List< Boolean > list = new ArrayList<>();
 
-        for(int i = 0; i < size; i++){
-            int val = candies[i]+ extraCandies;
+        for (int i = 0; i < size; i++) {
+            int val = candies[i] + extraCandies;
 
-            List<Integer> newList = candiesList.stream().filter(x -> val< x).collect(Collectors.toList());
-            if(newList.size() != 0){
+            List< Integer > newList = candiesList.stream().filter(x -> val < x).collect(Collectors.toList());
+            if (newList.size() != 0) {
                 list.add(false);
-            }else{
+            } else {
                 list.add(true);
             }
 
         }
-return list;
+        return list;
+    }
+
+    public boolean canBeEqual ( int[] target, int[] arr ) {
+
+        Arrays.sort(target);
+        Arrays.sort(arr);
+        System.out.println();
+        return (String.valueOf(arr).equals(String.valueOf(target))) == true ? true : false;
+
+    }
+
+    public ListNode middleNode ( ListNode head ) {
+
+        int count = count(head);
+        int index = 0;
+
+        if (count % 2 == 0) {
+            index = (count / 2) + 1;
+        } else {
+            index = (count + 1) / 2;
+        }
+
+        int counter = 0;
+        ListNode currNode = head;
+        while (currNode != null) {
+            if (counter == index) {
+                return currNode;
+            }
+            counter += 1;
+            currNode = currNode.next;
+
+        }
+
+        return null;
+
+    }
+
+    private int count ( ListNode head ) {
+        ListNode currNode = head;
+        int count = 0;
+        while (currNode != null) {
+            count += 1;
+            currNode = head.next;
+        }
+
+        return count;
+
+    }
+
+    public int canBeTypedWords ( String text, String brokenLetters ) {
+
+
+        int count= 0;
+
+        String[] textArr = text.split(" ");
+        if(brokenLetters.length() == 0 ){
+            return textArr.length;
+        }
+        for (String s : textArr) {
+
+            String[] arr = brokenLetters.split("");
+            for(String s1 : arr) {
+                if (s.contains(s1)){
+                    count += 1;
+                    break;
+                }
+            }
+
+        }
+
+        return textArr.length - count;
+    }
+
+    public int numDifferentIntegers(String word) {
+        //String str = s.replaceAll("[^a-zA-Z0-9]", "");
+        String numbers = word.replaceAll("[^0-9]", " ");
+        System.out.println(numbers);
+       numbers =  numbers.trim().replaceAll(" +", " ");
+        String[] str = numbers.split(" ");
+        Set<BigInteger> set = new HashSet<>();
+        for(String s : str){
+           try{
+               BigInteger i = new BigInteger(s);
+               set.add(i);
+
+           }catch (Exception e){
+               System.out.println("Cant convert to int");
+           }
+
+
+        }
+        return set.size();
     }
 }
