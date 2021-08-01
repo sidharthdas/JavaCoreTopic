@@ -107,17 +107,17 @@ public class LeetcodeMainClass {
     public int canBeTypedWords ( String text, String brokenLetters ) {
 
 
-        int count= 0;
+        int count = 0;
 
         String[] textArr = text.split(" ");
-        if(brokenLetters.length() == 0 ){
+        if (brokenLetters.length() == 0) {
             return textArr.length;
         }
         for (String s : textArr) {
 
             String[] arr = brokenLetters.split("");
-            for(String s1 : arr) {
-                if (s.contains(s1)){
+            for (String s1 : arr) {
+                if (s.contains(s1)) {
                     count += 1;
                     break;
                 }
@@ -128,24 +128,59 @@ public class LeetcodeMainClass {
         return textArr.length - count;
     }
 
-    public int numDifferentIntegers(String word) {
+    public int numDifferentIntegers ( String word ) {
         //String str = s.replaceAll("[^a-zA-Z0-9]", "");
         String numbers = word.replaceAll("[^0-9]", " ");
         System.out.println(numbers);
-       numbers =  numbers.trim().replaceAll(" +", " ");
+        numbers = numbers.trim().replaceAll(" +", " ");
         String[] str = numbers.split(" ");
-        Set<BigInteger> set = new HashSet<>();
-        for(String s : str){
-           try{
-               BigInteger i = new BigInteger(s);
-               set.add(i);
+        Set< BigInteger > set = new HashSet<>();
+        for (String s : str) {
+            try {
+                BigInteger i = new BigInteger(s);
+                set.add(i);
 
-           }catch (Exception e){
-               System.out.println("Cant convert to int");
-           }
+            } catch (Exception e) {
+                System.out.println("Cant convert to int");
+            }
 
 
         }
         return set.size();
+    }
+
+    public int oddCells ( int m, int n, int[][] indices ) {
+        int counter = 0;
+
+        for (int[] i : indices) {
+            for (int ii : i) {
+                if (ii % 2 != 0) {
+                    counter += 1;
+                }
+            }
+        }
+        return counter;
+    }
+
+    public int fib(int n) {
+        int count = 2;
+        if(n == 1){
+            return 0;
+        }else if(n == 2){
+            return 1;
+        }
+
+        int first = 0;
+        int second = 1;
+
+        int index = 2;
+
+        while(n != index){
+            int n1 = first + second;
+            first = second;
+            second = n1;
+        }
+
+        return second;
     }
 }
