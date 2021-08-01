@@ -1,0 +1,76 @@
+package JavaCoreTopicsImplementation17thJul2021.practice31stJuly2021.bst;
+
+/**
+ * @author sidharthdas on 01/08/21.
+ */
+
+class Node {
+    int data;
+    Node left;
+    Node right;
+
+}
+
+class BST {
+
+    public Node insert ( Node node, int data ) {
+        if (node == null) {
+            return createNewNode(data);
+        }
+        if (data < node.data) {
+            node.left = insert(node.left, data);
+        } else if (data > node.data) {
+            node.right = insert(node.right, data);
+        }
+
+        return node;
+    }
+
+    private Node createNewNode ( int data ) {
+        Node node = new Node();
+        node.left = null;
+        node.right = null;
+        node.data = data;
+
+        return node;
+    }
+
+    public Node remove(Node node , int data){
+        if(node == null){
+            return null;
+        }
+        if(data < node.data){
+            node.left = remove(node.left, data);
+        }else if(data > node.data){
+            node.right = remove(node.right, data);
+        }else{
+            if(node.right == null){
+                return node.left;
+            }else if(node.left == null){
+                return node.right;
+            }else{
+                node.data = getSuccessor(node);
+                node.right = remove(node.right, node.data);
+            }
+        }
+        return node;
+    }
+
+    private int getSuccessor ( Node node ) {
+        int minVal = node.data;
+
+        while(node.left!= null){
+            minVal = node.left.data;
+            node = node.left;
+        }
+
+        return minVal;
+    }
+}
+
+public class BSTMainClass {
+
+    public static void main ( String[] args ) {
+
+    }
+}
