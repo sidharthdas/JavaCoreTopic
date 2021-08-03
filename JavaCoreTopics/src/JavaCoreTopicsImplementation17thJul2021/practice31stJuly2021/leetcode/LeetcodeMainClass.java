@@ -31,6 +31,10 @@ public class LeetcodeMainClass {
 
     public static void main ( String[] args ) {
 
+        int[] temp = {55,38,53,81,61,93,97,32,43,78};
+        LeetcodeMainClass l = new LeetcodeMainClass();
+        int[] ans = l.dailyTemperatures(temp);
+
 
     }
 
@@ -182,5 +186,38 @@ public class LeetcodeMainClass {
         }
 
         return second;
+    }
+
+    public int[] dailyTemperatures(int[] temperatures) {
+        int[] answers = new int[temperatures.length];
+        int index = 0;
+        int count = 0;
+        int size = temperatures.length;
+        for(int i = 0; i < size; i++){
+            System.out.println("current value : "+temperatures[i]);
+            for(int j = i+1; j < size; j++){
+
+                if(temperatures[i]< temperatures[j]){
+                    count+=1;
+                    System.out.println(count);
+                    answers[index] = count;
+                    index+=1;
+                    count = 0;
+                    break;
+                }else if((temperatures[i] >= temperatures[j]) && j != size-1){
+                    count+=1;
+                    System.out.println(count);
+
+
+                }else if((temperatures[i] >= temperatures[j]) && j == size-1){
+                    count = 0;
+                    answers[index] = count;
+                    index+=1;
+                    break;
+                }
+            }
+
+        }
+        return answers;
     }
 }
