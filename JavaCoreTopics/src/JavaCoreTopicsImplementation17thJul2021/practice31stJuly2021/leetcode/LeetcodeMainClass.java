@@ -397,4 +397,24 @@ public class LeetcodeMainClass {
 
         return ans;
     }
+
+    public String reverseWords(String s) {
+
+        s = s.replaceAll("\\s+"," ").trim();
+
+        String[] srr = s.split(" ");
+
+        String newString = "";
+        int size = srr.length;
+        for(int i = size-1; i >=0; i--){
+            if(newString.length() == 0){
+                newString+=srr[i];
+            }else{
+                newString+= " "+srr[i];
+            }
+        }
+        System.out.println(newString);
+        return newString;
+    }
+
 }
