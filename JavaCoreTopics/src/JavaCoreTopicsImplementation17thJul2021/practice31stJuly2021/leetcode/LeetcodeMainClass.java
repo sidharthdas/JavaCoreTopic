@@ -4,6 +4,7 @@ import JavaCoreTopicsImplementation17thJul2021.abstractclass.I;
 
 import java.math.BigInteger;
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -33,11 +34,10 @@ public class LeetcodeMainClass {
 
     public static void main ( String[] args ) {
 
-        int[] temp = {55,38,53,81,61,93,97,32,43,78};
+        int[] temp = {55, 38, 53, 81, 61, 93, 97, 32, 43, 78};
         LeetcodeMainClass l = new LeetcodeMainClass();
-        System.out.println(l.findWords(new String[]{"Hello","Alaska","Dad","Peace"}));
-
-
+        List<Integer> list = Arrays.asList(55, 38, 53, 81, 61, 93, 97, 32, 43, 78);
+        System.out.println(l.returnAsPerFunction(list, x-> x%2==0));
 
 
     }
@@ -170,11 +170,11 @@ public class LeetcodeMainClass {
         return counter;
     }
 
-    public int fib(int n) {
+    public int fib ( int n ) {
         int count = 2;
-        if(n == 1){
+        if (n == 1) {
             return 0;
-        }else if(n == 2){
+        } else if (n == 2) {
             return 1;
         }
 
@@ -183,7 +183,7 @@ public class LeetcodeMainClass {
 
         int index = 2;
 
-        while(n != index){
+        while (n != index) {
             int n1 = first + second;
             first = second;
             second = n1;
@@ -192,31 +192,31 @@ public class LeetcodeMainClass {
         return second;
     }
 
-    public int[] dailyTemperatures(int[] temperatures) {
+    public int[] dailyTemperatures ( int[] temperatures ) {
         int[] answers = new int[temperatures.length];
         int index = 0;
         int count = 0;
         int size = temperatures.length;
-        for(int i = 0; i < size; i++){
-            System.out.println("current value : "+temperatures[i]);
-            for(int j = i+1; j < size; j++){
+        for (int i = 0; i < size; i++) {
+            System.out.println("current value : " + temperatures[i]);
+            for (int j = i + 1; j < size; j++) {
 
-                if(temperatures[i]< temperatures[j]){
-                    count+=1;
+                if (temperatures[i] < temperatures[j]) {
+                    count += 1;
                     System.out.println(count);
                     answers[index] = count;
-                    index+=1;
+                    index += 1;
                     count = 0;
                     break;
-                }else if((temperatures[i] >= temperatures[j]) && j != size-1){
-                    count+=1;
+                } else if ((temperatures[i] >= temperatures[j]) && j != size - 1) {
+                    count += 1;
                     System.out.println(count);
 
 
-                }else if((temperatures[i] >= temperatures[j]) && j == size-1){
+                } else if ((temperatures[i] >= temperatures[j]) && j == size - 1) {
                     count = 0;
                     answers[index] = count;
-                    index+=1;
+                    index += 1;
                     break;
                 }
             }
@@ -225,27 +225,27 @@ public class LeetcodeMainClass {
         return answers;
     }
 
-    public boolean areOccurrencesEqual(String s) {
+    public boolean areOccurrencesEqual ( String s ) {
 
-        Map<Character, Integer > map = new HashMap<>();
+        Map< Character, Integer > map = new HashMap<>();
 
         char[] arr = s.toCharArray();
 
-        for(char c : arr){
-            if(map.containsKey(c)){
-                map.put(c, map.get(c)+1);
-            }else{
+        for (char c : arr) {
+            if (map.containsKey(c)) {
+                map.put(c, map.get(c) + 1);
+            } else {
                 map.put(c, 1);
             }
         }
         int count = 0;
         int index = 0;
-        for(Map.Entry<Character, Integer> m : map.entrySet()){
-            if(count == 0){
+        for (Map.Entry< Character, Integer > m : map.entrySet()) {
+            if (count == 0) {
                 index = m.getValue();
                 count++;
-            }else{
-                if(m.getValue() != index){
+            } else {
+                if (m.getValue() != index) {
                     return false;
                 }
             }
@@ -254,35 +254,35 @@ public class LeetcodeMainClass {
         return true;
     }
 
-    public boolean checkRecord(String s) {
+    public boolean checkRecord ( String s ) {
 
-        if(!s.contains("PPP")){
-            List<String> l = new ArrayList<>();
+        if (!s.contains("PPP")) {
+            List< String > l = new ArrayList<>();
             String[] srr = s.split("");
-            for(String s1 : srr){
+            for (String s1 : srr) {
                 l.add(s1);
             }
             long num = l.stream().filter(x -> x.equals("A")).count();
-            if(num < 2){
+            if (num < 2) {
                 return true;
-            }else {
+            } else {
                 return false;
             }
 
-        }else{
+        } else {
             return false;
         }
 
     }
 
-    public List<String> commonChars(String[] words) {
+    public List< String > commonChars ( String[] words ) {
 
-        String[] word = {"cool","lock","cook"};
+        String[] word = {"cool", "lock", "cook"};
 
-        if(word == words){
-            return Arrays.asList("c","o");
+        if (word == words) {
+            return Arrays.asList("c", "o");
         }
-        List<String> list = new ArrayList<>();
+        List< String > list = new ArrayList<>();
 
 
         String s[] = words[0].split("");
@@ -290,18 +290,18 @@ public class LeetcodeMainClass {
 
         boolean isPresent = true;
 
-        for(int i = 0; i <  size; i++){
+        for (int i = 0; i < size; i++) {
 
-            for(String s1 : words){
-                if(!s1.contains(s[i]+"")){
+            for (String s1 : words) {
+                if (!s1.contains(s[i] + "")) {
                     isPresent = false;
                     break;
                 }
             }
 
-            if(isPresent){
+            if (isPresent) {
                 list.add(s[i]);
-            }else{
+            } else {
                 isPresent = true;
             }
 
@@ -311,10 +311,10 @@ public class LeetcodeMainClass {
 
     }
 
-    public boolean canPlaceFlowers(int[] flowerbed, int n) {
+    public boolean canPlaceFlowers ( int[] flowerbed, int n ) {
         String s = "";
-        for(int i : flowerbed){
-            s += i+"";
+        for (int i : flowerbed) {
+            s += i + "";
         }
         String z = "000";
         s = s.replaceAll(z, "$");
@@ -322,8 +322,8 @@ public class LeetcodeMainClass {
 
         int count = 0;
 
-        for(String ss : arr){
-            if(ss.equals("$")){
+        for (String ss : arr) {
+            if (ss.equals("$")) {
                 count++;
             }
         }
@@ -333,55 +333,55 @@ public class LeetcodeMainClass {
 
     }
 
-    public String[] findWords(String[] words) {
-        List<String> list = new ArrayList<>();
+    public String[] findWords ( String[] words ) {
+        List< String > list = new ArrayList<>();
         String firstRow = "qwertyuiop";
         String secondRow = "asdfghjkl";
         String thirdRow = "zxcvbnm";
 
-        for(String s : words){
+        for (String s : words) {
             String[] srr = s.split("");
-            if(firstRow.contains(srr[0].toLowerCase())){
+            if (firstRow.contains(srr[0].toLowerCase())) {
                 boolean can = true;
-                for(String s3 : srr){
-                    if(!firstRow.contains(s3.toLowerCase())){
+                for (String s3 : srr) {
+                    if (!firstRow.contains(s3.toLowerCase())) {
                         can = false;
                         break;
                     }
                 }
-                if(can){
+                if (can) {
                     list.add(s);
-                }else{
+                } else {
                     can = true;
                 }
 
-            }else if(secondRow.contains(srr[0].toLowerCase())){
+            } else if (secondRow.contains(srr[0].toLowerCase())) {
                 boolean can = true;
-                for(String s3 : srr){
+                for (String s3 : srr) {
                     s3 = s3.toLowerCase();
                     System.out.println(s3);
-                    if(!secondRow.contains(s3)){
+                    if (!secondRow.contains(s3)) {
                         can = false;
                         break;
                     }
                 }
-                if(can){
+                if (can) {
                     list.add(s);
-                }else{
+                } else {
                     can = true;
                 }
 
-            }else if(thirdRow.contains(srr[0].toLowerCase())){
+            } else if (thirdRow.contains(srr[0].toLowerCase())) {
                 boolean can = true;
-                for(String s3 : srr){
-                    if(!thirdRow.contains(s3.toLowerCase())){
+                for (String s3 : srr) {
+                    if (!thirdRow.contains(s3.toLowerCase())) {
                         can = false;
                         break;
                     }
                 }
-                if(can){
+                if (can) {
                     list.add(s);
-                }else{
+                } else {
                     can = true;
                 }
 
@@ -390,7 +390,7 @@ public class LeetcodeMainClass {
 
         String[] ans = new String[list.size()];
         int index = 0;
-        for(String s1: list){
+        for (String s1 : list) {
             ans[index] = s1;
             index++;
         }
@@ -398,23 +398,35 @@ public class LeetcodeMainClass {
         return ans;
     }
 
-    public String reverseWords(String s) {
+    public String reverseWords ( String s ) {
 
-        s = s.replaceAll("\\s+"," ").trim();
+        s = s.replaceAll("\\s+", " ").trim();
 
         String[] srr = s.split(" ");
 
         String newString = "";
         int size = srr.length;
-        for(int i = size-1; i >=0; i--){
-            if(newString.length() == 0){
-                newString+=srr[i];
-            }else{
-                newString+= " "+srr[i];
+        for (int i = size - 1; i >= 0; i--) {
+            if (newString.length() == 0) {
+                newString += srr[i];
+            } else {
+                newString += " " + srr[i];
             }
         }
         System.out.println(newString);
         return newString;
+    }
+
+    public List< Integer > returnAsPerFunction ( List< Integer > list1, Predicate< Integer > predicate ) {
+
+        List< Integer > list = new ArrayList<>();
+        for (int i : list1) {
+            if (predicate.negate().test(i)) {
+                list.add(i);
+            }
+        }
+
+        return list;
     }
 
 }
