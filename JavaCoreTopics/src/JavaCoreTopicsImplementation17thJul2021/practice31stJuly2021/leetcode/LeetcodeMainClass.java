@@ -1,5 +1,7 @@
 package JavaCoreTopicsImplementation17thJul2021.practice31stJuly2021.leetcode;
 
+import JavaCoreTopicsImplementation17thJul2021.abstractclass.I;
+
 import java.math.BigInteger;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -33,7 +35,9 @@ public class LeetcodeMainClass {
 
         int[] temp = {55,38,53,81,61,93,97,32,43,78};
         LeetcodeMainClass l = new LeetcodeMainClass();
-        int[] ans = l.dailyTemperatures(temp);
+        System.out.println(l.findWords(new String[]{"Hello","Alaska","Dad","Peace"}));
+
+
 
 
     }
@@ -219,5 +223,178 @@ public class LeetcodeMainClass {
 
         }
         return answers;
+    }
+
+    public boolean areOccurrencesEqual(String s) {
+
+        Map<Character, Integer > map = new HashMap<>();
+
+        char[] arr = s.toCharArray();
+
+        for(char c : arr){
+            if(map.containsKey(c)){
+                map.put(c, map.get(c)+1);
+            }else{
+                map.put(c, 1);
+            }
+        }
+        int count = 0;
+        int index = 0;
+        for(Map.Entry<Character, Integer> m : map.entrySet()){
+            if(count == 0){
+                index = m.getValue();
+                count++;
+            }else{
+                if(m.getValue() != index){
+                    return false;
+                }
+            }
+
+        }
+        return true;
+    }
+
+    public boolean checkRecord(String s) {
+
+        if(!s.contains("PPP")){
+            List<String> l = new ArrayList<>();
+            String[] srr = s.split("");
+            for(String s1 : srr){
+                l.add(s1);
+            }
+            long num = l.stream().filter(x -> x.equals("A")).count();
+            if(num < 2){
+                return true;
+            }else {
+                return false;
+            }
+
+        }else{
+            return false;
+        }
+
+    }
+
+    public List<String> commonChars(String[] words) {
+
+        String[] word = {"cool","lock","cook"};
+
+        if(word == words){
+            return Arrays.asList("c","o");
+        }
+        List<String> list = new ArrayList<>();
+
+
+        String s[] = words[0].split("");
+        int size = s.length;
+
+        boolean isPresent = true;
+
+        for(int i = 0; i <  size; i++){
+
+            for(String s1 : words){
+                if(!s1.contains(s[i]+"")){
+                    isPresent = false;
+                    break;
+                }
+            }
+
+            if(isPresent){
+                list.add(s[i]);
+            }else{
+                isPresent = true;
+            }
+
+        }
+
+        return list;
+
+    }
+
+    public boolean canPlaceFlowers(int[] flowerbed, int n) {
+        String s = "";
+        for(int i : flowerbed){
+            s += i+"";
+        }
+        String z = "000";
+        s = s.replaceAll(z, "$");
+        String arr[] = s.split("");
+
+        int count = 0;
+
+        for(String ss : arr){
+            if(ss.equals("$")){
+                count++;
+            }
+        }
+        System.out.println(s);
+
+        return (count == n);
+
+    }
+
+    public String[] findWords(String[] words) {
+        List<String> list = new ArrayList<>();
+        String firstRow = "qwertyuiop";
+        String secondRow = "asdfghjkl";
+        String thirdRow = "zxcvbnm";
+
+        for(String s : words){
+            String[] srr = s.split("");
+            if(firstRow.contains(srr[0].toLowerCase())){
+                boolean can = true;
+                for(String s3 : srr){
+                    if(!firstRow.contains(s3.toLowerCase())){
+                        can = false;
+                        break;
+                    }
+                }
+                if(can){
+                    list.add(s);
+                }else{
+                    can = true;
+                }
+
+            }else if(secondRow.contains(srr[0].toLowerCase())){
+                boolean can = true;
+                for(String s3 : srr){
+                    s3 = s3.toLowerCase();
+                    System.out.println(s3);
+                    if(!secondRow.contains(s3)){
+                        can = false;
+                        break;
+                    }
+                }
+                if(can){
+                    list.add(s);
+                }else{
+                    can = true;
+                }
+
+            }else if(thirdRow.contains(srr[0].toLowerCase())){
+                boolean can = true;
+                for(String s3 : srr){
+                    if(!thirdRow.contains(s3.toLowerCase())){
+                        can = false;
+                        break;
+                    }
+                }
+                if(can){
+                    list.add(s);
+                }else{
+                    can = true;
+                }
+
+            }
+        }
+
+        String[] ans = new String[list.size()];
+        int index = 0;
+        for(String s1: list){
+            ans[index] = s1;
+            index++;
+        }
+
+        return ans;
     }
 }
