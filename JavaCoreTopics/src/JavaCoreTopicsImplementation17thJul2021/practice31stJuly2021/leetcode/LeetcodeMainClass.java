@@ -429,4 +429,63 @@ public class LeetcodeMainClass {
         return list;
     }
 
+    public boolean isUgly(int n) {
+        List<Integer> list = new ArrayList<>();
+
+        for(int i = 2; i< n; i++) {
+            while(n%i == 0) {
+                if(i != 2 && i != 3 && i != 5){
+                    return false;
+                }
+                list.add(i);
+                System.out.println(i+" ");
+                n = n/i;
+            }
+        }
+        if(n >2) {
+            list.add(n);
+            System.out.println(n);
+        }
+
+        Predicate<Integer> predicate = x -> x != 2;
+        Predicate<Integer> predicate1 = x -> x != 3;
+        Predicate<Integer> predicate2 = x -> x != 5;
+
+        long count = list.stream().filter(predicate.and(predicate1).and(predicate2)).count();
+
+        if(count > 0){
+            return false;
+
+        }else{
+            return true;
+        }
+
+    }
+
+    public int nthUglyNumber(int n) {
+
+        List<Integer> list = new ArrayList<>();
+        int count = 0;
+
+        for(int i = 2; i< 100000000; i++) {
+            if(i != 2 && i != 3 && i != 5 && i != 4){
+
+            }
+            while(n%i == 0) {
+                if(i != 2 && i != 3 && i != 5){
+
+                }
+                list.add(i);
+                //System.out.println(i+" ");
+                n = n/i;
+            }
+        }
+        if(n >2) {
+            list.add(n);
+            // System.out.println(n);
+        }
+        return 0;
+    }
+
+
 }
