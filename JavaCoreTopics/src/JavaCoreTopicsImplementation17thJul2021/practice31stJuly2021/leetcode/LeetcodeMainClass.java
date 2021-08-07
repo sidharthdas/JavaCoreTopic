@@ -34,11 +34,9 @@ public class LeetcodeMainClass {
 
     public static void main ( String[] args ) {
 
-        int[] temp = {55, 38, 53, 81, 61, 93, 97, 32, 43, 78};
         LeetcodeMainClass l = new LeetcodeMainClass();
-        List<Integer> list = Arrays.asList(55, 38, 53, 81, 61, 93, 97, 32, 43, 78);
-        System.out.println(l.returnAsPerFunction(list, x-> x%2==0));
 
+        System.out.println(l.solution(new int[]{51,71,17,42}));
 
     }
 
@@ -429,63 +427,250 @@ public class LeetcodeMainClass {
         return list;
     }
 
-    public boolean isUgly(int n) {
-        List<Integer> list = new ArrayList<>();
+    public boolean isUgly ( int n ) {
+        List< Integer > list = new ArrayList<>();
 
-        for(int i = 2; i< n; i++) {
-            while(n%i == 0) {
-                if(i != 2 && i != 3 && i != 5){
+        for (int i = 2; i < n; i++) {
+            while (n % i == 0) {
+                if (i != 2 && i != 3 && i != 5) {
                     return false;
                 }
                 list.add(i);
-                System.out.println(i+" ");
-                n = n/i;
+                System.out.println(i + " ");
+                n = n / i;
             }
         }
-        if(n >2) {
+        if (n > 2) {
             list.add(n);
             System.out.println(n);
         }
 
-        Predicate<Integer> predicate = x -> x != 2;
-        Predicate<Integer> predicate1 = x -> x != 3;
-        Predicate<Integer> predicate2 = x -> x != 5;
+        Predicate< Integer > predicate = x -> x != 2;
+        Predicate< Integer > predicate1 = x -> x != 3;
+        Predicate< Integer > predicate2 = x -> x != 5;
 
         long count = list.stream().filter(predicate.and(predicate1).and(predicate2)).count();
 
-        if(count > 0){
+        if (count > 0) {
             return false;
 
-        }else{
+        } else {
             return true;
         }
 
     }
 
-    public int nthUglyNumber(int n) {
+    public int nthUglyNumber ( int n ) {
 
-        List<Integer> list = new ArrayList<>();
+        List< Integer > list = new ArrayList<>();
         int count = 0;
 
-        for(int i = 2; i< 100000000; i++) {
-            if(i != 2 && i != 3 && i != 5 && i != 4){
+        for (int i = 2; i < 100000000; i++) {
+            if (i != 2 && i != 3 && i != 5 && i != 4) {
 
             }
-            while(n%i == 0) {
-                if(i != 2 && i != 3 && i != 5){
+            while (n % i == 0) {
+                if (i != 2 && i != 3 && i != 5) {
 
                 }
                 list.add(i);
                 //System.out.println(i+" ");
-                n = n/i;
+                n = n / i;
             }
         }
-        if(n >2) {
+        if (n > 2) {
             list.add(n);
             // System.out.println(n);
         }
         return 0;
     }
+
+
+    public int countGoodSubstrings ( String s ) {
+
+        int size = s.length();
+        String[] arr = s.split("");
+        List< String > list = new ArrayList<>();
+
+        for (int i = 0; i < size; i++) {
+            if (i + 1 < size && i + 2 < size) {
+                String s1 = arr[i] + arr[i + 1] + arr[i + 2];
+                list.add(s1);
+            }
+        }
+        System.out.println(list);
+
+        List< String > finalList = new ArrayList<>();
+
+        for (String s2 : list) {
+            String[] srr = s2.split("");
+            List< String > l = Arrays.asList(srr);
+            int size1 = l.size();
+
+            Set< String > set = new HashSet<>(l);
+
+            if (size1 == set.size()) {
+                finalList.add(s2);
+            }
+        }
+
+        System.out.println(finalList);
+        return finalList.size();
+    }
+
+
+    public int getLucky ( String s, int k ) {
+
+        List< String > alpha = Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h", "i", "j",
+                "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z");
+
+        String[] srr = s.split("");
+
+        int count = 0;
+
+        String number = "";
+        for (String s1 : srr) {
+            number += String.valueOf(alpha.indexOf(s1) + 1);
+        }
+
+        String splitt[] = number.split("");
+
+        for(String sp : splitt){
+            count += Integer.valueOf(sp);
+        }
+        System.out.println(count);
+        if (k == 1) {
+            return count;
+        }
+
+        if (k > 1) {
+            int i = 2;
+            while (i <= k) {
+                if (count >= 10) {
+                    String s3 = String.valueOf(count);
+                    String[] s6rr = s3.split("");
+                    int c = 0;
+                    for (String s5 : s6rr) {
+                        c += Integer.valueOf(s5);
+                    }
+
+                    count = c;
+                    System.out.println("count: "+count+" i : "+i);
+                }
+
+                i++;
+
+            }
+
+        }
+        return count;
+
+    }
+
+
+    public boolean isHappy(int n) {
+
+        if(n < 10){
+            return false;
+        }
+
+        List<Integer> list = Arrays.asList(1, 10,100,1000,10000,100000, 1000000,10000000,100000000,1000000000);
+        while(true){
+            if(n != 1 && n < 10){
+                return false;
+            }
+            if(list.contains(n)){
+                return true;
+            }
+
+            String[] srr = String.valueOf(n).split("");
+            int count = 0;
+            for(String s: srr){
+                count += Integer.valueOf(s)*Integer.valueOf(s);
+            }
+            System.out.println(count);
+            n = count;
+
+
+        }
+
+    }
+
+    public int solution(int N) {
+        // write your code in Java SE 8
+        String s = String.valueOf(N);
+        String[] srr = s.split("");
+
+        int sum = 0;
+        for(String s1 : srr ){
+            sum += Integer.valueOf(s1);
+        }
+        int newN = N+1;
+        while(true){
+            String s2 = String.valueOf(newN);
+            String[] srr1 = s2.split("");
+
+            int sum1 = 0;
+            for(String s10 : srr1 ){
+                sum1 += Integer.valueOf(s10);
+            }
+
+            if(sum1 == sum){
+                return newN;
+            }else{
+                newN += 1;
+            }
+        }
+    }
+
+
+    public int solution(int[] A) {
+        // write your code in Java SE 8
+        int size = A.length;
+        List<Integer> list = new ArrayList<>();
+        List<List<Integer>> mainList = new ArrayList<>();
+        for(int i = 0; i < size; i++){
+            String[] s = String.valueOf(A[i]).split("");
+            int sum = 0;
+            for(String s1 : s){
+                sum += Integer.valueOf(s1);
+            }
+           for(int j = i+1; j < size ; j++){
+               String[] s2 = String.valueOf(A[j]).split("");
+               int sum1 = 0;
+               for(String s3 : s2){
+                   sum1 += Integer.valueOf(s3);
+               }
+               if(sum == sum1){
+                   List<Integer> l = new ArrayList<>();
+                   l.add(A[i]);
+                   l.add(A[j]);
+                   mainList.add(l);
+               }
+               System.out.println("A[i]: "+ A[i]+" A[j]: "+A[j]+" sum :"+(A[i]+A[j]));
+               list.add(A[i]+A[j]);
+           }
+        }
+        System.out.println(mainList);
+        if(mainList.size() == 0){
+            return -1;
+        }
+
+      List<Integer> ll = mainList.get(0);
+
+        List<Integer> finalList = new ArrayList<>();
+        for(List<Integer> l3 : mainList){
+            finalList.add((l3.get(0)+l3.get(1)));
+        }
+
+        finalList = finalList.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+
+     return finalList.get(0);
+
+    }
+
+
+
 
 
 }
