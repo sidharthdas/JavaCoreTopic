@@ -12,6 +12,61 @@ import java.util.stream.Collectors;
  */
 
 
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+
+    TreeNode () {
+    }
+
+    TreeNode ( int val ) {
+        this.val = val;
+    }
+
+    TreeNode ( int val, TreeNode left, TreeNode right ) {
+        this.val = val;
+        this.left = left;
+        this.right = right;
+    }
+}
+
+class BST {
+
+    List< Integer > list = new ArrayList<>();
+
+    public void inOrder ( TreeNode node ) {
+        if (node == null) {
+            return;
+        }
+        inOrder(node.left);
+        list.add(node.val);
+        //inOrder(node.right);
+    }
+
+    public TreeNode insert(TreeNode node, int data){
+        if(node == null){
+            return createNewNode(data);
+        }
+        if(data < node.val){
+            node.left = insert(node.left, data);
+        }else if(data > node.val){
+            node.right = insert(node.right, data);
+        }
+
+        return node;
+    }
+
+    private TreeNode createNewNode ( int data ) {
+        TreeNode node = new TreeNode();
+        node.val = data;
+        node.left = null;
+        node.right = null;
+
+        return node;
+    }
+}
+
 class ListNode {
     int val;
     ListNode next;
@@ -36,7 +91,9 @@ public class LeetcodeMainClass {
 
         LeetcodeMainClass l = new LeetcodeMainClass();
 
-        System.out.println(l.solution(new int[]{51,71,17,42}));
+        System.out.println(l.solution(new int[]{51, 71, 17, 42}));
+        Set<Integer> s = new TreeSet<>();
+
 
     }
 
@@ -535,7 +592,7 @@ public class LeetcodeMainClass {
 
         String splitt[] = number.split("");
 
-        for(String sp : splitt){
+        for (String sp : splitt) {
             count += Integer.valueOf(sp);
         }
         System.out.println(count);
@@ -555,7 +612,7 @@ public class LeetcodeMainClass {
                     }
 
                     count = c;
-                    System.out.println("count: "+count+" i : "+i);
+                    System.out.println("count: " + count + " i : " + i);
                 }
 
                 i++;
@@ -568,25 +625,25 @@ public class LeetcodeMainClass {
     }
 
 
-    public boolean isHappy(int n) {
+    public boolean isHappy ( int n ) {
 
-        if(n < 10){
+        if (n < 10) {
             return false;
         }
 
-        List<Integer> list = Arrays.asList(1, 10,100,1000,10000,100000, 1000000,10000000,100000000,1000000000);
-        while(true){
-            if(n != 1 && n < 10){
+        List< Integer > list = Arrays.asList(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000);
+        while (true) {
+            if (n != 1 && n < 10) {
                 return false;
             }
-            if(list.contains(n)){
+            if (list.contains(n)) {
                 return true;
             }
 
             String[] srr = String.valueOf(n).split("");
             int count = 0;
-            for(String s: srr){
-                count += Integer.valueOf(s)*Integer.valueOf(s);
+            for (String s : srr) {
+                count += Integer.valueOf(s) * Integer.valueOf(s);
             }
             System.out.println(count);
             n = count;
@@ -596,81 +653,178 @@ public class LeetcodeMainClass {
 
     }
 
-    public int solution(int N) {
+    public int solution ( int N ) {
         // write your code in Java SE 8
         String s = String.valueOf(N);
         String[] srr = s.split("");
 
         int sum = 0;
-        for(String s1 : srr ){
+        for (String s1 : srr) {
             sum += Integer.valueOf(s1);
         }
-        int newN = N+1;
-        while(true){
+        int newN = N + 1;
+        while (true) {
             String s2 = String.valueOf(newN);
             String[] srr1 = s2.split("");
 
             int sum1 = 0;
-            for(String s10 : srr1 ){
+            for (String s10 : srr1) {
                 sum1 += Integer.valueOf(s10);
             }
 
-            if(sum1 == sum){
+            if (sum1 == sum) {
                 return newN;
-            }else{
+            } else {
                 newN += 1;
             }
         }
     }
 
 
-    public int solution(int[] A) {
+    public int solution ( int[] A ) {
         // write your code in Java SE 8
         int size = A.length;
-        List<Integer> list = new ArrayList<>();
-        List<List<Integer>> mainList = new ArrayList<>();
-        for(int i = 0; i < size; i++){
+        List< Integer > list = new ArrayList<>();
+        List< List< Integer > > mainList = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
             String[] s = String.valueOf(A[i]).split("");
             int sum = 0;
-            for(String s1 : s){
+            for (String s1 : s) {
                 sum += Integer.valueOf(s1);
             }
-           for(int j = i+1; j < size ; j++){
-               String[] s2 = String.valueOf(A[j]).split("");
-               int sum1 = 0;
-               for(String s3 : s2){
-                   sum1 += Integer.valueOf(s3);
-               }
-               if(sum == sum1){
-                   List<Integer> l = new ArrayList<>();
-                   l.add(A[i]);
-                   l.add(A[j]);
-                   mainList.add(l);
-               }
-               System.out.println("A[i]: "+ A[i]+" A[j]: "+A[j]+" sum :"+(A[i]+A[j]));
-               list.add(A[i]+A[j]);
-           }
+            for (int j = i + 1; j < size; j++) {
+                String[] s2 = String.valueOf(A[j]).split("");
+                int sum1 = 0;
+                for (String s3 : s2) {
+                    sum1 += Integer.valueOf(s3);
+                }
+                if (sum == sum1) {
+                    List< Integer > l = new ArrayList<>();
+                    l.add(A[i]);
+                    l.add(A[j]);
+                    mainList.add(l);
+                }
+                System.out.println("A[i]: " + A[i] + " A[j]: " + A[j] + " sum :" + (A[i] + A[j]));
+                list.add(A[i] + A[j]);
+            }
         }
         System.out.println(mainList);
-        if(mainList.size() == 0){
+        if (mainList.size() == 0) {
             return -1;
         }
 
-      List<Integer> ll = mainList.get(0);
+        List< Integer > ll = mainList.get(0);
 
-        List<Integer> finalList = new ArrayList<>();
-        for(List<Integer> l3 : mainList){
-            finalList.add((l3.get(0)+l3.get(1)));
+        List< Integer > finalList = new ArrayList<>();
+        for (List< Integer > l3 : mainList) {
+            finalList.add((l3.get(0) + l3.get(1)));
         }
 
         finalList = finalList.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
 
-     return finalList.get(0);
+        return finalList.get(0);
+
 
     }
 
+    public int rangeSumBST ( TreeNode root, int low, int high ) {
+
+        BST b = new BST();
+
+        b.inOrder(root);
+
+        Optional< Integer > result = b.list.stream().filter(x -> x >= low && x <= high).collect(Collectors.toList()).stream().reduce(Integer::sum);
+
+        if (result.isPresent()) {
+            return result.get();
+        } else return -1;
+
+    }
+    public TreeNode increasingBST(TreeNode root) {
+
+        BST b = new BST();
+        b.inOrder(root);
+
+        TreeNode root1 = null;
+
+        for (Integer x : b.list) {
+            root1 = b.insert(root1, x);
+        }
+
+return root1;
+    }
+
+    public TreeNode invertTree(TreeNode root) {
+
+        if(root == null){
+            return null;
+        }
+
+        TreeNode left = invertTree(root.left);
+        TreeNode right = invertTree(root.right);
 
 
+        root.left = right;
+        root.right = left;
 
+        return root;
+
+
+    }
+
+    public TreeNode searchBST(TreeNode root, int val) {
+
+        if(root == null){
+            return null;
+        }
+
+        while(root != null){
+            if(val < root.val){
+                root = root.left;
+            }else if(val > root.val){
+                root = root.right;
+            }else{
+                return root;
+            }
+        }
+        return null;
+    }
+
+    public TreeNode insertIntoBST(TreeNode root, int val) {
+        if(root == null){
+            return createNewNode(val);
+        }
+
+        if(val < root.val){
+            root.left = insertIntoBST(root.left, val);
+        }else if(val > root.val){
+            root.right = insertIntoBST(root.right, val);
+        }
+        return root;
+    }
+
+    private TreeNode createNewNode ( int val ) {
+        TreeNode node = new TreeNode();
+        node.val = val;
+        node.left = null;
+        node.right = null;
+
+        return node;
+    }
+
+
+    public int sumOfLeftLeaves(TreeNode root) {
+        int firstVal = root.val;
+
+        BST b = new BST();
+        b.inOrder(root);
+
+       Optional<Integer> i = b.list.stream().reduce(Integer::sum);
+
+       if(i.isPresent()){
+           return (i.get()- firstVal);
+       }
+        return 0;
+    }
 
 }
