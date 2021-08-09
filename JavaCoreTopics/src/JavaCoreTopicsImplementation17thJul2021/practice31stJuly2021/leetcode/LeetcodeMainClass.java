@@ -41,16 +41,16 @@ class BST {
         }
         inOrder(node.left);
         list.add(node.val);
-        //inOrder(node.right);
+        inOrder(node.right);
     }
 
-    public TreeNode insert(TreeNode node, int data){
-        if(node == null){
+    public TreeNode insert ( TreeNode node, int data ) {
+        if (node == null) {
             return createNewNode(data);
         }
-        if(data < node.val){
+        if (data < node.val) {
             node.left = insert(node.left, data);
-        }else if(data > node.val){
+        } else if (data > node.val) {
             node.right = insert(node.right, data);
         }
 
@@ -64,6 +64,38 @@ class BST {
         node.right = null;
 
         return node;
+    }
+
+    public TreeNode removeLeafNodes(TreeNode root, int target) {
+
+        if(root == null){
+            return null;
+        }
+
+        if(target < root.val){
+            root.left = removeLeafNodes(root.left, target);
+        }else if(target > root.val){
+            root.right = removeLeafNodes(root.right, target);
+        }else{
+            if(root.right == null){
+                return root.left;
+            }else if(root.left == null){
+                return root.right;
+            }
+            root.val = getSuccessor(root);
+            root.right = removeLeafNodes(root.right, root.val);
+        }
+        return  root;
+
+    }
+
+    private int getSuccessor ( TreeNode root ) {
+        int minV = root.val;
+        while(root.left != null){
+            minV = root.left.val;
+            root = root.left;
+        }
+        return minV;
     }
 }
 
@@ -91,8 +123,13 @@ public class LeetcodeMainClass {
 
         LeetcodeMainClass l = new LeetcodeMainClass();
 
-        System.out.println(l.solution(new int[]{51, 71, 17, 42}));
-        Set<Integer> s = new TreeSet<>();
+
+
+        int[] arr = {0,0,1,1,1,2,2,3,3,4};
+
+        System.out.println(l.removeDuplicates(arr));
+
+        String s1 = "Sidharth";
 
 
     }
@@ -740,7 +777,8 @@ public class LeetcodeMainClass {
         } else return -1;
 
     }
-    public TreeNode increasingBST(TreeNode root) {
+
+    public TreeNode increasingBST ( TreeNode root ) {
 
         BST b = new BST();
         b.inOrder(root);
@@ -751,12 +789,12 @@ public class LeetcodeMainClass {
             root1 = b.insert(root1, x);
         }
 
-return root1;
+        return root1;
     }
 
-    public TreeNode invertTree(TreeNode root) {
+    public TreeNode invertTree ( TreeNode root ) {
 
-        if(root == null){
+        if (root == null) {
             return null;
         }
 
@@ -772,32 +810,32 @@ return root1;
 
     }
 
-    public TreeNode searchBST(TreeNode root, int val) {
+    public TreeNode searchBST ( TreeNode root, int val ) {
 
-        if(root == null){
+        if (root == null) {
             return null;
         }
 
-        while(root != null){
-            if(val < root.val){
+        while (root != null) {
+            if (val < root.val) {
                 root = root.left;
-            }else if(val > root.val){
+            } else if (val > root.val) {
                 root = root.right;
-            }else{
+            } else {
                 return root;
             }
         }
         return null;
     }
 
-    public TreeNode insertIntoBST(TreeNode root, int val) {
-        if(root == null){
+    public TreeNode insertIntoBST ( TreeNode root, int val ) {
+        if (root == null) {
             return createNewNode(val);
         }
 
-        if(val < root.val){
+        if (val < root.val) {
             root.left = insertIntoBST(root.left, val);
-        }else if(val > root.val){
+        } else if (val > root.val) {
             root.right = insertIntoBST(root.right, val);
         }
         return root;
@@ -813,18 +851,141 @@ return root1;
     }
 
 
-    public int sumOfLeftLeaves(TreeNode root) {
+    public int sumOfLeftLeaves ( TreeNode root ) {
         int firstVal = root.val;
 
         BST b = new BST();
         b.inOrder(root);
 
-       Optional<Integer> i = b.list.stream().reduce(Integer::sum);
+        Optional< Integer > i = b.list.stream().reduce(Integer::sum);
 
-       if(i.isPresent()){
-           return (i.get()- firstVal);
-       }
+        if (i.isPresent()) {
+            return (i.get() - firstVal);
+        }
         return 0;
+    }
+
+    public boolean isSameTree ( TreeNode p, TreeNode q ) {
+
+        boolean isSame = true;
+
+        BST b = new BST();
+        BST b1 = new BST();
+
+        b.inOrder(p);
+        b1.inOrder(q);
+
+        if (b.list.size() != b1.list.size()) {
+            return false;
+        }
+
+        for (int i = 0; i < b.list.size(); i++) {
+            if (b.list.get(i) != b.list.get(i)) {
+                return false;
+            }
+        }
+
+        return true;
+
+    }
+
+
+    public int maxDepth ( TreeNode root ) {
+        if(root == null){
+            return  0;
+
+        }
+
+        int left = maxDepth(root.left);
+        int right = maxDepth(root.right);
+
+        if(left > right){
+            return left+1;
+        }else{
+            return right+1;
+        }
+
+    }
+
+    public TreeNode sortedListToBST(ListNode head) {
+
+        TreeNode root = null;
+
+        BST b = new BST();
+        ListNode currNode = head;
+
+        while(currNode != null){
+            root = b.insert(root, currNode.val);
+            currNode = currNode.next;
+        }
+        return root;
+    }
+
+
+    public List<TreeNode> delNodes(TreeNode root, int[] to_delete) {
+        return null;
+    }
+
+    public TreeNode removeLeafNodes(TreeNode root, int target) {
+
+      BST b = new BST();
+      b.inOrder(root);
+
+      List<Integer> l = b.list;
+      int count = 0;
+      for(int i : l){
+          if(i == target){
+              count++;
+          }
+      }
+      while(count != 0) {
+         root =  b.removeLeafNodes(root, target);
+          count--;
+      }
+
+      return root;
+    }
+
+    private int getSuccessor ( TreeNode root ) {
+        int minV = root.val;
+        while(root.left != null){
+            minV = root.left.val;
+            root = root.left;
+        }
+        return minV;
+    }
+
+
+
+    public int removeDuplicates(int[] nums) {
+        List<Integer> l = new ArrayList<>();
+
+        for(int i : nums) {
+            if (!l.contains(i)) {
+                l.add(i);
+            }
+        }
+        int size = nums.length;
+
+        List<Integer> ll = new ArrayList<>();
+
+        for(int i = 0; i < size ; i++){
+            if(ll.contains(nums[i])){
+                for(int j = i; j < size; j++){
+                    if(j+1 < size) {
+                        int temp = nums[j];
+                        nums[j] = nums[j + 1];
+                        nums[j + 1] = temp;
+                    }
+                }
+                i--;
+            }else{
+                ll.add(nums[i]);
+            }
+
+        }
+        return size;
+
     }
 
 }
