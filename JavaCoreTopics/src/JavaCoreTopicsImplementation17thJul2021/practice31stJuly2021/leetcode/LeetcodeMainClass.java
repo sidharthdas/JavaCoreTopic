@@ -66,32 +66,32 @@ class BST {
         return node;
     }
 
-    public TreeNode removeLeafNodes(TreeNode root, int target) {
+    public TreeNode removeLeafNodes ( TreeNode root, int target ) {
 
-        if(root == null){
+        if (root == null) {
             return null;
         }
 
-        if(target < root.val){
+        if (target < root.val) {
             root.left = removeLeafNodes(root.left, target);
-        }else if(target > root.val){
+        } else if (target > root.val) {
             root.right = removeLeafNodes(root.right, target);
-        }else{
-            if(root.right == null){
+        } else {
+            if (root.right == null) {
                 return root.left;
-            }else if(root.left == null){
+            } else if (root.left == null) {
                 return root.right;
             }
             root.val = getSuccessor(root);
             root.right = removeLeafNodes(root.right, root.val);
         }
-        return  root;
+        return root;
 
     }
 
     private int getSuccessor ( TreeNode root ) {
         int minV = root.val;
-        while(root.left != null){
+        while (root.left != null) {
             minV = root.left.val;
             root = root.left;
         }
@@ -121,15 +121,18 @@ public class LeetcodeMainClass {
 
     public static void main ( String[] args ) {
 
+
         LeetcodeMainClass l = new LeetcodeMainClass();
 
 
+        int[] arr = {1, 0, 0, 1};
+        l.moveZeroes(arr);
 
-        int[] arr = {0,0,1,1,1,2,2,3,3,4};
-
-        System.out.println(l.removeDuplicates(arr));
+        System.out.println();
 
         String s1 = "Sidharth";
+
+        System.out.println(2000000000 % 3);
 
 
     }
@@ -891,30 +894,30 @@ public class LeetcodeMainClass {
 
 
     public int maxDepth ( TreeNode root ) {
-        if(root == null){
-            return  0;
+        if (root == null) {
+            return 0;
 
         }
 
         int left = maxDepth(root.left);
         int right = maxDepth(root.right);
 
-        if(left > right){
-            return left+1;
-        }else{
-            return right+1;
+        if (left > right) {
+            return left + 1;
+        } else {
+            return right + 1;
         }
 
     }
 
-    public TreeNode sortedListToBST(ListNode head) {
+    public TreeNode sortedListToBST ( ListNode head ) {
 
         TreeNode root = null;
 
         BST b = new BST();
         ListNode currNode = head;
 
-        while(currNode != null){
+        while (currNode != null) {
             root = b.insert(root, currNode.val);
             currNode = currNode.next;
         }
@@ -922,33 +925,33 @@ public class LeetcodeMainClass {
     }
 
 
-    public List<TreeNode> delNodes(TreeNode root, int[] to_delete) {
+    public List< TreeNode > delNodes ( TreeNode root, int[] to_delete ) {
         return null;
     }
 
-    public TreeNode removeLeafNodes(TreeNode root, int target) {
+    public TreeNode removeLeafNodes ( TreeNode root, int target ) {
 
-      BST b = new BST();
-      b.inOrder(root);
+        BST b = new BST();
+        b.inOrder(root);
 
-      List<Integer> l = b.list;
-      int count = 0;
-      for(int i : l){
-          if(i == target){
-              count++;
-          }
-      }
-      while(count != 0) {
-         root =  b.removeLeafNodes(root, target);
-          count--;
-      }
+        List< Integer > l = b.list;
+        int count = 0;
+        for (int i : l) {
+            if (i == target) {
+                count++;
+            }
+        }
+        while (count != 0) {
+            root = b.removeLeafNodes(root, target);
+            count--;
+        }
 
-      return root;
+        return root;
     }
 
     private int getSuccessor ( TreeNode root ) {
         int minV = root.val;
-        while(root.left != null){
+        while (root.left != null) {
             minV = root.left.val;
             root = root.left;
         }
@@ -956,35 +959,244 @@ public class LeetcodeMainClass {
     }
 
 
+    public int removeDuplicates ( int[] nums ) {
+        List< Integer > l = new ArrayList<>();
 
-    public int removeDuplicates(int[] nums) {
-        List<Integer> l = new ArrayList<>();
-
-        for(int i : nums) {
+        for (int i : nums) {
             if (!l.contains(i)) {
                 l.add(i);
             }
         }
         int size = nums.length;
 
-        List<Integer> ll = new ArrayList<>();
+        List< Integer > ll = new ArrayList<>();
 
-        for(int i = 0; i < size ; i++){
-            if(ll.contains(nums[i])){
-                for(int j = i; j < size; j++){
-                    if(j+1 < size) {
+        for (int i = 0; i < size; i++) {
+            if (ll.contains(nums[i])) {
+                for (int j = i; j < size; j++) {
+                    if (j + 1 < size) {
                         int temp = nums[j];
                         nums[j] = nums[j + 1];
                         nums[j + 1] = temp;
                     }
                 }
                 i--;
-            }else{
+            } else {
                 ll.add(nums[i]);
             }
 
         }
         return size;
+
+    }
+
+    public double angleClock ( int hour, int minutes ) {
+
+        double val = Double.valueOf(String.valueOf(minutes)) * 11 - Double.valueOf(String.valueOf(hour)) * 60;
+
+        if (val < 0) {
+            val = (-1) * val;
+        }
+        System.out.println("" + hour + ":" + minutes + " --- ");
+        double angle = val / 2;
+
+        double another = (360 - angle);
+        System.out.println("Angle: " + angle + " , Another: " + another);
+        System.out.println("_____________________________________");
+        return angle > another ? another : angle;
+
+    }
+
+    public ListNode rotateRight ( ListNode head, int k ) {
+
+        ListNode startNode = head;
+        ListNode lastNode = null;
+
+
+        while (k != 0) {
+
+            ListNode currNode = head;
+
+            while (currNode.next.next != null) {
+                currNode = currNode.next;
+            }
+
+            ListNode lastnode = currNode.next;
+            currNode.next = null;
+            lastnode.next = head;
+            head = lastnode;
+
+            k--;
+        }
+        return head;
+    }
+
+
+    public int countPrimes ( int n ) {
+
+        List< Integer > list = Arrays.asList(2, 4, 6, 8, 9, 5);
+        int count = 0;
+
+        for (int i = 2; i < n; i++) {
+            int counttt = 0;
+            if (i < 10) {
+                for (int j = 1; j <= i; j++) {
+                    if (i % j == 0) {
+                        counttt++;
+                        if (counttt > 2) {
+                            break;
+                        }
+                    }
+                }
+                if (counttt == 2) {
+                    count += 1;
+                }
+
+            }
+            if (i >= 10) {
+                String s[] = String.valueOf(i).split("");
+                int len = s.length;
+                if (!list.contains(Integer.valueOf(s[len - 1]))) {
+                    int val = 0;
+                    for (String s1 : s) {
+                        val += Integer.valueOf(s1);
+                    }
+                    if (val % 3 != 0) {
+                        for (int j = 1; j <= i; j++) {
+                            if (i % j == 0) {
+                                counttt++;
+                                if (counttt > 2) {
+                                    break;
+                                }
+                            }
+                        }
+                        if (counttt == 2) {
+                            count += 1;
+                        }
+
+                    }
+                }
+            }
+
+        }
+        return count;
+    }
+
+
+    public void moveZeroes ( int[] nums ) {
+        int size = nums.length;
+
+        for (int i = 0; i < size; ) {
+
+            if (nums[i] == 0) {
+
+                for (int j = i; j < size; j++) {
+
+                    if (i + 1 < size) {
+
+                        int temp = nums[i];
+                        nums[i] = nums[i + 1];
+                        nums[i + 1] = temp;
+                    }
+                }
+            } else {
+                i += 1;
+            }
+        }
+
+    }
+
+
+    public boolean threeConsecutiveOdds ( int[] arr ) {
+
+        int size = arr.length;
+
+        String s = "";
+
+        for (int i = 0; i < size; i++) {
+            if (arr[i] % 2 == 0) {
+                s += String.valueOf(0);
+            } else {
+                s += String.valueOf(1);
+            }
+
+            if (s.contains("111")) {
+                return true;
+            }
+        }
+
+
+        return false;
+
+    }
+
+    public int minDiffInBST(TreeNode root) {
+
+        BST b = new BST();
+
+        b.inOrder(root);
+
+        Collections.sort(b.list);
+
+       int size = b.list.size();
+
+       List<Integer> l = new ArrayList<>();
+
+
+       for(int i = 0; i < size; i++){
+           if(i+1 < size){
+               l.add(b.list.get(i+1) - b.list.get(i));
+           }
+
+       }
+
+       Collections.sort(l);
+
+       return l.get(0);
+
+
+
+    }
+
+    public TreeNode sortedArrayToBST(int[] nums) {
+        int size = nums.length;
+
+        int mid = (size / 2) +1;
+        int midVal = nums[mid-1];
+        List<Integer> l = new ArrayList<>();
+        List<Integer> r = new ArrayList<>();
+
+        for(int i = 0; i < size; i++){
+            if(i < mid -1){
+                l.add(nums[i]);
+            }else if(i > mid -1){
+                r.add(nums[i]);
+            }
+        }
+
+        System.out.println("l: "+l);
+        System.out.println("mid: "+midVal);
+        System.out.println("r: "+r);
+
+        TreeNode root = null;
+        BST b = new BST();
+        root = b.insert(root, midVal);
+
+
+        for(int i : l){
+            root = b.insert(root, i);
+        }
+
+        for(int i : r){
+            root = b.insert(root, i);
+        }
+
+
+
+        return root;
+    }
+
+    public TreeNode sortedListToBST(ListNode head) {
 
     }
 
