@@ -10,7 +10,76 @@ import java.util.stream.Collectors;
 /**
  * @author sidharthdas on 31/07/21.
  */
+class MyLinkedList {
 
+    ListNode head = null;
+
+    /** Initialize your data structure here. */
+    public MyLinkedList() {
+
+    }
+
+    /** Get the value of the index-th node in the linked list. If the index is invalid, return -1. */
+    public int get(int index) {
+
+        if(this.head == null){
+            return -1;
+        }
+        int count = 0;
+
+        ListNode n = this.head;
+
+        while(n != null){
+            if(count == index){
+                return n.val;
+            }else{
+                count+=1;
+            }
+        }
+        return 0;
+    }
+
+    /** Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list. */
+    public void addAtHead(int val) {
+        ListNode node = new ListNode();
+        node.val = val;
+
+        if(this.head == null){
+            this.head = node;
+        }else{
+
+            node.next = this.head;
+            this.head = node;
+        }
+    }
+
+    /** Append a node of value val to the last element of the linked list. */
+    public void addAtTail(int val) {
+        ListNode node = new ListNode();
+        node.val = val;
+
+        if(this.head == null){
+            this.head = node;
+        }else{
+            ListNode currNode = this.head;
+            while(currNode.next != null){
+                currNode = currNode.next;
+            }
+            currNode.next = node;
+        }
+
+    }
+
+    /** Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted. */
+    public void addAtIndex(int index, int val) {
+
+    }
+
+    /** Delete the index-th node in the linked list, if the index is valid. */
+    public void deleteAtIndex(int index) {
+
+    }
+}
 class LinkedList{
 
     ListNode head = null;
@@ -1354,10 +1423,47 @@ public class LeetcodeMainClass {
     }
 
 
-    public ListNode deleteDuplicates(ListNode head) {
+    public ListNode deleteDuplicates1(ListNode head) {
+        Map<Integer, Integer> map = new HashMap<>();
 
-        return null;
+        ListNode curr = head;
 
+        while(curr!= null){
+            if(map.containsKey(curr.val)){
+                map.put(curr.val, map.get(curr.val)+1);
+            }else{
+                map.put(curr.val, 1);
+            }
+            curr = curr.next;
+        }
+
+        LinkedList l = new LinkedList();
+
+        for(Map.Entry<Integer, Integer> m  : map.entrySet()){
+            if(m.getValue() ==1) {
+                l = l.insertAtEnd(l, m.getKey());
+            }
+        }
+
+        return l.head;
+    }
+
+    public ListNode insertionSortList(ListNode head) {
+
+        List<Integer> l = new ArrayList<>();
+
+        while(head != null){
+            l.add(head.val);
+        }
+
+        Collections.sort(l);
+
+        LinkedList l1 = new LinkedList();
+
+        for(int i : l){
+            l1 = l1.insertAtEnd(l1, i);
+        }
+        return l1.head;
     }
 
 }
