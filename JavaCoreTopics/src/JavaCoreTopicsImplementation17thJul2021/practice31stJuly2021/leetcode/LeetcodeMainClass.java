@@ -11,6 +11,31 @@ import java.util.stream.Collectors;
  * @author sidharthdas on 31/07/21.
  */
 
+class LinkedList{
+
+    ListNode head = null;
+
+    public LinkedList insertAtEnd(LinkedList l , int data){
+        ListNode node = new ListNode();
+        node.val = data;
+
+        if(l.head == null){
+            l.head = node;
+        }else{
+            ListNode currNode = l.head;
+
+            while(currNode.next != null){
+                currNode = currNode.next;
+            }
+
+            currNode.next = node;
+        }
+
+        return l;
+    }
+
+        }
+
 
 class TreeNode {
     int val;
@@ -1202,6 +1227,7 @@ public class LeetcodeMainClass {
         ListNode currNode = head;
         while(currNode != null){
             l.add(currNode.val);
+            currNode = currNode.next;
         }
 
 
@@ -1233,6 +1259,9 @@ public class LeetcodeMainClass {
         BST b = new BST();
         root = b.insert(root, midVal);
 
+        left = left.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+        right = right.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+
 
         for(int i : left){
             root = b.insert(root, i);
@@ -1245,6 +1274,90 @@ public class LeetcodeMainClass {
 
 
     return root;
+    }
+
+    public ListNode deleteDuplicates(ListNode head) {
+
+        Set<Integer> set = new TreeSet<>();
+
+        ListNode curr = head;
+
+        while(curr!= null){
+            set.add(curr.val);
+            curr = curr.next;
+        }
+
+        LinkedList l = new LinkedList();
+
+        for(int i : set){
+            l  = l.insertAtEnd(l, i);
+        }
+
+        return l.head;
+    }
+
+
+    public ListNode sortList(ListNode head) {
+
+        List<Integer> l = new ArrayList<>();
+
+        ListNode curr = head;
+        while(curr!= null){
+            l.add(curr.val);
+            curr = curr.next;
+        }
+
+        LinkedList link = new LinkedList();
+        Collections.sort(l);
+
+        for(int i : l){
+            link = link.insertAtEnd(link, i);
+        }
+                return link.head;
+    }
+
+
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+
+        String s1 = returnNumber(l1);
+        String s2 = returnNumber(l2);
+
+        BigInteger b1 = new BigInteger(s1);
+        BigInteger b2 = new BigInteger(s2);
+
+        b1 = b1.add(b2);
+
+        LinkedList l = new LinkedList();
+
+        String[] arr = String.valueOf(b1).split("");
+
+        for(String s : arr){
+            l = l.insertAtEnd(l, Integer.valueOf(s));
+        }
+
+        return l.head;
+
+    }
+
+
+    private String returnNumber(ListNode  l){
+        String s = "";
+
+        ListNode curr = l;
+        while(curr != null){
+
+            s+= String.valueOf(curr.val);
+            curr = curr.next;
+        }
+
+        return s;
+    }
+
+
+    public ListNode deleteDuplicates(ListNode head) {
+
+        return null;
+
     }
 
 }
