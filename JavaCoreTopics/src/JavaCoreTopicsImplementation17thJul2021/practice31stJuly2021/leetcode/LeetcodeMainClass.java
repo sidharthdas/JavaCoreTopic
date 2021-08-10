@@ -1196,8 +1196,55 @@ public class LeetcodeMainClass {
         return root;
     }
 
-    public TreeNode sortedListToBST(ListNode head) {
+    public TreeNode sortedListToBST1 ( ListNode head ) {
+        List<Integer> l = new ArrayList<>();
 
+        ListNode currNode = head;
+        while(currNode != null){
+            l.add(currNode.val);
+        }
+
+
+        int size = l.size();
+        if(size == 0){
+            return null;
+        }
+        if(size == 1){
+            TreeNode n1 = new TreeNode();
+            n1.val = l.get(0);
+            return  n1;
+        }
+
+        int mid = (size / 2) +1;
+        int midVal = l.get(mid-1);
+        List<Integer> left = new ArrayList<>();
+        List<Integer> right = new ArrayList<>();
+
+
+        for(int i = 0; i < size; i++){
+            if(i < mid -1){
+                left.add(l.get(i));
+            }else if(i > mid -1){
+                right.add(l.get(i));
+            }
+        }
+
+        TreeNode root = null;
+        BST b = new BST();
+        root = b.insert(root, midVal);
+
+
+        for(int i : left){
+            root = b.insert(root, i);
+        }
+
+        for(int i : right){
+            root = b.insert(root, i);
+        }
+
+
+
+    return root;
     }
 
 }
