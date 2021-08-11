@@ -2,6 +2,7 @@ package JavaCoreTopicsImplementation17thJul2021.practice31stJuly2021.leetcode;
 
 import JavaCoreTopicsImplementation17thJul2021.abstractclass.I;
 
+
 import java.math.BigInteger;
 import java.util.*;
 import java.util.function.Predicate;
@@ -10,9 +11,70 @@ import java.util.stream.Collectors;
 /**
  * @author sidharthdas on 31/07/21.
  */
+class KthLargest {
+
+    List<Integer> list = new ArrayList<>();
+
+    public KthLargest(int k, int[] nums) {
+        list = list.stream().sorted().collect(Collectors.toList());
+
+    }
+
+    public int add(int val) {
+         list.add(val);
+         return val;
+
+    }
+}
+class MyHashMap {
+    Map<Integer, Integer> map = new HashMap<>();
+    /** Initialize your data structure here. */
+    public MyHashMap() {
+
+    }
+
+    /** value will always be non-negative. */
+    public void put(int key, int value) {
+        map.put(key, value);
+    }
+
+    /** Returns the value to which the specified key is mapped, or -1 if this map contains no mapping for the key */
+    public int get(int key) {
+        return map.get(key);
+    }
+
+    /** Removes the mapping of the specified value key if this map contains a mapping for the key */
+    public void remove(int key) {
+        map.remove(key);
+    }
+}
+class MyHashSet {
+
+    /** Initialize your data structure here. */
+
+    Map<Integer, String> map = new HashMap<>();
+    public MyHashSet() {
+
+    }
+
+    public void add(int key) {
+        map.put(key, "ADDED");
+
+    }
+
+    public void remove(int key) {
+        map.remove(key);
+
+    }
+
+    /** Returns true if this set contains the specified element */
+    public boolean contains(int key) {
+            return map.containsKey(key);
+    }
+}
 class MyLinkedList {
 
-    ListNode head = null;
+    java.util.LinkedList<Integer> list = new java.util.LinkedList<>();
 
     /**
      * Initialize your data structure here.
@@ -26,55 +88,21 @@ class MyLinkedList {
      */
     public int get ( int index ) {
 
-        if (this.head == null) {
-            return -1;
-        }
-        int count = 0;
-
-        ListNode n = this.head;
-
-        while (n != null) {
-            if (count == index) {
-                return n.val;
-            } else {
-                count += 1;
-            }
-        }
-        return 0;
+       return list.get(index);
     }
 
     /**
      * Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list.
      */
     public void addAtHead ( int val ) {
-        ListNode node = new ListNode();
-        node.val = val;
-
-        if (this.head == null) {
-            this.head = node;
-        } else {
-
-            node.next = this.head;
-            this.head = node;
-        }
+      list.addFirst(val);
     }
 
     /**
      * Append a node of value val to the last element of the linked list.
      */
     public void addAtTail ( int val ) {
-        ListNode node = new ListNode();
-        node.val = val;
-
-        if (this.head == null) {
-            this.head = node;
-        } else {
-            ListNode currNode = this.head;
-            while (currNode.next != null) {
-                currNode = currNode.next;
-            }
-            currNode.next = node;
-        }
+       list.addLast(val);
 
     }
 
@@ -82,14 +110,14 @@ class MyLinkedList {
      * Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted.
      */
     public void addAtIndex ( int index, int val ) {
-
+        list.add(index, val);
     }
 
     /**
      * Delete the index-th node in the linked list, if the index is valid.
      */
     public void deleteAtIndex ( int index ) {
-
+        list.remove(index);
     }
 }
 
@@ -114,6 +142,27 @@ class LinkedList {
         }
 
         return l;
+    }
+
+    public LinkedList remove ( LinkedList list, int data ) {
+        if (list.head == null) {
+            return null;
+        }
+
+        if (list.head.val == data) {
+            list.head = list.head.next;
+        } else {
+            ListNode currNode = list.head;
+            while (currNode.next != null) {
+                if (currNode.next.val == data) {
+                    ListNode node = currNode.next.next;
+                    currNode.next = node;
+                }
+                currNode = currNode.next;
+            }
+
+        }
+        return list;
     }
 
 }
@@ -231,9 +280,8 @@ public class LeetcodeMainClass {
 
         LeetcodeMainClass l = new LeetcodeMainClass();
 
-        System.out.println(l.thousandSeparator(
-                123456789));
-
+       MyHashMap map = new MyHashMap();
+       map.get(10);
 
 
     }
@@ -1520,39 +1568,38 @@ public class LeetcodeMainClass {
         int size2 = s2.length();
 
         if (size1 > size2) {
-            for(int i = 0; i <=size2; i++){
+            for (int i = 0; i <= size2; i++) {
 
             }
         }
 
-    return null;
+        return null;
     }
 
-    public ListNode removeZeroSumSublists(ListNode head) {
+    public ListNode removeZeroSumSublists ( ListNode head ) {
 
-        if(head == null){
-            return  null;
+        if (head == null) {
+            return null;
         }
 
-        List<Integer> l = new ArrayList<>();
+        List< Integer > l = new ArrayList<>();
 
-        while(head != null){
+        while (head != null) {
             l.add(head.val);
             head = head.next;
         }
-        List<Integer> intToRem = new ArrayList<>();
+        List< Integer > intToRem = new ArrayList<>();
         int size = l.size();
-        for(int i = 0; i < size; i++){
-            if(i+1 < size){
-                if(l.get(i) + l.get(i+1) == 0){
+        for (int i = 0; i < size; i++) {
+            if (i + 1 < size) {
+                if (l.get(i) + l.get(i + 1) == 0) {
                     intToRem.add(l.get(i));
-                    intToRem.add(l.get(i+1));
+                    intToRem.add(l.get(i + 1));
                 }
             }
         }
 
         System.out.println(intToRem);
-
 
 
         System.out.println(l);
@@ -1561,51 +1608,114 @@ public class LeetcodeMainClass {
     }
 
 
-    public String thousandSeparator(int n) {
+    public String thousandSeparator ( int n ) {
 
         String num = String.valueOf(n);
-        if(num.length() == 3){
+        if (num.length() == 3) {
             return num;
         }
         String[] numArr = num.split("");
         int size = numArr.length;
         int numOfDots = 0;
-        if(size % 3 == 0){
+        if (size % 3 == 0) {
             numOfDots = (size / 3) - 1;
-        }else{
+        } else {
             numOfDots = size / 3;
         }
         int count = 1;
         String s = "";
 
-        for(int i = size-1; i >= 0; i--){
-            if(i == size-1){
-                s= numArr[i];
-                count ++;
-            }else{
-                if(count % 3 != 0){
-                    s = numArr[i]+""+s;
+        for (int i = size - 1; i >= 0; i--) {
+            if (i == size - 1) {
+                s = numArr[i];
+                count++;
+            } else {
+                if (count % 3 != 0) {
+                    s = numArr[i] + "" + s;
                     count++;
-                }else if(count % 3 == 0 && numOfDots != 0){
-                    s = "."+numArr[i]+""+s;
-                    numOfDots --;
+                } else if (count % 3 == 0 && numOfDots != 0) {
+                    s = "." + numArr[i] + "" + s;
+                    numOfDots--;
                     count++;
                 }
             }
         }
 
-        if(size % 3 == 0){
-            s = numArr[0]+""+s;
+        if (size % 3 == 0) {
+            s = numArr[0] + "" + s;
         }
 
         return s;
     }
 
-    public boolean isPrefixString(String s, String[] words) {
+    public boolean isPrefixString ( String s, String[] words ) {
+
+        int size = s.length();
+        String con = "";
+        for (String s1 : words) {
+
+            if (con.length() < size) {
+                con += s1;
+            }
+            if (con.length() == size) {
+                if (con.equals(s)) {
+                    return true;
+                }
+            } else if (con.length() > size) {
+                return false;
+            }
+        }
 
         return false;
 
     }
 
+    public ListNode removeElements ( ListNode head, int val ) {
+
+        List< Integer > l = new ArrayList<>();
+        ListNode currNode = head;
+        while (currNode != null) {
+            l.add(currNode.val);
+            currNode = currNode.next;
+        }
+        int count = 0;
+        for (int i : l) {
+            if (i == val) {
+                count++;
+            }
+        }
+        LinkedList list = new LinkedList();
+        list.head = head;
+
+        while (count != 0) {
+
+            list = list.remove(list, val);
+            count--;
+        }
+        return list.head;
+    }
+
+
+    public int countPrimes1(int n) {
+
+        List<Integer> list = new ArrayList<>();
+
+        for(int i = 0 ; i <= n ; i++)
+        {
+            //logic for checking number is prime or not
+            int count = 0;
+            for(int j = 1 ; j <= i ; j++)
+            {
+                if(i % j == 0)
+                    count = count+1;
+            }
+            if(count == 2)
+                list.add(i);
+        }
+
+        long total = list.stream().count();
+
+        return Integer.valueOf((int) total);
+    }
 
 }
