@@ -14,55 +14,63 @@ class MyLinkedList {
 
     ListNode head = null;
 
-    /** Initialize your data structure here. */
-    public MyLinkedList() {
+    /**
+     * Initialize your data structure here.
+     */
+    public MyLinkedList () {
 
     }
 
-    /** Get the value of the index-th node in the linked list. If the index is invalid, return -1. */
-    public int get(int index) {
+    /**
+     * Get the value of the index-th node in the linked list. If the index is invalid, return -1.
+     */
+    public int get ( int index ) {
 
-        if(this.head == null){
+        if (this.head == null) {
             return -1;
         }
         int count = 0;
 
         ListNode n = this.head;
 
-        while(n != null){
-            if(count == index){
+        while (n != null) {
+            if (count == index) {
                 return n.val;
-            }else{
-                count+=1;
+            } else {
+                count += 1;
             }
         }
         return 0;
     }
 
-    /** Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list. */
-    public void addAtHead(int val) {
+    /**
+     * Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list.
+     */
+    public void addAtHead ( int val ) {
         ListNode node = new ListNode();
         node.val = val;
 
-        if(this.head == null){
+        if (this.head == null) {
             this.head = node;
-        }else{
+        } else {
 
             node.next = this.head;
             this.head = node;
         }
     }
 
-    /** Append a node of value val to the last element of the linked list. */
-    public void addAtTail(int val) {
+    /**
+     * Append a node of value val to the last element of the linked list.
+     */
+    public void addAtTail ( int val ) {
         ListNode node = new ListNode();
         node.val = val;
 
-        if(this.head == null){
+        if (this.head == null) {
             this.head = node;
-        }else{
+        } else {
             ListNode currNode = this.head;
-            while(currNode.next != null){
+            while (currNode.next != null) {
                 currNode = currNode.next;
             }
             currNode.next = node;
@@ -70,30 +78,35 @@ class MyLinkedList {
 
     }
 
-    /** Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted. */
-    public void addAtIndex(int index, int val) {
+    /**
+     * Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted.
+     */
+    public void addAtIndex ( int index, int val ) {
 
     }
 
-    /** Delete the index-th node in the linked list, if the index is valid. */
-    public void deleteAtIndex(int index) {
+    /**
+     * Delete the index-th node in the linked list, if the index is valid.
+     */
+    public void deleteAtIndex ( int index ) {
 
     }
 }
-class LinkedList{
+
+class LinkedList {
 
     ListNode head = null;
 
-    public LinkedList insertAtEnd(LinkedList l , int data){
+    public LinkedList insertAtEnd ( LinkedList l, int data ) {
         ListNode node = new ListNode();
         node.val = data;
 
-        if(l.head == null){
+        if (l.head == null) {
             l.head = node;
-        }else{
+        } else {
             ListNode currNode = l.head;
 
-            while(currNode.next != null){
+            while (currNode.next != null) {
                 currNode = currNode.next;
             }
 
@@ -103,7 +116,7 @@ class LinkedList{
         return l;
     }
 
-        }
+}
 
 
 class TreeNode {
@@ -218,15 +231,9 @@ public class LeetcodeMainClass {
 
         LeetcodeMainClass l = new LeetcodeMainClass();
 
+        System.out.println(l.thousandSeparator(
+                123456789));
 
-        int[] arr = {1, 0, 0, 1};
-        l.moveZeroes(arr);
-
-        System.out.println();
-
-        String s1 = "Sidharth";
-
-        System.out.println(2000000000 % 3);
 
 
     }
@@ -1224,7 +1231,7 @@ public class LeetcodeMainClass {
 
     }
 
-    public int minDiffInBST(TreeNode root) {
+    public int minDiffInBST ( TreeNode root ) {
 
         BST b = new BST();
 
@@ -1232,94 +1239,92 @@ public class LeetcodeMainClass {
 
         Collections.sort(b.list);
 
-       int size = b.list.size();
+        int size = b.list.size();
 
-       List<Integer> l = new ArrayList<>();
+        List< Integer > l = new ArrayList<>();
 
 
-       for(int i = 0; i < size; i++){
-           if(i+1 < size){
-               l.add(b.list.get(i+1) - b.list.get(i));
-           }
+        for (int i = 0; i < size; i++) {
+            if (i + 1 < size) {
+                l.add(b.list.get(i + 1) - b.list.get(i));
+            }
 
-       }
+        }
 
-       Collections.sort(l);
+        Collections.sort(l);
 
-       return l.get(0);
-
+        return l.get(0);
 
 
     }
 
-    public TreeNode sortedArrayToBST(int[] nums) {
+    public TreeNode sortedArrayToBST ( int[] nums ) {
         int size = nums.length;
 
-        int mid = (size / 2) +1;
-        int midVal = nums[mid-1];
-        List<Integer> l = new ArrayList<>();
-        List<Integer> r = new ArrayList<>();
+        int mid = (size / 2) + 1;
+        int midVal = nums[mid - 1];
+        List< Integer > l = new ArrayList<>();
+        List< Integer > r = new ArrayList<>();
 
-        for(int i = 0; i < size; i++){
-            if(i < mid -1){
+        for (int i = 0; i < size; i++) {
+            if (i < mid - 1) {
                 l.add(nums[i]);
-            }else if(i > mid -1){
+            } else if (i > mid - 1) {
                 r.add(nums[i]);
             }
         }
 
-        System.out.println("l: "+l);
-        System.out.println("mid: "+midVal);
-        System.out.println("r: "+r);
+        System.out.println("l: " + l);
+        System.out.println("mid: " + midVal);
+        System.out.println("r: " + r);
 
         TreeNode root = null;
         BST b = new BST();
         root = b.insert(root, midVal);
 
 
-        for(int i : l){
+        for (int i : l) {
             root = b.insert(root, i);
         }
 
-        for(int i : r){
+        for (int i : r) {
             root = b.insert(root, i);
         }
-
 
 
         return root;
     }
 
     public TreeNode sortedListToBST1 ( ListNode head ) {
-        List<Integer> l = new ArrayList<>();
+        List< Integer > l = new ArrayList<>();
 
         ListNode currNode = head;
-        while(currNode != null){
+        while (currNode != null) {
             l.add(currNode.val);
             currNode = currNode.next;
         }
 
 
         int size = l.size();
-        if(size == 0){
+        if (size == 0) {
             return null;
         }
-        if(size == 1){
+        if (size == 1) {
             TreeNode n1 = new TreeNode();
             n1.val = l.get(0);
-            return  n1;
+            return n1;
         }
 
-        int mid = (size / 2) +1;
-        int midVal = l.get(mid-1);
-        List<Integer> left = new ArrayList<>();
-        List<Integer> right = new ArrayList<>();
+        int mid = (size / 2) + 1;
+        int midVal = l.get(mid - 1);
+        List< Integer > left = new ArrayList<>();
+        List< Integer > right = new ArrayList<>();
 
 
-        for(int i = 0; i < size; i++){
-            if(i < mid -1){
+        for (int i = 0; i < size; i++) {
+            if (i < mid - 1) {
                 left.add(l.get(i));
-            }else if(i > mid -1){
+            } else if (i > mid - 1) {
                 right.add(l.get(i));
             }
         }
@@ -1332,46 +1337,45 @@ public class LeetcodeMainClass {
         right = right.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
 
 
-        for(int i : left){
+        for (int i : left) {
             root = b.insert(root, i);
         }
 
-        for(int i : right){
+        for (int i : right) {
             root = b.insert(root, i);
         }
 
 
-
-    return root;
+        return root;
     }
 
-    public ListNode deleteDuplicates(ListNode head) {
+    public ListNode deleteDuplicates ( ListNode head ) {
 
-        Set<Integer> set = new TreeSet<>();
+        Set< Integer > set = new TreeSet<>();
 
         ListNode curr = head;
 
-        while(curr!= null){
+        while (curr != null) {
             set.add(curr.val);
             curr = curr.next;
         }
 
         LinkedList l = new LinkedList();
 
-        for(int i : set){
-            l  = l.insertAtEnd(l, i);
+        for (int i : set) {
+            l = l.insertAtEnd(l, i);
         }
 
         return l.head;
     }
 
 
-    public ListNode sortList(ListNode head) {
+    public ListNode sortList ( ListNode head ) {
 
-        List<Integer> l = new ArrayList<>();
+        List< Integer > l = new ArrayList<>();
 
         ListNode curr = head;
-        while(curr!= null){
+        while (curr != null) {
             l.add(curr.val);
             curr = curr.next;
         }
@@ -1379,14 +1383,14 @@ public class LeetcodeMainClass {
         LinkedList link = new LinkedList();
         Collections.sort(l);
 
-        for(int i : l){
+        for (int i : l) {
             link = link.insertAtEnd(link, i);
         }
-                return link.head;
+        return link.head;
     }
 
 
-    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+    public ListNode addTwoNumbers ( ListNode l1, ListNode l2 ) {
 
         String s1 = returnNumber(l1);
         String s2 = returnNumber(l2);
@@ -1400,7 +1404,7 @@ public class LeetcodeMainClass {
 
         String[] arr = String.valueOf(b1).split("");
 
-        for(String s : arr){
+        for (String s : arr) {
             l = l.insertAtEnd(l, Integer.valueOf(s));
         }
 
@@ -1409,13 +1413,13 @@ public class LeetcodeMainClass {
     }
 
 
-    private String returnNumber(ListNode  l){
+    private String returnNumber ( ListNode l ) {
         String s = "";
 
         ListNode curr = l;
-        while(curr != null){
+        while (curr != null) {
 
-            s+= String.valueOf(curr.val);
+            s += String.valueOf(curr.val);
             curr = curr.next;
         }
 
@@ -1423,15 +1427,15 @@ public class LeetcodeMainClass {
     }
 
 
-    public ListNode deleteDuplicates1(ListNode head) {
-        Map<Integer, Integer> map = new HashMap<>();
+    public ListNode deleteDuplicates1 ( ListNode head ) {
+        Map< Integer, Integer > map = new HashMap<>();
 
         ListNode curr = head;
 
-        while(curr!= null){
-            if(map.containsKey(curr.val)){
-                map.put(curr.val, map.get(curr.val)+1);
-            }else{
+        while (curr != null) {
+            if (map.containsKey(curr.val)) {
+                map.put(curr.val, map.get(curr.val) + 1);
+            } else {
                 map.put(curr.val, 1);
             }
             curr = curr.next;
@@ -1439,8 +1443,8 @@ public class LeetcodeMainClass {
 
         LinkedList l = new LinkedList();
 
-        for(Map.Entry<Integer, Integer> m  : map.entrySet()){
-            if(m.getValue() ==1) {
+        for (Map.Entry< Integer, Integer > m : map.entrySet()) {
+            if (m.getValue() == 1) {
                 l = l.insertAtEnd(l, m.getKey());
             }
         }
@@ -1448,11 +1452,11 @@ public class LeetcodeMainClass {
         return l.head;
     }
 
-    public ListNode insertionSortList(ListNode head) {
+    public ListNode insertionSortList ( ListNode head ) {
 
-        List<Integer> l = new ArrayList<>();
+        List< Integer > l = new ArrayList<>();
 
-        while(head != null){
+        while (head != null) {
             l.add(head.val);
         }
 
@@ -1460,10 +1464,148 @@ public class LeetcodeMainClass {
 
         LinkedList l1 = new LinkedList();
 
-        for(int i : l){
+        for (int i : l) {
             l1 = l1.insertAtEnd(l1, i);
         }
         return l1.head;
     }
+
+    public boolean isPalindrome ( ListNode head ) {
+        if (head == null) {
+            return false;
+        }
+
+        List< Integer > list = new ArrayList<>();
+
+        while (head != null) {
+            list.add(head.val);
+            head = head.next;
+        }
+
+        int size = list.size();
+
+        int mid = size / 2;
+
+        int j = 1;
+
+        for (int i = 0; i < mid; i++) {
+            if (list.get(i) != list.get(size - j)) {
+                return false;
+            }
+
+            j += 1;
+        }
+
+        return true;
+    }
+
+    public ListNode getIntersectionNode ( ListNode headA, ListNode headB ) {
+
+        String s1 = "";
+        String s2 = "";
+
+
+        while (headA != null) {
+            s1 += String.valueOf(headA.val);
+            headA = headA.next;
+        }
+
+        while (headB != null) {
+            s2 += String.valueOf(headB.val);
+            headB = headB.next;
+        }
+
+        int size1 = s1.length();
+
+        int size2 = s2.length();
+
+        if (size1 > size2) {
+            for(int i = 0; i <=size2; i++){
+
+            }
+        }
+
+    return null;
+    }
+
+    public ListNode removeZeroSumSublists(ListNode head) {
+
+        if(head == null){
+            return  null;
+        }
+
+        List<Integer> l = new ArrayList<>();
+
+        while(head != null){
+            l.add(head.val);
+            head = head.next;
+        }
+        List<Integer> intToRem = new ArrayList<>();
+        int size = l.size();
+        for(int i = 0; i < size; i++){
+            if(i+1 < size){
+                if(l.get(i) + l.get(i+1) == 0){
+                    intToRem.add(l.get(i));
+                    intToRem.add(l.get(i+1));
+                }
+            }
+        }
+
+        System.out.println(intToRem);
+
+
+
+        System.out.println(l);
+        return null;
+
+    }
+
+
+    public String thousandSeparator(int n) {
+
+        String num = String.valueOf(n);
+        if(num.length() == 3){
+            return num;
+        }
+        String[] numArr = num.split("");
+        int size = numArr.length;
+        int numOfDots = 0;
+        if(size % 3 == 0){
+            numOfDots = (size / 3) - 1;
+        }else{
+            numOfDots = size / 3;
+        }
+        int count = 1;
+        String s = "";
+
+        for(int i = size-1; i >= 0; i--){
+            if(i == size-1){
+                s= numArr[i];
+                count ++;
+            }else{
+                if(count % 3 != 0){
+                    s = numArr[i]+""+s;
+                    count++;
+                }else if(count % 3 == 0 && numOfDots != 0){
+                    s = "."+numArr[i]+""+s;
+                    numOfDots --;
+                    count++;
+                }
+            }
+        }
+
+        if(size % 3 == 0){
+            s = numArr[0]+""+s;
+        }
+
+        return s;
+    }
+
+    public boolean isPrefixString(String s, String[] words) {
+
+        return false;
+
+    }
+
 
 }
