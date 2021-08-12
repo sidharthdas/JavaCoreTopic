@@ -8,73 +8,187 @@ import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+class Twitter {
+
+    Map< Integer, List< Integer > > map;
+    Map< Integer, List< Integer > > twitterFollowers;
+
+    /**
+     * Initialize your data structure here.
+     */
+    public Twitter () {
+        map = new HashMap<>();
+        twitterFollowers = new HashMap<>();
+    }
+
+    /**
+     * Compose a new tweet.
+     */
+    public void postTweet ( int userId, int tweetId ) {
+        if (map.containsKey(userId)) {
+            if (map.get(userId) == null) {
+                List< Integer > l = new ArrayList<>();
+                l.add(tweetId);
+                map.put(userId, l);
+            } else {
+                List< Integer > l = map.get(userId);
+                l.add(tweetId);
+                map.put(userId, l);
+            }
+        } else {
+
+            List< Integer > list1 = new ArrayList<>();
+            list1.add(tweetId);
+            map.put(userId, list1);
+            twitterFollowers.put(userId, null);
+        }
+
+    }
+
+    /**
+     * Retrieve the 10 most recent tweet ids in the user's news feed. Each item in the news feed must be posted by users who the user followed or by the user herself. Tweets must be ordered from most recent to least recent.
+     */
+    public List< Integer > getNewsFeed ( int userId ) {
+        return null;
+
+    }
+
+    /**
+     * Follower follows a followee. If the operation is invalid, it should be a no-op.
+     */
+    public void follow ( int followerId, int followeeId ) {
+        if(twitterFollowers.containsKey(followeeId)){
+            if(twitterFollowers.get(followeeId) == null){
+                List<Integer> followers = new ArrayList<>();
+                followers.add(followerId);
+
+                twitterFollowers.put(followeeId, followers);
+            }else{
+                List<Integer> followers = twitterFollowers.get(followeeId);
+                if(!followers.contains(followerId)){
+                    followers.add(followerId);
+                }
+            }
+        }else{
+            List<Integer> followers = new ArrayList<>();
+            followers.add(followerId);
+            twitterFollowers.put(followeeId, followers);
+        }
+
+
+    }
+
+    /**
+     * Follower unfollows a followee. If the operation is invalid, it should be a no-op.
+     */
+    public void unfollow ( int followerId, int followeeId ) {
+
+        List<Integer> l= twitterFollowers.get(followerId);
+        if(l != null){
+            l.remove(Integer.valueOf(followerId));
+            twitterFollowers.put(followeeId, l);
+        }
+
+    }
+}
+
+/**
+ * Your Twitter object will be instantiated and called as such:
+ * Twitter obj = new Twitter();
+ * obj.postTweet(userId,tweetId);
+ * List<Integer> param_2 = obj.getNewsFeed(userId);
+ * obj.follow(followerId,followeeId);
+ * obj.unfollow(followerId,followeeId);
+ */
+
 /**
  * @author sidharthdas on 31/07/21.
  */
 class KthLargest {
 
-    List<Integer> list = new ArrayList<>();
+    List< Integer > list = new ArrayList<>();
 
-    public KthLargest(int k, int[] nums) {
-        list = list.stream().sorted().collect(Collectors.toList());
+    public KthLargest ( int k, int[] nums ) {
+        Arrays.sort(nums);
+        for (int i : nums) {
+            list.add(i);
+        }
 
     }
 
-    public int add(int val) {
-         list.add(val);
-         return val;
+    public int add ( int val ) {
+        list.add(val);
+        Collections.sort(list);
+        return val;
 
     }
 }
+
 class MyHashMap {
-    Map<Integer, Integer> map = new HashMap<>();
-    /** Initialize your data structure here. */
-    public MyHashMap() {
+    Map< Integer, Integer > map = new HashMap<>();
+
+    /**
+     * Initialize your data structure here.
+     */
+    public MyHashMap () {
 
     }
 
-    /** value will always be non-negative. */
-    public void put(int key, int value) {
+    /**
+     * value will always be non-negative.
+     */
+    public void put ( int key, int value ) {
         map.put(key, value);
     }
 
-    /** Returns the value to which the specified key is mapped, or -1 if this map contains no mapping for the key */
-    public int get(int key) {
+    /**
+     * Returns the value to which the specified key is mapped, or -1 if this map contains no mapping for the key
+     */
+    public int get ( int key ) {
         return map.get(key);
     }
 
-    /** Removes the mapping of the specified value key if this map contains a mapping for the key */
-    public void remove(int key) {
+    /**
+     * Removes the mapping of the specified value key if this map contains a mapping for the key
+     */
+    public void remove ( int key ) {
         map.remove(key);
     }
 }
+
 class MyHashSet {
 
-    /** Initialize your data structure here. */
+    /**
+     * Initialize your data structure here.
+     */
 
-    Map<Integer, String> map = new HashMap<>();
-    public MyHashSet() {
+    Map< Integer, String > map = new HashMap<>();
+
+    public MyHashSet () {
 
     }
 
-    public void add(int key) {
+    public void add ( int key ) {
         map.put(key, "ADDED");
 
     }
 
-    public void remove(int key) {
+    public void remove ( int key ) {
         map.remove(key);
 
     }
 
-    /** Returns true if this set contains the specified element */
-    public boolean contains(int key) {
-            return map.containsKey(key);
+    /**
+     * Returns true if this set contains the specified element
+     */
+    public boolean contains ( int key ) {
+        return map.containsKey(key);
     }
 }
+
 class MyLinkedList {
 
-    java.util.LinkedList<Integer> list = new java.util.LinkedList<>();
+    java.util.LinkedList< Integer > list = new java.util.LinkedList<>();
 
     /**
      * Initialize your data structure here.
@@ -88,21 +202,21 @@ class MyLinkedList {
      */
     public int get ( int index ) {
 
-       return list.get(index);
+        return list.get(index);
     }
 
     /**
      * Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list.
      */
     public void addAtHead ( int val ) {
-      list.addFirst(val);
+        list.addFirst(val);
     }
 
     /**
      * Append a node of value val to the last element of the linked list.
      */
     public void addAtTail ( int val ) {
-       list.addLast(val);
+        list.addLast(val);
 
     }
 
@@ -117,7 +231,9 @@ class MyLinkedList {
      * Delete the index-th node in the linked list, if the index is valid.
      */
     public void deleteAtIndex ( int index ) {
-        list.remove(index);
+        if(list.size() > index+1) {
+            list.remove(index);
+        }
     }
 }
 
@@ -278,10 +394,11 @@ public class LeetcodeMainClass {
     public static void main ( String[] args ) {
 
 
-        LeetcodeMainClass l = new LeetcodeMainClass();
-
-       MyHashMap map = new MyHashMap();
-       map.get(10);
+        List<Integer> l = new ArrayList<>();
+        l.add(2);
+        l.add(10);
+        l.remove(Integer.valueOf(10));
+        System.out.println(l);
 
 
     }
@@ -1696,26 +1813,128 @@ public class LeetcodeMainClass {
     }
 
 
-    public int countPrimes1(int n) {
+    public int countPrimes1 ( int n ) {
 
-        List<Integer> list = new ArrayList<>();
+        List< Integer > list = new ArrayList<>();
 
-        for(int i = 0 ; i <= n ; i++)
-        {
+        for (int i = 0; i <= n; i++) {
             //logic for checking number is prime or not
             int count = 0;
-            for(int j = 1 ; j <= i ; j++)
-            {
-                if(i % j == 0)
-                    count = count+1;
+            for (int j = 1; j <= i; j++) {
+                if (i % j == 0)
+                    count = count + 1;
             }
-            if(count == 2)
+            if (count == 2)
                 list.add(i);
         }
 
         long total = list.stream().count();
 
         return Integer.valueOf((int) total);
+    }
+
+    public int[] nextLargerNodes ( ListNode head ) {
+
+        List< Integer > l = new ArrayList<>();
+
+
+        while (head != null) {
+            l.add(head.val);
+            head = head.next;
+        }
+
+        l = Arrays.asList(2, 7, 4, 3, 5);
+
+        int size = l.size();
+        int[] result = new int[size];
+        int index = 0;
+        for (int i = 0; i < size; i++) {
+
+            if (i == size - 1) {
+                result[i] = 0;
+            }
+
+            for (int j = i + 1; j < size; j++) {
+
+                if (l.get(j) > l.get(i)) {
+                    result[index] = l.get(j);
+                    index++;
+                    break;
+                } else if (j == size - 1) {
+                    result[index] = 0;
+                    index++;
+                }
+            }
+        }
+
+        return result;
+    }
+
+
+    public ListNode oddEvenList ( ListNode head ) {
+
+        List< Integer > l = new ArrayList<>();
+        ListNode currNode = head;
+
+        while (currNode != null) {
+            l.add(currNode.val);
+        }
+
+        LinkedList even = new LinkedList();
+        LinkedList odd = new LinkedList();
+        int size = l.size();
+        for (int i = 1; i < size; i++) {
+            if (i % 2 == 0) {
+                even = even.insertAtEnd(even, l.get(i));
+            } else {
+                odd = odd.insertAtEnd(odd, l.get(i));
+            }
+        }
+
+
+        head.next = even.head;
+
+        ListNode cuNode = head;
+        while (cuNode.next != null) {
+            cuNode = cuNode.next;
+        }
+        cuNode.next = odd.head;
+
+        return head;
+    }
+
+    public ListNode partition ( ListNode head, int x ) {
+
+        List< Integer > l = new ArrayList<>();
+        ListNode currNode = head;
+
+        while (currNode != null) {
+            l.add(currNode.val);
+            currNode = currNode.next;
+        }
+
+        List< Integer > lessThanX = new ArrayList<>();
+        List< Integer > greaterThanOREqualToX = new ArrayList<>();
+
+        for (int i : l) {
+            if (i < x) {
+                lessThanX.add(i);
+            } else {
+                greaterThanOREqualToX.add(i);
+            }
+        }
+
+        LinkedList list = new LinkedList();
+
+        for (int i : lessThanX) {
+            list = list.insertAtEnd(list, i);
+        }
+
+        for (int i : greaterThanOREqualToX) {
+            list = list.insertAtEnd(list, i);
+        }
+
+        return list.head;
     }
 
 }
