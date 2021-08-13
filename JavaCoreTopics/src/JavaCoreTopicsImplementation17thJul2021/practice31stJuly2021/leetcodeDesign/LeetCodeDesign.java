@@ -56,7 +56,7 @@ public class LeetCodeDesign {
         List< String > list = Arrays.asList("Sidharth", "Ram", "Shayam", "Raju");
 
         int step = 2;
-        System.out.println(new LeetCodeDesign().tribonacci(4));
+       new LeetCodeDesign().moveZeroes(new int[]{0,0,1});
 
     }
 
@@ -175,8 +175,8 @@ public class LeetCodeDesign {
     public boolean containsNearbyDuplicate ( int[] nums, int k ) {
         int size = nums.length;
         for (int i = 0; i < size; i++) {
-            for(int j = i+1; j < size; j++){
-                if((nums[i] == nums[j]) && Math.abs(i -j) <= k){
+            for (int j = i + 1; j < size; j++) {
+                if ((nums[i] == nums[j]) && Math.abs(i - j) <= k) {
                     return true;
 
                 }
@@ -184,4 +184,92 @@ public class LeetCodeDesign {
         }
         return false;
     }
+
+    public int removeElement ( int[] nums, int val ) {
+
+        List< Integer > l = new ArrayList<>();
+
+        for (int i : nums) {
+            if (i != val) {
+                l.add(i);
+            }
+        }
+
+        int len = l.size();
+        int size = nums.length;
+
+        int numOfDuplicates = size - len;
+        System.out.println(numOfDuplicates);
+        int count = 0;
+        int index = 1;
+        for (int i = 0; i < size; ) {
+            if (count == numOfDuplicates) {
+                break;
+            }
+            if (nums[i] == val) {
+                for (int j = i; j < size; j++) {
+                    if (j + 1 < size) {
+                        int temp = nums[j];
+                        nums[j] = nums[j + 1];
+                        nums[j + 1] = temp;
+
+                    }
+                }
+                count += 1;
+
+            } else {
+                if (count == numOfDuplicates) {
+                    break;
+                }
+                i++;
+            }
+
+        }
+        return len;
+
+
+    }
+
+    public void moveZeroes ( int[] nums ) {
+        List< Integer > l = new ArrayList<>();
+
+        for (int i : nums) {
+            if (i != 0) {
+                l.add(i);
+            }
+        }
+
+        int len = l.size();
+        int size = nums.length;
+
+        int numOfDuplicates = size - len;
+        System.out.println(numOfDuplicates);
+
+        int count = 0;
+        for (int i = 0; i < size;) {
+            if (count == numOfDuplicates) {
+                break;
+            }
+            if (nums[i] == 0) {
+                for (int j = i; j < size; j++) {
+                    if (j + 1 < size) {
+                        int temp = nums[j];
+                        nums[j] = nums[j + 1];
+                        nums[j + 1] = temp;
+
+                    }
+                }
+                count += 1;
+
+            } else {
+                if (count == numOfDuplicates) {
+                    break;
+                }
+                i++;
+            }
+
+        }
+    }
 }
+
+
