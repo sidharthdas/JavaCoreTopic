@@ -137,4 +137,51 @@ public class LeetCodeDesign {
         }
         return -1;
     }
+
+    public List< List< String > > groupAnagrams ( String[] strs ) {
+
+        Map< String, List< String > > map = new LinkedHashMap<>();
+
+        for (String s : strs) {
+            char[] c = s.toCharArray();
+            Arrays.sort(c);
+            String s1 = String.valueOf(c);
+
+            if (map.containsKey(s1)) {
+                if (map.get(s1) == null) {
+                    List< String > l = new ArrayList<>();
+                    l.add(s);
+                    map.put(s1, l);
+                } else {
+                    List< String > l = map.get(s1);
+                    l.add(s);
+                    map.put(s1, l);
+                }
+            } else {
+                List< String > l = new ArrayList<>();
+                l.add(s);
+                map.put(s1, l);
+
+            }
+        }
+        List< List< String > > finalList = new ArrayList<>();
+        for (Map.Entry< String, List< String > > m : map.entrySet()) {
+            finalList.add(m.getValue());
+        }
+
+        return finalList;
+    }
+
+    public boolean containsNearbyDuplicate ( int[] nums, int k ) {
+        int size = nums.length;
+        for (int i = 0; i < size; i++) {
+            for(int j = i+1; j < size; j++){
+                if((nums[i] == nums[j]) && Math.abs(i -j) <= k){
+                    return true;
+
+                }
+            }
+        }
+        return false;
+    }
 }
