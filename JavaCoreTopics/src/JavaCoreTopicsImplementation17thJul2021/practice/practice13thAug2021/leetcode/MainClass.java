@@ -28,8 +28,8 @@ public class MainClass {
         String text = "  this   is  a sentence ";
         int count = 0;
         String textArr[] = text.split("");
-        for(String s : textArr){
-            if(s.equals(" ")){
+        for (String s : textArr) {
+            if (s.equals(" ")) {
                 count++;
             }
         }
@@ -283,7 +283,6 @@ public class MainClass {
         String s2 = "";
 
 
-
         for (String s : nameArr) {
             if (map1.containsKey(s)) {
                 map1.put(s, map1.get(s) + 1);
@@ -301,16 +300,16 @@ public class MainClass {
                 map2.put(s, 1);
             }
         }
-        for(Map.Entry<String, Integer> m : map1.entrySet()){
-            s1+=m.getKey();
+        for (Map.Entry< String, Integer > m : map1.entrySet()) {
+            s1 += m.getKey();
         }
 
-        for(Map.Entry<String, Integer> m : map2.entrySet()){
-            s2+=m.getKey();
+        for (Map.Entry< String, Integer > m : map2.entrySet()) {
+            s2 += m.getKey();
         }
 
 
-        if(!s1.equals(s2)){
+        if (!s1.equals(s2)) {
             return false;
         }
 
@@ -318,11 +317,11 @@ public class MainClass {
         System.out.println(s2);
 
 
-        for(Map.Entry<String, Integer> m : map1.entrySet()){
-            if(!map2.containsKey(m.getKey())){
+        for (Map.Entry< String, Integer > m : map1.entrySet()) {
+            if (!map2.containsKey(m.getKey())) {
                 return false;
             }
-            if(m.getValue() < map2.get(m.getKey())){
+            if (m.getValue() < map2.get(m.getKey())) {
                 return false;
             }
         }
@@ -332,49 +331,48 @@ public class MainClass {
     }
 
 
-    public String reorderSpaces(String text) {
-            String[] textArr = text.split("");
-            int count = 0;
-            for(String s : textArr){
-                if(s.equals(" ")){
-                    count++;
-                }
+    public String reorderSpaces ( String text ) {
+        String[] textArr = text.split("");
+        int count = 0;
+        for (String s : textArr) {
+            if (s.equals(" ")) {
+                count++;
             }
+        }
 
-            String noSpaceStr = text.replaceAll("\\s", " " );
-            String sArr[] = noSpaceStr.split(" ");
-            int len = sArr.length;
+        String noSpaceStr = text.replaceAll("\\s", " ");
+        String sArr[] = noSpaceStr.split(" ");
+        int len = sArr.length;
 
-            String result = "";
+        String result = "";
 
-            int each = count %  len-1;
-            if(each == 0){
-                for(String s : sArr){
-                    result+= s+"   ";
-                }
+        int each = count % len - 1;
+        if (each == 0) {
+            for (String s : sArr) {
+                result += s + "   ";
             }
+        }
 
-            return result;
+        return result;
     }
 
 
-
-    public int numberOfSubstrings(String s) {
+    public int numberOfSubstrings ( String s ) {
         char[] str = s.toCharArray();
         int n = str.length;
 
         String[] srr = s.split("");
-        Set<String> set = new TreeSet<>();
+        Set< String > set = new TreeSet<>();
 
-        for(String s3: srr){
+        for (String s3 : srr) {
             set.add(s3);
         }
 
         String absolut = "";
-        for(String s4 : set){
-            absolut+=s4;
+        for (String s4 : set) {
+            absolut += s4;
         }
-        List<String> l = new ArrayList<>();
+        List< String > l = new ArrayList<>();
         for (int len = 1; len <= n; len++) {
             // Pick ending point
             String s1 = "";
@@ -385,7 +383,7 @@ public class MainClass {
                 int j = i + len - 1;
                 for (int k = i; k <= j; k++) {
                     System.out.print(str[k]);
-                    s1+=str[k];
+                    s1 += str[k];
                 }
                 char[] c = s1.toCharArray();
                 Arrays.sort(c);
@@ -394,21 +392,40 @@ public class MainClass {
             }
         }
         String[] spli = absolut.split("");
-       l = l.stream().filter(x->x.length() >= spli.length).collect(Collectors.toList());
-        int count= 0;
-       for(String s5: l){
-           for(int i = 0; i < spli.length; i++){
-               if(!s5.contains(spli[i])){
-                   break;
-               }
-               if(s5.contains(spli[i]) && i == spli.length-1){
-                   count++;
-               }
-           }
-       }
-return count;
+        l = l.stream().filter(x -> x.length() >= spli.length).collect(Collectors.toList());
+        int count = 0;
+        for (String s5 : l) {
+            for (int i = 0; i < spli.length; i++) {
+                if (!s5.contains(spli[i])) {
+                    break;
+                }
+                if (s5.contains(spli[i]) && i == spli.length - 1) {
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 
+    public char nextGreatestLetter ( char[] letters, char target ) {
+        Set< Character > set = new TreeSet<>();
+        for (char c : letters) {
+            set.add(c);
+        }
+        for (char c : set) {
+            System.out.println(c);
+            if ((target + "").compareTo(String.valueOf(c)) < 0) {
+                return c;
+            }
+        }
+
+        List< Character > l = new ArrayList<>();
+        for (char c : set) {
+            l.add(c);
+        }
+
+        return l.get(0);
+    }
 
 
 }
