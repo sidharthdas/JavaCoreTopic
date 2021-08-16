@@ -24,9 +24,16 @@ public class MainClass {
 
     public static void main ( String[] args ) {
 
-        new MainClass().validPalindrome("abca");
-
-
+        //new MainClass().validPalindrome("abca");
+        String text = "  this   is  a sentence ";
+        int count = 0;
+        String textArr[] = text.split("");
+        for(String s : textArr){
+            if(s.equals(" ")){
+                count++;
+            }
+        }
+        System.out.println(count);
     }
 
 
@@ -323,5 +330,85 @@ public class MainClass {
         return true;
 
     }
+
+
+    public String reorderSpaces(String text) {
+            String[] textArr = text.split("");
+            int count = 0;
+            for(String s : textArr){
+                if(s.equals(" ")){
+                    count++;
+                }
+            }
+
+            String noSpaceStr = text.replaceAll("\\s", " " );
+            String sArr[] = noSpaceStr.split(" ");
+            int len = sArr.length;
+
+            String result = "";
+
+            int each = count %  len-1;
+            if(each == 0){
+                for(String s : sArr){
+                    result+= s+"   ";
+                }
+            }
+
+            return result;
+    }
+
+
+
+    public int numberOfSubstrings(String s) {
+        char[] str = s.toCharArray();
+        int n = str.length;
+
+        String[] srr = s.split("");
+        Set<String> set = new TreeSet<>();
+
+        for(String s3: srr){
+            set.add(s3);
+        }
+
+        String absolut = "";
+        for(String s4 : set){
+            absolut+=s4;
+        }
+        List<String> l = new ArrayList<>();
+        for (int len = 1; len <= n; len++) {
+            // Pick ending point
+            String s1 = "";
+            for (int i = 0; i <= n - len; i++) {
+                //  Print characters from current
+                // starting point to current ending
+                // point.
+                int j = i + len - 1;
+                for (int k = i; k <= j; k++) {
+                    System.out.print(str[k]);
+                    s1+=str[k];
+                }
+                char[] c = s1.toCharArray();
+                Arrays.sort(c);
+
+                l.add(String.valueOf(c));
+            }
+        }
+        String[] spli = absolut.split("");
+       l = l.stream().filter(x->x.length() >= spli.length).collect(Collectors.toList());
+        int count= 0;
+       for(String s5: l){
+           for(int i = 0; i < spli.length; i++){
+               if(!s5.contains(spli[i])){
+                   break;
+               }
+               if(s5.contains(spli[i]) && i == spli.length-1){
+                   count++;
+               }
+           }
+       }
+return count;
+    }
+
+
 
 }
