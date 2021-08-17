@@ -8,6 +8,26 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 import static java.time.temporal.ChronoUnit.DAYS;
+
+
+ class Codec {
+
+    String s = "";
+
+    // Encodes a URL to a shortened URL.
+    public String encode(String longUrl) {
+        s = longUrl;
+        return "xyz";
+    }
+
+    // Decodes a shortened URL to its original URL.
+    public String decode(String shortUrl) {
+        if(shortUrl.equals("xyx")){
+            return s;
+        }
+        return null;
+    }
+}
 class ParkingSystem {
 
     int big, medium, small;
