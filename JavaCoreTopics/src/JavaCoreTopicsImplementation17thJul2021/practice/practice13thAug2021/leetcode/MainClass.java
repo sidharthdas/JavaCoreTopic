@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 import static java.time.temporal.ChronoUnit.DAYS;
@@ -11,6 +12,202 @@ import static java.time.temporal.ChronoUnit.DAYS;
 /**
  * @author sidharthdas on 14/08/21.
  */
+
+class RandomizedSet {
+
+    Set< Integer > list;
+
+    /**
+     * Initialize your data structure here.
+     */
+    public RandomizedSet () {
+        list = new HashSet<>();
+    }
+
+    /**
+     * Inserts a value to the set. Returns true if the set did not already contain the specified element.
+     */
+    public boolean insert ( int val ) {
+        return list.add(val);
+    }
+
+    /**
+     * Removes a value from the set. Returns true if the set contained the specified element.
+     */
+    public boolean remove ( int val ) {
+       return  list.remove(Integer.valueOf(val));
+    }
+
+    /**
+     * Get a random element from the set.
+     */
+    public int getRandom () {
+        int size = list.size();
+        int randomNum = ThreadLocalRandom.current().nextInt(0, size-1);
+        return list.stream().collect(Collectors.toList()).get(randomNum);
+
+
+    }
+}
+
+class TimeMap {
+
+    /**
+     * Initialize your data structure here.
+     */
+    Map< Integer, Map< String, String > > map;
+
+    public TimeMap () {
+
+        map = new LinkedHashMap<>();
+
+    }
+
+    public void set ( String key, String value, int timestamp ) {
+        if (map.containsKey(timestamp)) {
+            map.get(timestamp).put(key, value);
+        } else {
+            Map< String, String > m = new HashMap<>();
+            m.put(key, value);
+            map.put(timestamp, m);
+        }
+
+    }
+
+    public String get ( String key, int timestamp ) {
+
+        if (map.containsKey(timestamp)) {
+            return map.get(timestamp).get(key);
+        } else {
+            return null;
+        }
+
+    }
+}
+
+class MapSum {
+
+    /**
+     * Initialize your data structure here.
+     */
+    Map< String, Integer > map;
+
+    public MapSum () {
+        map = new HashMap<>();
+    }
+
+    public void insert ( String key, int val ) {
+        map.put(key, val);
+    }
+
+    public int sum ( String prefix ) {
+        int sum = 0;
+        int len = prefix.length();
+        for (Map.Entry< String, Integer > m : map.entrySet()) {
+            if (m.getKey().length() >= len) {
+                if ((m.getKey().substring(0, len)).equals(prefix)) {
+                    sum += m.getValue();
+                }
+            }
+        }
+
+        return sum;
+
+    }
+}
+
+
+class MedianFinder {
+
+    /**
+     * initialize your data structure here.
+     */
+    List< Integer > list;
+
+    public MedianFinder () {
+        list = new ArrayList<>();
+    }
+
+    public void addNum ( int num ) {
+        list.add(num);
+    }
+
+    public double findMedian () {
+
+        if (list.size() == 1) {
+            return Double.valueOf(list.get(0));
+        } else if (list.size() == 2) {
+            return (Double.valueOf(list.get(0)) + Double.valueOf(list.get(1))) / Double.valueOf(2);
+        } else if (list.size() == 3) {
+            return Double.valueOf(list.get(1));
+        }
+        if (list.size() % 2 != 0) {
+            return Double.valueOf(list.get((list.size() / 2)));
+        } else {
+            int i = list.get(list.size() / 2);
+            int j = list.get((list.size() / 2) - 1);
+            double value = (Double.valueOf(i) + Double.valueOf(j)) / Double.valueOf(2);
+            return value;
+        }
+    }
+}
+
+class ProductOfNumbers {
+
+    List< Integer > list;
+
+    public ProductOfNumbers () {
+        list = new ArrayList<>();
+    }
+
+    public void add ( int num ) {
+        list.add(num);
+
+    }
+
+    public int getProduct ( int k ) {
+        int finalVal = 1;
+        for (int i = list.size() - 1; i >= 0; i--) {
+            if (k != 0) {
+                finalVal *= list.get(i);
+                if (finalVal == 0) {
+                    return 0;
+                }
+                k--;
+            } else {
+                break;
+            }
+        }
+        return finalVal;
+    }
+}
+
+class WordDictionary {
+
+    /**
+     * Initialize your data structure here.
+     */
+    List< String > list;
+
+    public WordDictionary () {
+        list = new ArrayList<>();
+    }
+
+    public void addWord ( String word ) {
+        list.add(word);
+
+    }
+
+    public boolean search ( String word ) {
+
+        if (word.contains(".")) {
+
+        }
+
+        return list.contains(word);
+
+    }
+}
 
 
 interface MountainArray {
@@ -23,17 +220,10 @@ public class MainClass {
 
 
     public static void main ( String[] args ) {
-
-        //new MainClass().validPalindrome("abca");
-        String text = "  this   is  a sentence ";
-        int count = 0;
-        String textArr[] = text.split("");
-        for (String s : textArr) {
-            if (s.equals(" ")) {
-                count++;
-            }
-        }
-        System.out.println(count);
+        //["MedianFinder","addNum","findMedian","addNum","findMedian","addNum","findMedian","addNum","findMedian","addNum","findMedian"]
+        //[[],[-1],[],[-2],[],[-3],[],[-4],[],[-5],[]]
+        int randomNum = ThreadLocalRandom.current().nextInt(0, 5);
+        System.out.println(randomNum);
     }
 
 
@@ -425,6 +615,43 @@ public class MainClass {
         }
 
         return l.get(0);
+    }
+
+    public int dominantIndex ( int[] nums ) {
+        List< Integer > l = new ArrayList<>();
+
+        for (int i : nums) {
+            l.add(i);
+        }
+
+        Collections.sort(l);
+        int size = l.size();
+        int num = 0;
+
+        System.out.println(l);
+        for (int i = size - 1; i >= 0; i--) {
+
+            if (l.get(i) % 2 == 0) {
+
+                int temp = l.get(i) / 2;
+                System.out.println(temp);
+                System.out.println(l.contains(temp));
+                if (l.contains(temp)) {
+                    num = 3;
+                }
+            }
+        }
+
+        System.out.println(l.indexOf(num));
+        int lq = nums.length;
+        for (int i = 0; i < lq; i++) {
+            if (nums[i] == num) {
+                return i;
+            }
+
+        }
+
+        return -1;
     }
 
 
