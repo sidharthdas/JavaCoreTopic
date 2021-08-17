@@ -8,6 +8,76 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 import static java.time.temporal.ChronoUnit.DAYS;
+class ParkingSystem {
+
+    int big, medium, small;
+
+    public ParkingSystem(int big, int medium, int small) {
+        this.big = big;
+        this.medium = medium;
+        this.small = small;
+    }
+
+    public boolean addCar(int carType) {
+        if(carType  == 1){
+            if(big >0){
+                big-=1;
+                return true;
+            }else{
+                return false;
+            }
+        }
+        if(carType  == 2){
+            if(medium >0){
+                medium-=1;
+                return true;
+            }else{
+                return false;
+            }
+        }
+        if(carType  == 3){
+            if(small >0){
+                small-=1;
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        return false;
+    }
+}
+class SeatManager {
+    Map< Integer, String > map;
+    int counter;
+
+    public SeatManager ( int n ) {
+        map = new HashMap<>();
+        counter = n;
+
+
+    }
+
+    public int reserve () {
+        int key = 0;
+        for (int i = 1; i <= counter; i++) {
+            if (!map.containsKey(i)) {
+                map.put(i, "RESERVED");
+                key = i;
+                break;
+            }
+        }
+
+        return key;
+    }
+
+    public void unreserve ( int seatNumber ) {
+        if (map.containsKey(seatNumber)) {
+           map.remove(seatNumber);
+        }
+    }
+}
+
 
 /**
  * @author sidharthdas on 14/08/21.
@@ -35,7 +105,7 @@ class RandomizedSet {
      * Removes a value from the set. Returns true if the set contained the specified element.
      */
     public boolean remove ( int val ) {
-       return  list.remove(Integer.valueOf(val));
+        return list.remove(Integer.valueOf(val));
     }
 
     /**
@@ -43,7 +113,7 @@ class RandomizedSet {
      */
     public int getRandom () {
         int size = list.size();
-        int randomNum = ThreadLocalRandom.current().nextInt(0, size-1);
+        int randomNum = ThreadLocalRandom.current().nextInt(0, size - 1);
         return list.stream().collect(Collectors.toList()).get(randomNum);
 
 
@@ -220,10 +290,10 @@ public class MainClass {
 
 
     public static void main ( String[] args ) {
-        //["MedianFinder","addNum","findMedian","addNum","findMedian","addNum","findMedian","addNum","findMedian","addNum","findMedian"]
-        //[[],[-1],[],[-2],[],[-3],[],[-4],[],[-5],[]]
-        int randomNum = ThreadLocalRandom.current().nextInt(0, 5);
-        System.out.println(randomNum);
+        SeatManager seatManager = new SeatManager(4);
+        //["SeatManager","reserve","unreserve","reserve","reserve","reserve","unreserve","reserve","unreserve","reserve","unreserve"]
+        System.out.println(seatManager.reserve());
+
     }
 
 
