@@ -9,57 +9,133 @@ import java.util.stream.Collectors;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
+class Solution {
 
- class Codec {
+    /**
+     * @param head The linked list's head.
+     * Note that the head is guaranteed to be not null, so it contains at least one node.
+     */
+    List< Integer > list;
+
+    public Solution ( ListNode head ) {
+        list = new ArrayList<>();
+
+        while (head != null) {
+            list.add(head.val);
+            head = head.next;
+        }
+    }
+
+    /**
+     * Returns a random node's value.
+     */
+    public int getRandom () {
+
+        Random random = new Random();
+        int i = random.nextInt((list.size() - 1) - 0 + 1) + 0;
+        return list.get(i);
+
+    }
+}
+
+class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode () {
+    }
+
+    ListNode ( int val ) {
+        this.val = val;
+    }
+
+    ListNode ( int val, ListNode next ) {
+        this.val = val;
+        this.next = next;
+    }
+}
+
+
+class NumArray {
+
+    Map< Integer, String > map = new LinkedHashMap<>();
+    int[] nums;
+
+    public NumArray ( int[] nums ) {
+        this.nums = nums;
+
+
+    }
+
+    public void update ( int index, int val ) {
+        nums[index] = val;
+
+    }
+
+    public int sumRange ( int left, int right ) {
+        int sum = 0;
+
+        for (int i = left; i <= right; i++) {
+            sum += nums[i];
+
+        }
+
+        return sum;
+
+    }
+}
+
+class Codec {
 
     String s = "";
 
     // Encodes a URL to a shortened URL.
-    public String encode(String longUrl) {
+    public String encode ( String longUrl ) {
         s = longUrl;
         return "xyz";
     }
 
     // Decodes a shortened URL to its original URL.
-    public String decode(String shortUrl) {
-        if(shortUrl.equals("xyx")){
+    public String decode ( String shortUrl ) {
+        if (shortUrl.equals("xyx")) {
             return s;
         }
         return null;
     }
 }
+
 class ParkingSystem {
 
     int big, medium, small;
 
-    public ParkingSystem(int big, int medium, int small) {
+    public ParkingSystem ( int big, int medium, int small ) {
         this.big = big;
         this.medium = medium;
         this.small = small;
     }
 
-    public boolean addCar(int carType) {
-        if(carType  == 1){
-            if(big >0){
-                big-=1;
+    public boolean addCar ( int carType ) {
+        if (carType == 1) {
+            if (big > 0) {
+                big -= 1;
                 return true;
-            }else{
+            } else {
                 return false;
             }
         }
-        if(carType  == 2){
-            if(medium >0){
-                medium-=1;
+        if (carType == 2) {
+            if (medium > 0) {
+                medium -= 1;
                 return true;
-            }else{
+            } else {
                 return false;
             }
         }
-        if(carType  == 3){
-            if(small >0){
-                small-=1;
+        if (carType == 3) {
+            if (small > 0) {
+                small -= 1;
                 return true;
-            }else{
+            } else {
                 return false;
             }
         }
@@ -67,6 +143,7 @@ class ParkingSystem {
         return false;
     }
 }
+
 class SeatManager {
     Map< Integer, String > map;
     int counter;
@@ -93,7 +170,7 @@ class SeatManager {
 
     public void unreserve ( int seatNumber ) {
         if (map.containsKey(seatNumber)) {
-           map.remove(seatNumber);
+            map.remove(seatNumber);
         }
     }
 }
@@ -310,9 +387,11 @@ public class MainClass {
 
 
     public static void main ( String[] args ) {
-        SeatManager seatManager = new SeatManager(4);
-        //["SeatManager","reserve","unreserve","reserve","reserve","reserve","unreserve","reserve","unreserve","reserve","unreserve"]
-        System.out.println(seatManager.reserve());
+
+        String binaryString = "010";
+        int decimal = Integer.parseInt(binaryString, 2);
+        System.out.println(decimal);
+
 
     }
 
