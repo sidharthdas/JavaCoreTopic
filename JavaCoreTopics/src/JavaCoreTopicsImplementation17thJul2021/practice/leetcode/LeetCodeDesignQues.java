@@ -1,11 +1,62 @@
 package JavaCoreTopicsImplementation17thJul2021.practice.leetcode;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author sidharthdas on 18/08/21.
  */
 
+
+class TreeNode {
+
+    int val;
+    TreeNode left;
+    TreeNode right;
+
+    TreeNode () {
+    }
+
+    TreeNode ( int val ) {
+        this.val = val;
+    }
+
+    TreeNode ( int val, TreeNode left, TreeNode right ) {
+        this.val = val;
+        this.left = left;
+        this.right = right;
+    }
+}
+
+
+class BST{
+
+    List<Integer> l = new ArrayList<>();
+
+    public void inOrder(TreeNode root){
+        if(root == null){
+            return;
+        }
+        inOrder(root.left);
+        l.add(root.val);
+        inOrder(root.right);
+    }
+
+    public int depth(TreeNode root){
+        if(root == null){
+            return 0;
+        }
+
+        int left = depth(root.left);
+        int right = depth(root.right);
+
+        if(left > right ){
+            return left +1;
+        }else{
+            return right+1;
+        }
+    }
+}
 
 public class LeetCodeDesignQues {
 
@@ -127,5 +178,17 @@ public class LeetCodeDesignQues {
         }
 
         return true;
+    }
+
+    public boolean isUnivalTree(TreeNode root) {
+
+       BST  b = new BST();
+       b.inOrder(root);
+
+       return b.l.stream().collect(Collectors.toSet()).size() == 1 ?  true : false;
+
+
+
+
     }
 }
