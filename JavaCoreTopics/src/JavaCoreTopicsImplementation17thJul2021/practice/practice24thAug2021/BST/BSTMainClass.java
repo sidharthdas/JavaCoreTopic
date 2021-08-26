@@ -1,7 +1,7 @@
 package JavaCoreTopicsImplementation17thJul2021.practice.practice24thAug2021.BST;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author sidharthdas on 24/08/21.
@@ -74,10 +74,64 @@ public class BSTMainClass {   //
 
     public static void main ( String[] args ) {
 
-        Set<Integer> set = new HashSet<>();
+        Set< Integer > set = new HashSet<>();
 
-        for(int i : set){
+        for (int i : set) {
 
         }
+    }
+
+
+    public int[] frequencySort ( int[] nums ) {
+        Map< Integer, Integer > map = new HashMap<>();
+
+        for (int i : nums) {
+            if (map.containsKey(i)) {
+                map.put(i, map.get(i) + 1);
+            } else {
+                map.put(i, 1);
+            }
+        }
+
+       map = map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue())
+               .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2)-> e1, LinkedHashMap::new));
+
+        Map<Integer, List<Integer>> newMap = new HashMap<>();
+
+        for(Map.Entry<Integer, Integer> m : map.entrySet()){
+            if(newMap.containsKey(m.getValue())){
+                List<Integer> l = newMap.get(m.getValue());
+                l.add(m.getKey());
+                newMap.put(m.getValue(), l);
+            }else{
+                List<Integer> l = new ArrayList<>();
+                l.add(m.getKey());
+                newMap.put(m.getValue(), l);
+
+            }
+        }
+        System.out.println(newMap);
+
+        List<Integer> l = new ArrayList<>();
+
+        for(Map.Entry<Integer, List<Integer>> m : newMap.entrySet()){
+            Collections.sort(m.getValue(), Collections.reverseOrder());
+            for(int i : m.getValue()){
+                for(int j = 0; j < m.getKey(); j++){
+                    l.add(i);
+                }
+            }
+        }
+
+        System.out.println(l);
+
+        int[] result = new int[l.size()];
+
+        int index = 0;
+        for(int i : l){
+            result[index] = i;
+            index++;
+        }
+        return result;
     }
 }
