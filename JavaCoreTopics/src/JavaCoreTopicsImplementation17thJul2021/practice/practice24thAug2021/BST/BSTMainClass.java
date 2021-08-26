@@ -1,5 +1,8 @@
 package JavaCoreTopicsImplementation17thJul2021.practice.practice24thAug2021.BST;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * @author sidharthdas on 24/08/21.
  */
@@ -68,4 +71,13 @@ class BST {
 
 
 public class BSTMainClass {   //
+
+    public static void main ( String[] args ) {
+
+        Set<Integer> set = new HashSet<>();
+
+        for(int i : set){
+
+        }
+    }
 }
