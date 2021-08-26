@@ -134,4 +134,22 @@ public class BSTMainClass {   //
         }
         return result;
     }
+
+
+    public String customSortString(String order, String s) {
+        final String ORDER= order;  //"FCBWHJLOAQUXMPVINTKGZERDYS";
+
+        String str[] = s.split("");
+
+        Arrays.sort(str, new Comparator<String>() {
+
+            @Override
+            public int compare(String o1, String o2) {
+                return ORDER.indexOf(o1) -  ORDER.indexOf(o2) ;
+            }
+        });
+
+        return String.valueOf(str);
+
+    }
 }
