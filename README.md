@@ -22,6 +22,8 @@
 
 -> For Singleton, please refer JUNE.practice1.singleton
 
+-> For String custom sorting, refer package JavaCoreTopicsImplementation17thJul2021.stringCustomSorting; classNAME: StringCustomSortingMainClass
+
 To sort a map with respect to its value using Stream API.
 
 ```
@@ -29,3 +31,5 @@ final Map< String, Integer > sortedByCount = map.entrySet()
         .stream()
         .sorted((Map.Entry.< String, Integer >comparingByValue().reversed()))
         .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, ( e1, e2 ) -> e1, LinkedHashMap::new));
+        
+       
