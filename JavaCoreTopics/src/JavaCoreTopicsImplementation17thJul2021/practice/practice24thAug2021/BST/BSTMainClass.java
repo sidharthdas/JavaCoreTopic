@@ -1,5 +1,6 @@
 package JavaCoreTopicsImplementation17thJul2021.practice.practice24thAug2021.BST;
 
+import java.math.BigInteger;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -150,6 +151,40 @@ public class BSTMainClass {   //
         });
 
         return String.valueOf(str);
+
+    }
+
+    public int minPairSum(int[] nums) {
+
+
+        int size = nums.length;
+        List<Integer> list = new ArrayList<>();
+        for(int i = 0; i < size; i++){
+            for(int j = i+1; j < size; j++){
+                list.add(nums[i]+nums[j]);
+            }
+        }
+
+        Collections.sort(list, Collections.reverseOrder());
+
+        return list.get(0);
+
+    }
+
+    public String addBinary(String a, String b) {
+
+        BigInteger b1 = new  BigInteger(a, 2);
+        BigInteger b2 = new  BigInteger(b, 2);
+
+        BigInteger b3 = b1.add(b2);
+
+        return b3.toString(2);
+
+    }
+
+    public String toHex(int num) {
+
+        return Integer.toHexString(num);
 
     }
 }
