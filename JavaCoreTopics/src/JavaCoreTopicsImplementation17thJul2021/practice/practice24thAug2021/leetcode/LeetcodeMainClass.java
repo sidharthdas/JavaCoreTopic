@@ -131,4 +131,32 @@ public class LeetcodeMainClass {
         return count;
 
     }
+
+    public String convertToBase7(int num) {
+        String s = Integer.toString(
+                Integer.parseInt(String.valueOf(num), 10), 7);
+
+        return s;
+
+    }
+
+    public int countDigitOne(int n) {
+        int count = 1;
+        for(int i = 2; i <= n; i++){
+            String s = String.valueOf(i);
+            if(s.length() == 1){
+
+            }else{
+                String str[] = s.split("");
+                for(String s1 : str){
+                    if(s1.equals("1")){
+                        count++;
+                    }
+                }
+            }
+        }
+
+        return count;
+    }
+
 }
