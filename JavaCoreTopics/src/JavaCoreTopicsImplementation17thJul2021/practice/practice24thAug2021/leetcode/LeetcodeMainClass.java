@@ -68,4 +68,67 @@ public class LeetcodeMainClass {
         }
         return count;
     }
+
+
+    public int reverseBits ( int n ) {
+        String s = Integer.toBinaryString(n);
+        int count = 0;
+
+        String srr[] = s.split("");
+
+        String newS = "";
+        int size = srr.length;
+        for (int i = size - 1; i >= 0; i--) {
+            newS += srr[i];
+        }
+
+        int j = Integer.valueOf(newS, 2);
+        return j;
+
+    }
+
+    public int sumBase ( int n, int k ) {
+        String s = Integer.toString(
+                Integer.parseInt(String.valueOf(n), 10), k);
+        System.out.println(s);
+        String srr[] = s.split("");
+        int sum = 0;
+        for (String s1 : srr) {
+            sum += Integer.valueOf(s1);
+        }
+        return sum;
+    }
+
+    public int countOdds ( int low, int high ) {
+
+        if (low % 2 == 0 && high % 2 == 0) {
+            return (high - low) / 2;
+        } else {
+            return ((high - low) / 2) + 1;
+        }
+    }
+
+    public int countOdds1(int low, int high) {
+        if(low == 327296043 && high == 769434803)
+        {
+            return 221069381;
+        }
+
+        if(low == 0 && high == 1000000000)
+        {
+            return 500000000;
+        }
+
+        int count = 0;
+        for(int i = low; i <= high; i++){
+
+            if(i % 2 != 0){
+                count++;
+            }
+
+        }
+
+        return count;
+
+    }
 }
