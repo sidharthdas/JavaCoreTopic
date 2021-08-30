@@ -159,4 +159,14 @@ public class LeetcodeMainClass {
         return count;
     }
 
+    public int concatenatedBinary(int n) {
+        String s = "";
+        for(int i = 1; i <= n; i++){
+            s += Integer.toBinaryString(i);
+        }
+        return Integer.parseInt(String.valueOf(s), 10);
+       // return Integer.parseInt(s, 10);
+
+    }
+
 }
