@@ -247,4 +247,6 @@ public class LeetCodeMainClass {
 
         return listSizes.get(0);
     }
+
+
 }
