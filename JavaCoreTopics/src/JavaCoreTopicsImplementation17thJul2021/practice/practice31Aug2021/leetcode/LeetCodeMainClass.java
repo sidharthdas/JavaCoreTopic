@@ -29,6 +29,9 @@ public class LeetCodeMainClass {
 
     public static void main ( String[] args ) {
 
+        int[] arr = {1, 2, 10, 5, 7};
+        System.out.println(new LeetCodeMainClass().canBeIncreasing(arr));
+
 
     }
 
@@ -182,22 +185,22 @@ public class LeetCodeMainClass {
         }
 
         map = map.entrySet().stream().sorted(Map.Entry.comparingByKey())
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2)-> e1, LinkedHashMap::new));
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, ( e1, e2 ) -> e1, LinkedHashMap::new));
 
-        List<Integer> l = new ArrayList<>();
+        List< Integer > l = new ArrayList<>();
 
-        for(Map.Entry<Integer, List<Integer>> m : map.entrySet()){
-            if(m.getValue().size() > 1 ){
-                List<Integer> l1 = m.getValue();
+        for (Map.Entry< Integer, List< Integer > > m : map.entrySet()) {
+            if (m.getValue().size() > 1) {
+                List< Integer > l1 = m.getValue();
                 Collections.sort(l1);
                 l.addAll(l1);
-            }else{
+            } else {
                 l.addAll(m.getValue());
             }
         }
         int index = 0;
-        int [] result = new int[l.size()];
-        for(int i : l){
+        int[] result = new int[l.size()];
+        for (int i : l) {
             result[index] = i;
             index++;
         }
@@ -206,28 +209,28 @@ public class LeetCodeMainClass {
 
     }
 
-    public int longestConsecutive(int[] nums) {
-        List<Integer> list = new ArrayList<>();
-        for(int i : nums){
+    public int longestConsecutive ( int[] nums ) {
+        List< Integer > list = new ArrayList<>();
+        for (int i : nums) {
             list.add(i);
         }
 
         Collections.sort(list);
-        List<List<Integer>> l1 = new ArrayList<>();
+        List< List< Integer > > l1 = new ArrayList<>();
         int index = 0;
-        List<Integer> l2= new ArrayList<>();
+        List< Integer > l2 = new ArrayList<>();
         int j = 0;
-        for(int i : list){
-            if(index == 0){
+        for (int i : list) {
+            if (index == 0) {
                 l2 = new ArrayList<>();
                 l2.add(i);
                 j = i;
                 index++;
-            }else{
-                if(j+1 == i){
+            } else {
+                if (j + 1 == i) {
                     l2.add(i);
                     j = i;
-                }else{
+                } else {
                     l1.add(l2);
                     l2 = new ArrayList<>();
                     l2.add(i);
@@ -237,9 +240,9 @@ public class LeetCodeMainClass {
 
         System.out.println(l1);
 
-        List<Integer> listSizes = new ArrayList<>();
+        List< Integer > listSizes = new ArrayList<>();
 
-        for(List<Integer> l : l1){
+        for (List< Integer > l : l1) {
             listSizes.add(l.size());
         }
         Collections.sort(listSizes, Collections.reverseOrder());
@@ -249,4 +252,155 @@ public class LeetCodeMainClass {
     }
 
 
+    public String arrangeWords ( String text ) {
+
+        String[] str = text.split(" ");
+        List< String > list = new ArrayList<>();
+        for (String s : str) {
+            list.add(s);
+        }
+
+        Map< Integer, List< String > > map = new HashMap<>();
+
+        for (String s : str) {
+            int size = s.length();
+            if (map.containsKey(size)) {
+                List< String > l = map.get(size);
+                l.add(s);
+                map.put(size, l);
+            } else {
+                List< String > l = new ArrayList<>();
+                l.add(s);
+                map.put(size, l);
+
+            }
+        }
+
+        map = map.entrySet().stream().sorted(Map.Entry.comparingByKey())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, ( e1, e2 ) -> e1, LinkedHashMap::new));
+        String result = "";
+
+        for (Map.Entry< Integer, List< String > > m : map.entrySet()) {
+            if (m.getValue().size() == 1) {
+                result += m.getValue().get(0) + " ";
+            } else {
+                Map< Integer, String > map1 = new HashMap<>();
+
+                for (String s : m.getValue()) {
+                    int i = list.indexOf(s);
+                    map1.put(i, s);
+                }
+
+                map1 = map1.entrySet().stream().sorted(Map.Entry.comparingByKey())
+                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, ( e1, e2 ) -> e1, LinkedHashMap::new));
+
+                for (Map.Entry< Integer, String > m1 : map1.entrySet()) {
+                    result += m1.getValue() + " ";
+                }
+            }
+        }
+
+        System.out.println(result.trim());
+
+        result = result.toLowerCase();
+        char c = result.charAt(0);
+        String s2 = String.valueOf(c).toUpperCase();
+
+
+        s2 = s2 + result.substring(1);
+        System.out.println(s2);
+        /*String s1 = c+"".toUpperCase()+ result.substring(1);
+        result.replaceFirst(c+"", s1);*/
+
+        return s2.trim();
+
+    }
+
+
+    public boolean canBeIncreasing ( int[] nums ) {
+        int size = nums.length;
+
+        int count = 0;
+        int prevNumber = -1;
+        int secondPrevNumber = -1;
+        for (int i = 0; i < size; i++) {
+            if (i == 0) {
+                prevNumber = nums[i];
+            } else {
+                if (count < 2) {
+                    if (prevNumber <= nums[i]) {
+                        secondPrevNumber = prevNumber;
+                        prevNumber = nums[i];
+
+                    } else {
+                        prevNumber = secondPrevNumber;
+                        count++;
+                    }
+
+                } else {
+                    return false;
+                }
+            }
+
+
+        }
+
+        if (count < 2) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public int[] countBits ( int n ) {
+        List< Integer > l = new ArrayList<>();
+        l.add(0);
+        l.add(1);
+        for (int i = 2; i <= n; i++) {
+            String s = Integer.toBinaryString(i);
+            String srr[] = s.split("");
+            int count = 0;
+            for (String s1 : srr) {
+                if (s1.equals("1")) {
+                    count++;
+                }
+            }
+
+            l.add(count);
+
+        }
+
+        int[] result = new int[l.size()];
+
+        int index = 0;
+
+        for (int i : l) {
+            result[index] = i;
+            index++;
+        }
+
+        return result;
+    }
+
+    public int findComplement ( int num ) {
+        String s = Integer.toBinaryString(num);
+        String sCompliment = "";
+
+        String srr[] = s.split("");
+
+        for (String s1 : srr) {
+            if(s1.equals("1")) {
+                sCompliment += "0";
+            }else{
+                sCompliment += "1";
+            }
+        }
+
+
+        String regex = "^0+(?!$)";
+        sCompliment = sCompliment.replaceAll(regex, "");
+
+        return Integer.parseInt(sCompliment, 2);
+    }
 }
