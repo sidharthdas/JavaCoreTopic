@@ -390,9 +390,9 @@ public class LeetCodeMainClass {
         String srr[] = s.split("");
 
         for (String s1 : srr) {
-            if(s1.equals("1")) {
+            if (s1.equals("1")) {
                 sCompliment += "0";
-            }else{
+            } else {
                 sCompliment += "1";
             }
         }
@@ -403,4 +403,17 @@ public class LeetCodeMainClass {
 
         return Integer.parseInt(sCompliment, 2);
     }
+
+    public boolean hasAlternatingBits ( int n ) {
+        String s = Integer.toBinaryString(n);
+        if (s.contains("00")) {
+            return false;
+        } else if (s.contains("11")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
 }
