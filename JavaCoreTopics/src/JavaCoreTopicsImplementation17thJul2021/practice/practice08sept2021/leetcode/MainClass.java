@@ -1,8 +1,6 @@
 package JavaCoreTopicsImplementation17thJul2021.practice.practice08sept2021.leetcode;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * @author sidharthdas on 09/09/21.
@@ -11,7 +9,7 @@ public class MainClass {
 
 
     public static void main ( String[] args ) {
-        System.out.println("\"");
+        //System.out.println((Double.valueOf(12)/Double.valueOf(25));
 
     }
 
@@ -62,5 +60,30 @@ public class MainClass {
         s = s.replaceAll("\\s+"," ").trim();
         String str[] = s.split(" ");
         return str.length;
+    }
+    public int findSpecialInteger(int[] arr) {
+
+        Map<Integer, Integer> map = new HashMap<>();
+        for(int i : arr){
+            if(map.containsKey(i)){
+                map.put(i, map.get(i)+1);
+            }else{
+                map.put( i,1);
+            }
+        }
+
+        int length = arr.length;
+        double d = 25;
+        for(Map.Entry<Integer, Integer> m : map.entrySet()){
+            double d1 = (Double.valueOf(m.getValue())/Double.valueOf(length)) * Double.valueOf(100);
+            System.out.println(d1);
+            if((Double.valueOf(m.getValue())/Double.valueOf(length)) * Double.valueOf(100) >= d){
+                return m.getKey();
+            }
+
+        }
+
+        return 0;
+
     }
 }
