@@ -1,0 +1,5 @@
+
+›
+ksrc/JavaCoreTopicsImplementation17thJul2021/practice/practice6thAugust2021/designpartern/bilder/Laptop.java,6/5/650bfa8e895e925ca3135d19e6786dec32d0b9c4
+Ÿ
+osrc/JavaCoreTopicsImplementation17thJul2021/practice/practice08sept2021/designpattern/fiveton/EmployeeFive.java,e/d/edf758deb1887fa05b991bc9cff08941eb6ad62d

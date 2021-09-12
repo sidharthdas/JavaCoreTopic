@@ -13,7 +13,7 @@ public class MainClass {
 
     }
 
-
+     //
     public int numOfSubarrays ( int[] arr ) {
         int arrSize = arr.length;
         //start point
