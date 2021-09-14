@@ -148,3 +148,70 @@ public class MainClass {
 
     }
 }
+
+
+
+class KthLargest {
+
+    List< Integer > list = new ArrayList<>();
+        int k = 0;
+    public KthLargest ( int k, int[] nums ) {
+        this.k = k;
+        for(int i : nums){
+            list.add(i);
+        }
+
+
+    }
+
+    public int add ( int val ) {
+      list.add(val);
+      Collections.sort(list, Collections.reverseOrder());
+        return list.get(k-1);
+
+    }
+}
+
+
+class PeekingIterator implements Iterator<Integer> {
+    List<Integer> list = new ArrayList<>();
+    int size = 0;
+    int index = 0;
+    public PeekingIterator(Iterator<Integer> iterator) {
+        // initialize any member here.
+        while(iterator.hasNext()){
+            list.add(iterator.next());
+        }
+        size = list.size();
+
+    }
+
+    // Returns the next element in the iteration without advancing the iterator.
+    public Integer peek() {
+        return list.get(index);
+
+    }
+
+    // hasNext() and next() should behave the same as in the Iterator interface.
+    // Override them if needed.
+    @Override
+    public Integer next() {
+        if(hasNext()){
+            int i = index;
+            index+=1;
+            return list.get(i);
+
+        }
+        return 0;
+    }
+
+    @Override
+    public boolean hasNext() {
+        if(index >= size){
+            return false;
+        }
+        return true;
+    }
+}
+
+
