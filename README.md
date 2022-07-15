@@ -32,7 +32,7 @@ final Map< String, Integer > sortedByCount = map.entrySet()
         .sorted((Map.Entry.< String, Integer >comparingByValue().reversed()))
         .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, ( e1, e2 ) -> e1, LinkedHashMap::new));
         
-        
+    ```    
 Java 1.8 Stream Feature:
 
 ```//Flat map impl
