@@ -30,32 +30,7 @@ To sort a map with respect to its value using Stream API.
 final Map< String, Integer > sortedByCount = map.entrySet()
         .stream()
         .sorted((Map.Entry.< String, Integer >comparingByValue().reversed()))
-        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, ( e1, e2 ) -> e1, LinkedHashMap::new));
-        
-    ```    
-Java 1.8 Stream Feature:
-
-```//Flat map impl
-		List<List<List<Integer>>>
-				list = Arrays.asList (Arrays.asList (Arrays.asList (5,5,6) ),
-				Arrays.asList (Arrays.asList (1,2,3) ) );
-
-		System. out .println (list.stream() .flatMap(Collection::stream) .flatMap(Collection::stream) .collect (Collectors.toList ()));
-		List<Integer> l= Arrays.asList (1,2,3,34, 5454, 54) ;
-		l.add (10);
-		int[] arr = {1,2,3,4,5, 6};
-		int op = Arrays.stream (arr) . filter (x->x > 3) . reduce (0, (a,b)-> a+b);
-		int opl = Arrays.stream (arr).filter (x ->  x > 3).reduce (0, Integer::sum) ;
-		Map<Object, Long>  occurrences = Arrays.stream(arr).boxed().collect(Collectors.groupingBy(s ->s , Collectors.counting()));
-		System.out.println (occurrences);
-
-//Convert list to Map and filter whose value is one
-		List<String> items  = Arrays.asList("apple ", "apple", "banana", "banana", "papaya");
-		Map<String, Long> result  = items.stream().
-				collect(Collectors.groupingBy(Function.identity(), Collectors. counting()))
-				.entrySet().stream().filter(x -> x.getValue() ==1)
-				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
-		System.out .println(result);
+        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, ( e1, e2 ) -> e1, LinkedHashMap::new));```
 
         
        
