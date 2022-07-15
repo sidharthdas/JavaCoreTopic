@@ -26,6 +26,14 @@
 
 To sort a map with respect to its value using Stream API.
 
+Find highest occurance String from list:
+
+```
+Optional<Map.Entry<String, Long>> l  = items.stream().
+				collect(Collectors.groupingBy(O -> O, Collectors. counting()))
+				.entrySet().stream().sorted(Collections.reverseOrder(Comparator.comparing(p-> p.getValue()))).findFirst();
+```
+
 Generics:
 1. Upper bound generics: Any class extends by Object, this can access
 ```
