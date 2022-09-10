@@ -26,6 +26,14 @@
 
 To sort a map with respect to its value using Stream API.
 
+Sort map with value and if value is same sort by alpha order:
+
+```
+map = map.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2 ) -> e1, LinkedHashMap::new));
+
+```
+
 Find highest occurance String from list:
 
 ```
