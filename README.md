@@ -5,6 +5,12 @@
 -> For BST please follow this package JUNE.BSTWithFullImplementation
 
 -> For java8 functional interface, refer JavaCoreTopicsImplementation17thJul2021.java8FunctionalInterfaces.
+
+-> Map java8 functionalities, refer spet2022.MapPractice
+```
+Map<String, Employee> mapEmpl = empList.stream().collect(Collectors.groupingBy(x -> x.dept.deptCode, Collectors.collectingAndThen(Collectors.maxBy(Comparator.comparingInt(x -> x.empSalary)),
+                Optional::get)));
+```
  
  
  1. Insert a node
