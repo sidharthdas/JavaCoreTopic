@@ -2,7 +2,7 @@
 
 -> For Java core topics, refer package JavaCoreTopicsImplementation17thJul2021
 
--> For BST please follow this package JUNE.BSTWithFullImplementation
+-> For BST please follow this package src.binarysearchtreefullimplementation
 
 -> For java8 functional interface, refer JavaCoreTopicsImplementation17thJul2021.java8FunctionalInterfaces.
 
@@ -88,4 +88,40 @@ Java 1.8 Stream Feature:
 				.entrySet().stream().filter(x -> x.getValue() ==1)
 				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
 		System.out .println(result);
+```
+
+
+BST - Delete Node : 
+
+```
+public Node delete ( Node root, int data ) {
+        if (root == null) {
+            return root;
+        }
+
+        if (data < root.data) {
+            root.left = delete(root.left, data);
+        } else if (data > root.data) {
+            root.right = delete(root.right, data);
+        } else {
+            if (root.left == null) {
+                return root.right;
+            } else if (root.right == null) {
+                return root.left;
+            }
+            root.data = minVal(root.right);
+            root.right = delete(root.right, root.data);
+        }
+
+        return root;
+    }
+
+    private int minVal ( Node root ) {
+        int minV = root.data;
+        while (root.left != null) {
+            minV = root.left.data;
+            root = root.left;
+        }
+        return minV;
+    }
 ```
