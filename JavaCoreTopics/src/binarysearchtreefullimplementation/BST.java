@@ -1,11 +1,12 @@
 package src.binarysearchtreefullimplementation;
+import src.binarysearchtreefullimplementation.Node;
 
 /**
  * @author sidharthdas on 12/09/22.
  */
 public class BST {
 
-    public Node createNewNode ( int data ) {
+    public src.binarysearchtreefullimplementation.Node createNewNode (int data ) {
         Node node = new Node();
         node.data = data;
         node.left = node.right = null;
