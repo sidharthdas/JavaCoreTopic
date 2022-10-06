@@ -9,7 +9,30 @@ import java.util.stream.Collectors;
 public class MainClass {
 
     public static void main(String[] args) {
-        System.out.println(findClosestNumber(new int[]{-4,-2,1,4,8}));
+        System.out.println(1% 2);
+
+    }
+
+    public static  int maxAscendingSum(int[] nums) {
+        int len = nums.length;
+        int sum = nums[0];
+        List<Integer> list = new ArrayList<>();
+        int el = nums[0];
+        for(int i = 1; i < len; i++){
+            if(el < nums[i]){
+                el = nums[i];
+                sum += el;
+            }else{
+                list.add(sum);
+                sum = nums[i];
+                el = nums[i];
+            }
+        }
+
+        list.add(sum);
+
+        Collections.sort(list, Collections.reverseOrder());
+        return list.get(0);
 
     }
 
@@ -221,6 +244,84 @@ public class MainClass {
 
 
       }
+
+      public int smallestEqual(int[] nums) {
+
+          int len = nums.length;
+          int finalOut = -1;
+
+          for(int i = 0; i < len ; i++){
+                if(i % 10 == nums[i]){
+                    finalOut = i;
+                    break;
+                }
+          }
+
+          return finalOut;
+
+      }
+
+      public int minMaxGame(int[] nums) {
+          List<Integer> list = Arrays.stream(nums).boxed().collect(Collectors.toList());
+          List<Integer> finalList = getOne(list);
+          return finalList.get(0);
+
+
+      }
+
+      private List<Integer> getOne(List<Integer> l){
+          if(l.size() == 1){
+              return l;
+          }
+          boolean flag = true;
+          int len = l.size();
+          List<Integer> finalList = new ArrayList<>();
+          for(int i = 0; i < len; i++){
+              if(flag){
+                  int a = l.get(i) < l.get(i+1) ? l.get(i) : l.get(i+1);
+                  finalList.add(a);
+                  i+=1;
+                  flag = false;
+              }else{
+                  int a = l.get(i) > l.get(i+1) ? l.get(i) : l.get(i+1);
+                  finalList.add(a);
+                  i+=1;
+                  flag = true;
+              }
+
+          }
+          return getOne(finalList);
+      }
+
+      public int mostFrequentEven(int[] nums) {
+          Map<Integer, Integer> map = new HashMap<>();
+          for(int i : nums){
+              if(i % 2 == 0  ){
+                  if(map.containsKey(i)){
+                      map.put(i, map.get(i)+1);
+                  }else{
+                      map.put(i,1);
+                  }
+
+              }
+          }
+
+          if(map.size() == 0){
+              return -1;
+          }
+
+          if(map.size() == 1){
+              return map.keySet().stream().findFirst().get();
+          }else{
+             int highest = map.values().stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList()).get(0);
+
+             return map.entrySet().stream().filter(x ->x.getValue() == highest).sorted(Map.Entry.<Integer, Integer>comparingByKey())
+                     .findFirst().get().getKey();
+          }
+
+      }
+
+
   }
 
 
