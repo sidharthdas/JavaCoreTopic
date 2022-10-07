@@ -13,7 +13,119 @@ import java.util.stream.Collectors;
 public class MainClass2 {
 
     public static void main(String[] args) {
-        System.out.println(findLonely(new int[]{75, 35, 59, 66, 69, 53, 37, 16, 60, 98, 11, 33, 3, 85, 59, 65, 59, 44, 34, 89, 72, 47}));
+        //System.out.println(findLonely(new int[]{75, 35, 59, 66, 69, 53, 37, 16, 60, 98, 11, 33, 3, 85, 59, 65, 59, 44, 34, 89, 72, 47}));
+        System.out.println(commonFactors(6, 12));
+    }
+
+    /*You are given an integer array matches where matches[i] = [winneri, loseri] indicates that the player winneri defeated player loseri in a match.
+
+    Return a list answer of size 2 where:
+
+    answer[0] is a list of all players that have not lost any matches.
+    answer[1] is a list of all players that have lost exactly one match.
+    The values in the two lists should be returned in increasing order.
+
+    Note:
+
+    You should only consider the players that have played at least one match.
+    The testcases will be generated such that no two matches will have the same outcome.
+    */
+    public List<List<Integer>> findWinners(int[][] matches) {
+        return null;
+    }
+
+    public static int commonFactors(int a, int b) {
+
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 1; i <= a; i++) {
+            if (a % i == 0) {
+                if (!map.containsKey(i)) {
+                    map.put(i, 1);
+                }
+            }
+        }
+
+        for (int i = 1; i <= b; i++) {
+            if (b % i == 0) {
+                if (!map.containsKey(i)) {
+                    map.put(i, 1);
+                } else {
+                    map.put(i, 2);
+                }
+            }
+        }
+
+        return (int) map.entrySet().stream().filter(x -> x.getValue() == 2).count();
+
+    }
+
+    public int smallestEvenMultiple(int n) {
+        if (n % 2 != 0) {
+            return n * 2;
+        } else {
+            return n;
+        }
+
+    }
+
+    public int largestPerimeter(int[] nums) {
+
+        int a = nums[0];
+        int b = nums[1];
+        int c = nums[2];
+
+        if ((a + b > c) && (b + c > a) && (a + c > b)) {
+            return a + b + c;
+        }
+        return 0;
+    }
+
+    public List<String> removeAnagrams(String[] words) {
+        List<String> l = new ArrayList<>();
+        int len = words.length;
+        String prev = "";
+        for (int i = 0; i < len; i++) {
+            char[] crr = words[i].toCharArray();
+            Arrays.sort(crr);
+            String s = String.valueOf(crr);
+            if (!s.equals(prev)) {
+                l.add(words[i]);
+                prev = s;
+            }
+        }
+        return l;
+    }
+
+    public int[] findEvenNumbers1(int[] digits) {
+
+        int len = digits.length;
+        Set<Integer> set = new TreeSet<>();
+
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j < len; j++) {
+                for (int k = 0; k < len; k++) {
+                    if (i != j && j != k && i != k) {
+                        int num = Integer.parseInt(digits[i] + "" + digits[j] + "" + digits[k]);
+                        if (num > 99 && num <= 999 && num % 2 == 0) {
+                            set.add(num);
+                        }
+
+                    }
+                }
+            }
+        }
+
+        //List<Integer> l = set.stream().toList();
+
+        int[] finalNum = new int[set.size()];
+        int count = 0;
+        for (int i : set) {
+            finalNum[count] = i;
+            count += 1;
+        }
+
+        return finalNum;
 
     }
 
@@ -255,22 +367,86 @@ class SmallestInfiniteSet {
 
 class RecentCounter {
     public static void main(String[] args) {
-        RecentCounter rc = new RecentCounter();
-        //SSS[1], [100], [3001], [3002]
-        System.out.println(rc.ping(1));
-        System.out.println(rc.ping(100));
-        System.out.println(rc.ping(3001));
-        System.out.println(rc.ping(3002));
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        pq.add(10);
+        pq.add(20);
+
+        System.out.println(pq.peek());
+        System.out.println(pq.peek());
+        System.out.println(pq);
+
     }
-    Set<Integer> list;
+
+    List<Integer> list;
 
     public RecentCounter() {
-        list = new HashSet<>();
+        list = new ArrayList(1000000000);
     }
 
     public int ping(int t) {
         this.list.add(t);
         int val = t - 3000;
-        return (int) list.stream().filter(x ->x >= val && x <= t ).count();
+        int count = 0;
+        for (int x : list) {
+            if (x < val) {
+                count += 1;
+            } else {
+                break;
+            }
+        }
+        return list.size() - count;
     }
 }
+
+class SeatManager {
+
+    Map<Integer, Boolean> map;
+
+    public SeatManager(int n) {
+        map = new LinkedHashMap<>();
+        for (int i = 1; i <= n; i++) {
+            map.put(i, true);
+        }
+    }
+
+    public int reserve() {
+        int seatNumber = -1;
+        for (Map.Entry<Integer, Boolean> m : map.entrySet()) {
+            if (m.getValue()) {
+                seatNumber = m.getKey();
+                break;
+            }
+        }
+        map.put(seatNumber, false);
+        return seatNumber;
+
+    }
+
+    public void unreserve(int seatNumber) {
+        map.put(seatNumber, true);
+    }
+}
+
+class SeatManager1 {
+
+    PriorityQueue<Integer> pq;
+
+    public SeatManager1(int n) {
+        pq = new PriorityQueue<>();
+        for (int i = 1; i <= n; i++) {
+            pq.add(i);
+        }
+    }
+
+    public int reserve() {
+        return pq.poll();
+
+    }
+
+    public void unreserve(int seatNumber) {
+
+        pq.add(seatNumber);
+
+    }
+}
+
