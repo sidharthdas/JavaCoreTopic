@@ -219,19 +219,58 @@ public class MainClass2 {
 
 class SmallestInfiniteSet {
 
-    TreeSet<Integer> qu;
+    public static void main(String[] args) {
+        SmallestInfiniteSet set = new SmallestInfiniteSet();
+        set.addBack(2);
+        System.out.println(set.pq);
+    }
+
+    PriorityQueue<Integer> pq;
 
     public SmallestInfiniteSet() {
-        qu = new TreeSet<>();
+        pq = new PriorityQueue<>();
+        for (int i = 1; i <= 1000; i++) {
+            pq.add(i);
+        }
     }
 
     public int popSmallest() {
-        int a = qu.first();
-        qu.remove(a);
-        return a;
+        return pq.poll();
     }
 
     public void addBack(int num) {
-        qu.add(num);
+        if (!pq.contains(num)) {
+            pq.add(num);
+        }
+
+    }
+}
+
+/**
+ * Your SmallestInfiniteSet object will be instantiated and called as such:
+ * SmallestInfiniteSet obj = new SmallestInfiniteSet();
+ * int param_1 = obj.popSmallest();
+ * obj.addBack(num);
+ */
+
+class RecentCounter {
+    public static void main(String[] args) {
+        RecentCounter rc = new RecentCounter();
+        //SSS[1], [100], [3001], [3002]
+        System.out.println(rc.ping(1));
+        System.out.println(rc.ping(100));
+        System.out.println(rc.ping(3001));
+        System.out.println(rc.ping(3002));
+    }
+    Set<Integer> list;
+
+    public RecentCounter() {
+        list = new HashSet<>();
+    }
+
+    public int ping(int t) {
+        this.list.add(t);
+        int val = t - 3000;
+        return (int) list.stream().filter(x ->x >= val && x <= t ).count();
     }
 }
