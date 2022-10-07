@@ -38,7 +38,7 @@ class Solution {
     }
 }
 
-class ListNode {
+ class ListNode {
     int val;
     ListNode next;
 
