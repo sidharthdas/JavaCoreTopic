@@ -30,9 +30,6 @@ public class MainClass2 {
     You should only consider the players that have played at least one match.
     The testcases will be generated such that no two matches will have the same outcome.
     */
-    public List<List<Integer>> findWinners(int[][] matches) {
-        return null;
-    }
 
     public static int commonFactors(int a, int b) {
 
