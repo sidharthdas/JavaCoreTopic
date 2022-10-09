@@ -1,5 +1,6 @@
 package Oct4Th2022.leetcode;
 
+import javax.print.DocFlavor;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -10,15 +11,43 @@ import java.util.stream.Collectors;
 public class LeetcodeMain4 {
     public static void main(String[] args) {
         List<List<String>> displayTable =
-                Arrays.asList(Arrays.asList("David","3","Ceviche"),
-                        Arrays.asList("Corina","10","Beef Burrito"),
-                        Arrays.asList("David","3","Fried Chicken"),
-                        Arrays.asList("Carla","5","Water"),
-                        Arrays.asList("Carla","5","Ceviche"),
-                        Arrays.asList("Rous","3","Ceviche"));
+                Arrays.asList(Arrays.asList("David", "3", "Ceviche"),
+                        Arrays.asList("Corina", "10", "Beef Burrito"),
+                        Arrays.asList("David", "3", "Fried Chicken"),
+                        Arrays.asList("Carla", "5", "Water"),
+                        Arrays.asList("Carla", "5", "Ceviche"),
+                        Arrays.asList("Rous", "3", "Ceviche"));
 
-displayTable(displayTable);
+        displayTable(displayTable);
 
+    }
+
+    public int[] kWeakestRows(int[][] mat, int k) {
+        int len = mat.length;
+        String[] weekest = new String[len];
+        int count = 0;
+        for (int m[] : mat) {
+            int sum = Arrays.stream(m).boxed().reduce(Integer::sum).get();
+            weekest[count] = count + "-" + sum;
+            count++;
+        }
+
+        Comparator<String> comparator = (x, y) -> {
+            int i = Integer.valueOf(x.split("-")[1]);
+            int j = Integer.valueOf(y.split("-")[1]);
+            return i - j;
+        };
+
+        Arrays.sort(weekest, comparator);
+        int[] fArr = new int[k];
+
+        int i = 0;
+
+        while (i <= k) {
+            fArr[i] = Integer.parseInt(weekest[i].split("-")[0]);
+        }
+
+        return fArr;
     }
 
     public static List<List<String>> displayTable(List<List<String>> orders) {
@@ -56,9 +85,9 @@ displayTable(displayTable);
             List<String> l = new ArrayList<>();
             l.add(String.valueOf(x.getKey()));
             set.forEach(y -> {
-                if(x.getValue().containsKey(y)){
+                if (x.getValue().containsKey(y)) {
                     l.add(String.valueOf(x.getValue().get(y)));
-                }else{
+                } else {
                     l.add("0");
                 }
             });
