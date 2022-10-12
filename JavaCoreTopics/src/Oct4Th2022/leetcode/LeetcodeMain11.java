@@ -30,6 +30,12 @@ public class LeetcodeMain11 {
 
     }
 
+    public String interpret(String command) {
+        command = command.replaceAll("\\(\\)","o");
+        command = command.replaceAll("\\(","").replaceAll("\\)", "");
+        return command;
+    }
+
     public int numberOfSubstrings(String s) {
         int count = 0;
         int len = s.length();
