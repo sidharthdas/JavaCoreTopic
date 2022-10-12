@@ -25,8 +25,67 @@ public class LeetcodeMain11 {
         /*
          * dictionary = ["cat","bat","rat"], sentence = "the cattle was rattled by the battery"
          * */
+        System.out.println(addSpaces("LeetcodeHelpsMeLearn", new int[]{8, 13, 15}));
+        //System.out.println(replaceWords(Arrays.asList("cat", "bat", "rat"), "the cattle was rattled by the battery"));
 
-        System.out.println(replaceWords(Arrays.asList("cat", "bat", "rat"), "the cattle was rattled by the battery"));
+    }
+
+    public int numberOfSubstrings(String s) {
+        int count = 0;
+        int len = s.length();
+        int temp = 0;
+        String arr[] = new String[len * (len + 1) / 2];
+
+
+        for (int i = 0; i < len; i++) {
+            for (int j = i; j < len; j++) {
+                arr[temp] = s.substring(i, j + 1);
+                if (s.substring(i, j + 1).length() >= 3) {
+                    if (s.substring(i, j + 1).contains("a") &&
+                            s.substring(i, j + 1).contains("b") &&
+                            s.substring(i, j + 1).contains("c")) {
+                        count++;
+                    }
+
+                }
+                temp++;
+            }
+        }
+
+        return count;
+
+    }
+
+    public int findLeastNumOfUniqueInts(int[] arr, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int a : arr) {
+            map.put(a, map.getOrDefault(a, 0) + 1);
+        }
+
+        // map.entrySet().stream().sorted(Map.Entry.<Integer, Integer> comparingByValue().reversed())
+        return 0;
+    }
+
+    public static String addSpaces(String s, int[] spaces) {
+        List<String> l = new ArrayList<>();
+        int len = spaces.length;
+        int prevIndex = -1;
+        for (int i = 0; i < len; i++) {
+            if (i == 0) {
+                l.add(s.substring(0, spaces[i]) + "-");
+                prevIndex = spaces[i];
+            } else {
+                l.add(s.substring(prevIndex, spaces[i]) + "-");
+                prevIndex = spaces[i];
+            }
+        }
+        l.add(s.substring(prevIndex));
+        System.out.println(l);
+        StringBuffer sb = new StringBuffer("");
+        l.forEach(x -> {
+            sb.append(x);
+        });
+        return sb.toString().replaceAll("-", " ");
 
     }
 
@@ -48,16 +107,16 @@ public class LeetcodeMain11 {
                         //mainSen += s2 + " ";
                     }
                 }
-                count ++;
+                count++;
             }
-            if(l.isEmpty()){
+            if (l.isEmpty()) {
                 mainSen += s1 + " ";
-            }else{
-                if(l.size() == 1){
+            } else {
+                if (l.size() == 1) {
                     mainSen += l.get(0) + " ";
                     l = new ArrayList<>();
-                }else{
-                    Collections.sort(l, (x, y) -> x.length()-y.length());
+                } else {
+                    Collections.sort(l, (x, y) -> x.length() - y.length());
                     mainSen += l.get(0) + " ";
                     l = new ArrayList<>();
                 }
