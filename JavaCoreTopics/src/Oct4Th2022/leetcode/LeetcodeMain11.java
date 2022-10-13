@@ -1,6 +1,7 @@
 package Oct4Th2022.leetcode;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author Sidharth Das
@@ -8,6 +9,9 @@ import java.util.*;
  */
 public class LeetcodeMain11 {
     public static void main(String[] args) {
+
+/*        int[] arrr = new int[]{6, 3, 7, 1, 8, 2, 9, 1};
+        System.out.println(Arrays.binarySearch(arrr, 1));*/
 
        /* FrontMiddleBackQueue q = new FrontMiddleBackQueue();
         q.pushFront(1);   // [1]
@@ -25,14 +29,285 @@ public class LeetcodeMain11 {
         /*
          * dictionary = ["cat","bat","rat"], sentence = "the cattle was rattled by the battery"
          * */
-        System.out.println(addSpaces("LeetcodeHelpsMeLearn", new int[]{8, 13, 15}));
+        // System.out.println(numEquivDominoPairs(new int[][]{{1, 2}, {2, 1}, {3, 4}, {5, 6}}));
+        //System.out.println(addSpaces("LeetcodeHelpsMeLearn", new int[]{8, 13, 15}));
         //System.out.println(replaceWords(Arrays.asList("cat", "bat", "rat"), "the cattle was rattled by the battery"));
+        System.out.println(removeDuplicates("aaaaaaaaa"));
 
     }
 
+    public static String removeDuplicates(String s) {
+        String[] srr = s.split("");
+        String prev = srr[0];
+        StringBuffer s1 = new StringBuffer(srr[0]);
+        int count = 1;
+        int len = srr.length;
+        for (int i = 1; i < len; i++) {
+            if (prev.equals(srr[i])) {
+                s1.append(srr[i]);
+                count++;
+            } else {
+                if (count == 2) {
+                    break;
+                } else {
+                    prev = srr[i];
+                    s1 = new StringBuffer(srr[i]);
+                }
+            }
+            if (count == 2) {
+                break;
+            }
+        }
+        if (count > 1) {
+            s = s.replaceAll(s1.toString(), "");
+            return removeDuplicates(s);
+        } else {
+            return s;
+        }
+    }
+
+    public static boolean canBeIncreasing(int[] nums) {
+        int len = nums.length;
+        int prevVal = nums[0];
+        int count = 0;
+
+        for (int i = 1; i < len; i++) {
+            if (nums[i] > prevVal) {
+                prevVal = nums[i];
+            } else {
+                if (i - 2 < 0) {
+                    prevVal = nums[0];
+                } else {
+                    prevVal = nums[i - 2];
+                }
+                count += 1;
+            }
+
+            if (count > 1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static int numEquivDominoPairs(int[][] dominoes) {
+        Map<Integer, Integer> map = new HashMap<>();
+        int len = dominoes.length;
+        int count = 0;
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j < len; j++) {
+                if (!map.containsKey(j)) {
+                    if (i != j) {
+                        if (((dominoes[i][0] == dominoes[j][0]) && (dominoes[i][1] == dominoes[j][1])) ||
+                                ((dominoes[i][0] == dominoes[j][1]) && (dominoes[i][1] == dominoes[j][0]))) {
+                            count++;
+                        }
+                    }
+                } else if (map.containsKey(j) && map.get(j) != i) {
+                    if (i != j) {
+                        if (((dominoes[i][0] == dominoes[j][0]) && (dominoes[i][1] == dominoes[j][1])) ||
+                                ((dominoes[i][0] == dominoes[j][1]) && (dominoes[i][1] == dominoes[j][0]))) {
+                            count++;
+                        }
+                    }
+                }
+            }
+        }
+        return count / 2;
+    }
+
+    public List<Boolean> prefixesDivBy5(int[] nums) {
+        List<Boolean> prefixes = new ArrayList<>();
+        int len = nums.length;
+        String s = "";
+        for (int i : nums) {
+            s = s + i;
+            if (Integer.parseInt(s, 2) % 5 == 0) {
+                prefixes.add(true);
+            } else {
+                prefixes.add(false);
+            }
+
+        }
+
+        return prefixes;
+    }
+
+    public static int findLengthOfLCIS(int[] nums) {
+        int len = nums.length;
+        int count = 1;
+        int longest = 1;
+
+        for (int i = 0; i < len - 1; i++) {
+            if (nums[i] < nums[i + 1]) {
+                count += 1;
+            } else {
+                if (longest < count) {
+                    longest = count;
+                    count = 1;
+                } else {
+                    count = 1;
+                }
+            }
+        }
+        if (count > longest) {
+            return count;
+        }
+        return longest;
+    }
+
+    public int maximumDifference(int[] nums) {
+        int len = nums.length;
+        Set<Integer> set = new TreeSet<>();
+
+        for (int i = 0; i < len; i++) {
+
+            for (int j = i + 1; j < len; j++) {
+
+                if (nums[i] < nums[j]) {
+                    set.add(nums[j] - nums[i]);
+                }
+            }
+
+        }
+
+        int len1 = set.size();
+        if (len1 == 0) {
+            return -1;
+        }
+        return set.stream().toList().get(len1);
+
+    }
+
+
+    public int[] nextGreaterElements(int[] nums) {
+        int len = nums.length;
+        int greatest = Integer.MIN_VALUE;
+        int[] newNum = new int[len];
+        int curr = 0;
+        for (int i = 0; i < len; i++) {
+            curr = nums[i];
+            for (int j = i + 1; j < len; j++) {
+                if (curr < nums[j]) {
+                    greatest = nums[j];
+                    break;
+                }
+            }
+            if (greatest == Integer.MIN_VALUE) {
+                for (int j = 0; j < i; j++) {
+                    if (curr < nums[j]) {
+                        greatest = nums[j];
+                        break;
+                    }
+                }
+            }
+
+            if (greatest == Integer.MIN_VALUE) {
+                newNum[i] = -1;
+            } else {
+                newNum[i] = greatest;
+                greatest = Integer.MIN_VALUE;
+            }
+        }
+
+        return newNum;
+
+    }
+
+    public static int countCharacters(String[] words, String chars) {
+        Map<String, Integer> map = new HashMap<>();
+        String[] arr = chars.split("");
+        int count = 0;
+
+        for (String s1 : arr) {
+            map.put(s1, map.getOrDefault(s1, 0) + 1);
+        }
+
+        for (String word : words) {
+
+            Map<String, Integer> m = new HashMap<>();
+            String[] wArr = word.split("");
+
+            for (String s1 : wArr) {
+                m.put(s1, m.getOrDefault(s1, 0) + 1);
+            }
+            boolean flag = true;
+            for (Map.Entry<String, Integer> m1 : m.entrySet()) {
+                if (!map.containsKey(m1.getKey())) {
+                    flag = false;
+                    break;
+                }
+                if (m1.getValue() > map.get(m1.getKey())) {
+                    flag = false;
+                    break;
+
+                }
+            }
+            if (flag) {
+                count += word.length();
+            } else {
+                flag = true;
+            }
+
+
+        }
+
+        return count;
+
+    }
+
+    public int[] decompressRLElist(int[] nums) {
+        int len = nums.length;
+        List<Integer> l = new ArrayList<>();
+        for (int i = 0; i < len; i += 2) {
+            //freq, val]
+            int freq = nums[i];
+            int val = nums[i + 1];
+            while (freq != 0) {
+                l.add(val);
+                freq--;
+            }
+
+        }
+        int lLen = l.size();
+        int[] arr = new int[lLen];
+        for (int i = 0; i < lLen; i++) {
+            arr[i] = l.get(i);
+        }
+
+        return arr;
+    }
+
+    public int[] decode(int[] encoded, int first) {
+        int encodedLen = encoded.length;
+        int[] newArr = new int[encodedLen + 1];
+        newArr[0] = first;
+        for (int i = 0; i < encodedLen; i++) {
+            newArr[i + 1] = newArr[i] ^ encoded[i];
+        }
+        return newArr;
+    }
+
+    public int largestPerimeter1(int[] nums) {
+        List<Integer> l = Arrays.stream(nums).boxed().sorted().toList();
+        int len = l.size();
+        for (int i = len - 1; i > 2; i++) {
+            int a = l.get(len - 1);
+            int b = l.get(len - 2);
+            int c = l.get(len - 3);
+
+            if ((a + b > c)) {
+                return a + b + c;
+            }
+
+        }
+
+        return 0;
+    }
+
     public String interpret(String command) {
-        command = command.replaceAll("\\(\\)","o");
-        command = command.replaceAll("\\(","").replaceAll("\\)", "");
+        command = command.replaceAll("\\(\\)", "o");
+        command = command.replaceAll("\\(", "").replaceAll("\\)", "");
         return command;
     }
 
