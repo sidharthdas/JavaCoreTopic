@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class LeetcodeMain11 {
     public static void main(String[] args) {
 
-        int[][] arr = {{1,2,3},{3,1,2},{2,3,1}};
+        int[][] arr = {{1, 2, 3}, {3, 1, 2}, {2, 3, 1}};
 
         //System.out.println(arr[j][i]);
 
@@ -36,7 +36,43 @@ public class LeetcodeMain11 {
         // System.out.println(numEquivDominoPairs(new int[][]{{1, 2}, {2, 1}, {3, 4}, {5, 6}}));
         //System.out.println(addSpaces("LeetcodeHelpsMeLearn", new int[]{8, 13, 15}));
         //System.out.println(replaceWords(Arrays.asList("cat", "bat", "rat"), "the cattle was rattled by the battery"));
-        System.out.println(checkValid(new int[][]{{1,2,3},{3,1,2},{2,3,1}}));
+        System.out.println(checkValid(new int[][]{{1, 2, 3}, {3, 1, 2}, {2, 3, 1}}));
+
+    }
+
+    public boolean checkZeroOnes(String s) {
+        String srr[] = s.split("");
+        List<Integer> count1 = new ArrayList<>();
+        List<Integer> count2 = new ArrayList<>();
+        int len = s.length();
+        int count = 0;
+        for (int i = 0; i < len; i++) {
+            if(srr[i].equals("1")){
+                count+=1;
+            }else{
+                count1.add(count);
+                count = 0;
+            }
+        }
+
+        count1.add(count);
+        count = 0;
+
+        for (int i = 0; i < len; i++) {
+            if(srr[i].equals("0")){
+                count+=1;
+            }else{
+                count2.add(count);
+                count = 0;
+            }
+
+        }
+        count2.add(count);
+
+        Collections.sort(count1, Comparator.reverseOrder());
+        Collections.sort(count2, Comparator.reverseOrder());
+
+        return count1.get(0) > count2.get(0);
 
     }
 
@@ -44,48 +80,48 @@ public class LeetcodeMain11 {
         int size = matrix.length;
         int sum = (size * (size + 1)) / 2;
 
-        for(int[] i : matrix){
+        for (int[] i : matrix) {
             int s = sum(i);
-            if(s == sum){
+            if (s == sum) {
                 boolean ch = check(i);
-                if(!ch){
+                if (!ch) {
                     return false;
                 }
             }
-            if(s != sum){
+            if (s != sum) {
                 return false;
             }
         }
 
-        for(int i = 0; i < size; i++){
+        for (int i = 0; i < size; i++) {
             int sum1 = 0;
-            for(int j = 0; j < size ; j++){
+            for (int j = 0; j < size; j++) {
                 sum1 += matrix[j][i];
             }
-            if(sum != sum1){
+            if (sum != sum1) {
                 return false;
-            }else{
+            } else {
                 sum1 = 0;
             }
         }
         return true;
     }
 
-    private static boolean check(int a[]){
+    private static boolean check(int a[]) {
         List<Integer> l = Arrays.stream(a).boxed().toList();
         int len = a.length;
         int c = 1;
-        for(int i = 1; i<=len; i++){
-            if(!l.contains(i)){
+        for (int i = 1; i <= len; i++) {
+            if (!l.contains(i)) {
                 return false;
             }
         }
         return true;
     }
 
-    private static  int sum (int [] ar){
+    private static int sum(int[] ar) {
         int sum = 0;
-        for(int a : ar){
+        for (int a : ar) {
             sum += a;
         }
         return sum;
@@ -96,25 +132,25 @@ public class LeetcodeMain11 {
         Arrays.sort(nums);
         int len = nums.length;
         int lar = nums[len - 1];
-        for(int i = 1; i <=lar; i++){
+        for (int i = 1; i <= lar; i++) {
             map.put(i, false);
         }
-        for(int num : nums){
-            if(map.containsKey(num)){
+        for (int num : nums) {
+            if (map.containsKey(num)) {
                 map.put(num, true);
             }
         }
-        if(map.size() == 0){
+        if (map.size() == 0) {
             return lar + 1;
         }
 
-        map =  map.entrySet().stream().filter(x -> x.getValue() == false).collect(Collectors.toMap(
+        map = map.entrySet().stream().filter(x -> x.getValue() == false).collect(Collectors.toMap(
                 Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new
         ));
 
-        if(map.size() == 0){
-            return lar  +1;
-        }else{
+        if (map.size() == 0) {
+            return lar + 1;
+        } else {
             return map.entrySet().stream().findFirst().get().getKey();
         }
 
@@ -125,16 +161,16 @@ public class LeetcodeMain11 {
         int prev = nums[0];
         int count = 0;
         for (int i = 1; i < len; i++) {
-            if(prev < nums[i]){
+            if (prev < nums[i]) {
                 prev = nums[i];
-            }else{
+            } else {
                 prev = prev > nums[i] ? nums[i] : prev;
 
-                    count += 1;
+                count += 1;
 
             }
 
-            if(count > 1){
+            if (count > 1) {
                 return false;
             }
         }
