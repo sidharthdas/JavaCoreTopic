@@ -10,6 +10,10 @@ import java.util.stream.Collectors;
 public class LeetcodeMain11 {
     public static void main(String[] args) {
 
+        int[][] arr = {{1,2,3},{3,1,2},{2,3,1}};
+
+        //System.out.println(arr[j][i]);
+
 /*        int[] arrr = new int[]{6, 3, 7, 1, 8, 2, 9, 1};
         System.out.println(Arrays.binarySearch(arrr, 1));*/
 
@@ -32,8 +36,154 @@ public class LeetcodeMain11 {
         // System.out.println(numEquivDominoPairs(new int[][]{{1, 2}, {2, 1}, {3, 4}, {5, 6}}));
         //System.out.println(addSpaces("LeetcodeHelpsMeLearn", new int[]{8, 13, 15}));
         //System.out.println(replaceWords(Arrays.asList("cat", "bat", "rat"), "the cattle was rattled by the battery"));
-        System.out.println(removeDuplicates("aaaaaaaaa"));
+        System.out.println(checkValid(new int[][]{{1,2,3},{3,1,2},{2,3,1}}));
 
+    }
+
+    public static boolean checkValid(int[][] matrix) {
+        int size = matrix.length;
+        int sum = (size * (size + 1)) / 2;
+
+        for(int[] i : matrix){
+            int s = sum(i);
+            if(s == sum){
+                boolean ch = check(i);
+                if(!ch){
+                    return false;
+                }
+            }
+            if(s != sum){
+                return false;
+            }
+        }
+
+        for(int i = 0; i < size; i++){
+            int sum1 = 0;
+            for(int j = 0; j < size ; j++){
+                sum1 += matrix[j][i];
+            }
+            if(sum != sum1){
+                return false;
+            }else{
+                sum1 = 0;
+            }
+        }
+        return true;
+    }
+
+    private static boolean check(int a[]){
+        List<Integer> l = Arrays.stream(a).boxed().toList();
+        int len = a.length;
+        int c = 1;
+        for(int i = 1; i<=len; i++){
+            if(!l.contains(i)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static  int sum (int [] ar){
+        int sum = 0;
+        for(int a : ar){
+            sum += a;
+        }
+        return sum;
+    }
+
+    public static int firstMissingPositive(int[] nums) {
+        Map<Integer, Boolean> map = new LinkedHashMap<>();
+        Arrays.sort(nums);
+        int len = nums.length;
+        int lar = nums[len - 1];
+        for(int i = 1; i <=lar; i++){
+            map.put(i, false);
+        }
+        for(int num : nums){
+            if(map.containsKey(num)){
+                map.put(num, true);
+            }
+        }
+        if(map.size() == 0){
+            return lar + 1;
+        }
+
+        map =  map.entrySet().stream().filter(x -> x.getValue() == false).collect(Collectors.toMap(
+                Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new
+        ));
+
+        if(map.size() == 0){
+            return lar  +1;
+        }else{
+            return map.entrySet().stream().findFirst().get().getKey();
+        }
+
+    }
+
+    public static boolean canBeIncreasing(int[] nums) {
+        int len = nums.length;
+        int prev = nums[0];
+        int count = 0;
+        for (int i = 1; i < len; i++) {
+            if(prev < nums[i]){
+                prev = nums[i];
+            }else{
+                prev = prev > nums[i] ? nums[i] : prev;
+
+                    count += 1;
+
+            }
+
+            if(count > 1){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static int balancedStringSplit(String s) {
+        String[] srr = s.split("");
+        int len = srr.length;
+        int mainCount = 0;
+        int countR = 0;
+        int countL = 0;
+        for (int i = 0; i < len; i++) {
+            if (countR != 0 && countL != 0 && (countL == countR)) {
+                mainCount += 1;
+                if (srr[i].equals("R")) {
+                    countR += 1;
+                } else {
+                    countL += 1;
+                }
+            } else {
+                if (srr[i].equals("R")) {
+                    countR += 1;
+                } else {
+                    countL += 1;
+                }
+            }
+        }
+        if (countR != 0 && countL != 0 && (countL == countR)) {
+            mainCount += 1;
+        }
+        return mainCount;
+    }
+
+    public int numOfPairs(String[] nums, String target) {
+        int len = nums.length;
+        int count = 0;
+        int tarLen = target.length();
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j < len; j++) {
+                if (i != j) {
+                    String s = nums[i] + nums[j];
+                    if (s.equals(target)) {
+                        count++;
+                    }
+                }
+            }
+        }
+        return count;
     }
 
     public static String removeDuplicates(String s) {
@@ -66,29 +216,6 @@ public class LeetcodeMain11 {
         }
     }
 
-    public static boolean canBeIncreasing(int[] nums) {
-        int len = nums.length;
-        int prevVal = nums[0];
-        int count = 0;
-
-        for (int i = 1; i < len; i++) {
-            if (nums[i] > prevVal) {
-                prevVal = nums[i];
-            } else {
-                if (i - 2 < 0) {
-                    prevVal = nums[0];
-                } else {
-                    prevVal = nums[i - 2];
-                }
-                count += 1;
-            }
-
-            if (count > 1) {
-                return false;
-            }
-        }
-        return true;
-    }
 
     public static int numEquivDominoPairs(int[][] dominoes) {
         Map<Integer, Integer> map = new HashMap<>();
