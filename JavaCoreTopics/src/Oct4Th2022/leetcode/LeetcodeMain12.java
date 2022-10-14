@@ -1,6 +1,7 @@
 package Oct4Th2022.leetcode;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author Sidharth Das
@@ -14,7 +15,112 @@ public class LeetcodeMain12 {
         //flipAndInvertImage(new int[][]{{1,1,0},{1,0,1},{0,0,0}});
         //numberOfPairs(new int[]{1,3,2,1,3,2,2});
         //checkDistances("abaccb", new int[]{1, 3, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
-        digitSum("11111222223", 3);
+        //digitSum("11111222223", 3);
+        //countLargestGroup(13);
+        firstMissingPositive(new int[]{2147483647});
+    }
+
+    public int maximumGap(int[] nums) {
+        if (nums.length == 1){
+            return 0;
+        }
+        int len = nums.length;
+        int high = Integer.MIN_VALUE;
+        int prevNum = nums[0];
+        for(int i = 1; i < len; i++){
+            int h = nums[i] - prevNum;
+            if(high < h){
+                high = h;
+            }
+            prevNum = nums[i];
+        }
+        return high;
+
+    }
+
+    public static int firstMissingPositive(int[] nums) {
+        Set<Integer> l = new TreeSet<>();
+        for (int i : nums) {
+            if (i > 0) {
+                l.add(i);
+            }
+        }
+        //Collections.sort(l, Collections.reverseOrder());
+        int len = l.size();
+        int higst = l.stream().toList().get(len - 1);
+
+        for (int i = 1; i <= higst; i++) {
+            if (!l.contains(i)) {
+                return i;
+            }
+        }
+        return higst + 1;
+    }
+
+    public int largestPerimeter(int[] nums) {
+        List<Integer> l = Arrays.stream(nums).boxed().sorted().toList();
+        int largest = 0;
+        int seclargest = 0;
+        int len = l.size();
+        for (int i = len - 1; i > 2; i++) {
+            int a = l.get(len - 1);
+            int b = l.get(len - 2);
+            int c = l.get(len - 3);
+
+            if (a > b) {
+
+            }
+
+        }
+
+        return 0;
+    }
+
+    public int countElements(int[] nums) {
+        List<Integer> l = Arrays.stream(nums).boxed().toList();
+        int len = nums.length;
+        int count = 0;
+
+        for (int i : nums) {
+            if (l.stream().filter(x -> x > i).count() != 0 &&
+                    l.stream().filter(x -> x < i).count() != 0) {
+                count++;
+            }
+
+        }
+        return count;
+    }
+
+    public static int countLargestGroup(int n) {
+        Map<Integer, List<Integer>> map = new HashMap<>();
+        for (int i = 1; i <= n; i++) {
+            int sum = sum(i);
+            List<Integer> l = map.getOrDefault(sum, new ArrayList<>());
+            l.add(i);
+            map.put(sum, l);
+        }
+
+        Map<Integer, Integer> map1 = new HashMap<>();
+        map.entrySet().forEach(x -> {
+            map1.put(x.getKey(), x.getValue().size());
+        });
+
+        int lar = map1.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed())
+                .findFirst().get().getValue();
+
+        return (int) map1.entrySet().stream().filter(x -> x.getValue() == lar).count();
+
+    }
+
+    private static int sum(int number) {
+        int digit, sum = 0;
+        while (number > 0) {
+            digit = number % 10;
+            sum = sum + digit;
+            number = number / 10;
+        }
+
+        return sum;
     }
 
     public int countPoints(String rings) {
@@ -22,28 +128,28 @@ public class LeetcodeMain12 {
         String s[] = rings.split("");
         int len = s.length;
         //B0B6G0R6R0R6G9
-        for(int i = 0; i < len; i +=2){
-            map.put(s[i + 1], map.getOrDefault(s[i + 1], "") +s[i]);
+        for (int i = 0; i < len; i += 2) {
+            map.put(s[i + 1], map.getOrDefault(s[i + 1], "") + s[i]);
         }
 
-        return (int)map.entrySet().stream().filter(x -> x.getValue().contains("B") && x.getValue().contains("G") && x.getValue().contains("R"))
+        return (int) map.entrySet().stream().filter(x -> x.getValue().contains("B") && x.getValue().contains("G") && x.getValue().contains("R"))
                 .count();
 
     }
 
     public String reformatNumber(String number) {
-        number = number.replace(" ","").replace("-", "");
+        number = number.replace(" ", "").replace("-", "");
         int len = number.length();
         String[] num = number.split("");
         String s = "";
         int count = 0;
         String finalString = "";
-        for(int i = 0; i < len ; i++){
-            if(count < 3){
-                s +=num[i];
-                count ++;
-            }else{
-                finalString += s+"-";
+        for (int i = 0; i < len; i++) {
+            if (count < 3) {
+                s += num[i];
+                count++;
+            } else {
+                finalString += s + "-";
                 count = 1;
                 s = num[i];
             }
@@ -68,7 +174,7 @@ public class LeetcodeMain12 {
         for (int i = 0; i < len; i++) {
             if (count < k) {
                 sum += Integer.parseInt(srr[i]);
-                count ++;
+                count++;
             } else {
                 s1 += sum;
                 count = 1;
@@ -266,5 +372,35 @@ public class LeetcodeMain12 {
 
         }
         return count;
+    }
+
+    class RandomizedCollection {
+
+        List<Integer> l;
+
+        public RandomizedCollection() {
+            l = new ArrayList<>();
+
+        }
+
+        public boolean insert(int val) {
+            boolean flag = l.contains(val);
+            l.add(val);
+            return flag;
+        }
+
+        public boolean remove(int val) {
+            boolean flag = l.contains(val);
+            l.remove(new Integer(val));
+            return flag;
+
+        }
+
+        public int getRandom() {
+            Random rand = new Random();
+            rand.ints(0, l.size() -1);
+            return l.get(rand.nextInt());
+
+        }
     }
 }
