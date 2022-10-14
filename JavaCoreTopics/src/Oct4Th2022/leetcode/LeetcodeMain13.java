@@ -1,6 +1,6 @@
 package Oct4Th2022.leetcode;
 
-import java.util.Arrays;
+import java.util.*;
 
 /**
  * @author Sidharth Das
@@ -28,7 +28,39 @@ class ListNode {
 public class LeetcodeMain13 {
 
     public static void main(String[] args) {
-        findMin(new int[]{1,2,3,45});
+        //findMin(new int[]{1,2,3,45});
+        Random rand = new Random();
+        rand.nextInt(2);
+    }
+
+    public List<Integer> majorityElement(int[] nums) {
+        int len = nums.length;
+        Map<Integer, Integer> map = new HashMap<>();
+        for(int n : nums){
+            map.put(n, map.getOrDefault(n, 0) + 1);
+        }
+
+        List<Integer> l = new ArrayList<>();
+
+        map.entrySet().forEach(x -> {
+            if(x.getValue() > len/3){
+                l.add(x.getKey());
+            }
+        });
+        return l;
+    }
+
+    public boolean search1(int[] nums, int target) {
+        List<Integer> l = Arrays.stream(nums).boxed().toList();
+        return l.contains(target);
+
+    }
+
+    public int search(int[] nums, int target) {
+        List<Integer> l = Arrays.stream(nums).boxed().toList();
+        if(!l.contains(target)) return -1;
+        return l.indexOf(target);
+
     }
 
     public static int findMin(int[] nums) {
