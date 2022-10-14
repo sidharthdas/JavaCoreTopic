@@ -1,5 +1,7 @@
 package Oct4Th2022.leetcode;
 
+import java.util.Arrays;
+
 /**
  * @author Sidharth Das
  * created on  14/10/22
@@ -26,6 +28,12 @@ class ListNode {
 public class LeetcodeMain13 {
 
     public static void main(String[] args) {
+        findMin(new int[]{1,2,3,45});
+    }
+
+    public static int findMin(int[] nums) {
+        Arrays.sort(nums);
+        return nums[0];
 
     }
 
