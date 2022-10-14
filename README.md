@@ -125,3 +125,25 @@ public Node delete ( Node root, int data ) {
         return minV;
     }
 ```
+
+Delete Middle Element Of LinkedList:
+
+```
+public ListNode deleteMiddle(ListNode head) {
+        int count = 0;
+        ListNode n = head;
+        ListNode node = head;
+
+        while (node != null) {
+            count++;
+            node = node.next;
+        }
+
+        int middleIndex = count / 2;
+        while (middleIndex-- > 1) {
+            head = head.next;
+        }
+        head.next = head.next.next;
+        return n;
+    }
+```
