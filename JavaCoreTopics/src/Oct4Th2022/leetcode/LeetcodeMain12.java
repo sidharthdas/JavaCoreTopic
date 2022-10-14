@@ -17,19 +17,25 @@ public class LeetcodeMain12 {
         //checkDistances("abaccb", new int[]{1, 3, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
         //digitSum("11111222223", 3);
         //countLargestGroup(13);
-        firstMissingPositive(new int[]{2147483647});
+        RandomizedCollection randomizedCollection = new RandomizedCollection();
+       /* ["RandomizedCollection","insert","insert","remove","getRandom"]
+[[],[1],[1],[1],[]]*/
+        randomizedCollection.insert(1);
+        randomizedCollection.insert(1);
+        randomizedCollection.remove(1);
+        randomizedCollection.getRandom();
     }
 
     public int maximumGap(int[] nums) {
-        if (nums.length == 1){
+        if (nums.length == 1) {
             return 0;
         }
         int len = nums.length;
         int high = Integer.MIN_VALUE;
         int prevNum = nums[0];
-        for(int i = 1; i < len; i++){
+        for (int i = 1; i < len; i++) {
             int h = nums[i] - prevNum;
-            if(high < h){
+            if (high < h) {
                 high = h;
             }
             prevNum = nums[i];
@@ -373,34 +379,75 @@ public class LeetcodeMain12 {
         }
         return count;
     }
+}
 
-    class RandomizedCollection {
 
-        List<Integer> l;
+class RandomizedCollection {
 
-        public RandomizedCollection() {
-            l = new ArrayList<>();
+    List<Integer> l;
 
-        }
+    public RandomizedCollection() {
+        l = new ArrayList<>();
 
-        public boolean insert(int val) {
-            boolean flag = l.contains(val);
-            l.add(val);
-            return flag;
-        }
+    }
 
-        public boolean remove(int val) {
-            boolean flag = l.contains(val);
-            l.remove(new Integer(val));
-            return flag;
+    public boolean insert(int val) {
+        boolean flag = l.contains(val);
+        l.add(val);
+        return !flag;
+    }
 
-        }
+    public boolean remove(int val) {
+        boolean flag = l.contains(val);
+        l.remove(new Integer(val));
+        return flag;
 
-        public int getRandom() {
-            Random rand = new Random();
-            rand.ints(0, l.size() -1);
-            return l.get(rand.nextInt());
+    }
 
-        }
+    public int getRandom() {
+
+        Random rand = new Random();
+        //rand.ints(0, l.size() -1);
+        //int i = rand.nextInt(l.size() -1 - 0) + 0;
+        return l.get(rand.nextInt(l.size()));
+
     }
 }
+
+class RandomizedSet {
+
+    List<Integer> l ;
+
+    public RandomizedSet() {
+        l = new ArrayList<>();
+    }
+
+    public boolean insert(int val) {
+        boolean flag = false;
+        if(!l.contains(val)){
+            flag = true;
+            l.add(val);
+        }
+        return flag;
+    }
+
+    public boolean remove(int val) {
+        boolean flag = false;
+        if(l.contains(val)){
+            flag = true;
+            l.remove(val);
+        }
+        return flag;
+
+    }
+
+    public int getRandom() {
+
+        Random rand = new Random();
+        //rand.ints(0, l.size() -1);
+        //int i = rand.nextInt(l.size() -1 - 0) + 0;
+        return l.get(rand.nextInt(l.size()));
+
+    }
+}
+
