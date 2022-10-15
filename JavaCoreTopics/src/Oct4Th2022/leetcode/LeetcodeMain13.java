@@ -33,17 +33,101 @@ public class LeetcodeMain13 {
         rand.nextInt(2);
     }
 
+    public int maxLengthBetweenEqualCharacters(String s) {
+        String[] srr = s.split("");
+        List<Integer> l = new ArrayList<>();
+        boolean flag = true;
+        for (String s1 : srr) {
+            if (s.indexOf(s1) != s.lastIndexOf(s1)) {
+                l.add(s.lastIndexOf(s1) - s.indexOf(s1));
+                flag = false;
+            }
+        }
+
+        if (flag) {
+            return -1;
+        }
+
+        Collections.sort(l, Collections.reverseOrder());
+
+        return l.get(0) - 1;
+
+    }
+
+    public static int isprime(int n){
+
+        for(int i = 2; i<=Math.sqrt(n); i++){
+            if(n%i==0)
+                return 0;
+        }
+
+        return 1;
+    }
+
+    public int minimumDifference(int[] nums, int k) {
+        if(k == 1){
+            return 0;
+        }
+        Arrays.sort(nums);
+        int i = nums.length;
+
+        return nums[i-1] - nums[i - 2];
+
+    }
+
+    public List<Integer> primeFactors(int n)
+    {
+
+        for(int i = 2; i<= n; i++){
+            if(isprime(i)==1){
+                int x = n;
+                while(x%i==0){
+                    System.out.print(i + " ");
+                    x /= i;
+                }
+            }
+        }
+        return null;
+    }
+
+    class FindElements {
+
+        TreeNode root;
+
+        public FindElements(TreeNode root) {
+            this.root = root;
+        }
+
+        public boolean find(int target) {
+            if (root == null) {
+                return false;
+            }
+            boolean flag = false;
+            while (root != null) {
+                if(target < root.val){
+                    root = root.left;
+                }else if(target > root.val){
+                    root = root.right;
+                }else{
+                    flag = true;
+                    break;
+                }
+            }
+            return flag;
+        }
+    }
+
     public List<Integer> majorityElement(int[] nums) {
         int len = nums.length;
         Map<Integer, Integer> map = new HashMap<>();
-        for(int n : nums){
+        for (int n : nums) {
             map.put(n, map.getOrDefault(n, 0) + 1);
         }
 
         List<Integer> l = new ArrayList<>();
 
         map.entrySet().forEach(x -> {
-            if(x.getValue() > len/3){
+            if (x.getValue() > len / 3) {
                 l.add(x.getKey());
             }
         });
@@ -58,7 +142,7 @@ public class LeetcodeMain13 {
 
     public int search(int[] nums, int target) {
         List<Integer> l = Arrays.stream(nums).boxed().toList();
-        if(!l.contains(target)) return -1;
+        if (!l.contains(target)) return -1;
         return l.indexOf(target);
 
     }
