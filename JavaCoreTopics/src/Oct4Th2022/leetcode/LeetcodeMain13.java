@@ -33,6 +33,51 @@ public class LeetcodeMain13 {
         rand.nextInt(2);
     }
 
+    public String originalDigits(String s) {
+        Map<String, String> map = new LinkedHashMap<>();
+                map.put("zero", "0");
+                map.put("one", "1");
+                map.put("two", "2");
+                map.put("three", "3");
+                map.put("four", "4");
+                map.put("five", "5");
+                map.put("six", "6");
+                map.put("seven", "7");
+                map.put("eight", "8");
+                map.put("nine", "9");
+        String mainString = "";
+        while(s.length() != 0) {
+            for (Map.Entry<String, String> m : map.entrySet()) {
+                boolean flag = true;
+                String s1[] = m.getKey().split("");
+                for (String s3 : s1) {
+                    if (!s.contains(s3)) {
+                        flag = false;
+                        break;
+                    }
+                }
+                if (flag) {
+                    s = replaceChar(s, m.getKey());
+                    mainString += m.getValue();
+                }
+
+                flag = true;
+
+
+            }
+        }
+        return mainString;
+    }
+
+    private String replaceChar(String mainWord, String tobeReplaced){
+        String arr[] = tobeReplaced.split("");
+        for(String s : arr){
+            mainWord = mainWord.replaceFirst(s,"");
+        }
+
+        return mainWord;
+    }
+
     public int maxLengthBetweenEqualCharacters(String s) {
         String[] srr = s.split("");
         List<Integer> l = new ArrayList<>();
@@ -54,10 +99,10 @@ public class LeetcodeMain13 {
 
     }
 
-    public static int isprime(int n){
+    public static int isprime(int n) {
 
-        for(int i = 2; i<=Math.sqrt(n); i++){
-            if(n%i==0)
+        for (int i = 2; i <= Math.sqrt(n); i++) {
+            if (n % i == 0)
                 return 0;
         }
 
@@ -65,23 +110,22 @@ public class LeetcodeMain13 {
     }
 
     public int minimumDifference(int[] nums, int k) {
-        if(k == 1){
+        if (k == 1) {
             return 0;
         }
         Arrays.sort(nums);
         int i = nums.length;
 
-        return nums[i-1] - nums[i - 2];
+        return nums[i - 1] - nums[i - 2];
 
     }
 
-    public List<Integer> primeFactors(int n)
-    {
+    public List<Integer> primeFactors(int n) {
 
-        for(int i = 2; i<= n; i++){
-            if(isprime(i)==1){
+        for (int i = 2; i <= n; i++) {
+            if (isprime(i) == 1) {
                 int x = n;
-                while(x%i==0){
+                while (x % i == 0) {
                     System.out.print(i + " ");
                     x /= i;
                 }
@@ -104,11 +148,11 @@ public class LeetcodeMain13 {
             }
             boolean flag = false;
             while (root != null) {
-                if(target < root.val){
+                if (target < root.val) {
                     root = root.left;
-                }else if(target > root.val){
+                } else if (target > root.val) {
                     root = root.right;
-                }else{
+                } else {
                     flag = true;
                     break;
                 }
