@@ -33,6 +33,74 @@ public class LeetcodeMain13 {
         rand.nextInt(2);
     }
 
+    public ListNode sortList(ListNode head) {
+        if(head == null){
+            return null;
+        }
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        while(head != null){
+            pq.add(head.val);
+            head = head.next;
+        }
+        ListNode head1 = new ListNode();
+        head1.val = pq.poll();
+        head1.next = null;
+
+        while (!pq.isEmpty()){
+            head1 = insertAtEnd(head1, pq.poll());
+        }
+        return head1;
+    }
+
+    public ListNode insertAtEnd(ListNode l, int data) {
+        ListNode node = new ListNode();
+        node.val = data;
+
+        if (l == null) {
+            l = node;
+        } else {
+            ListNode currNode = l;
+
+            while (currNode.next != null) {
+                currNode = currNode.next;
+            }
+
+            currNode.next = node;
+        }
+
+        return l;
+    }
+
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        List<Integer> l = Arrays.stream(nums2).boxed().toList();
+        int[] finalNum = new int[nums1.length];
+        int counter = 0;
+        int len = nums2.length;
+        for(int num : nums1){
+            boolean flag = true;
+            int indexOfI = l.indexOf(num);
+            for(int i = indexOfI + 1; i < len; i++ ){
+                if(l.get(i) > num){
+                    flag = false;
+                    finalNum[counter] = l.get(i);
+                    counter ++;
+                    break;
+                }
+            }
+
+            if(flag){
+                finalNum[counter] = -1;
+                counter ++;
+            }
+
+            flag = true;
+
+        }
+
+        return finalNum;
+
+    }
+
     public String originalDigits(String s) {
         Map<String, String> map = new LinkedHashMap<>();
                 map.put("zero", "0");
