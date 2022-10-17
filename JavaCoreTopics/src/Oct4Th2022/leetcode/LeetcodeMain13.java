@@ -35,6 +35,33 @@ public class LeetcodeMain13 {
         System.out.println(numberOfSteps(14));
     }
 
+    public int findNthDigit(int n) {
+        StringBuilder s = new StringBuilder("");
+
+        for(int i = 1; i <=n; i++){
+            s.append(i);
+        }
+
+        return Integer.valueOf(s.charAt(n-1));
+    }
+    /*public int guessNumber(int n) {
+        int first = 1;
+        int last = n;
+
+        while(first <= last){
+            int mid = first  + (last - first) / 2;
+            if(guess(mid) == 1){
+                first = mid + 1;
+            }else if(guess(mid) == -1){
+                last = mid - 1;
+            }
+            else{
+                return mid;
+            }
+        }
+        return 1;
+    }*/
+
     public String longestCommonPrefix(String[] strs) {
         if (strs.length == 1 && strs[0].equals("")) {
             return "";
