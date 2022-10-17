@@ -29,16 +29,176 @@ public class LeetcodeMain13 {
 
     public static void main(String[] args) {
         //findMin(new int[]{1,2,3,45});
-        Random rand = new Random();
+        /*Random rand = new Random();
         rand.nextInt(2);
+        wordBreak("catsandog", Arrays.asList("cats", "dog", "sand", "and", "cat"));*/
+        System.out.println(numberOfSteps(14));
+    }
+
+    public String longestCommonPrefix(String[] strs) {
+        if (strs.length == 1 && strs[0].equals("")) {
+            return "";
+        }
+
+        String s = strs[0];
+        int len = strs.length;
+        String pref = "";
+        int count = 1;
+        while (true) {
+            if (s.length() > count) {
+                break;
+            }
+            for (String s1 : strs) {
+                if (!s1.substring(0, count).equals(s.substring(0, count))) {
+                    return pref;
+                }
+            }
+
+            pref = s.substring(0, count);
+            count++;
+        }
+        return pref;
+    }
+
+    public static int numberOfSteps(int num) {
+        if (num == 0) {
+            return 0;
+        } else if (num % 2 == 0) {
+            return numberOfSteps(num / 2) + 1;
+        } else {
+            return numberOfSteps(num - 1) + 1;
+        }
+    }
+
+
+    public boolean isPalindrome(ListNode head) {
+        StringBuilder sb = new StringBuilder("");
+
+        while (head != null) {
+            sb.append(head.val);
+        }
+
+       /* String s1 = sb.toString();
+        String s2 = sb.t*/
+
+        return sb.toString().equals(sb.reverse().toString());
+    }
+
+    public int firstBadVersion(int n) {
+        int first = 1;
+        int last = n;
+
+        while (first < last) {
+            int mid = (first + (last - first)) / 2;
+
+            if (isBadVersion(mid)) {
+                last = mid;
+            } else {
+                first = mid + 1;
+            }
+        }
+
+        return first;
+
+    }
+
+    private boolean isBadVersion(int mid) {
+        return true;
+    }
+
+
+    public boolean isSubsequence(String s, String t) {
+
+        String[] srr = s.split("");
+        int prevIndex = -1;
+        int flag = 0;
+
+        for (String s1 : srr) {
+            if (flag == 0) {
+                prevIndex = t.indexOf(s1);
+                flag = 1;
+            } else {
+                int currIndex = t.lastIndexOf(s1);
+                if (prevIndex < currIndex) {
+                    prevIndex = currIndex;
+                } else {
+                    return false;
+                }
+            }
+
+        }
+        return true;
+    }
+
+    /*public int guessNumber(int n) {
+        n = n/2;
+        while (true) {
+            int i = guess(n);
+            if(i == -1){
+                n = n -1;
+            }else if(i == 1){
+                n = n+1;
+            }else{
+                break;
+            }
+        }
+        return n;
+
+    }
+*/
+    public static String removeDuplicateLetters(String s) {
+        String srr[] = s.split("");
+
+        for (String s1 : srr) {
+            if (s.indexOf(s1) != s.lastIndexOf(s1)) {
+                s = s.replaceFirst(s1, "");
+            }
+        }
+        return s;
+    }
+
+    public static boolean wordBreak(String s, List<String> wordDict) {
+        boolean flag = true;
+        for (String s1 : wordDict) {
+            if (!s.contains(s1)) {
+                flag = false;
+                break;
+            }
+        }
+        return flag;
+    }
+
+    public int triangleNumber(int[] nums) {
+        int len = nums.length;
+        int count = 0;
+
+        for (int i = 0; i < len; i++) {
+
+            // Fix the second element as A[j]
+            for (int j = 0; j < len; j++) {
+
+                // Now look for the third number
+                for (int k = 0; k < len; k++) {
+
+                    if (i != j && j != k && i != k) {
+                        if (nums[i] + nums[j] > nums[k]) {
+                            count++;
+                        }
+                    }
+
+                }
+
+            }
+        }
+        return count;
     }
 
     public ListNode sortList(ListNode head) {
-        if(head == null){
+        if (head == null) {
             return null;
         }
         PriorityQueue<Integer> pq = new PriorityQueue<>();
-        while(head != null){
+        while (head != null) {
             pq.add(head.val);
             head = head.next;
         }
@@ -46,7 +206,7 @@ public class LeetcodeMain13 {
         head1.val = pq.poll();
         head1.next = null;
 
-        while (!pq.isEmpty()){
+        while (!pq.isEmpty()) {
             head1 = insertAtEnd(head1, pq.poll());
         }
         return head1;
@@ -76,21 +236,21 @@ public class LeetcodeMain13 {
         int[] finalNum = new int[nums1.length];
         int counter = 0;
         int len = nums2.length;
-        for(int num : nums1){
+        for (int num : nums1) {
             boolean flag = true;
             int indexOfI = l.indexOf(num);
-            for(int i = indexOfI + 1; i < len; i++ ){
-                if(l.get(i) > num){
+            for (int i = indexOfI + 1; i < len; i++) {
+                if (l.get(i) > num) {
                     flag = false;
                     finalNum[counter] = l.get(i);
-                    counter ++;
+                    counter++;
                     break;
                 }
             }
 
-            if(flag){
+            if (flag) {
                 finalNum[counter] = -1;
-                counter ++;
+                counter++;
             }
 
             flag = true;
@@ -103,18 +263,18 @@ public class LeetcodeMain13 {
 
     public String originalDigits(String s) {
         Map<String, String> map = new LinkedHashMap<>();
-                map.put("zero", "0");
-                map.put("one", "1");
-                map.put("two", "2");
-                map.put("three", "3");
-                map.put("four", "4");
-                map.put("five", "5");
-                map.put("six", "6");
-                map.put("seven", "7");
-                map.put("eight", "8");
-                map.put("nine", "9");
+        map.put("zero", "0");
+        map.put("one", "1");
+        map.put("two", "2");
+        map.put("three", "3");
+        map.put("four", "4");
+        map.put("five", "5");
+        map.put("six", "6");
+        map.put("seven", "7");
+        map.put("eight", "8");
+        map.put("nine", "9");
         String mainString = "";
-        while(s.length() != 0) {
+        while (s.length() != 0) {
             for (Map.Entry<String, String> m : map.entrySet()) {
                 boolean flag = true;
                 String s1[] = m.getKey().split("");
@@ -137,10 +297,10 @@ public class LeetcodeMain13 {
         return mainString;
     }
 
-    private String replaceChar(String mainWord, String tobeReplaced){
+    private String replaceChar(String mainWord, String tobeReplaced) {
         String arr[] = tobeReplaced.split("");
-        for(String s : arr){
-            mainWord = mainWord.replaceFirst(s,"");
+        for (String s : arr) {
+            mainWord = mainWord.replaceFirst(s, "");
         }
 
         return mainWord;
