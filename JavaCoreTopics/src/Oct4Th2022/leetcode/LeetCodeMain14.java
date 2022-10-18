@@ -11,7 +11,7 @@ public class LeetCodeMain14 {
 
     public static void main(String[] args) {
 
-        FoodRatings foodRatings = new FoodRatings(new String[]{"kimchi", "miso", "sushi", "moussaka", "ramen", "bulgogi"},new String[] {"korean", "japanese", "japanese", "greek", "japanese", "korean"},new int[] {9, 12, 8, 15, 14, 7});
+        /*FoodRatings foodRatings = new FoodRatings(new String[]{"kimchi", "miso", "sushi", "moussaka", "ramen", "bulgogi"}, new String[]{"korean", "japanese", "japanese", "greek", "japanese", "korean"}, new int[]{9, 12, 8, 15, 14, 7});
         foodRatings.highestRated("korean"); // return "kimchi"
         // "kimchi" is the highest rated korean food with a rating of 9.
         foodRatings.highestRated("japanese"); // return "ramen"
@@ -22,8 +22,56 @@ public class LeetCodeMain14 {
         foodRatings.changeRating("ramen", 16); // "ramen" now has a rating of 16.
         foodRatings.highestRated("japanese"); // return "ramen"
         // Both "sushi" and "ramen" have a rating of 16.
-        // However, "ramen" is lexicographically smaller than "sushi".
+        // However, "ramen" is lexicographically smaller than "sushi".*/
 
+        System.out.println(reverseBits(43261596));
+
+    }
+
+    public static int  reverseBits(int n) {
+
+        StringBuilder s = new StringBuilder(Integer.toBinaryString(n));
+        return Integer.parseInt(s.reverse().toString(), 2);
+
+    }
+
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> subsets = new ArrayList<>();
+        int n = nums.length;
+        for (int i = 0; i < (1 << n); i++) {
+            System.out.print("{ ");
+            List<Integer> l = new ArrayList<>();
+            for (int j = 0; j < n; j++)
+
+                if ((i & (1 << j)) > 0) {
+                    l.add(nums[j]);
+                }
+            subsets.add(l);
+        }
+        return subsets;
+    }
+
+    static void printSubsets(char set[]) {
+        int n = set.length;
+
+        // Run a loop for printing all 2^n
+        // subsets one by one
+        for (int i = 0; i < (1 << n); i++) {
+            System.out.print("{ ");
+
+            // Print current subset
+            for (int j = 0; j < n; j++)
+
+                // (1<<j) is a number with jth bit 1
+                // so when we 'and' them with the
+                // subset number we get which numbers
+                // are present in the subset and which
+                // are not
+                if ((i & (1 << j)) > 0)
+                    System.out.print(set[j] + " ");
+
+            System.out.println("}");
+        }
     }
 }
 
@@ -49,7 +97,7 @@ class FoodRatings {
                 sorted(Map.Entry.<FoodCuisine, Integer>comparingByValue().reversed())
                 .findFirst().get().getValue();
 
-        Comparator<FoodCuisine> comparator = (FoodCuisine f1, FoodCuisine f2) ->{
+        Comparator<FoodCuisine> comparator = (FoodCuisine f1, FoodCuisine f2) -> {
             return f1.getFood().compareTo(f2.getFood());
         };
 
@@ -113,16 +161,16 @@ class AllOne {
     }
 
     public void dec(String key) {
-        if(map.get(key) == 1){
+        if (map.get(key) == 1) {
             map.remove(key);
-        }else{
+        } else {
             map.put(key, map.get(key) - 1);
         }
 
     }
 
     public String getMaxKey() {
-        if(map.size() == 0){
+        if (map.size() == 0) {
             return "";
         }
         return map.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
@@ -131,11 +179,75 @@ class AllOne {
     }
 
     public String getMinKey() {
-        if(map.size() == 0){
+        if (map.size() == 0) {
             return "";
         }
         return map.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue())
                 .findFirst().get().getKey();
+    }
+}
+
+class Solution {
+    int[] arr;
+    int size;
+
+    public Solution(int[] nums) {
+        this.arr = nums;
+        this.size = nums.length;
+    }
+
+    public int[] reset() {
+        return arr;
+
+    }
+
+    public int[] shuffle() {
+        List<Integer> l = new ArrayList<>();
+        for(int i : arr){
+            l.add(i);
+        }
+        Collections.shuffle(l);
+        int arr[] = new int[size];
+        for(int i = 0; i < size; i++){
+            arr[i] = l.get(i);
+        }
+        return arr;
+    }
+}
+
+class MinStack {
+
+    Stack <Integer> stack;
+    int top;
+
+    public MinStack() {
+        stack =  new Stack<>();
+    }
+
+    public void push(int val) {
+        stack.push(val);
+        top = val;
+    }
+
+    public void pop() {
+        stack.pop();
+        if(stack.isEmpty()){
+            top = 0;
+        }
+        top = stack.peek();
+    }
+
+    public int top() {
+        return top;
+    }
+
+    public int getMin() {
+        Optional<Integer>op = stack.stream().sorted().findFirst();
+        if(op.isEmpty()){
+            return -1;
+        }else{
+            return op.get();
+        }
     }
 }
 
