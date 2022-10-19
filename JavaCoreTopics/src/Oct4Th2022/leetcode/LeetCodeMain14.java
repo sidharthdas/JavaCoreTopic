@@ -24,7 +24,23 @@ public class LeetCodeMain14 {
         // Both "sushi" and "ramen" have a rating of 16.
         // However, "ramen" is lexicographically smaller than "sushi".*/
 
-        System.out.println(reverseBits(43261596));
+        System.out.println(6 % 4);
+
+    }
+
+    public int numWaterBottles(int numBottles, int numExchange) {
+        int totcalCount = numBottles;
+
+        while(true){
+            int drinkableBottle = numBottles / numExchange;
+            int reminderBottle = numBottles % numExchange;
+            totcalCount += drinkableBottle;
+            numBottles = drinkableBottle + reminderBottle;
+            if(numBottles < numExchange){
+                break;
+            }
+        }
+        return totcalCount;
 
     }
 
