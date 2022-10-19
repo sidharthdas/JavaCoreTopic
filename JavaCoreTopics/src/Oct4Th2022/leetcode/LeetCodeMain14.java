@@ -24,8 +24,32 @@ public class LeetCodeMain14 {
         // Both "sushi" and "ramen" have a rating of 16.
         // However, "ramen" is lexicographically smaller than "sushi".*/
 
-        System.out.println(6 % 4);
+        //reorderSpaces("  this   is  a sentence ");
 
+    }
+
+    public String complexNumberMultiply(String num1, String num2) {
+        String num1Arr[] = num1.split("\\+");
+        String num2Arr[] = num1.split("\\+");
+
+        int a = Integer.valueOf(num1Arr[0]);
+        int b = Integer.valueOf(num1Arr[1].replace("i", ""));
+        int c = Integer.valueOf(num2Arr[0]);
+        int d = Integer.valueOf(num2Arr[1].replace("i", ""));
+
+
+
+        return String.valueOf(a*c-b*d)+"+"+String.valueOf(b*c+a*d)+"i";
+    }
+
+    public String complexNumberMultiply1(String num1, String num2) {
+        String[] one = num1.split("\\+");
+        String[] two = num2.split("\\+");
+        int a = Integer.valueOf(one[0]);
+        int b = Integer.valueOf(one[1].replace("i",""));
+        int c = Integer.valueOf(two[0]);
+        int d = Integer.valueOf(two[1].replace("i",""));
+        return String.valueOf(a*c-b*d)+"+"+String.valueOf(b*c+a*d)+"i";
     }
 
     public int numWaterBottles(int numBottles, int numExchange) {
