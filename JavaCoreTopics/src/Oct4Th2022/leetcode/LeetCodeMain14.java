@@ -30,12 +30,42 @@ public class LeetCodeMain14 {
         //brokenCalc(2, 3);
         /*TreeMap<Integer, Integer> map = new TreeMap<>();
         map.h*/
-        MyCalendar myCalendar = new MyCalendar();
+        /*MyCalendar myCalendar = new MyCalendar();
         myCalendar.book(10, 20); // return True
         myCalendar.book(15, 25); // return False, It can not be booked because time 15 is already booked by another event.
         myCalendar.book(20, 30); // return True, The event can be booked, as the first event takes every time less than 20, but not including 20.
-
+*/
+        // ["LRUCache","put","put","get","put","put","get"]
+        // [[2],[2,1],[2,2],[2],[1,1],[4,1],[2]]
+        LRUCache lRUCache = new LRUCache(2);
+        lRUCache.put(2, 1); // cache is {1=1}
+        lRUCache.put(2, 2); // cache is {1=1, 2=2}
+        lRUCache.get(2);    // return 1
+        lRUCache.put(1, 1);
+        lRUCache.put(4, 1);// LRU key was 2, evicts key 2, cache is {1=1, 3=3}
+        lRUCache.get(2);    // returns -1 (not found)
     }
+
+    public List<Integer> sequentialDigits(int low, int high) {
+        List<Integer> sequentialDigits = new ArrayList<>();
+        List<Integer> l =
+                Arrays.asList(12,23,34,45,56,67,78,89,
+                        123,234,345,456,567,678,789,
+                        1234,2345,3456,4567,5678,6789,
+                        12345,23456,34567,45678,56789,
+                        123456,234567,345678,456789,
+                        1234567,2345678,3456789,
+                        12345678,23456789,
+                        123456789);
+
+        for(int i : l){
+            if(i >= low && i <=high){
+                l.add(i);
+            }
+        }
+        return l;
+    }
+
     public List<List<Integer>> subsets1(int[] nums) {
         List<List<Integer>> subsets = new ArrayList<>();
         int n = nums.length;
@@ -50,6 +80,7 @@ public class LeetCodeMain14 {
         }
         return subsets;
     }
+
     public int numMatchingSubseq(String s, String[] words) {
         List<String> l = Arrays.stream(words).toList();
         return 0;
@@ -61,15 +92,14 @@ public class LeetCodeMain14 {
         for (String s : words1) {
             boolean flag = true;
             for (String w : words2) {
-                if(w.length() == 1) {
+                if (w.length() == 1) {
                     if (!s.contains(w)) {
                         flag = false;
                         break;
                     }
-                }
-                else{
+                } else {
                     String[] wrr = w.split("");
-                    for(String wr : wrr){
+                    for (String wr : wrr) {
                         if (!s.contains(wr)) {
                             flag = false;
                             break;
@@ -78,7 +108,7 @@ public class LeetCodeMain14 {
                 }
             }
 
-            if(flag){
+            if (flag) {
                 wordSubsets.add(s);
             }
         }
@@ -378,29 +408,29 @@ class MinStack {
 
 class MyCalendar {
 
-    List<Booking> list ;
+    List<Booking> list;
 
     public MyCalendar() {
 
-        list =  new ArrayList<>();
+        list = new ArrayList<>();
 
     }
 
     public boolean book(int start, int end) {
         int count = 0;
-        for(Booking b : list){
-            if(start <= b.startTime){
-                if(end >= b.endTime || (end >= b.startTime && end <= b.endTime)){
-                  count +=1;
-                  break;
+        for (Booking b : list) {
+            if (start <= b.startTime) {
+                if (end >= b.endTime || (end >= b.startTime && end <= b.endTime)) {
+                    count += 1;
+                    break;
                 }
-            }else if(start >= b.startTime){
-                if(start < b.endTime){
+            } else if (start >= b.startTime) {
+                if (start < b.endTime) {
                     count += 1;
                 }
             }
         }
-        if(count  == 0){
+        if (count == 0) {
             list.add(new Booking(start, end));
             return true;
         }
@@ -409,13 +439,45 @@ class MyCalendar {
     }
 }
 
-class Booking{
+class Booking {
     int startTime;
     int endTime;
 
     public Booking(int startTime, int endTime) {
         this.startTime = startTime;
         this.endTime = endTime;
+    }
+}
+
+class LRUCache {
+
+    Map<Integer, Integer> cacheMap;
+    TreeMap<Integer, Integer> recentlyUsedMap;
+    int capacity;
+
+    public LRUCache(int capacity) {
+        cacheMap = new HashMap<>();
+        recentlyUsedMap = new TreeMap<>();
+        this.capacity = capacity;
+    }
+
+    public int get(int key) {
+        recentlyUsedMap.put(key, recentlyUsedMap.getOrDefault(key, 1) + 1);
+        return cacheMap.getOrDefault(key, -1);
+    }
+
+    public void put(int key, int value) {
+        if (cacheMap.size() < capacity) {
+            recentlyUsedMap.put(key, recentlyUsedMap.getOrDefault(key,1) + 1);
+            cacheMap.put(key, value);
+        } else {
+            int k = recentlyUsedMap.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed())
+                    .findFirst().get().getKey();
+            cacheMap.remove(k);
+            cacheMap.put(key, value);
+        }
+
+
     }
 }
 
