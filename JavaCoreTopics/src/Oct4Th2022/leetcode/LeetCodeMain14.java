@@ -1,6 +1,7 @@
 package Oct4Th2022.leetcode;
 
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -26,7 +27,13 @@ public class LeetCodeMain14 {
 
         //reorderSpaces("  this   is  a sentence ");
         //sumOfThree(15);
-        brokenCalc(2, 3);
+        //brokenCalc(2, 3);
+        /*TreeMap<Integer, Integer> map = new TreeMap<>();
+        map.h*/
+        MyCalendar myCalendar = new MyCalendar();
+        myCalendar.book(10, 20); // return True
+        myCalendar.book(15, 25); // return False, It can not be booked because time 15 is already booked by another event.
+        myCalendar.book(20, 30); // return True, The event can be booked, as the first event takes every time less than 20, but not including 20.
 
     }
     public List<List<Integer>> subsets1(int[] nums) {
@@ -366,6 +373,49 @@ class MinStack {
         } else {
             return op.get();
         }
+    }
+}
+
+class MyCalendar {
+
+    List<Booking> list ;
+
+    public MyCalendar() {
+
+        list =  new ArrayList<>();
+
+    }
+
+    public boolean book(int start, int end) {
+        int count = 0;
+        for(Booking b : list){
+            if(start <= b.startTime){
+                if(end >= b.endTime || (end >= b.startTime && end <= b.endTime)){
+                  count +=1;
+                  break;
+                }
+            }else if(start >= b.startTime){
+                if(start < b.endTime){
+                    count += 1;
+                }
+            }
+        }
+        if(count  == 0){
+            list.add(new Booking(start, end));
+            return true;
+        }
+
+        return false;
+    }
+}
+
+class Booking{
+    int startTime;
+    int endTime;
+
+    public Booking(int startTime, int endTime) {
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 }
 
