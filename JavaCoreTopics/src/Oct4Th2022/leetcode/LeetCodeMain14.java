@@ -25,6 +25,85 @@ public class LeetCodeMain14 {
         // However, "ramen" is lexicographically smaller than "sushi".*/
 
         //reorderSpaces("  this   is  a sentence ");
+        //sumOfThree(15);
+        brokenCalc(2, 3);
+
+    }
+    public List<List<Integer>> subsets1(int[] nums) {
+        List<List<Integer>> subsets = new ArrayList<>();
+        int n = nums.length;
+        for (int i = 0; i < (1 << n); i++) {
+            List<Integer> l = new ArrayList<>();
+            for (int j = 0; j < n; j++)
+
+                if ((i & (1 << j)) > 0) {
+                    l.add(nums[j]);
+                }
+            subsets.add(l);
+        }
+        return subsets;
+    }
+    public int numMatchingSubseq(String s, String[] words) {
+        List<String> l = Arrays.stream(words).toList();
+        return 0;
+    }
+
+    public List<String> wordSubsets(String[] words1, String[] words2) {
+        List<String> wordSubsets = new ArrayList<>();
+
+        for (String s : words1) {
+            boolean flag = true;
+            for (String w : words2) {
+                if(w.length() == 1) {
+                    if (!s.contains(w)) {
+                        flag = false;
+                        break;
+                    }
+                }
+                else{
+                    String[] wrr = w.split("");
+                    for(String wr : wrr){
+                        if (!s.contains(wr)) {
+                            flag = false;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if(flag){
+                wordSubsets.add(s);
+            }
+        }
+        return wordSubsets;
+    }
+    //(i + (i - 1) + (i - 2))
+
+    public static int brokenCalc(int startValue, int target) {
+        int count = 0;
+        while (true) {
+            if (startValue < target) {
+                startValue *= 2;
+                count += 1;
+            } else if (startValue > target) {
+                startValue -= 1;
+                count += 1;
+            } else {
+                break;
+            }
+        }
+
+        return count;
+
+    }
+
+    public static long[] sumOfThree(long num) {
+        if (num % 3 != 0) {
+            return new long[0];
+        }
+        num = num / 3;
+
+        return new long[]{num - 1, num, num + 1};
 
     }
 
@@ -38,29 +117,28 @@ public class LeetCodeMain14 {
         int d = Integer.valueOf(num2Arr[1].replace("i", ""));
 
 
-
-        return String.valueOf(a*c-b*d)+"+"+String.valueOf(b*c+a*d)+"i";
+        return String.valueOf(a * c - b * d) + "+" + String.valueOf(b * c + a * d) + "i";
     }
 
     public String complexNumberMultiply1(String num1, String num2) {
         String[] one = num1.split("\\+");
         String[] two = num2.split("\\+");
         int a = Integer.valueOf(one[0]);
-        int b = Integer.valueOf(one[1].replace("i",""));
+        int b = Integer.valueOf(one[1].replace("i", ""));
         int c = Integer.valueOf(two[0]);
-        int d = Integer.valueOf(two[1].replace("i",""));
-        return String.valueOf(a*c-b*d)+"+"+String.valueOf(b*c+a*d)+"i";
+        int d = Integer.valueOf(two[1].replace("i", ""));
+        return String.valueOf(a * c - b * d) + "+" + String.valueOf(b * c + a * d) + "i";
     }
 
     public int numWaterBottles(int numBottles, int numExchange) {
         int totcalCount = numBottles;
 
-        while(true){
+        while (true) {
             int drinkableBottle = numBottles / numExchange;
             int reminderBottle = numBottles % numExchange;
             totcalCount += drinkableBottle;
             numBottles = drinkableBottle + reminderBottle;
-            if(numBottles < numExchange){
+            if (numBottles < numExchange) {
                 break;
             }
         }
@@ -68,7 +146,7 @@ public class LeetCodeMain14 {
 
     }
 
-    public static int  reverseBits(int n) {
+    public static int reverseBits(int n) {
 
         StringBuilder s = new StringBuilder(Integer.toBinaryString(n));
         return Integer.parseInt(s.reverse().toString(), 2);
@@ -243,12 +321,12 @@ class Solution {
 
     public int[] shuffle() {
         List<Integer> l = new ArrayList<>();
-        for(int i : arr){
+        for (int i : arr) {
             l.add(i);
         }
         Collections.shuffle(l);
         int arr[] = new int[size];
-        for(int i = 0; i < size; i++){
+        for (int i = 0; i < size; i++) {
             arr[i] = l.get(i);
         }
         return arr;
@@ -257,11 +335,11 @@ class Solution {
 
 class MinStack {
 
-    Stack <Integer> stack;
+    Stack<Integer> stack;
     int top;
 
     public MinStack() {
-        stack =  new Stack<>();
+        stack = new Stack<>();
     }
 
     public void push(int val) {
@@ -271,7 +349,7 @@ class MinStack {
 
     public void pop() {
         stack.pop();
-        if(stack.isEmpty()){
+        if (stack.isEmpty()) {
             top = 0;
         }
         top = stack.peek();
@@ -282,10 +360,10 @@ class MinStack {
     }
 
     public int getMin() {
-        Optional<Integer>op = stack.stream().sorted().findFirst();
-        if(op.isEmpty()){
+        Optional<Integer> op = stack.stream().sorted().findFirst();
+        if (op.isEmpty()) {
             return -1;
-        }else{
+        } else {
             return op.get();
         }
     }
