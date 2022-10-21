@@ -49,6 +49,41 @@ public class LeetCodeMain14 {
         findMiddleIndex(new int[]{1,-1,4});
     }
 
+    public int countPrimes(int n) {
+        int count = 0;
+        int start = 2;
+        if (n == 0 || n == 1 || n == 2) {
+            return 0;
+        }
+
+        while (start < n) {
+            if (checkPrimeNumber(start)) {
+                count++;
+            }
+            start++;
+        }
+
+        return count;
+
+    }
+
+    private boolean checkPrimeNumber(int n) {
+        int i, m = 0, flag = 0;
+        m = n / 2;
+        for (i = 2; i <= m; i++) {
+            if (n % i == 0) {
+                flag = 1;
+                break;
+            }
+        }
+        if (flag == 0) {
+            return true;
+        }
+
+
+        return false;
+    }
+
     public static int findMiddleIndex(int[] nums) {
 
         int len = nums.length;
