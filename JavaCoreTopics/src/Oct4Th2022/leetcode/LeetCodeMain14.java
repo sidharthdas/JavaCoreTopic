@@ -35,7 +35,7 @@ public class LeetCodeMain14 {
         myCalendar.book(15, 25); // return False, It can not be booked because time 15 is already booked by another event.
         myCalendar.book(20, 30); // return True, The event can be booked, as the first event takes every time less than 20, but not including 20.
 */
-        // ["LRUCache","put","put","get","put","put","get"]
+   /*     // ["LRUCache","put","put","get","put","put","get"]
         // [[2],[2,1],[2,2],[2],[1,1],[4,1],[2]]
         LRUCache lRUCache = new LRUCache(2);
         lRUCache.put(2, 1); // cache is {1=1}
@@ -43,7 +43,67 @@ public class LeetCodeMain14 {
         lRUCache.get(2);    // return 1
         lRUCache.put(1, 1);
         lRUCache.put(4, 1);// LRU key was 2, evicts key 2, cache is {1=1, 3=3}
-        lRUCache.get(2);    // returns -1 (not found)
+        lRUCache.get(2);    // returns -1 (not found)*/
+
+        //largestAltitude(new int[]{-5,1,5,0,-7});
+        findMiddleIndex(new int[]{1,-1,4});
+    }
+
+    public static int findMiddleIndex(int[] nums) {
+
+        int len = nums.length;
+        int mid = (len - 1) / 2;
+
+        while(true){
+            int left = 0;
+            for(int i = 0; i < mid;i++){
+                left += nums[i];
+            }
+
+            int right = 0;
+            for(int i = mid + 1; i < len;i++){
+                right += nums[i];
+            }
+
+            if(mid == 0 && right == 0){
+                return mid;
+            }
+            if(mid == len - 1 && left == 0){
+                return mid;
+            }
+
+            if(mid == 0 && right != left){
+                break;
+            }
+            if(mid == len - 1 && right != left){
+                break;
+            }
+
+            if(left > right){
+                mid = mid - 1;
+            } else if(left < right){
+                mid = mid + 1;
+            }else{
+                return mid;
+            }
+        }
+        return -1;
+    }
+
+    public static  int largestAltitude(int[] gain) {
+        List<Integer> l = new ArrayList<>();
+        l.add(0);
+        int len = gain.length;
+        int prev = 0;
+        for(int i = 0; i < len; i++){
+            int val = prev + gain[i];
+            l.add(val);
+            prev = val;
+        }
+
+        Collections.sort(l);
+        return l.get(len);
+
     }
 
     public List<Integer> sequentialDigits(int low, int high) {
