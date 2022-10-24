@@ -24,6 +24,31 @@ public class LeeetcodeMain15 {
 // The resulting order is the same as the order above.
 
     }
+
+    public int sumOddLengthSubarrays(int[] arr) {
+        int arrSize = arr.length;
+        int totalCount = 0;
+        //start point
+        List< List<Integer> > list = new ArrayList<>();
+        for (int startPoint = 0; startPoint <arrSize ; startPoint++) {
+            //group sizes
+
+            for (int grps = startPoint; grps <=arrSize ; grps++) {
+                List<Integer> list1 = new ArrayList<>();
+                for (int j = startPoint ; j < grps ; j++) {
+                    System.out.print(arr[j] + " ");
+                    list1.add(arr[j]);
+                }
+
+                if(list1.size() % 2 != 0){
+                    totalCount += list1.stream().reduce(0, Integer::sum);
+                }
+                list.add(list1);
+            }
+        }
+
+        return totalCount;
+    }
 }
 
 class OrderedStream {
