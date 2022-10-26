@@ -8,8 +8,54 @@ import java.util.stream.Collectors;
  * created on  26/10/22
  */
 public class LeetcodeMainClass16 {
+    public static void main(String[] args) {
+
+    }
+
+    public List<String> cellsInRange(String s) {
+        List<String> cellsInRange = new ArrayList<>();
+        String[] srr = s.split(":");
+        char startChar = srr[0].charAt(0);
+        int startNum = Integer.parseInt(String.valueOf(srr[0].charAt(1)));
+
+        char endChar = srr[1].charAt(0);
+        int endNum = Integer.parseInt(String.valueOf(srr[1].charAt(1)));
+
+        for(char c = startChar; c <= endChar; c++){
+            for(int i = startNum; i <= endNum; i++){
+                cellsInRange.add(c + "" +i);
+            }
+        }
+
+        return cellsInRange;
+
+    }
+
+    public int distributeCandies(int[] candyType) {
+
+        int count = Arrays.stream(candyType).boxed().collect(Collectors.toSet()).size();
+        int canEat = candyType.length / 2;
+
+        if(count >= canEat){
+            return canEat;
+        }
+
+        return count;
+
+    }
+
+    public boolean canBeEqual(int[] target, int[] arr) {
+        if(arr.length != target.length) return false;
+
+        Arrays.sort(target);
+        Arrays.sort(arr);
+
+        return Arrays.equals(arr, target);
+    }
 
 }
+
+
 
 class UndergroundSystem {
 
