@@ -12,6 +12,42 @@ public class LeetcodeMainClass16 {
 
     }
 
+    public boolean judgeCircle(String moves) {
+
+        int x = 0;
+        int y = 0;
+
+        char[] movesArr = moves.toCharArray();
+
+        for (char c : movesArr) {
+            if(c == 'U')  x++;
+            else if(c == 'D') x--;
+            else if(c == 'R') y++;
+            else if(c == 'L') y--;
+        }
+
+        return x == 0 && y == 0;
+
+    }
+
+    public int countAsterisks(String s) {
+        char[] crr = s.toCharArray();
+        boolean flag = true;
+        int count = 0;
+
+        for (char c : crr) {
+            if (flag && c == '*') {
+                count += 1;
+                continue;
+            }
+
+            if (c == '|') {
+                flag = flag == true ? false : true;
+            }
+        }
+        return count;
+    }
+
     public List<String> cellsInRange(String s) {
         List<String> cellsInRange = new ArrayList<>();
         String[] srr = s.split(":");
@@ -21,9 +57,9 @@ public class LeetcodeMainClass16 {
         char endChar = srr[1].charAt(0);
         int endNum = Integer.parseInt(String.valueOf(srr[1].charAt(1)));
 
-        for(char c = startChar; c <= endChar; c++){
-            for(int i = startNum; i <= endNum; i++){
-                cellsInRange.add(c + "" +i);
+        for (char c = startChar; c <= endChar; c++) {
+            for (int i = startNum; i <= endNum; i++) {
+                cellsInRange.add(c + "" + i);
             }
         }
 
@@ -36,7 +72,7 @@ public class LeetcodeMainClass16 {
         int count = Arrays.stream(candyType).boxed().collect(Collectors.toSet()).size();
         int canEat = candyType.length / 2;
 
-        if(count >= canEat){
+        if (count >= canEat) {
             return canEat;
         }
 
@@ -45,7 +81,7 @@ public class LeetcodeMainClass16 {
     }
 
     public boolean canBeEqual(int[] target, int[] arr) {
-        if(arr.length != target.length) return false;
+        if (arr.length != target.length) return false;
 
         Arrays.sort(target);
         Arrays.sort(arr);
@@ -54,7 +90,6 @@ public class LeetcodeMainClass16 {
     }
 
 }
-
 
 
 class UndergroundSystem {
@@ -76,11 +111,11 @@ class UndergroundSystem {
     public void checkOut(int id, String stationName, int t) {
         map.get(id).setCheckOut(stationName);
         map.get(id).setCheckOutTime(t);
-        String key = map.get(id).getCheckIn()+"-"+stationName;
+        String key = map.get(id).getCheckIn() + "-" + stationName;
         Route m = route.get(key);
-        if(m == null){
+        if (m == null) {
             route.put(key, new Route(1, t - map.get(id).getCheckInTime()));
-        }else{
+        } else {
             m.totalCount += 1;
             m.totalTime += t - map.get(id).getCheckInTime();
         }
@@ -98,11 +133,11 @@ class UndergroundSystem {
         }
         System.out.println(count);
         System.out.println(time);*/
-        return (double) route.get(startStation+"-"+endStation).totalTime / route.get(startStation+"-"+endStation).totalCount;
+        return (double) route.get(startStation + "-" + endStation).totalTime / route.get(startStation + "-" + endStation).totalCount;
     }
 }
 
-class Route{
+class Route {
     int totalCount;
     int totalTime;
 
@@ -111,6 +146,7 @@ class Route{
         this.totalTime = totalTime;
     }
 }
+
 class DistanceMapping {
 
     private int id;
