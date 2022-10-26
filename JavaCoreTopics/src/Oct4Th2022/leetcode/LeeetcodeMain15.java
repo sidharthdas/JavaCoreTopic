@@ -23,6 +23,20 @@ public class LeeetcodeMain15 {
 
     }
 
+    public int[] findArray(int[] pref) {
+        int len = pref.length;
+        int[] finalArray = new int[len];
+        finalArray[0] = pref[0];
+        for(int i = 1; i < len; i++){
+            int xor = 0;
+            for(int j = 0; j <= i; j++){
+                xor ^= pref[j];
+            }
+            finalArray[i] = xor;
+        }
+        return finalArray;
+    }
+
     public int numUniqueEmails(String[] emails) {
         Map<String , Integer> map = new HashMap<>();
 
