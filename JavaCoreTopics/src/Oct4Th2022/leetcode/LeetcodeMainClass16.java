@@ -15,21 +15,29 @@ public class LeetcodeMainClass16 {
         //5 ^ 7 = 2
         /*System.out.println(5 ^ 7);
         System.out.println(5  2);*/
+
+        CombinationIterator itr = new CombinationIterator("abc", 2);
+        itr.next();    // return "ab"
+        itr.hasNext(); // return True
+        itr.next();    // return "ac"
+        itr.hasNext(); // return True
+        itr.next();    // return "bc"
+        itr.hasNext(); // return False
     }
 
     public List<String> wordSubsets(String[] words1, String[] words2) {
 
         List<String> wordSubsets = new ArrayList<>();
 
-        for(String s : words1){
+        for (String s : words1) {
             boolean flag = true;
-            for(String s1 : words2){
-                if(!s.contains(s1)){
+            for (String s1 : words2) {
+                if (!s.contains(s1)) {
                     flag = false;
                     break;
                 }
             }
-            if(flag){
+            if (flag) {
                 wordSubsets.add(s);
             }
         }
@@ -38,14 +46,14 @@ public class LeetcodeMainClass16 {
 
     public int minimumRounds(int[] tasks) {
         Map<Integer, Integer> map = new HashMap<>();
-        for(int task : tasks){
+        for (int task : tasks) {
             map.put(task, map.getOrDefault(task, 0) + 1);
         }
         List<Integer> val = map.values().stream().toList();
         int count = 0;
-        for(int v : val){
-            if(v == 1 ) return -1;
-            count = ( v + 2 ) / 3;
+        for (int v : val) {
+            if (v == 1) return -1;
+            count = (v + 2) / 3;
         }
 
         return count;
@@ -58,15 +66,15 @@ public class LeetcodeMainClass16 {
             map.put(a, map.getOrDefault(a, 0) + 1);
         }
 
-        List<Integer> l =  map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue())
+        List<Integer> l = map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue())
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new)).values().stream().collect(Collectors.toList());
 
         while (k > 0) {
             if (l.get(0) > k) {
                 return l.size();
-            } else if(l.get(0) == k){
+            } else if (l.get(0) == k) {
                 return l.size() - 1;
-            }else{
+            } else {
                 int i = l.get(0);
                 k = k - i;
                 l.remove(0);
@@ -307,5 +315,48 @@ class DistanceMapping {
 
     public void setCheckOutTime(int checkOutTime) {
         this.checkOutTime = checkOutTime;
+    }
+}
+
+class CombinationIterator {
+
+    List<String> allSubSet;
+    int totalSize;
+    int currPos;
+
+    public CombinationIterator(String characters, int combinationLength) {
+        allSubSet = allSubSet(characters, combinationLength);
+        totalSize = allSubSet.size();
+        currPos = 0;
+    }
+
+    private List<String> allSubSet(String str, int k) {
+        int len = str.length();
+        List<String> l = new ArrayList<>();
+        for (int i = 0; i < len; i++) {
+            for (int j = i; j < len; j++) {
+                if (str.substring(i, j + 1).length() == k) {
+                    l.add(str.substring(i, j + 1));
+                }
+            }
+        }
+        return l;
+    }
+
+    public String next() {
+        String s = null;
+        if(currPos < totalSize){
+            s = allSubSet.get(currPos);
+            currPos += 1;
+        }
+        return s;
+    }
+
+    public boolean hasNext() {
+        if(currPos < totalSize - 1){
+            return true;
+        }
+
+        return false;
     }
 }
