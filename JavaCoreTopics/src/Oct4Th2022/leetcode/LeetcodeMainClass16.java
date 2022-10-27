@@ -11,7 +11,90 @@ public class LeetcodeMainClass16 {
     public static void main(String[] args) {
         /*List<Integer> l = Arrays.asList(1,23,4,5,6,78,9,-1,0);
         l.stream().filter(LeetcodeMainClass16::compare).toList();*/
-        licenseKeyFormatting("2-5g-3-J", 2);
+        //licenseKeyFormatting("2-5g-3-J", 2);
+        //5 ^ 7 = 2
+        /*System.out.println(5 ^ 7);
+        System.out.println(5  2);*/
+    }
+
+    public List<String> wordSubsets(String[] words1, String[] words2) {
+
+        List<String> wordSubsets = new ArrayList<>();
+
+        for(String s : words1){
+            boolean flag = true;
+            for(String s1 : words2){
+                if(!s.contains(s1)){
+                    flag = false;
+                    break;
+                }
+            }
+            if(flag){
+                wordSubsets.add(s);
+            }
+        }
+        return wordSubsets;
+    }
+
+    public int minimumRounds(int[] tasks) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for(int task : tasks){
+            map.put(task, map.getOrDefault(task, 0) + 1);
+        }
+        List<Integer> val = map.values().stream().toList();
+        int count = 0;
+        for(int v : val){
+            if(v == 1 ) return -1;
+            count = ( v + 2 ) / 3;
+        }
+
+        return count;
+    }
+
+    public int findLeastNumOfUniqueInts(int[] arr, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int a : arr) {
+            map.put(a, map.getOrDefault(a, 0) + 1);
+        }
+
+        List<Integer> l =  map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new)).values().stream().collect(Collectors.toList());
+
+        while (k > 0) {
+            if (l.get(0) > k) {
+                return l.size();
+            } else if(l.get(0) == k){
+                return l.size() - 1;
+            }else{
+                int i = l.get(0);
+                k = k - i;
+                l.remove(0);
+            }
+        }
+        return -1;
+    }
+
+    public int countDistinctIntegers(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+
+        for (int i : nums) {
+            set.add(reverse(i));
+            set.add(i);
+        }
+
+        return set.size();
+    }
+
+    private int reverse(int number) {
+        int reverse = 0;
+        while (number != 0) {
+            int remainder = number % 10;
+            reverse = reverse * 10 + remainder;
+            number = number / 10;
+        }
+
+        return reverse;
     }
 
     public static String licenseKeyFormatting(String s, int k) {
@@ -19,13 +102,13 @@ public class LeetcodeMainClass16 {
         int len = s.length();
         String finalString = "";
         int count = 0;
-        for(int i = len - 1; i>=0; i--){
-            if(count < k){
+        for (int i = len - 1; i >= 0; i--) {
+            if (count < k) {
                 finalString = s.charAt(i) + finalString;
                 count++;
-            }else{
+            } else {
                 count = 1;
-                finalString = s.charAt(i)+"-"+finalString;
+                finalString = s.charAt(i) + "-" + finalString;
 
 
             }
@@ -33,7 +116,7 @@ public class LeetcodeMainClass16 {
         return finalString;
     }
 
-    public static boolean compare(int x){
+    public static boolean compare(int x) {
         return x >= 0;
     }
 
@@ -45,10 +128,10 @@ public class LeetcodeMainClass16 {
         char[] movesArr = moves.toCharArray();
 
         for (char c : movesArr) {
-            if(c == 'U')  x++;
-            else if(c == 'D') x--;
-            else if(c == 'R') y++;
-            else if(c == 'L') y--;
+            if (c == 'U') x++;
+            else if (c == 'D') x--;
+            else if (c == 'R') y++;
+            else if (c == 'L') y--;
         }
 
         return x == 0 && y == 0;
