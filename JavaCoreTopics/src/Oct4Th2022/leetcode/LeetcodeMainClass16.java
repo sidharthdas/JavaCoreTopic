@@ -16,13 +16,59 @@ public class LeetcodeMainClass16 {
         /*System.out.println(5 ^ 7);
         System.out.println(5  2);*/
 
-        CombinationIterator itr = new CombinationIterator("abc", 2);
+        /*CombinationIterator itr = new CombinationIterator("abc", 2);
         itr.next();    // return "ab"
         itr.hasNext(); // return True
         itr.next();    // return "ac"
         itr.hasNext(); // return True
         itr.next();    // return "bc"
-        itr.hasNext(); // return False
+        itr.hasNext(); // return False*/
+        int[] arr = new int[]{1,2,3,4,56,78,9};
+        int[] newArray = Arrays.copyOfRange(arr, 7, 7);
+        System.out.println(Arrays.stream(newArray).boxed().toList());
+    }
+    public int countTriples(int n) {
+        int count = 0;
+        for(int i = 1; i <= n; i++){
+            for(int j = 1; j <= n ; j++){
+                double c = (int) Math.sqrt(j*j + i*i);
+                if(c == (int) c &&  c < n){
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+
+
+    public static  List<Integer> countSmaller(int[] nums) {
+        int count = 0;
+        int len = nums.length;
+        List<Integer> list = new ArrayList<>(len);
+
+        for (int i = 0; i < len; i++) {
+            int finalI = i;
+            list.add((int)Arrays.stream(Arrays.copyOfRange(nums, i, len)).boxed().filter(x -> x < nums[finalI]).count());
+        }
+        return list;
+    }
+
+    public int[] arrayChange(int[] nums, int[][] operations) {
+
+        Map<Integer, Integer> map = new HashMap<>();
+        int len = nums.length;
+        for(int i = 0; i < len; i++){
+            map.put(nums[i], i);
+        }
+
+        for(int[] i : operations){
+            int index = map.get(i[0]);
+            nums[index] = i[1];
+            map.remove(i[0]);
+            map.put(i[1], index);
+        }
+        return nums;
     }
 
     public List<String> wordSubsets(String[] words1, String[] words2) {
@@ -334,7 +380,7 @@ class CombinationIterator {
         int len = str.length();
         List<String> l = new ArrayList<>();
         for (int i = 0; i < len; i++) {
-            for (int j = i; j < len; j++) {
+            for (int j = i + 1; j < len; j++) {
                 if (str.substring(i, j + 1).length() == k) {
                     l.add(str.substring(i, j + 1));
                 }
