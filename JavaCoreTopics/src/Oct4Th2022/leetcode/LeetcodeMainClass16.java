@@ -9,7 +9,32 @@ import java.util.stream.Collectors;
  */
 public class LeetcodeMainClass16 {
     public static void main(String[] args) {
+        /*List<Integer> l = Arrays.asList(1,23,4,5,6,78,9,-1,0);
+        l.stream().filter(LeetcodeMainClass16::compare).toList();*/
+        licenseKeyFormatting("2-5g-3-J", 2);
+    }
 
+    public static String licenseKeyFormatting(String s, int k) {
+        s = s.replaceAll("-", "").toUpperCase();
+        int len = s.length();
+        String finalString = "";
+        int count = 0;
+        for(int i = len - 1; i>=0; i--){
+            if(count < k){
+                finalString = s.charAt(i) + finalString;
+                count++;
+            }else{
+                count = 1;
+                finalString = s.charAt(i)+"-"+finalString;
+
+
+            }
+        }
+        return finalString;
+    }
+
+    public static boolean compare(int x){
+        return x >= 0;
     }
 
     public boolean judgeCircle(String moves) {
