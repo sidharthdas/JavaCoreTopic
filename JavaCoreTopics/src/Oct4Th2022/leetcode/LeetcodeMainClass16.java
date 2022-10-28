@@ -40,17 +40,49 @@ public class LeetcodeMainClass16 {
         streamChecker.query("j"); // return False
         streamChecker.query("k"); // return False
         streamChecker.query("l"); // return True, because 'kl' is in the wordlist*/
-        countQuadruplets_1(new int[]{1,2,3,6});
+        countQuadruplets_1(new int[]{1, 2, 3, 6});
+    }
+
+    public List<List<Integer>> groupThePeople(int[] groupSizes) {
+        int len = groupSizes.length;
+        Map<Integer, List<Integer>> map = new HashMap<>();
+        for (int i = 0; i < len; i++) {
+            if (map.containsKey(groupSizes[i])) {
+                List<Integer> l = map.get(groupSizes[i]);
+                l.add(i);
+                map.put(groupSizes[i], l);
+            } else {
+                List<Integer> l = new ArrayList<>();
+                l.add(i);
+                map.put(groupSizes[i], l);
+            }
+        }
+        List<List<Integer>> groupThePeople = new ArrayList<>();
+
+        map.entrySet().forEach(x -> {
+            List<Integer> l = new ArrayList<>();
+            for(int i : x.getValue()){
+                if(l.size()<= x.getKey()){
+                    l.add(i);
+                }else{
+                    groupThePeople.add(l);
+                    l = new ArrayList<>();
+                }
+            }
+            groupThePeople.add(l);
+        });
+
+        return groupThePeople;
     }
 
     public static int countQuadruplets_1(int[] nums) {
         int len = nums.length;
         int res = 0;
-        for(int i = 0; i < len; i++){
-            for(int j = i+ 1; j < len; j++){
-                for(int k = i + 2; k < len; k++){
-                    for(int l = i + 3; l < len; l++){
-                        if(nums[i] + nums[j] + nums[k] == nums[l]){
+        for (int i = 0; i < len; i++) {
+            for (int j = i + 1; j < len; j++) {
+                for (int k = i + 2; k < len; k++) {
+                    for (int l = i + 3; l < len; l++) {
+                        if (nums[i] + nums[j] + nums[k] == nums[l]) {
                             res += 1;
                         }
                     }
@@ -63,20 +95,19 @@ public class LeetcodeMainClass16 {
     public int nextBeautifulNumber(int n) {
         int[] beautifulNumbers = {0, 1, 22, 122, 212, 221, 333, 1333, 3133, 3313, 3331, 4444, 14444, 22333, 23233, 23323, 23332, 32233, 32323, 32332, 33223, 33232, 33322, 41444, 44144, 44414, 44441, 55555, 122333, 123233, 123323, 123332, 132233, 132323, 132332, 133223, 133232, 133322, 155555, 212333, 213233, 213323, 213332, 221333, 223133, 223313, 223331, 224444, 231233, 231323, 231332, 232133, 232313, 232331, 233123, 233132, 233213, 233231, 233312, 233321, 242444, 244244, 244424, 244442, 312233, 312323, 312332, 313223, 313232, 313322, 321233, 321323, 321332, 322133, 322313, 322331, 323123, 323132, 323213, 323231, 323312, 323321, 331223, 331232, 331322, 332123, 332132, 332213, 332231, 332312, 332321, 333122, 333212, 333221, 422444, 424244, 424424, 424442, 442244, 442424, 442442, 444224, 444242, 444422, 515555, 551555, 555155, 555515, 555551, 666666, 1224444};
         int position = Arrays.binarySearch(beautifulNumbers, n);
-        if(position>=0){
+        if (position >= 0) {
             return beautifulNumbers[position + 1];
-        }
-        else return 0;
+        } else return 0;
     }
 
     public int longestMountain(int[] arr) {
-        if(arr.length < 3) return 0;
+        if (arr.length < 3) return 0;
         int len = arr.length;
         List<Integer> l = new ArrayList<>();
         int current = arr[0];
         int count = 1;
-        for(int i = 1; i < len; i++){
-            if(current < arr[i]){
+        for (int i = 1; i < len; i++) {
+            if (current < arr[i]) {
 
             }
         }
@@ -87,8 +118,8 @@ public class LeetcodeMainClass16 {
     public boolean sumOfNumberAndReverse(int num) {
         int half = num / 2;
 
-        for(int i = 1 ; i <=half; i++){
-            if(i + reverse(i) == num){
+        for (int i = 1; i <= half; i++) {
+            if (i + reverse(i) == num) {
                 return true;
             }
         }
@@ -109,10 +140,10 @@ public class LeetcodeMainClass16 {
 
     public int countTriples(int n) {
         int count = 0;
-        for(int i = 1; i <= n; i++){
-            for(int j = 1; j <= n ; j++){
-                double c = (int) Math.sqrt(j*j + i*i);
-                if(c == (int) c &&  c < n){
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n; j++) {
+                double c = (int) Math.sqrt(j * j + i * i);
+                if (c == (int) c && c < n) {
                     count++;
                 }
             }
@@ -121,15 +152,14 @@ public class LeetcodeMainClass16 {
     }
 
 
-
-    public static  List<Integer> countSmaller(int[] nums) {
+    public static List<Integer> countSmaller(int[] nums) {
         int count = 0;
         int len = nums.length;
         List<Integer> list = new ArrayList<>(len);
 
         for (int i = 0; i < len; i++) {
             int finalI = i;
-            list.add((int)Arrays.stream(Arrays.copyOfRange(nums, i, len)).boxed().filter(x -> x < nums[finalI]).count());
+            list.add((int) Arrays.stream(Arrays.copyOfRange(nums, i, len)).boxed().filter(x -> x < nums[finalI]).count());
         }
         return list;
     }
@@ -138,11 +168,11 @@ public class LeetcodeMainClass16 {
 
         Map<Integer, Integer> map = new HashMap<>();
         int len = nums.length;
-        for(int i = 0; i < len; i++){
+        for (int i = 0; i < len; i++) {
             map.put(nums[i], i);
         }
 
-        for(int[] i : operations){
+        for (int[] i : operations) {
             int index = map.get(i[0]);
             nums[index] = i[1];
             map.remove(i[0]);
@@ -471,7 +501,7 @@ class CombinationIterator {
 
     public String next() {
         String s = null;
-        if(currPos < totalSize){
+        if (currPos < totalSize) {
             s = allSubSet.get(currPos);
             currPos += 1;
         }
@@ -479,7 +509,7 @@ class CombinationIterator {
     }
 
     public boolean hasNext() {
-        if(currPos < totalSize - 1){
+        if (currPos < totalSize - 1) {
             return true;
         }
 
@@ -493,12 +523,12 @@ class StreamChecker {
 
     public StreamChecker(String[] words) {
         this.words = new StringBuilder();
-        for(String word : words){
+        for (String word : words) {
             this.words.append(word.charAt(word.length() - 1));
         }
     }
 
     public boolean query(char letter) {
-        return words.toString().contains(letter+"");
+        return words.toString().contains(letter + "");
     }
 }
