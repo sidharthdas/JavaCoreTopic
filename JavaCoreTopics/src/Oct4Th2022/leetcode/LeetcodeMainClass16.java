@@ -1,5 +1,7 @@
 package Oct4Th2022.leetcode;
 
+import JavaCoreTopicsImplementation17thJul2021.abstractclass.I;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -41,6 +43,25 @@ public class LeetcodeMainClass16 {
         streamChecker.query("k"); // return False
         streamChecker.query("l"); // return True, because 'kl' is in the wordlist*/
         countQuadruplets_1(new int[]{1, 2, 3, 6});
+    }
+
+    public List<List<Integer>> minimumAbsDifference(int[] arr) {
+        List<List<Integer>> minimumAbsDifference = new ArrayList<>();
+        Arrays.sort(arr);
+        int len = arr.length;
+        int minDifference = Integer.MAX_VALUE;
+
+        for(int i = 0; i < len; i++){
+            int diff = arr[i + 1] - arr[i];
+            if(diff < minDifference){
+                minimumAbsDifference.clear();
+                minDifference = diff;
+                minimumAbsDifference.add(List.of(arr[i], arr[i + 1]));
+            }else if(minDifference == diff){
+                minimumAbsDifference.add(List.of(arr[i], arr[i + 1]));
+            }
+        }
+        return minimumAbsDifference;
     }
 
     public List<List<Integer>> groupThePeople(int[] groupSizes) {
