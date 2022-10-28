@@ -23,10 +23,73 @@ public class LeetcodeMainClass16 {
         itr.hasNext(); // return True
         itr.next();    // return "bc"
         itr.hasNext(); // return False*/
-        int[] arr = new int[]{1,2,3,4,56,78,9};
+        /*int[] arr = new int[]{1,2,3,4,56,78,9};
         int[] newArray = Arrays.copyOfRange(arr, 7, 7);
-        System.out.println(Arrays.stream(newArray).boxed().toList());
+        System.out.println(Arrays.stream(newArray).boxed().toList());*/
+
+       /* StreamChecker streamChecker = new StreamChecker(["cd", "f", "kl"]);
+        streamChecker.query("a"); // return False
+        streamChecker.query("b"); // return False
+        streamChecker.query("c"); // return False
+        streamChecker.query("d"); // return True, because 'cd' is in the wordlist
+        streamChecker.query("e"); // return False
+        streamChecker.query("f"); // return True, because 'f' is in the wordlist
+        streamChecker.query("g"); // return False
+        streamChecker.query("h"); // return False
+        streamChecker.query("i"); // return False
+        streamChecker.query("j"); // return False
+        streamChecker.query("k"); // return False
+        streamChecker.query("l"); // return True, because 'kl' is in the wordlist*/
     }
+
+    //
+    public int nextBeautifulNumber(int n) {
+        int[] beautifulNumbers = {0, 1, 22, 122, 212, 221, 333, 1333, 3133, 3313, 3331, 4444, 14444, 22333, 23233, 23323, 23332, 32233, 32323, 32332, 33223, 33232, 33322, 41444, 44144, 44414, 44441, 55555, 122333, 123233, 123323, 123332, 132233, 132323, 132332, 133223, 133232, 133322, 155555, 212333, 213233, 213323, 213332, 221333, 223133, 223313, 223331, 224444, 231233, 231323, 231332, 232133, 232313, 232331, 233123, 233132, 233213, 233231, 233312, 233321, 242444, 244244, 244424, 244442, 312233, 312323, 312332, 313223, 313232, 313322, 321233, 321323, 321332, 322133, 322313, 322331, 323123, 323132, 323213, 323231, 323312, 323321, 331223, 331232, 331322, 332123, 332132, 332213, 332231, 332312, 332321, 333122, 333212, 333221, 422444, 424244, 424424, 424442, 442244, 442424, 442442, 444224, 444242, 444422, 515555, 551555, 555155, 555515, 555551, 666666, 1224444};
+        int position = Arrays.binarySearch(beautifulNumbers, n);
+        if(position>=0){
+            return beautifulNumbers[position + 1];
+        }
+        else return 0;
+    }
+
+    public int longestMountain(int[] arr) {
+        if(arr.length < 3) return 0;
+        int len = arr.length;
+        List<Integer> l = new ArrayList<>();
+        int current = arr[0];
+        int count = 1;
+        for(int i = 1; i < len; i++){
+            if(current < arr[i]){
+
+            }
+        }
+        return 0;
+    }
+
+
+    public boolean sumOfNumberAndReverse(int num) {
+        int half = num / 2;
+
+        for(int i = 1 ; i <=half; i++){
+            if(i + reverse(i) == num){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private int reverse1(int number) {
+        int reverse = 0;
+        while (number != 0) {
+            int remainder = number % 10;
+            reverse = reverse * 10 + remainder;
+            number = number / 10;
+        }
+
+        return reverse;
+    }
+
     public int countTriples(int n) {
         int count = 0;
         for(int i = 1; i <= n; i++){
@@ -404,5 +467,21 @@ class CombinationIterator {
         }
 
         return false;
+    }
+}
+
+class StreamChecker {
+
+    StringBuilder words;
+
+    public StreamChecker(String[] words) {
+        this.words = new StringBuilder();
+        for(String word : words){
+            this.words.append(word.charAt(word.length() - 1));
+        }
+    }
+
+    public boolean query(char letter) {
+        return words.toString().contains(letter+"");
     }
 }
