@@ -14,6 +14,18 @@ public class LeetcodeMainClass18 {
 
     }
 
+    public double averageWaitingTime(int[][] customers) {
+        double currentTime = 0;
+        double waitingTime = 0;
+        int len = customers.length;
+        for(int[] cus : customers){
+            currentTime = (currentTime > (cus[0]* 1.0) ? currentTime : (cus[0] * 1.0)) + cus[1];
+            waitingTime += currentTime - cus[0];
+        }
+
+        return waitingTime / len;
+    }
+
     public int maximumUnits(int[][] boxTypes, int truckSize) {
         List<Truck> list = new ArrayList<>();
         for (int[] box : boxTypes) {
