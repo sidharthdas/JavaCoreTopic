@@ -1,9 +1,6 @@
 package Oct4Th2022.leetcode;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Sidharth Das
@@ -12,14 +9,76 @@ import java.util.List;
 public class LeetcodeMainClass18 {
     public static void main(String[] args) {
 
+        System.out.println(isValid("[])"));
+
+    }
+
+    public static boolean isValid(String s) {
+
+        String srr[] = s.split("");
+        if(srr[0].equals("]") || srr[0].equals("}") || srr[0].equals(")")) return false;
+        Stack<String> stack = new Stack<>();
+
+        for (String s1 : srr) {
+            if (s1.equals("(") || s1.equals("[") || s1.equals("{")) {
+                stack.push(s1);
+            } else {
+                if(stack.size() > 0) {
+                    if (!getOp(s1).equals(stack.pop())) {
+                        return false;
+                    }
+                }else{
+                    return false;
+                }
+            }
+        }
+        return stack.size() == 0;
+    }
+
+    private static String getOp(String s) {
+        if (s.equals("]")) return "[";
+        else if (s.equals("}")) return "{";
+        else if (s.equals(")")) return "(";
+        return null;
+    }
+
+/*
+I             1
+V             5
+X             10
+L             50
+C             100
+D             500
+M             1000
+    * */
+
+    public int romanToInt(String s) {
+        Map<String, Integer> map = Map.ofEntries(
+                Map.entry("I", 1),
+                Map.entry("V", 5),
+                Map.entry("X", 10),
+                Map.entry("L", 50),
+                Map.entry("C", 100),
+                Map.entry("D", 500),
+                Map.entry("M", 1000)
+        );
+
+        int count = 0;
+        String[] srr = s.split("");
+        int len = srr.length;
+
+        for (int i = 0; i < len; i++) {
+            count += map.get(srr[i]);
+        }
+        return count;
     }
 
     public double averageWaitingTime(int[][] customers) {
         double currentTime = 0;
         double waitingTime = 0;
         int len = customers.length;
-        for(int[] cus : customers){
-            currentTime = (currentTime > (cus[0]* 1.0) ? currentTime : (cus[0] * 1.0)) + cus[1];
+        for (int[] cus : customers) {
+            currentTime = (currentTime > (cus[0] * 1.0) ? currentTime : (cus[0] * 1.0)) + cus[1];
             waitingTime += currentTime - cus[0];
         }
 
@@ -43,13 +102,13 @@ public class LeetcodeMainClass18 {
         int count = 0;
 
         for (Truck t : list) {
-            if(truckSize < t.numOfBoxes){
+            if (truckSize < t.numOfBoxes) {
                 count += truckSize * t.numOfUnitPerBox;
                 break;
-            }else if(truckSize == t.numOfBoxes){
+            } else if (truckSize == t.numOfBoxes) {
                 count += truckSize * t.numOfUnitPerBox;
                 break;
-            }else{
+            } else {
                 count += t.numOfBoxes * t.numOfUnitPerBox;
                 truckSize -= t.numOfBoxes;
             }
