@@ -13,6 +13,29 @@ public class LeetcodeMainClass18 {
 
     }
 
+    public String evaluate(String s, List<List<String>> knowledge) {
+        StringBuilder sb = new StringBuilder(s);
+
+        while(sb.toString().contains("(")){
+            int indexOfFirst =  s.indexOf("(");
+            int indexOfSec =  s.indexOf(")");
+
+            //String s1 = s.substring(s.indexOf("("), s.indexOf(")") + 1);
+            String code = s.substring(indexOfFirst + 1, indexOfSec);
+
+            String replace = "?";
+
+            for(List<String> l : knowledge){
+                if(l.get(0).equals(code)){
+                    replace = l.get(1);
+                    break;
+                }
+            }
+            sb = sb.replace(indexOfFirst, indexOfSec, replace);
+        }
+        return sb.toString();
+    }
+
     public static boolean isValid(String s) {
 
         String srr[] = s.split("");
