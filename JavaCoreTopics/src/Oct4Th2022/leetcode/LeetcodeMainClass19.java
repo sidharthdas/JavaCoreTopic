@@ -11,6 +11,45 @@ public class LeetcodeMainClass19 {
     public static void main(String[] args) {
 
     }
+    List<Integer> lPre;
+    public List<Integer> preorder(Node root) {
+        lPre = new ArrayList<>();
+        pre(root);
+        return lPre;
+
+    }
+
+    public void pre(Node root){
+        if(root == null){
+            return;
+        }
+        lPre.add(root.val);
+
+        for(Node child : root.children){
+            pre(child);
+        }
+    }
+
+    List<Integer> l;
+
+    public List<Integer> postorder(Node root) {
+        l = new ArrayList<>();
+        postorder(root);
+        return l;
+
+
+    }
+
+    public void postOrder(Node root) {
+        if (root == null) {
+            return;
+        }
+
+        for (Node child : root.children) {
+            postorder(child);
+        }
+        l.add(root.val);
+    }
 }
 
 
@@ -46,3 +85,20 @@ class Solution1 {
 
     }
 }
+
+class Node {
+    public int val;
+    public List<Node> children;
+
+    public Node() {
+    }
+
+    public Node(int _val) {
+        val = _val;
+    }
+
+    public Node(int _val, List<Node> _children) {
+        val = _val;
+        children = _children;
+    }
+};
