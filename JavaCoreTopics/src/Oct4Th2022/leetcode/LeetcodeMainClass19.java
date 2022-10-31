@@ -9,19 +9,55 @@ import java.util.*;
 public class LeetcodeMainClass19 {
 
     public static void main(String[] args) {
+        divideString("abcdefghi", 3, 'x');
+    }
+
+    public static String[] divideString(String s, int k, char fill) {
+
+        int len = s.length();
+        int div = len % k;
+        if (div != 0) {
+            int numOfFill = k - div;
+            while (numOfFill != 0) {
+                s += fill;
+                numOfFill--;
+            }
+        }
+
+        int afterLen = s.length();
+        String srr[] = s.split("");
+        String temp = "";
+        int index = 0;
+        int count = 0;
+        String[] newArr = new String[afterLen / k];
+        for (int i = 0; i < afterLen; i++) {
+            if (count < k) {
+                temp += srr[i];
+                count ++;
+            } else {
+                count = 1;
+                newArr[index] = temp;
+                temp = srr[i];
+                index++;
+            }
+        }
+
+        newArr[index] = temp;
+        return newArr;
 
     }
 
+
     public int minimumDifference(int[] nums, int k) {
-        if(k == 1){
+        if (k == 1) {
             return 0;
         }
         Arrays.sort(nums);
         int len = nums.length;
         List<Integer> l = new ArrayList<>();
 
-        for(int i = 0; i < len; i++){
-            if(i+k < len) {
+        for (int i = 0; i < len; i++) {
+            if (i + k < len) {
                 l.add(nums[i + k] - nums[i]);
             }
         }
@@ -35,7 +71,7 @@ public class LeetcodeMainClass19 {
         int len = nums.length;
         Arrays.sort(nums);
         int sum = 0;
-        for(int i = 0; i < len; i+=2){
+        for (int i = 0; i < len; i += 2) {
             sum += nums[i];
         }
 
@@ -47,17 +83,19 @@ public class LeetcodeMainClass19 {
 
         List<Integer> l = new ArrayList<>();
 
-        while(num > 0){
+        while (num > 0) {
             l.add(num % 10);
             num = num / 10;
         }
 
         Collections.sort(l);
 
-        return (l.get(3) * 10 + l.get(0) ) + (l.get(2) * l.get(1));
+        return (l.get(3) * 10 + l.get(0)) + (l.get(2) * l.get(1));
 
     }
+
     List<Integer> lPre;
+
     public List<Integer> preorder(Node root) {
         lPre = new ArrayList<>();
         pre(root);
@@ -65,13 +103,13 @@ public class LeetcodeMainClass19 {
 
     }
 
-    public void pre(Node root){
-        if(root == null){
+    public void pre(Node root) {
+        if (root == null) {
             return;
         }
         lPre.add(root.val);
 
-        for(Node child : root.children){
+        for (Node child : root.children) {
             pre(child);
         }
     }
