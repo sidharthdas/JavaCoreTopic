@@ -11,7 +11,43 @@ public class LeetcodeMainClass19 {
 
     public static void main(String[] args) {
         //divideString("abcdefghi", 3, 'x');
-        System.out.println(findAllRecipes(new String[]{"bread"},Arrays.asList(Arrays.asList("yeast","flour")), new String[] {"yeast","flour","corn"}));
+        System.out.println(makeFancyString("aaabaaaa"));
+    }
+
+
+
+
+
+    public static  String makeFancyString(String s) {
+
+        boolean flag = true;
+
+        while (flag) {
+            int len = s.length();
+            int indexToBeRemoved = -1;
+            for (int i = 0; i < len; i++) {
+
+                if (i + 2 < len) {
+                    if(s.charAt(i) == s.charAt(i + 1) && s.charAt(i+ 2) == s.charAt(i + 1)){
+                        indexToBeRemoved = i + 1;
+                        //break;
+                        if(i+ 2 == len){
+                            flag = false;
+                        }
+                        break;
+                    }
+                }else if(i+ 2 == len ){
+                    flag = false;
+                    break;
+                }
+            }
+
+            if(indexToBeRemoved != -1){
+                s = s.substring(0, indexToBeRemoved) + s.substring(indexToBeRemoved + 1);
+            }
+
+        }
+        return s;
     }
 
     public static List<String> findAllRecipes(String[] recipes, List<List<String>> ingredients, String[] supplies) {
