@@ -12,6 +12,25 @@ public class LeetcodeMainClass19 {
 
     }
 
+    public int minimumDifference(int[] nums, int k) {
+        if(k == 1){
+            return 0;
+        }
+        Arrays.sort(nums);
+        int len = nums.length;
+        List<Integer> l = new ArrayList<>();
+
+        for(int i = 0; i < len; i++){
+            if(i+k < len) {
+                l.add(nums[i + k] - nums[i]);
+            }
+        }
+
+        Collections.sort(l);
+        return l.get(0);
+
+    }
+
     public int arrayPairSum(int[] nums) {
         int len = nums.length;
         Arrays.sort(nums);
