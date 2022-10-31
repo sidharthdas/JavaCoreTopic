@@ -1,6 +1,7 @@
 package Oct4Th2022.leetcode;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author Sidharth Das
@@ -9,19 +10,58 @@ import java.util.*;
 public class LeetcodeMainClass19 {
 
     public static void main(String[] args) {
-        divideString("abcdefghi", 3, 'x');
+        //divideString("abcdefghi", 3, 'x');
+        System.out.println(findAllRecipes(new String[]{"bread"},Arrays.asList(Arrays.asList("yeast","flour")), new String[] {"yeast","flour","corn"}));
+    }
+
+    public static List<String> findAllRecipes(String[] recipes, List<List<String>> ingredients, String[] supplies) {
+
+        int len = ingredients.size();
+        List<String> newSuplies = Arrays.stream(supplies).collect(Collectors.toList());
+        List<String> finalRe = new ArrayList<>();
+
+        for (int i = 0; i < len; i++) {
+            boolean flag = true;
+            for (String s : ingredients.get(i)) {
+                if (!newSuplies.contains(s)) {
+                    flag = false;
+                    break;
+                }
+
+            }
+            if (flag) {
+                newSuplies.add(recipes[i]);
+                finalRe.add(recipes[i]);
+            }
+        }
+
+        return finalRe;
+
+
+    }
+
+    public void findSecretWord(String[] words, Master master) {
+        for (String s : words) {
+            int len = s.length();
+
+            if (master.guess(s) == len) {
+                System.out.println("You guessed the secret word correctly.");
+            }
+        }
+
+
     }
 
     public String largestGoodInteger(String num) {
         int len = num.length();
         int max = Integer.MIN_VALUE;
         String maxi = "";
-        for(int i = 0; i < len; i++){
-            if(i + 2 < len){
-                if(num.charAt(i) == num.charAt(i + 1) && num.charAt(i+ 1) == num.charAt(i + 2)){
-                    if(max < Integer.parseInt(num.charAt(i)+""+num.charAt(i+1)+num.charAt(i+2)) ){
-                        max = Integer.parseInt(num.charAt(i)+""+num.charAt(i+1)+num.charAt(i+2));
-                        maxi = num.charAt(i)+""+num.charAt(i+1)+num.charAt(i+2);
+        for (int i = 0; i < len; i++) {
+            if (i + 2 < len) {
+                if (num.charAt(i) == num.charAt(i + 1) && num.charAt(i + 1) == num.charAt(i + 2)) {
+                    if (max < Integer.parseInt(num.charAt(i) + "" + num.charAt(i + 1) + num.charAt(i + 2))) {
+                        max = Integer.parseInt(num.charAt(i) + "" + num.charAt(i + 1) + num.charAt(i + 2));
+                        maxi = num.charAt(i) + "" + num.charAt(i + 1) + num.charAt(i + 2);
                     }
                 }
             }
@@ -51,7 +91,7 @@ public class LeetcodeMainClass19 {
         for (int i = 0; i < afterLen; i++) {
             if (count < k) {
                 temp += srr[i];
-                count ++;
+                count++;
             } else {
                 count = 1;
                 newArr[index] = temp;
@@ -203,4 +243,9 @@ class Node {
         val = _val;
         children = _children;
     }
-};
+}
+
+
+interface Master {
+    public int guess(String word);
+}
