@@ -12,6 +12,24 @@ public class LeetcodeMainClass19 {
         divideString("abcdefghi", 3, 'x');
     }
 
+    public String largestGoodInteger(String num) {
+        int len = num.length();
+        int max = Integer.MIN_VALUE;
+        String maxi = "";
+        for(int i = 0; i < len; i++){
+            if(i + 2 < len){
+                if(num.charAt(i) == num.charAt(i + 1) && num.charAt(i+ 1) == num.charAt(i + 2)){
+                    if(max < Integer.parseInt(num.charAt(i)+""+num.charAt(i+1)+num.charAt(i+2)) ){
+                        max = Integer.parseInt(num.charAt(i)+""+num.charAt(i+1)+num.charAt(i+2));
+                        maxi = num.charAt(i)+""+num.charAt(i+1)+num.charAt(i+2);
+                    }
+                }
+            }
+
+        }
+        return maxi;
+    }
+
     public static String[] divideString(String s, int k, char fill) {
 
         int len = s.length();
