@@ -11,6 +11,33 @@ public class LeetcodeMainClass19 {
     public static void main(String[] args) {
 
     }
+
+    public int arrayPairSum(int[] nums) {
+        int len = nums.length;
+        Arrays.sort(nums);
+        int sum = 0;
+        for(int i = 0; i < len; i+=2){
+            sum += nums[i];
+        }
+
+        return sum;
+
+    }
+
+    public int minimumSum(int num) {
+
+        List<Integer> l = new ArrayList<>();
+
+        while(num > 0){
+            l.add(num % 10);
+            num = num / 10;
+        }
+
+        Collections.sort(l);
+
+        return (l.get(3) * 10 + l.get(0) ) + (l.get(2) * l.get(1));
+
+    }
     List<Integer> lPre;
     public List<Integer> preorder(Node root) {
         lPre = new ArrayList<>();
