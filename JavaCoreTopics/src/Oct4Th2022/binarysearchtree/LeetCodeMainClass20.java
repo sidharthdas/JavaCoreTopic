@@ -1,8 +1,6 @@
 package Oct4Th2022.binarysearchtree;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author Sidharth Das
@@ -11,6 +9,42 @@ import java.util.Set;
 public class LeetCodeMainClass20 {
 
     public static void main(String[] args) {
+        System.out.println(calculateTax(new int[][]{{1,0},{4,25},{5,50}}, 2));
+    }
+
+    public static double calculateTax(int[][] brackets, int income) {
+        //min(income, upperi) - prev.
+        int prev = 0;
+        int len = brackets.length;
+        List<List<Integer>> l = new ArrayList<>();
+        for (int[] brac : brackets) {
+            if (income >= brac[0]) {
+                l.add(List.of(getMin(income, brac[0]) - prev, brac[1]));
+                prev = brac[0];
+            }
+        }
+
+        double totalTax = 0.0;
+
+        for(int i = 0; i < len; i++){
+            totalTax +=(double) l.get(i).get(0) * ( ( double) l.get(i).get(1) / 100);
+        }
+
+        return totalTax;
+    }
+
+    private static int getMin(int i0, int i1){
+        return i0 >= i1 ? i1 : i0;
+    }
+
+    public int[] numberOfLines(int[] widths, String s) {
+
+        int total = Arrays.stream(widths).boxed().reduce(0, Integer::sum);
+
+        int totalLines = total / 100;
+        int extra = total % 100;
+
+        return new int[]{totalLines + 1, extra};
 
     }
 
@@ -20,26 +54,26 @@ public class LeetCodeMainClass20 {
         Set<Point> set = new HashSet<>();
 
         String str[] = path.split("");
-        for(String s : str){
+        for (String s : str) {
             //'N', 'S', 'E' or 'W'
-            if(s.equals("N")){
+            if (s.equals("N")) {
                 currentX += 1;
-                if(!set.add(new Point(currentX, currentY))){
+                if (!set.add(new Point(currentX, currentY))) {
                     return true;
                 }
-            } else if(s.equals("S")){
+            } else if (s.equals("S")) {
                 currentX -= 1;
-                if(!set.add(new Point(currentX, currentY))){
+                if (!set.add(new Point(currentX, currentY))) {
                     return true;
                 }
-            }else if(s.equals("E")){
+            } else if (s.equals("E")) {
                 currentY += 1;
-                if(!set.add(new Point(currentX, currentY))){
+                if (!set.add(new Point(currentX, currentY))) {
                     return true;
                 }
-            }else if(s.equals("W")){
+            } else if (s.equals("W")) {
                 currentY -= 1;
-                if(!set.add(new Point(currentX, currentY))){
+                if (!set.add(new Point(currentX, currentY))) {
                     return true;
                 }
             }
