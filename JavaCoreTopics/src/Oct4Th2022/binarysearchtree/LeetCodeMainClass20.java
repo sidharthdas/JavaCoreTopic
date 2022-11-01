@@ -9,7 +9,22 @@ import java.util.*;
 public class LeetCodeMainClass20 {
 
     public static void main(String[] args) {
-        System.out.println(calculateTax(new int[][]{{1,0},{4,25},{5,50}}, 2));
+        //System.out.println(calculateTax(new int[][]{{1,0},{4,25},{5,50}}, 2));
+        System.out.println(getMinDistance(new int[]{1,2,3,4,5}, 5, 3));
+    }
+
+    public static int getMinDistance(int[] nums, int target, int start) {
+        int len = nums.length;
+        int min = Integer.MAX_VALUE;
+        for(int i = 0; i < len; i++){
+            if(nums[i] == target){
+                int abs = Math.abs(i - start);
+                if(min > abs){
+                    min = abs;
+                }
+            }
+        }
+        return min;
     }
 
     public static double calculateTax(int[][] brackets, int income) {
