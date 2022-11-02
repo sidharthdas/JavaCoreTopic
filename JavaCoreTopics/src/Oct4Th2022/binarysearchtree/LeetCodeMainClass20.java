@@ -10,16 +10,82 @@ public class LeetCodeMainClass20 {
 
     public static void main(String[] args) {
         //System.out.println(calculateTax(new int[][]{{1,0},{4,25},{5,50}}, 2));
-        System.out.println(getMinDistance(new int[]{1,2,3,4,5}, 5, 3));
+        //System.out.println(getMinDistance(new int[]{1, 2, 3, 4, 5}, 5, 3));
+        //System.out.println(pivotIndex(new int[]{1,2,3}));
+        System.out.println(maxDepth("(1+(2*3)+((8)/4))+1"));
     }
+
+    public static int maxDepth(String s) {
+
+        String arr[] = s.split("");
+        int count = 0;
+
+        List<Integer> l = new ArrayList<>();
+        l.add(0);
+
+        for(String s1 : arr){
+            if(s1.equals("(")){
+                count +=1;
+            }else if(s1.equals(")")){
+
+                l.add(count);
+                count -= 1;
+            }
+        }
+
+        Collections.sort(l, Collections.reverseOrder());
+
+        return l.get(0);
+    }
+
+
+    public static  int pivotIndex(int[] nums) {
+        int len = nums.length;
+        int pivotIndex = len / 2;
+        int sumLeft = 0;
+        int sumRight = 0;
+        while (true) {
+            for(int i = 0; i < pivotIndex; i++){
+                sumLeft += nums[i];
+            }
+
+            for(int i = pivotIndex + 1; i < len; i++){
+                sumRight += nums[i];
+            }
+
+            if(pivotIndex == 0 && pivotIndex == len - 1){
+                if(sumLeft == sumRight){
+                    return pivotIndex;
+                }
+                return -1;
+            }
+
+            if(sumLeft == sumRight){
+                return pivotIndex;
+            }
+
+            if(sumLeft > sumRight){
+                pivotIndex --;
+            }
+
+            if(sumLeft < sumRight){
+                pivotIndex ++;
+            }
+
+            sumRight = 0;
+            sumLeft = 0;
+
+        }
+    }
+
 
     public static int getMinDistance(int[] nums, int target, int start) {
         int len = nums.length;
         int min = Integer.MAX_VALUE;
-        for(int i = 0; i < len; i++){
-            if(nums[i] == target){
+        for (int i = 0; i < len; i++) {
+            if (nums[i] == target) {
                 int abs = Math.abs(i - start);
-                if(min > abs){
+                if (min > abs) {
                     min = abs;
                 }
             }
@@ -41,14 +107,14 @@ public class LeetCodeMainClass20 {
 
         double totalTax = 0.0;
 
-        for(int i = 0; i < len; i++){
-            totalTax +=(double) l.get(i).get(0) * ( ( double) l.get(i).get(1) / 100);
+        for (int i = 0; i < len; i++) {
+            totalTax += (double) l.get(i).get(0) * ((double) l.get(i).get(1) / 100);
         }
 
         return totalTax;
     }
 
-    private static int getMin(int i0, int i1){
+    private static int getMin(int i0, int i1) {
         return i0 >= i1 ? i1 : i0;
     }
 
