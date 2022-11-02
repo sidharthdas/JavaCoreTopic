@@ -15,6 +15,42 @@ public class LeetCodeMainClass20 {
         System.out.println(maxDepth("(1+(2*3)+((8)/4))+1"));
     }
 
+    public int maxScore(String s) {
+        return 0;
+    }
+
+    public String oddString(String[] words) {
+        Map<List<Integer>, List<String>> map = new HashMap<>();
+
+        for (String word : words) {
+            int len = word.length();
+            List<Integer> list = new ArrayList<>();
+            char[] crr = word.toCharArray();
+
+            for(int i = 0; i < len - 1; i++){
+                list.add(crr[i + 1] - crr[i]);
+            }
+
+            if(map.containsKey(list)){
+                List<String> l = map.get(list);
+                l.add(word);
+            }else{
+                List<String> l = new ArrayList<>();
+                l.add(word);
+                map.put(list,l);
+            }
+
+
+        }
+        for(Map.Entry<List<Integer>, List<String>> m  : map.entrySet()){
+            if(m.getValue().size() == 1){
+                return m.getValue().get(0);
+            }
+        }
+        return "";
+
+    }
+
     public static int maxDepth(String s) {
 
         String arr[] = s.split("");
@@ -23,10 +59,10 @@ public class LeetCodeMainClass20 {
         List<Integer> l = new ArrayList<>();
         l.add(0);
 
-        for(String s1 : arr){
-            if(s1.equals("(")){
-                count +=1;
-            }else if(s1.equals(")")){
+        for (String s1 : arr) {
+            if (s1.equals("(")) {
+                count += 1;
+            } else if (s1.equals(")")) {
 
                 l.add(count);
                 count -= 1;
@@ -39,37 +75,37 @@ public class LeetCodeMainClass20 {
     }
 
 
-    public static  int pivotIndex(int[] nums) {
+    public static int pivotIndex(int[] nums) {
         int len = nums.length;
         int pivotIndex = len / 2;
         int sumLeft = 0;
         int sumRight = 0;
         while (true) {
-            for(int i = 0; i < pivotIndex; i++){
+            for (int i = 0; i < pivotIndex; i++) {
                 sumLeft += nums[i];
             }
 
-            for(int i = pivotIndex + 1; i < len; i++){
+            for (int i = pivotIndex + 1; i < len; i++) {
                 sumRight += nums[i];
             }
 
-            if(pivotIndex == 0 && pivotIndex == len - 1){
-                if(sumLeft == sumRight){
+            if (pivotIndex == 0 && pivotIndex == len - 1) {
+                if (sumLeft == sumRight) {
                     return pivotIndex;
                 }
                 return -1;
             }
 
-            if(sumLeft == sumRight){
+            if (sumLeft == sumRight) {
                 return pivotIndex;
             }
 
-            if(sumLeft > sumRight){
-                pivotIndex --;
+            if (sumLeft > sumRight) {
+                pivotIndex--;
             }
 
-            if(sumLeft < sumRight){
-                pivotIndex ++;
+            if (sumLeft < sumRight) {
+                pivotIndex++;
             }
 
             sumRight = 0;
