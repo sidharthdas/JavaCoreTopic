@@ -16,6 +16,53 @@ public class LeetCodeMainClass20 {
         System.out.println(minimumCost(new int[]{1, 2, 3}));
     }
 
+    public String reorderSpaces(String text) {
+        String[] srr = text.split("");
+        String[] words = text.trim().split("\\s+");
+        int count = 0;
+
+        for (String s : srr) {
+            if (s.equals(" ")) {
+                count++;
+            }
+        }
+
+        if(count == 0) return text;
+
+        int wordsLen = words.length;
+        if(wordsLen == 1){
+            text = text.trim();
+            while(count != 0){
+                text += " ";
+                count --;
+            }
+
+            return text;
+        }
+        int gaps = count / (wordsLen - 1);
+
+        int endGaps = count % (wordsLen - 1);
+
+        StringBuilder sb = new StringBuilder("");
+
+        for (String word : words) {
+            sb.append(word);
+            int temp = gaps;
+            while (temp != 0) {
+                sb.append(" ");
+                temp--;
+            }
+        }
+
+        sb = new StringBuilder(sb.toString().trim());
+
+        while (endGaps != 0) {
+            sb.append(" ");
+            endGaps --;
+        }
+        return sb.toString();
+    }
+
     public int rearrangeCharacters(String s, String target) {
         Map<String, Integer> map = new HashMap<>();
         String[] srr = s.split("");
