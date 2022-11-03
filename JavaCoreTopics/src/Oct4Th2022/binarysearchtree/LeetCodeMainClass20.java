@@ -13,7 +13,42 @@ public class LeetCodeMainClass20 {
         //System.out.println(getMinDistance(new int[]{1, 2, 3, 4, 5}, 5, 3));
         //System.out.println(pivotIndex(new int[]{1,2,3}));
         //System.out.println(maxDepth("(1+(2*3)+((8)/4))+1"));
-        System.out.println(minimumCost(new int[]{1,2,3}));
+        System.out.println(minimumCost(new int[]{1, 2, 3}));
+    }
+
+    public int rearrangeCharacters(String s, String target) {
+        Map<String, Integer> map = new HashMap<>();
+        String[] srr = s.split("");
+        String[] trr = target.split("");
+        for (String s1 : srr) {
+            map.put(s1, map.getOrDefault(s1, 0) + 1);
+        }
+        int count = 0;
+        while (true) {
+            boolean flag = true;
+            for (String t1 : trr) {
+                if (map.containsKey(t1)) {
+                    int temp = map.get(t1) - 1;
+                    if (temp == 0) {
+                        map.remove(t1);
+                    } else {
+                        map.put(t1, temp);
+                    }
+
+                } else {
+                    flag = false;
+                    break;
+                }
+            }
+
+            if (!flag) {
+                return count;
+            }
+
+            count += 1;
+
+        }
+
     }
 
     public static int minimumCost(int[] cost) {
@@ -22,10 +57,10 @@ public class LeetCodeMainClass20 {
         Arrays.sort(cost);
         int count = 0;
         for (int i = len - 1; i >= 0; i--) {
-            if(count < 3){
+            if (count < 3) {
                 minCost += cost[i];
-                count ++;
-            }else if(count >= 3){
+                count++;
+            } else if (count >= 3) {
                 count = 0;
             }
         }
