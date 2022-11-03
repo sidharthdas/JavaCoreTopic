@@ -12,11 +12,82 @@ public class LeetCodeMainClass20 {
         //System.out.println(calculateTax(new int[][]{{1,0},{4,25},{5,50}}, 2));
         //System.out.println(getMinDistance(new int[]{1, 2, 3, 4, 5}, 5, 3));
         //System.out.println(pivotIndex(new int[]{1,2,3}));
-        System.out.println(maxDepth("(1+(2*3)+((8)/4))+1"));
+        //System.out.println(maxDepth("(1+(2*3)+((8)/4))+1"));
+        System.out.println(minimumCost(new int[]{1,2,3}));
     }
 
-    public int maxScore(String s) {
-        return 0;
+    public static int minimumCost(int[] cost) {
+        int len = cost.length;
+        int minCost = 0;
+        Arrays.sort(cost);
+        int count = 0;
+        for (int i = len - 1; i >= 0; i--) {
+            if(count < 3){
+                minCost += cost[i];
+                count ++;
+            }else if(count >= 3){
+                count = 0;
+            }
+        }
+        return minCost;
+    }
+
+    public int[] decrypt(int[] code, int k) {
+        int[] arr;
+        int len = code.length;
+        arr = new int[len];
+        if (k == 0) {
+            for (int i = 0; i < len; i++) {
+                arr[i] = 0;
+            }
+
+            return arr;
+        } else if (k > 0) {
+            for (int i = 0; i < len; i++) {
+                int sum = 0;
+                int count = 0;
+                int current = i + 1;
+                if (i == code.length - 1) {
+                    current = 0;
+                }
+                for (int j = current; j < code.length; j++) {
+
+                    sum += code[j];
+                    count++;
+                    if (j == code.length - 1) {
+                        j = -1;
+                    }
+                    if (count == k) {
+                        break;
+                    }
+                }
+
+                arr[i] = sum;
+
+
+            }
+        } else {
+            for (int i = 0; i < code.length; i++) {
+                int sum = 0;
+                int count = 0;
+                int current = i - 1;
+                if (i == 0) {
+                    current = code.length - 1;
+                }
+                for (int j = current; j >= 0; j--) {
+                    sum += code[j];
+                    count++;
+                    if (count == Math.abs(k)) {
+                        break;
+                    }
+                    if (j == 0) {
+                        j = code.length;
+                    }
+                }
+                arr[i] = sum;
+            }
+        }
+        return arr;
     }
 
     public String oddString(String[] words) {
@@ -27,23 +98,23 @@ public class LeetCodeMainClass20 {
             List<Integer> list = new ArrayList<>();
             char[] crr = word.toCharArray();
 
-            for(int i = 0; i < len - 1; i++){
+            for (int i = 0; i < len - 1; i++) {
                 list.add(crr[i + 1] - crr[i]);
             }
 
-            if(map.containsKey(list)){
+            if (map.containsKey(list)) {
                 List<String> l = map.get(list);
                 l.add(word);
-            }else{
+            } else {
                 List<String> l = new ArrayList<>();
                 l.add(word);
-                map.put(list,l);
+                map.put(list, l);
             }
 
 
         }
-        for(Map.Entry<List<Integer>, List<String>> m  : map.entrySet()){
-            if(m.getValue().size() == 1){
+        for (Map.Entry<List<Integer>, List<String>> m : map.entrySet()) {
+            if (m.getValue().size() == 1) {
                 return m.getValue().get(0);
             }
         }
