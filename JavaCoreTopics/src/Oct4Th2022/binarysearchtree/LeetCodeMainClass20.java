@@ -16,6 +16,51 @@ public class LeetCodeMainClass20 {
         System.out.println(minimumCost(new int[]{1, 2, 3}));
     }
 
+    public String sortString(String s) {
+        String[] srr = s.split("");
+        Map<String, Integer> map = new TreeMap<>();
+        StringBuilder sb = new StringBuilder("");
+        for (String s1 : srr) {
+            map.put(s1, map.getOrDefault(s1, 0) + 1);
+        }
+        int count = 0;
+        while (true) {
+            if (map.isEmpty()) {
+                break;
+            }
+            if (count % 2 == 0) {
+                for (char a = 'a'; a <= 'z'; a++) {
+                    if (map.containsKey(a + "")) {
+                        if (map.get(a + "") == 1) {
+                            sb.append(a + "");
+                            map.remove(a + "");
+                        } else {
+                            sb.append(a + "");
+                            map.put(a + "", map.get(a+"") - 1);
+                        }
+                    }
+                }
+                count++;
+            } else {
+
+                for (char a = 'z'; a >= 'a'; a--) {
+                    if (map.containsKey(a + "")) {
+                        if (map.get(a + "") == 1) {
+                            sb.append(a + "");
+                            map.remove(a + "");
+                        } else {
+                            sb.append(a + "");
+                            map.put(a + "", map.get(a+"") - 1);
+                        }
+                    }
+                }
+                count ++;
+            }
+
+        }
+        return sb.toString();
+    }
+
     public String reorderSpaces(String text) {
         String[] srr = text.split("");
         String[] words = text.trim().split("\\s+");
@@ -27,14 +72,14 @@ public class LeetCodeMainClass20 {
             }
         }
 
-        if(count == 0) return text;
+        if (count == 0) return text;
 
         int wordsLen = words.length;
-        if(wordsLen == 1){
+        if (wordsLen == 1) {
             text = text.trim();
-            while(count != 0){
+            while (count != 0) {
                 text += " ";
-                count --;
+                count--;
             }
 
             return text;
@@ -58,7 +103,7 @@ public class LeetCodeMainClass20 {
 
         while (endGaps != 0) {
             sb.append(" ");
-            endGaps --;
+            endGaps--;
         }
         return sb.toString();
     }
