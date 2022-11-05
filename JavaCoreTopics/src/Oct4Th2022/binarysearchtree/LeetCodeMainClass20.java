@@ -16,6 +16,27 @@ public class LeetCodeMainClass20 {
         System.out.println(minimumCost(new int[]{1, 2, 3}));
     }
 
+    public List<Integer> intersection(int[][] nums) {
+
+        Map<Integer, Integer> map = new TreeMap<>();
+
+        for(int[] n : nums){
+            for(int n1 : n){
+                map.put(n1, map.getOrDefault(n1, 0)+1);
+            }
+        }
+        List<Integer> l = new ArrayList<>();
+        int len = nums.length;
+        map.entrySet().forEach(x ->{
+            if(x.getValue() == len){
+                l.add(x.getKey());
+            }
+        });
+
+        return l;
+
+    }
+
     public String sortString(String s) {
         String[] srr = s.split("");
         Map<String, Integer> map = new TreeMap<>();
