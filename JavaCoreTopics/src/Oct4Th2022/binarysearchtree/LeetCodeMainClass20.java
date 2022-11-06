@@ -30,7 +30,6 @@ public class LeetCodeMainClass20 {
         map.entrySet().forEach(x ->{
             if(x.getValue() == len){
                 l.add(x.getKey());
-                System.out.println();
             }
         });
 
