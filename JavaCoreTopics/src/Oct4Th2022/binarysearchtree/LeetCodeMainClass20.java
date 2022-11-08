@@ -13,15 +13,40 @@ public class LeetCodeMainClass20 {
         //System.out.println(getMinDistance(new int[]{1, 2, 3, 4, 5}, 5, 3));
         //System.out.println(pivotIndex(new int[]{1,2,3}));
         //System.out.println(maxDepth("(1+(2*3)+((8)/4))+1"));
-        System.out.println(minimumCost(new int[]{1, 2, 3}));
+        //System.out.println(minimumCost(new int[]{1, 2, 3}));
+        sumZero(5);
     }
 
-    public int maximum69Number (int num) {
+    public static int[] sumZero(int n) {
+        int nums[] = new int[n];
+        int index = 0;
+
+        if (n % 2 == 0) {
+            for (int i = 1; i <= n / 2; i++) {
+                nums[index] = i;
+                nums[index + 1] = -1 * i;
+                index += 2;
+            }
+
+            return nums;
+        } else {
+            for (int i = 1; i <= n / 2; i++) {
+                nums[index] = i;
+                nums[index + 1] = -1 * i;
+                index += 2;
+            }
+            nums[index] = 0;
+            return nums;
+        }
+
+    }
+
+    public int maximum69Number(int num) {
         char[] arr = String.valueOf(num).toCharArray();
         int len = arr.length;
 
-        for(int i = 0; i < len ; i++){
-            if(arr[i] == '6'){
+        for (int i = 0; i < len; i++) {
+            if (arr[i] == '6') {
                 arr[i] = '9';
                 break;
             }
@@ -34,15 +59,15 @@ public class LeetCodeMainClass20 {
 
         Map<Integer, Integer> map = new TreeMap<>();
 
-        for(int[] n : nums){
-            for(int n1 : n){
-                map.put(n1, map.getOrDefault(n1, 0)+1);
+        for (int[] n : nums) {
+            for (int n1 : n) {
+                map.put(n1, map.getOrDefault(n1, 0) + 1);
             }
         }
         List<Integer> l = new ArrayList<>();
         int len = nums.length;
-        map.entrySet().forEach(x ->{
-            if(x.getValue() == len){
+        map.entrySet().forEach(x -> {
+            if (x.getValue() == len) {
                 l.add(x.getKey());
             }
         });
@@ -72,7 +97,7 @@ public class LeetCodeMainClass20 {
                             map.remove(a + "");
                         } else {
                             sb.append(a + "");
-                            map.put(a + "", map.get(a+"") - 1);
+                            map.put(a + "", map.get(a + "") - 1);
                         }
                     }
                 }
@@ -86,11 +111,11 @@ public class LeetCodeMainClass20 {
                             map.remove(a + "");
                         } else {
                             sb.append(a + "");
-                            map.put(a + "", map.get(a+"") - 1);
+                            map.put(a + "", map.get(a + "") - 1);
                         }
                     }
                 }
-                count ++;
+                count++;
             }
 
         }
