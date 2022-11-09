@@ -19,7 +19,7 @@ public class LeetCodeMainClass20 {
 
     public static int[] sumZero(int n) {
         int nums[] = new int[n];
-        int index = 0;
+        int index = 0; //
 
         if (n % 2 == 0) {
             for (int i = 1; i <= n / 2; i++) {
