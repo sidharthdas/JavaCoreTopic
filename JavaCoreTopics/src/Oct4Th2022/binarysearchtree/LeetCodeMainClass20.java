@@ -1,5 +1,7 @@
 package Oct4Th2022.binarysearchtree;
 
+
+
 import java.util.*;
 
 /**
@@ -18,7 +20,8 @@ public class LeetCodeMainClass20 {
     }
 
     public int reductionOperations(int[] nums) {
-
+        LinkedList<Integer> l = new LinkedList<>();
+        Collections.sort(l);
         Arrays.sort(nums);
 
         int len = nums.length;
