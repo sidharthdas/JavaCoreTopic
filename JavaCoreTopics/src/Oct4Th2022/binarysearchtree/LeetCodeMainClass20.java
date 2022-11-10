@@ -17,6 +17,22 @@ public class LeetCodeMainClass20 {
         sumZero(5);
     }
 
+    public int reductionOperations(int[] nums) {
+
+        Arrays.sort(nums);
+
+        int len = nums.length;
+        int count = 0;
+        for (int i = len - 1; i > 0; --i) {
+            if(nums[i - 1] != nums[i]){
+                count += len - i;
+            }
+        }
+
+        return count;
+
+    }
+
     public static int[] sumZero(int n) {
         int nums[] = new int[n];
         int index = 0; //
