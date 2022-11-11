@@ -1,7 +1,6 @@
 package Oct4Th2022.binarysearchtree;
 
 
-
 import java.util.*;
 
 /**
@@ -19,6 +18,35 @@ public class LeetCodeMainClass20 {
         sumZero(5);
     }
 
+    public int hardestWorker(int n, int[][] logs) {
+
+        int prevTime = 0;
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int[] log : logs) {
+            int totalTime = log[1] - prevTime;
+            if (map.containsKey(log[0])) {
+                if (map.get(log[0]) < totalTime) {
+                    map.put(log[0], totalTime);
+                }
+            } else {
+                map.put(log[0], totalTime);
+            }
+
+            prevTime = log[1];
+        }
+        int maxVal = map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed()).findFirst().get().getValue();
+        Set<Integer> s = new TreeSet<>();
+
+        for(Map.Entry<Integer, Integer> m : map.entrySet()){
+            if(m.getValue() == maxVal){
+                s.add(m.getKey());
+            }
+        }
+
+        return s.stream().findFirst().get();
+    }
+
     public int reductionOperations(int[] nums) {
         LinkedList<Integer> l = new LinkedList<>();
         Collections.sort(l);
@@ -27,7 +55,7 @@ public class LeetCodeMainClass20 {
         int len = nums.length;
         int count = 0;
         for (int i = len - 1; i > 0; --i) {
-            if(nums[i - 1] != nums[i]){
+            if (nums[i - 1] != nums[i]) {
                 count += len - i;
             }
         }
