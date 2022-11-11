@@ -23,7 +23,7 @@ public class LeetCodeMainClass20 {
         LinkedList<Integer> l = new LinkedList<>();
         Collections.sort(l);
         Arrays.sort(nums);
-
+        System.out.println();
         int len = nums.length;
         int count = 0;
         for (int i = len - 1; i > 0; --i) {
