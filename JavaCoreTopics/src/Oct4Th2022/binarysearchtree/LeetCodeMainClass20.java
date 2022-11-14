@@ -22,7 +22,7 @@ public class LeetCodeMainClass20 {
 
         int prevTime = 0;
         Map<Integer, Integer> map = new HashMap<>();
-
+        System.out.println();
         for (int[] log : logs) {
             int totalTime = log[1] - prevTime;
             if (map.containsKey(log[0])) {
