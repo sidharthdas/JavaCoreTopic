@@ -18,6 +18,67 @@ public class LeetCodeMainClass20 {
         sumZero(5);
     }
 
+    public long smallestNumber(long num) {
+        if(num == 0) return 0;
+        if(num > 0){
+            List<Long> l = numToList(num);
+            int len = l.size();
+            Collections.sort(l);
+            StringBuilder sb = new StringBuilder();
+            int totalZeros = (int) l.stream().filter(x -> x ==0).count();
+
+            if(totalZeros > 0){
+                sb.append(l.get(totalZeros));
+                int temp = totalZeros;
+                while(temp != 0){
+                    sb.append("0");
+                    temp --;
+                }
+                for(int i = totalZeros + 1; i < len; i++){
+                    sb.append(l.get(i));
+                }
+            }else{
+                for(int i = 0; i < len; i++){
+                    sb.append(l.get(i));
+                }
+            }
+
+            return new Long(sb.toString());
+        }else{
+            List<Long> l = numToList(-1 * num);
+            int len = l.size();
+            Collections.sort(l, Collections.reverseOrder());
+            StringBuilder sb = new StringBuilder();
+            for(int i = 0; i < len; i++){
+                sb.append(l.get(i));
+            }
+
+            return -1 * new Long(sb.toString());
+
+        }
+
+    }
+
+    private List<Long> numToList(long num){
+        List<Long> l = new ArrayList<>();
+        while(num > 0){
+            l.add(num % 10);
+            num = num / 10;
+        }
+
+        return l;
+    }
+
+    public int countNumbersWithUniqueDigits(int n) {
+        StringBuilder sb = new StringBuilder("");
+        int i = 1;
+        while(n != 0){
+            sb.append(i);
+            i--;
+        }
+        return Integer.parseInt(sb.toString());
+    }
+
     public int hardestWorker(int n, int[][] logs) {
 
         int prevTime = 0;
