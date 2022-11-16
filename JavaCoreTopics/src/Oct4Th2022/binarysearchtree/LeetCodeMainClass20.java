@@ -2,6 +2,7 @@ package Oct4Th2022.binarysearchtree;
 
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author Sidharth Das
@@ -15,41 +16,72 @@ public class LeetCodeMainClass20 {
         //System.out.println(pivotIndex(new int[]{1,2,3}));
         //System.out.println(maxDepth("(1+(2*3)+((8)/4))+1"));
         //System.out.println(minimumCost(new int[]{1, 2, 3}));
-        sumZero(5);
+        //sumZero(5);
+        rearrangeArray(new int[]{3,1,-2,-5,2,-4});
+    }
+
+    public static int[] rearrangeArray(int[] nums) {
+        List<Integer> pos = Arrays.stream(nums).boxed().filter(x -> x > 0).collect(Collectors.toList());
+        List<Integer> neg = Arrays.stream(nums).boxed().filter(x -> x < 0).collect(Collectors.toList());
+        int len = nums.length;
+        int[] finalNum = new int[len];
+        int currentIndex = 0;
+        boolean flag = true;
+        int curPos = 0;
+        int curNeg = 0;
+        while (len > 0) {
+            if(flag){
+                finalNum[currentIndex] = pos.get(curPos);
+                currentIndex ++;
+                curPos ++;
+                flag = false;
+            } else{
+                finalNum[currentIndex] = neg.get(curNeg);
+                currentIndex ++;
+                curNeg ++;
+                flag = true;
+
+            }
+
+            len --;
+
+        }
+
+        return finalNum;
     }
 
     public long smallestNumber(long num) {
-        if(num == 0) return 0;
-        if(num > 0){
+        if (num == 0) return 0;
+        if (num > 0) {
             List<Long> l = numToList(num);
             int len = l.size();
             Collections.sort(l);
             StringBuilder sb = new StringBuilder();
-            int totalZeros = (int) l.stream().filter(x -> x ==0).count();
+            int totalZeros = (int) l.stream().filter(x -> x == 0).count();
 
-            if(totalZeros > 0){
+            if (totalZeros > 0) {
                 sb.append(l.get(totalZeros));
                 int temp = totalZeros;
-                while(temp != 0){
+                while (temp != 0) {
                     sb.append("0");
-                    temp --;
+                    temp--;
                 }
-                for(int i = totalZeros + 1; i < len; i++){
+                for (int i = totalZeros + 1; i < len; i++) {
                     sb.append(l.get(i));
                 }
-            }else{
-                for(int i = 0; i < len; i++){
+            } else {
+                for (int i = 0; i < len; i++) {
                     sb.append(l.get(i));
                 }
             }
 
             return new Long(sb.toString());
-        }else{
+        } else {
             List<Long> l = numToList(-1 * num);
             int len = l.size();
             Collections.sort(l, Collections.reverseOrder());
             StringBuilder sb = new StringBuilder();
-            for(int i = 0; i < len; i++){
+            for (int i = 0; i < len; i++) {
                 sb.append(l.get(i));
             }
 
@@ -59,9 +91,9 @@ public class LeetCodeMainClass20 {
 
     }
 
-    private List<Long> numToList(long num){
+    private List<Long> numToList(long num) {
         List<Long> l = new ArrayList<>();
-        while(num > 0){
+        while (num > 0) {
             l.add(num % 10);
             num = num / 10;
         }
@@ -72,7 +104,7 @@ public class LeetCodeMainClass20 {
     public int countNumbersWithUniqueDigits(int n) {
         StringBuilder sb = new StringBuilder("");
         int i = 1;
-        while(n != 0){
+        while (n != 0) {
             sb.append(i);
             i--;
         }
@@ -99,8 +131,8 @@ public class LeetCodeMainClass20 {
         int maxVal = map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed()).findFirst().get().getValue();
         Set<Integer> s = new TreeSet<>();
 
-        for(Map.Entry<Integer, Integer> m : map.entrySet()){
-            if(m.getValue() == maxVal){
+        for (Map.Entry<Integer, Integer> m : map.entrySet()) {
+            if (m.getValue() == maxVal) {
                 s.add(m.getKey());
             }
         }
