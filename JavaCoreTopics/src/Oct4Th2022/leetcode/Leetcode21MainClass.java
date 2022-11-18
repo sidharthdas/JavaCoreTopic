@@ -1,7 +1,6 @@
 package Oct4Th2022.leetcode;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Sidharth Das
@@ -21,27 +20,67 @@ public class Leetcode21MainClass {
         bank.withdraw(10, 50);   // return false, it is invalid because account 10 does not
 
     }
+
+    public int specialArray(int[] nums) {
+        int len = nums.length;
+
+        for (int x = len; x >= 0; x--) {
+            int count = 0;
+            for (int num : nums) {
+                if (num >= x) {
+                    count++;
+                }
+            }
+            if (count == x) {
+                return x;
+            }
+        }
+        return -1;
+    }
+
+    public List<Boolean> camelMatch(String[] queries, String pattern) {
+        List<Boolean> l = new ArrayList<>();
+        for (String query : queries) {
+            query = query.replaceAll("[^a-z]", "");
+            if (pattern.equals(query)) {
+                l.add(true);
+            } else {
+                l.add(false);
+            }
+        }
+
+        return l;
+    }
+
+
+    public int maxProduct(String[] words) {
+        Arrays.sort(words, (x1, x2) -> x1.length() - x2.length());
+        int len = words.length;
+
+        return words[len - 1].length() * words[len - 2].length();
+
+    }
 }
 
 class Bank {
 
-        Map<Integer, Long> map;
+    Map<Integer, Long> map;
 
     public Bank(long[] balance) {
         map = new HashMap<>();
         int len = balance.length;
         for (int i = 0; i < len; i++) {
-            map.put(i+1, balance[i]);
+            map.put(i + 1, balance[i]);
         }
     }
 
     public boolean transfer(int account1, int account2, long money) {
 
-        if(map.containsKey(account1) && map.containsKey(account2)){
-            if(account2 == account1) return true;
+        if (map.containsKey(account1) && map.containsKey(account2)) {
+            if (account2 == account1) return true;
             long bal1 = map.get(account1);
             long bal2 = map.get(account2);
-            if(bal1 >= money){
+            if (bal1 >= money) {
                 map.put(account1, bal1 - money);
                 map.put(account2, bal2 + money);
                 return true;
@@ -53,7 +92,7 @@ class Bank {
     }
 
     public boolean deposit(int account, long money) {
-        if(map.containsKey(account)){
+        if (map.containsKey(account)) {
             map.put(account, map.get(account) + money);
             return true;
         }
@@ -61,9 +100,9 @@ class Bank {
     }
 
     public boolean withdraw(int account, long money) {
-        if(map.containsKey(account)){
+        if (map.containsKey(account)) {
             long mon = map.get(account);
-            if(money <= mon){
+            if (money <= mon) {
                 map.put(account, mon - money);
                 return true;
             }
