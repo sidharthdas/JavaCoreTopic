@@ -35,6 +35,7 @@ public class Leetcode21MainClass {
                 return x;
             }
         }
+        System.out.println();
         return -1;
     }
 
