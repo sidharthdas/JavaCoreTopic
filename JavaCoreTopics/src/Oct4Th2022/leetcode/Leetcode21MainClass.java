@@ -21,6 +21,67 @@ public class Leetcode21MainClass {
 
     }
 
+    public ListNode mergeNodes(ListNode head) {
+        LinkedList1 ll = new LinkedList1();
+        int sum = 0;
+        int zeroCount = 0;
+        while(head.next != null){
+            if(zeroCount == 2){
+                ll = ll.insertAtEnd(ll, sum);
+                zeroCount = 1;
+                sum = 0 + head.val;
+            }else if(head.val == 0){
+                zeroCount ++;
+            }
+
+            else{
+                sum += head.val;
+            }
+
+            head = head.next;
+        }
+        return ll.head;
+
+    }
+
+    public List<Boolean> camelMatch1(String[] queries, String pattern) {
+        List<String> alpha = List.of("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O",
+                "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
+
+        String[] arr = pattern.split("");
+        int len = pattern.length();
+        List<String> l = new ArrayList<>();
+        StringBuilder sb = new StringBuilder(arr[0]);
+        for (int i = 1; i < len; i++) {
+            if (alpha.contains(arr[i])) {
+                l.add(sb.toString());
+                sb = new StringBuilder(arr[i]);
+            } else {
+                sb.append(arr[i]);
+            }
+        }
+        l.add(sb.toString());
+        List<Boolean> finalList = new ArrayList<>();
+
+        for (String s : queries) {
+            boolean flag = true;
+            for(String s1 : l){
+                if(!s.contains(s1)){
+                    flag = false;
+                    break;
+                }
+            }
+
+            if(flag){
+                finalList.add(true);
+            }else{
+                finalList.add(false);
+            }
+        }
+
+        return finalList;
+    }
+
     public int specialArray(int[] nums) {
         int len = nums.length;
 
@@ -112,3 +173,31 @@ class Bank {
         return false;
     }
 }
+
+
+class LinkedList1 {
+
+    ListNode head = null;
+
+    public LinkedList1 insertAtEnd ( LinkedList1 l, int data ) {
+        ListNode node = new ListNode();
+        node.val = data;
+
+        if (l.head == null) {
+            l.head = node;
+        } else {
+            ListNode currNode = l.head;
+
+            while (currNode.next != null) {
+                currNode = currNode.next;
+            }
+
+            currNode.next = node;
+        }
+
+        return l;
+    }
+
+
+}
+
