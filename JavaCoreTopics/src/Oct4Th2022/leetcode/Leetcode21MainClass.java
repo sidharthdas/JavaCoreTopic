@@ -21,20 +21,53 @@ public class Leetcode21MainClass {
 
     }
 
+    public int mostFrequent(int[] nums, int key) {
+        int len = nums.length;
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < len - 1; i++) {
+            if(nums[i] == key){
+                map.put(nums[i+1], map.getOrDefault(nums[i+1], 0) + 1);
+            }
+        }
+
+        return map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed())
+                .findFirst().get().getKey();
+
+    }
+
+    public boolean makeEqual(String[] words) {
+        Map<String, Integer> map = new HashMap<>();
+
+        for (String s : words) {
+            String[] s1 = s.split("");
+            for (String s2 : s1) {
+                map.put(s2, map.getOrDefault(s2, 0) + 1);
+            }
+        }
+
+        int len = words.length;
+
+        for (Map.Entry<String, Integer> m : map.entrySet()) {
+            if (m.getValue() % len != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public ListNode mergeNodes(ListNode head) {
         LinkedList1 ll = new LinkedList1();
         int sum = 0;
         int zeroCount = 0;
-        while(head.next != null){
-            if(zeroCount == 2){
+        while (head.next != null) {
+            if (zeroCount == 2) {
                 ll = ll.insertAtEnd(ll, sum);
                 zeroCount = 1;
                 sum = 0 + head.val;
-            }else if(head.val == 0){
-                zeroCount ++;
-            }
-
-            else{
+            } else if (head.val == 0) {
+                zeroCount++;
+            } else {
                 sum += head.val;
             }
 
@@ -65,16 +98,16 @@ public class Leetcode21MainClass {
 
         for (String s : queries) {
             boolean flag = true;
-            for(String s1 : l){
-                if(!s.contains(s1)){
+            for (String s1 : l) {
+                if (!s.contains(s1)) {
                     flag = false;
                     break;
                 }
             }
 
-            if(flag){
+            if (flag) {
                 finalList.add(true);
-            }else{
+            } else {
                 finalList.add(false);
             }
         }
@@ -179,7 +212,7 @@ class LinkedList1 {
 
     ListNode head = null;
 
-    public LinkedList1 insertAtEnd ( LinkedList1 l, int data ) {
+    public LinkedList1 insertAtEnd(LinkedList1 l, int data) {
         ListNode node = new ListNode();
         node.val = data;
 
