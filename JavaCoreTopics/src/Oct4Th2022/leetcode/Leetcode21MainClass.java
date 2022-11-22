@@ -22,6 +22,32 @@ public class Leetcode21MainClass {
 
     }
 
+    //The condition can be rearranged to (nums[i] - rev(nums[i])) == (nums[j] - rev(nums[j])).
+    //0 <= i < j < nums.length
+    public int countNicePairs(int[] nums) {
+        int len = nums.length;
+        int count = 0;
+        for(int i = 0; i < len; i++){
+            for(int j = i +1; j < len; j++){
+                if((nums[i] - rev(nums[i])) == (nums[j] - rev(nums[j]))) {
+                    count ++;
+                }
+            }
+        }
+        return count;
+    }
+
+    private int rev(int n) {
+        int reverse = 0;
+        while (n != 0) {
+            int remainder = n % 10;
+            reverse = reverse * 10 + remainder;
+            n = n / 10;
+        }
+
+        return reverse;
+    }
+
     public String reorganizeString(String s) {
         Map<String, Integer> map = new HashMap<>();
         String[] srr = s.split("");
@@ -34,30 +60,30 @@ public class Leetcode21MainClass {
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new)).keySet();
 
         StringBuilder sb = new StringBuilder();
-        while(map.size() > 0){
-            for(String se1 : set){
-                if(map.containsKey(se1)){
+        while (map.size() > 0) {
+            for (String se1 : set) {
+                if (map.containsKey(se1)) {
                     sb.append(se1);
-                    if(map.get(se1) == 1){
+                    if (map.get(se1) == 1) {
                         map.remove(se1);
-                    }else{
+                    } else {
                         map.put(se1, map.get(se1) - 1);
                     }
                 }
             }
         }
 
-        if(checkString(sb.toString())){
+        if (checkString(sb.toString())) {
             return sb.toString();
         }
         return "";
     }
 
-    private boolean checkString(String s){
+    private boolean checkString(String s) {
         int len = s.length();
         String[] srr = s.split("");
-        for(int i = 0; i < len - 1; i++){
-            if(srr[i].equals(srr[i + 1])){
+        for (int i = 0; i < len - 1; i++) {
+            if (srr[i].equals(srr[i + 1])) {
                 return false;
             }
         }
