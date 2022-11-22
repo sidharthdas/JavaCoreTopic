@@ -22,15 +22,31 @@ public class Leetcode21MainClass {
 
     }
 
+    public int countNicePairs1(int[] nums) {
+        Map<Integer, Integer> map = new HashMap<>();
+        int count = 0;
+        for (int num : nums) {
+            int i = num - rev(num);
+
+            if(map.containsKey(i)){
+                count +=1;
+            }
+
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+
+        return count;
+    }
+
     //The condition can be rearranged to (nums[i] - rev(nums[i])) == (nums[j] - rev(nums[j])).
     //0 <= i < j < nums.length
     public int countNicePairs(int[] nums) {
         int len = nums.length;
         int count = 0;
-        for(int i = 0; i < len; i++){
-            for(int j = i +1; j < len; j++){
-                if((nums[i] - rev(nums[i])) == (nums[j] - rev(nums[j]))) {
-                    count ++;
+        for (int i = 0; i < len; i++) {
+            for (int j = i + 1; j < len; j++) {
+                if ((nums[i] - rev(nums[i])) == (nums[j] - rev(nums[j]))) {
+                    count++;
                 }
             }
         }
