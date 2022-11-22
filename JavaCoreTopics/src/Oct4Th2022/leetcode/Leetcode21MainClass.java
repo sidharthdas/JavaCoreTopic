@@ -1,6 +1,7 @@
 package Oct4Th2022.leetcode;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author Sidharth Das
@@ -19,6 +20,48 @@ public class Leetcode21MainClass {
         // so it is invalid to transfer $15 from it.
         bank.withdraw(10, 50);   // return false, it is invalid because account 10 does not
 
+    }
+
+    public String reorganizeString(String s) {
+        Map<String, Integer> map = new HashMap<>();
+        String[] srr = s.split("");
+
+        for (String s1 : srr) {
+            map.put(s1, map.getOrDefault(s1, 0) + 1);
+        }
+
+        Set<String> set = map.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new)).keySet();
+
+        StringBuilder sb = new StringBuilder();
+        while(map.size() > 0){
+            for(String se1 : set){
+                if(map.containsKey(se1)){
+                    sb.append(se1);
+                    if(map.get(se1) == 1){
+                        map.remove(se1);
+                    }else{
+                        map.put(se1, map.get(se1) - 1);
+                    }
+                }
+            }
+        }
+
+        if(checkString(sb.toString())){
+            return sb.toString();
+        }
+        return "";
+    }
+
+    private boolean checkString(String s){
+        int len = s.length();
+        String[] srr = s.split("");
+        for(int i = 0; i < len - 1; i++){
+            if(srr[i].equals(srr[i + 1])){
+                return false;
+            }
+        }
+        return true;
     }
 
     public String bestHand(int[] ranks, char[] suits) {
