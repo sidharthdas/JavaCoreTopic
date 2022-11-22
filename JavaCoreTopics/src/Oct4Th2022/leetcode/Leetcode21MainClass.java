@@ -21,13 +21,43 @@ public class Leetcode21MainClass {
 
     }
 
+    public String bestHand(int[] ranks, char[] suits) {
+
+        Map<Integer, Integer> ranksMap = new HashMap<>();
+        Map<Character, Integer> suitsMap = new HashMap<>();
+
+        for (int rank : ranks) {
+            ranksMap.put(rank, ranksMap.getOrDefault(rank, 0) + 1);
+        }
+
+        for (char suit : suits) {
+            suitsMap.put(suit, ranksMap.getOrDefault(suit, 0) + 1);
+        }
+
+        if (suitsMap.size() == 1) {
+            return "Flush";
+        } else {
+            int val = ranksMap.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed())
+                    .findFirst().get().getValue();
+
+            if (val >= 3) {
+                return "Three of a Kind";
+            } else if (val == 2) {
+                return "Pair";
+            } else {
+                return "High Card";
+            }
+        }
+
+    }
+
     public int mostFrequent(int[] nums, int key) {
         int len = nums.length;
         Map<Integer, Integer> map = new HashMap<>();
 
         for (int i = 0; i < len - 1; i++) {
-            if(nums[i] == key){
-                map.put(nums[i+1], map.getOrDefault(nums[i+1], 0) + 1);
+            if (nums[i] == key) {
+                map.put(nums[i + 1], map.getOrDefault(nums[i + 1], 0) + 1);
             }
         }
 
