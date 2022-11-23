@@ -11,16 +11,30 @@ public class Leetcode21MainClass {
 
     public static void main(String[] args) {
        /* ["Bank","deposit","transfer","transfer"]
-[[[0]],[1,2],[1,1,1],[1,1,3]]*/
+[[[0]],[1,2],[1,1,1],[1,1,3]]*//*
         Bank bank = new Bank(new long[]{0});
 
         bank.deposit(1, 2);     // return true, it is valid to deposit $20 to account 5.
         // Account 5 has $10 + $20 = $30.
         bank.transfer(3, 4, 15); // return false, the current balance of account 3 is $10,
         // so it is invalid to transfer $15 from it.
-        bank.withdraw(10, 50);   // return false, it is invalid because account 10 does not
+        bank.withdraw(10, 50);   // return false, it is invalid because account 10 does not*/
+        //["WordDictionary","addWord","addWord","search","search","search","search","search","search","search","search"]
+        //[[],["a"],["ab"],["a"],["a."],["ab"],[".a"],[".b"],["ab."],["."],[".."]]
+        WordDictionary wordDictionary = new WordDictionary();
+        wordDictionary.addWord("a");
+        wordDictionary.addWord("ab");
+        wordDictionary.search("a"); // return False
+        wordDictionary.search("a."); // return True
+        wordDictionary.search("ab"); // return True
+        wordDictionary.search(".a"); // return True
+        wordDictionary.search(".b"); // return True
+        wordDictionary.search("ab."); // return True
+        wordDictionary.search("."); // return True
+        wordDictionary.search(".."); // return True
 
     }
+
 
     public int countNicePairs1(int[] nums) {
         Map<Integer, Integer> map = new HashMap<>();
@@ -28,8 +42,8 @@ public class Leetcode21MainClass {
         for (int num : nums) {
             int i = num - rev(num);
 
-            if(map.containsKey(i)){
-                count +=1;
+            if (map.containsKey(i)) {
+                count += 1;
             }
 
             map.put(num, map.getOrDefault(num, 0) + 1);
@@ -347,5 +361,47 @@ class LinkedList1 {
     }
 
 
+}
+
+class WordDictionary {
+    Map<String, Boolean> map;
+
+    public WordDictionary() {
+        map = new HashMap<>();
+    }
+
+    public void addWord(String word) {
+        map.put(word, true);
+    }
+
+    public boolean search(String word) {
+
+        String[] w = word.split("");
+        int len = w.length;
+        List<String> list = map.keySet().stream().filter(x -> x.length() == len).toList();
+        for (String w1 : list) {
+            boolean flag = true;
+            if (w1.length() == w.length) {
+
+
+                String[] w1Arr = w1.split("");
+                for (int i = 0; i < len; i++) {
+                    if (!w[i].equals(".")) {
+                        if (!w[i].equals(w1Arr[i])) {
+                            flag = false;
+                            break;
+                        }
+                    }
+                }
+            }else{
+                flag = false;
+            }
+
+            if(flag){
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
