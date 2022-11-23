@@ -21,7 +21,7 @@ public class Leetcode21MainClass {
         bank.withdraw(10, 50);   // return false, it is invalid because account 10 does not*/
         //["WordDictionary","addWord","addWord","search","search","search","search","search","search","search","search"]
         //[[],["a"],["ab"],["a"],["a."],["ab"],[".a"],[".b"],["ab."],["."],[".."]]
-        WordDictionary wordDictionary = new WordDictionary();
+        /*WordDictionary wordDictionary = new WordDictionary();
         wordDictionary.addWord("a");
         wordDictionary.addWord("ab");
         wordDictionary.search("a"); // return False
@@ -31,7 +31,15 @@ public class Leetcode21MainClass {
         wordDictionary.search(".b"); // return True
         wordDictionary.search("ab."); // return True
         wordDictionary.search("."); // return True
-        wordDictionary.search(".."); // return True
+        wordDictionary.search(".."); // return True*/
+
+        Trie trie = new Trie();
+        trie.insert("apple");
+        trie.search("apple");   // return True
+        trie.search("app");     // return False
+        trie.startsWith("app"); // return True
+        trie.insert("app");
+        trie.search("app");     // return True
 
     }
 
@@ -398,6 +406,36 @@ class WordDictionary {
             }
 
             if(flag){
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
+
+class Trie {
+
+    Map<String, Boolean> map;
+
+    public Trie() {
+        map = new HashMap<>();
+    }
+
+    public void insert(String word) {
+        map.put(word, true);
+    }
+
+    public boolean search(String word) {
+        return map.containsKey(word);
+    }
+
+    public boolean startsWith(String prefix) {
+        int len = prefix.length();
+        List<String> l = map.keySet().stream().filter(x -> x.length() >= len).toList();
+
+        for(String s : l){
+            if(prefix.equals(s.substring(0, len ))){
                 return true;
             }
         }
