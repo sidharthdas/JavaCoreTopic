@@ -43,6 +43,33 @@ public class Leetcode21MainClass {
 
     }
 
+    public String rankTeams(String[] votes) {
+        StringBuilder sb = new StringBuilder();
+        int votesLen = votes.length;
+        int partLen = votes[0].length();
+
+        for(int i = 0; i < partLen; i++){
+            Map<String, Integer> map = new HashMap<>();
+            for(String vote : votes){
+                map.put(vote.charAt(i)+"", map.getOrDefault(vote.charAt(i)+"", 0) + 1);
+            }
+            int high = map.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+                    .findFirst().get().getValue();
+
+            Set<String> set = map.entrySet().stream().filter(x -> x.getValue() == high).
+                    sorted(Map.Entry.comparingByKey()).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+                            (e1, e2) -> e1, LinkedHashMap::new)).keySet();
+
+            for(String s : set){
+                if(!sb.toString().contains(s)){
+                    sb.append(s);
+                    break;
+                }
+            }
+        }
+        return sb.toString();
+    }
+
 
     public int countNicePairs1(int[] nums) {
         Map<Integer, Integer> map = new HashMap<>();
