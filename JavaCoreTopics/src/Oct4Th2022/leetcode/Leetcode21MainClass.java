@@ -43,23 +43,52 @@ public class Leetcode21MainClass {
 
         //System.out.println(findMiddleIndex(new int[]{1, 1, 1, 1}));
         //System.out.println(checkXMatrix(new int[][]{{2,0,0,1},{0,3,1,0},{0,5,2,0},{4,0,0,2}}));
-        System.out.println(countsubarraysOddProduct(new int[]{5, 1, 2, 3, 4}));
+        //System.out.println(countsubarraysOddProduct(new int[]{5, 1, 2, 3, 4}));
+        System.out.println(applyOperations(new int[]{1,2,2,1,1,0}));
 
     }
 
-    public static int countsubarraysOddProduct(int[] arr){
-        List<Integer> l = Arrays.stream(arr).boxed().filter(x -> x% 2 != 0).toList();
+    public static int[] applyOperations(int[] nums) {
+        int len = nums.length;
+
+        for (int i = 0; i < len - 1; i++) {
+            if (nums[i] == nums[i + 1]) {
+                nums[i] = nums[i] * 2;
+                nums[i + 1] = 0;
+                i = i + 2;
+            }
+
+        }
+        List<Integer> list = new ArrayList<>();
+        for (int i : nums) {
+            if (i != 0) {
+                list.add(i);
+            }
+        }
+
+        int zeroCount = (int) Arrays.stream(nums).filter(x -> x == 0).count();
+        while(zeroCount != 0){
+            list.add(0);
+            zeroCount --;
+        }
+
+        return list.stream()
+                .mapToInt(Integer::intValue)
+                .toArray();
+
+    }
+
+    public static int countsubarraysOddProduct(int[] arr) {
+        List<Integer> l = Arrays.stream(arr).boxed().filter(x -> x % 2 != 0).toList();
         int n = l.size();
         System.out.println(l);
-        for (int i=0; i <n; i++)
-        {
+        for (int i = 0; i < n; i++) {
             // Pick ending point
-            for (int j=i; j<n; j++)
-            {
+            for (int j = i; j < n; j++) {
                 // Print subarray between current starting
                 // and ending points
-                for (int k=i; k<=j; k++)
-                    System.out.print(l.get(k)+" ");
+                for (int k = i; k <= j; k++)
+                    System.out.print(l.get(k) + " ");
             }
             System.out.println();
         }
@@ -71,14 +100,14 @@ public class Leetcode21MainClass {
         int len = grid.length;
 
         for (int i = 0; i < len; i++) {
-            for(int j = 0; j < len; j++){
-                if((i == j) ||(i == len - 1 - j)){
-                    if(grid[i][j] == 0){
+            for (int j = 0; j < len; j++) {
+                if ((i == j) || (i == len - 1 - j)) {
+                    if (grid[i][j] == 0) {
                         return false;
                     }
 
-                }else{
-                    if(grid[i][j] != 0){
+                } else {
+                    if (grid[i][j] != 0) {
                         return false;
                     }
                 }
