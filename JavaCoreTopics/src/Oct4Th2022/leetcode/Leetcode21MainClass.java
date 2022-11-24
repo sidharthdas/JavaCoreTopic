@@ -33,14 +33,66 @@ public class Leetcode21MainClass {
         wordDictionary.search("."); // return True
         wordDictionary.search(".."); // return True*/
 
-        Trie trie = new Trie();
+/*        Trie trie = new Trie();
         trie.insert("apple");
         trie.search("apple");   // return True
         trie.search("app");     // return False
         trie.startsWith("app"); // return True
         trie.insert("app");
-        trie.search("app");     // return True
+        trie.search("app");     // return True*/
 
+        System.out.println(findMiddleIndex(new int[]{1,1,1,1}));
+
+    }
+
+    public static int findMiddleIndex(int[] nums) {
+        int len = nums.length;
+
+        if (len == 2) {
+            if (nums[0] == 0) {
+                return 1;
+            } else if (nums[1] == 0) {
+                return 0;
+            } else {
+                return -1;
+            }
+        }
+        int mid = (len - 1) / 2;
+
+        while (true) {
+            int left = 0;
+            for (int i = 0; i < mid; i++) {
+                left += nums[i];
+            }
+
+            int right = 0;
+            for (int i = mid + 1; i < len; i++) {
+                right += nums[i];
+            }
+
+            if (mid == 0 && right == 0) {
+                return mid;
+            }
+            if (mid == len - 1 && left == 0) {
+                return mid;
+            }
+
+            if (mid == 0 && right != left) {
+                break;
+            }
+            if (mid == len - 1 && right != left) {
+                break;
+            }
+
+            if (left > right) {
+                mid = mid - 1;
+            } else if (left < right) {
+                mid = mid + 1;
+            } else {
+                return mid;
+            }
+        }
+        return -1;
     }
 
     public String rankTeams(String[] votes) {
@@ -48,10 +100,10 @@ public class Leetcode21MainClass {
         int votesLen = votes.length;
         int partLen = votes[0].length();
 
-        for(int i = 0; i < partLen; i++){
+        for (int i = 0; i < partLen; i++) {
             Map<String, Integer> map = new HashMap<>();
-            for(String vote : votes){
-                map.put(vote.charAt(i)+"", map.getOrDefault(vote.charAt(i)+"", 0) + 1);
+            for (String vote : votes) {
+                map.put(vote.charAt(i) + "", map.getOrDefault(vote.charAt(i) + "", 0) + 1);
             }
             int high = map.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
                     .findFirst().get().getValue();
@@ -60,8 +112,8 @@ public class Leetcode21MainClass {
                     sorted(Map.Entry.comparingByKey()).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
                             (e1, e2) -> e1, LinkedHashMap::new)).keySet();
 
-            for(String s : set){
-                if(!sb.toString().contains(s)){
+            for (String s : set) {
+                if (!sb.toString().contains(s)) {
                     sb.append(s);
                     break;
                 }
@@ -428,11 +480,11 @@ class WordDictionary {
                         }
                     }
                 }
-            }else{
+            } else {
                 flag = false;
             }
 
-            if(flag){
+            if (flag) {
                 return true;
             }
         }
@@ -461,8 +513,8 @@ class Trie {
         int len = prefix.length();
         List<String> l = map.keySet().stream().filter(x -> x.length() >= len).toList();
 
-        for(String s : l){
-            if(prefix.equals(s.substring(0, len ))){
+        for (String s : l) {
+            if (prefix.equals(s.substring(0, len))) {
                 return true;
             }
         }
