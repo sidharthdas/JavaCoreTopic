@@ -41,9 +41,33 @@ public class Leetcode21MainClass {
         trie.insert("app");
         trie.search("app");     // return True*/
 
-        System.out.println(findMiddleIndex(new int[]{1,1,1,1}));
+        //System.out.println(findMiddleIndex(new int[]{1, 1, 1, 1}));
+        System.out.println(checkXMatrix(new int[][]{{2,0,0,1},{0,3,1,0},{0,5,2,0},{4,0,0,2}}));
 
     }
+
+    public static boolean checkXMatrix(int[][] grid) {
+        int len = grid.length;
+
+        for (int i = 0; i < len; i++) {
+            for(int j = 0; j < len; j++){
+                if((i == j) ||(i == len - 1 - j)){
+                    if(grid[i][j] == 0){
+                        return false;
+                    }
+
+                }else{
+                    if(grid[i][j] != 0){
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
+
+    }
+
 
     public static int findMiddleIndex(int[] nums) {
         int len = nums.length;
