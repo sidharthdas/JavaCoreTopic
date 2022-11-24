@@ -44,11 +44,12 @@ public class Leetcode21MainClass {
         //System.out.println(findMiddleIndex(new int[]{1, 1, 1, 1}));
         //System.out.println(checkXMatrix(new int[][]{{2,0,0,1},{0,3,1,0},{0,5,2,0},{4,0,0,2}}));
         //System.out.println(countsubarraysOddProduct(new int[]{5, 1, 2, 3, 4}));
-        System.out.println(applyOperations(new int[]{1,2,2,1,1,0}));
+        //System.out.println(applyOperations(new int[]{1,2,2,1,1,0}));
+        System.out.println(distinctAverages(new int[]{9,5,7,8,7,9,8,2,0,7}));
 
     }
 
-    public int distinctAverages(int[] nums) {
+    public static int distinctAverages(int[] nums) {
 
         List<Integer> list = Arrays.stream(nums).boxed().collect(Collectors.toList());
         Set<Double> set = new TreeSet<>();
@@ -60,7 +61,7 @@ public class Leetcode21MainClass {
             list.remove(new Integer(max));
             list.remove(new Integer(min));
 
-            double d = (max + min) / 2;
+            double d = (double)(max + min) / 2;
             set.add(d);
         }
 
