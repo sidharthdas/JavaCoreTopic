@@ -42,9 +42,30 @@ public class Leetcode21MainClass {
         trie.search("app");     // return True*/
 
         //System.out.println(findMiddleIndex(new int[]{1, 1, 1, 1}));
-        System.out.println(checkXMatrix(new int[][]{{2,0,0,1},{0,3,1,0},{0,5,2,0},{4,0,0,2}}));
+        //System.out.println(checkXMatrix(new int[][]{{2,0,0,1},{0,3,1,0},{0,5,2,0},{4,0,0,2}}));
+        System.out.println(countsubarraysOddProduct(new int[]{5, 1, 2, 3, 4}));
 
     }
+
+    public static int countsubarraysOddProduct(int[] arr){
+        List<Integer> l = Arrays.stream(arr).boxed().filter(x -> x% 2 != 0).toList();
+        int n = l.size();
+        System.out.println(l);
+        for (int i=0; i <n; i++)
+        {
+            // Pick ending point
+            for (int j=i; j<n; j++)
+            {
+                // Print subarray between current starting
+                // and ending points
+                for (int k=i; k<=j; k++)
+                    System.out.print(l.get(k)+" ");
+            }
+            System.out.println();
+        }
+        return 0;
+    }
+
 
     public static boolean checkXMatrix(int[][] grid) {
         int len = grid.length;
