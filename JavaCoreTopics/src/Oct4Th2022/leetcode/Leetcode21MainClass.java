@@ -49,6 +49,15 @@ public class Leetcode21MainClass {
 
     }
 
+    public int averageValue(int[] nums) {
+        List<Integer> l = Arrays.stream(nums).boxed().filter(x -> x % 2 == 0 && x%6 == 0).collect(Collectors.toList());
+        int len = l.size();
+        if(len == 0){
+            return 0;
+        }
+        return l.stream().reduce(0, Integer::sum) / len;
+    }
+
     public static int distinctAverages(int[] nums) {
 
         List<Integer> list = Arrays.stream(nums).boxed().collect(Collectors.toList());
