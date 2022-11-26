@@ -45,14 +45,33 @@ public class Leetcode21MainClass {
         //System.out.println(checkXMatrix(new int[][]{{2,0,0,1},{0,3,1,0},{0,5,2,0},{4,0,0,2}}));
         //System.out.println(countsubarraysOddProduct(new int[]{5, 1, 2, 3, 4}));
         //System.out.println(applyOperations(new int[]{1,2,2,1,1,0}));
-        System.out.println(distinctAverages(new int[]{9,5,7,8,7,9,8,2,0,7}));
+        System.out.println(distinctAverages(new int[]{9, 5, 7, 8, 7, 9, 8, 2, 0, 7}));
 
     }
 
+    public boolean kLengthApart(int[] nums, int k) {
+
+        int len = nums.length;
+        List<Integer> l = new ArrayList<>();
+        for (int i = 0; i < len; i++) {
+            if (nums[i] == 1) {
+                l.add(i);
+            }
+        }
+
+        int lenL = l.size();
+        for (int i = 0; i < lenL - 1; i++) {
+            if(!(l.get(i + 1) - l.get(i) >= k + 1)){
+                return false;
+            }
+        }
+        return true;
+    }
+
     public int averageValue(int[] nums) {
-        List<Integer> l = Arrays.stream(nums).boxed().filter(x -> x % 2 == 0 && x%6 == 0).collect(Collectors.toList());
+        List<Integer> l = Arrays.stream(nums).boxed().filter(x -> x % 2 == 0 && x % 6 == 0).collect(Collectors.toList());
         int len = l.size();
-        if(len == 0){
+        if (len == 0) {
             return 0;
         }
         return l.stream().reduce(0, Integer::sum) / len;
@@ -70,7 +89,7 @@ public class Leetcode21MainClass {
             list.remove(new Integer(max));
             list.remove(new Integer(min));
 
-            double d = (double)(max + min) / 2;
+            double d = (double) (max + min) / 2;
             set.add(d);
         }
 
@@ -96,9 +115,9 @@ public class Leetcode21MainClass {
         }
 
         int zeroCount = (int) Arrays.stream(nums).filter(x -> x == 0).count();
-        while(zeroCount != 0){
+        while (zeroCount != 0) {
             list.add(0);
-            zeroCount --;
+            zeroCount--;
         }
 
         return list.stream()
