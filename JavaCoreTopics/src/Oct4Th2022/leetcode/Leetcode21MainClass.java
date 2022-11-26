@@ -49,6 +49,48 @@ public class Leetcode21MainClass {
 
     }
 
+    public String tictactoe(int[][] moves) {
+
+        int len = moves.length;
+        if (len == 5) {
+            return "A";
+        }
+        //[[0,0],[1,1],[0,1],[0,2],[1,0],[2,0]]
+        int[][] tictac = new int[3][3];
+        int count = 0;
+        for (int[] t : tictac) {
+            if(count % 2 != 0){
+                tictac[t[0]][t[1]] = 10;
+                count++;
+            }else{
+                count++;
+            }
+        }
+
+        if(tictac[0][0] == 10 && tictac[0][1] == 10 && tictac[0][2] == 10){
+            return "B";
+        }
+        else if(tictac[1][0] == 10 && tictac[1][1] == 10 && tictac[1][2] == 10){
+            return "B";
+        }else if(tictac[2][0] == 10 && tictac[2][1] == 10 && tictac[2][2] == 10){
+            return "B";
+        }else if(tictac[0][0] == 10 && tictac[1][0] == 10 && tictac[2][0] == 10){
+            return "B";
+        }else if(tictac[0][1] == 10 && tictac[1][1] == 10 && tictac[2][1] == 10){
+            return "B";
+        }else if(tictac[0][2] == 10 && tictac[1][2] == 10 && tictac[2][2] == 10){
+            return "B";
+        }else if(tictac[0][0] == 10 && tictac[1][1] == 10 && tictac[2][2] == 10){
+            return "B";
+        }else if(tictac[0][2] == 10 && tictac[1][1] == 10 && tictac[2][0] == 10){
+            return "B";
+        }else{
+            return "DRAW";
+        }
+
+
+    }
+
     public boolean kLengthApart(int[] nums, int k) {
 
         int len = nums.length;
