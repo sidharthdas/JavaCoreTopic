@@ -61,7 +61,7 @@ public class Leetcode21MainClass {
 
         int lenL = l.size();
         for (int i = 0; i < lenL - 1; i++) {
-            if(!(l.get(i + 1) - l.get(i) >= k + 1)){
+            if (!(l.get(i + 1) - l.get(i) >= k + 1)) {
                 return false;
             }
         }
