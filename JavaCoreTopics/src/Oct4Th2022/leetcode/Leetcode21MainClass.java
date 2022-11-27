@@ -50,7 +50,7 @@ public class Leetcode21MainClass {
     }
 
     public String tictactoe(int[][] moves) {
-
+        System.out.println();
         int len = moves.length;
         if (len == 5) {
             return "A";
