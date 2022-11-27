@@ -49,6 +49,28 @@ public class Leetcode21MainClass {
 
     }
 
+    public int minDeletionSize(String[] strs) {
+        int count = 0;
+        int len = strs.length;
+        int wordLen = strs[0].length();
+        char prevChar = 0;
+        for (int i = 0; i < wordLen; i++) {
+            for (int j = 0; j < len; j++) {
+                if (j == 0) {
+                    prevChar = strs[j].charAt(i);
+                } else {
+                    if (prevChar > strs[j].charAt(i)) {
+                        count ++;
+                        break;
+                    }else{
+                        prevChar = strs[j].charAt(i);
+                    }
+                }
+            }
+        }
+        return count;
+    }
+
     public String tictactoe(int[][] moves) {
         System.out.println();
         int len = moves.length;
@@ -59,32 +81,31 @@ public class Leetcode21MainClass {
         int[][] tictac = new int[3][3];
         int count = 0;
         for (int[] t : tictac) {
-            if(count % 2 != 0){
+            if (count % 2 != 0) {
                 tictac[t[0]][t[1]] = 10;
                 count++;
-            }else{
+            } else {
                 count++;
             }
         }
 
-        if(tictac[0][0] == 10 && tictac[0][1] == 10 && tictac[0][2] == 10){
+        if (tictac[0][0] == 10 && tictac[0][1] == 10 && tictac[0][2] == 10) {
             return "B";
-        }
-        else if(tictac[1][0] == 10 && tictac[1][1] == 10 && tictac[1][2] == 10){
+        } else if (tictac[1][0] == 10 && tictac[1][1] == 10 && tictac[1][2] == 10) {
             return "B";
-        }else if(tictac[2][0] == 10 && tictac[2][1] == 10 && tictac[2][2] == 10){
+        } else if (tictac[2][0] == 10 && tictac[2][1] == 10 && tictac[2][2] == 10) {
             return "B";
-        }else if(tictac[0][0] == 10 && tictac[1][0] == 10 && tictac[2][0] == 10){
+        } else if (tictac[0][0] == 10 && tictac[1][0] == 10 && tictac[2][0] == 10) {
             return "B";
-        }else if(tictac[0][1] == 10 && tictac[1][1] == 10 && tictac[2][1] == 10){
+        } else if (tictac[0][1] == 10 && tictac[1][1] == 10 && tictac[2][1] == 10) {
             return "B";
-        }else if(tictac[0][2] == 10 && tictac[1][2] == 10 && tictac[2][2] == 10){
+        } else if (tictac[0][2] == 10 && tictac[1][2] == 10 && tictac[2][2] == 10) {
             return "B";
-        }else if(tictac[0][0] == 10 && tictac[1][1] == 10 && tictac[2][2] == 10){
+        } else if (tictac[0][0] == 10 && tictac[1][1] == 10 && tictac[2][2] == 10) {
             return "B";
-        }else if(tictac[0][2] == 10 && tictac[1][1] == 10 && tictac[2][0] == 10){
+        } else if (tictac[0][2] == 10 && tictac[1][1] == 10 && tictac[2][0] == 10) {
             return "B";
-        }else{
+        } else {
             return "DRAW";
         }
 
