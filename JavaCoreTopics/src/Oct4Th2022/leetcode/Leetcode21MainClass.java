@@ -48,6 +48,10 @@ public class Leetcode21MainClass {
         System.out.println(distinctAverages(new int[]{9, 5, 7, 8, 7, 9, 8, 2, 0, 7}));
 
     }
+    public String reformatNumber(String number) {
+        number = number.replaceAll(" ", "").replaceAll("-", "");
+        return null;
+    }
 
     public int minDeletionSize(String[] strs) {
         int count = 0;
