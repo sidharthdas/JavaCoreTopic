@@ -48,6 +48,9 @@ public class Leetcode21MainClass {
         System.out.println(distinctAverages(new int[]{9, 5, 7, 8, 7, 9, 8, 2, 0, 7}));
 
     }
+    public String gcdOfStrings(String str1, String str2) {
+        return null;
+    }
     public String reformatNumber(String number) {
         number = number.replaceAll(" ", "").replaceAll("-", "");
         if(number.length() == 2 || number.length() == 3){
