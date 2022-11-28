@@ -50,6 +50,10 @@ public class Leetcode21MainClass {
 
     }
 
+    public boolean haveConflict(String[] event1, String[] event2) {
+        return false;
+    }
+
     public static String gcdOfStrings(String str1, String str2) {
         if (str1.length() <= str2.length()) {
             StringBuilder sb = new StringBuilder("");
