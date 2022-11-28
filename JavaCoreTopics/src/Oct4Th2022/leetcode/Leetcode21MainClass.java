@@ -45,31 +45,89 @@ public class Leetcode21MainClass {
         //System.out.println(checkXMatrix(new int[][]{{2,0,0,1},{0,3,1,0},{0,5,2,0},{4,0,0,2}}));
         //System.out.println(countsubarraysOddProduct(new int[]{5, 1, 2, 3, 4}));
         //System.out.println(applyOperations(new int[]{1,2,2,1,1,0}));
-        System.out.println(distinctAverages(new int[]{9, 5, 7, 8, 7, 9, 8, 2, 0, 7}));
+        //System.out.println(distinctAverages(new int[]{9, 5, 7, 8, 7, 9, 8, 2, 0, 7}));
+        System.out.println(gcdOfStrings("ABABAB", "ABAB"));
 
     }
-    public String gcdOfStrings(String str1, String str2) {
-        return null;
+
+    public static String gcdOfStrings(String str1, String str2) {
+        if (str1.length() <= str2.length()) {
+            StringBuilder sb = new StringBuilder("");
+            int len = str1.length();
+            int index = 0;
+            while(true){
+                if(index < len && !sb.toString().contains(str1.substring(index, index + 1))){
+                    sb.append(str1.substring(index, index + 1));
+                    index++;
+                }else{
+                    break;
+                }
+            }
+            int newLen = sb.length();
+            while(true){
+                if(sb.toString().equals(str2.substring(0, newLen))){
+                    return sb.toString();
+                }else{
+                    newLen--;
+                    if(newLen == 0){
+                        break;
+                    }
+                }
+
+            }
+
+            return "";
+
+        }else{
+            StringBuilder sb = new StringBuilder("");
+            int len = str2.length();
+            int index = 0;
+            while(true){
+                if(index < len && !sb.toString().contains(str2.substring(index, index + 1))){
+                    sb.append(str2.substring(index, index + 1));
+                    index++;
+                }else{
+                    break;
+                }
+            }
+            int newLen = sb.length();
+            while(true){
+                if(sb.toString().equals(str1.substring(0, newLen))){
+                    return sb.toString();
+                }else{
+
+                    if(newLen == 0){
+                        break;
+                    }
+                    newLen--;
+                }
+
+            }
+
+            return "";
+        }
+
     }
+
     public String reformatNumber(String number) {
         number = number.replaceAll(" ", "").replaceAll("-", "");
-        if(number.length() == 2 || number.length() == 3){
+        if (number.length() == 2 || number.length() == 3) {
             return number;
         }
-        if(number.length() == 4){
+        if (number.length() == 4) {
             return number.substring(0, 2) + "-" + number.substring(2);
         }
 
         StringBuilder sb = new StringBuilder();
 
-        while(true){
-            if(number.length() > 4){
+        while (true) {
+            if (number.length() > 4) {
                 sb.append(number.substring(0, 3)).append("-");
                 number = number.substring(3);
-            }else if(number.length() == 4){
+            } else if (number.length() == 4) {
                 sb.append(number.substring(0, 2)).append("-").append(number.substring(2));
                 break;
-            }else{
+            } else {
                 sb.append(number);
                 break;
             }
@@ -89,9 +147,9 @@ public class Leetcode21MainClass {
                     prevChar = strs[j].charAt(i);
                 } else {
                     if (prevChar > strs[j].charAt(i)) {
-                        count ++;
+                        count++;
                         break;
-                    }else{
+                    } else {
                         prevChar = strs[j].charAt(i);
                     }
                 }
