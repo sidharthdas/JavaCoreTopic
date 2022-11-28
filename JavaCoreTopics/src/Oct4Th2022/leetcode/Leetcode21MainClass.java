@@ -50,7 +50,30 @@ public class Leetcode21MainClass {
     }
     public String reformatNumber(String number) {
         number = number.replaceAll(" ", "").replaceAll("-", "");
-        return null;
+        if(number.length() == 2 || number.length() == 3){
+            return number;
+        }
+        if(number.length() == 4){
+            return number.substring(0, 2) + "-" + number.substring(2);
+        }
+
+        StringBuilder sb = new StringBuilder();
+        boolean flag = true;
+
+        while(flag){
+            if(number.length() > 4){
+                sb.append(number.substring(0, 3)).append("-");
+                number = number.substring(3);
+            }else if(number.length() == 4){
+                sb.append(number.substring(0, 2)).append("-").append(number.substring(2));
+                break;
+            }else{
+                sb.append(number);
+                break;
+            }
+
+        }
+        return sb.toString();
     }
 
     public int minDeletionSize(String[] strs) {
