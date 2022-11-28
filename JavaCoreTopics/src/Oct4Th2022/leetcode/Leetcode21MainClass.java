@@ -58,9 +58,8 @@ public class Leetcode21MainClass {
         }
 
         StringBuilder sb = new StringBuilder();
-        boolean flag = true;
 
-        while(flag){
+        while(true){
             if(number.length() > 4){
                 sb.append(number.substring(0, 3)).append("-");
                 number = number.substring(3);
