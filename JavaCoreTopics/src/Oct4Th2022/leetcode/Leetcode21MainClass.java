@@ -52,6 +52,10 @@ public class Leetcode21MainClass {
 
     }
 
+    public boolean winnerOfGame(String colors) {
+        return false;
+    }
+
     public int[] numSmallerByFrequency(String[] queries, String[] words) {
         int lenQueries = queries.length;
         int lenWords = words.length;
