@@ -47,8 +47,37 @@ public class Leetcode21MainClass {
         //System.out.println(applyOperations(new int[]{1,2,2,1,1,0}));
         //System.out.println(distinctAverages(new int[]{9, 5, 7, 8, 7, 9, 8, 2, 0, 7}));
         //System.out.println(gcdOfStrings("ABABAB", "ABAB"));
-        System.out.println(backspaceCompare("ab##", "c#d#"));
+        //System.out.println(backspaceCompare("ab##", "c#d#"));
+        System.out.println(countVowelSubstrings("cuaieuouac"));
 
+    }
+
+    public static int countVowelSubstrings(String word) {
+        Set<String> set = new TreeSet<>();
+        if(word.length() < 5) return 0;
+        int count = 0;
+        String s1 = word;
+        int len = s1.length();
+        while(s1.length() >= 5){
+            if(s1.contains("a") && s1.contains("e") && s1.contains("i") && s1.contains("o") && s1.contains("u") ){
+                set.add(s1);
+                s1 = s1.substring(0, s1.length() -1 );
+            }else{
+                s1 = s1.substring(0, s1.length() -1 );
+            }
+        }
+        int current = 0;
+        while(word.length() >= 5){
+            if(word.contains("a") && word.contains("e") && word.contains("i") && word.contains("o") && word.contains("u") ){
+                set.add(word);
+                current++;
+                word = word.substring( current);
+            }else{
+                current++;
+                word = word.substring( current);
+            }
+        }
+        return set.size();
     }
 
     public static  boolean backspaceCompare(String s, String t) {
