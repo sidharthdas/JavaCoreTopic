@@ -52,8 +52,43 @@ public class Leetcode21MainClass {
 
     }
 
+    public int[] numSmallerByFrequency(String[] queries, String[] words) {
+        int lenQueries = queries.length;
+        int lenWords = words.length;
+        int[] finalArr = new int[lenQueries];
+        int[] intQueries = new int[lenQueries];
+        int[] intWords = new int[lenWords];
+
+        for (int i = 0; i < lenQueries; i++) {
+            intQueries[i] = countSmallestLetterFrequency(queries[i]);
+        }
+
+        for (int i = 0; i < lenWords; i++) {
+            intWords[i] = countSmallestLetterFrequency(words[i]);
+        }
+
+        for (int i = 0; i < lenQueries; i++) {
+            int j = i;
+            int g = (int)Arrays.stream(intWords).boxed().filter(x -> x > intQueries[j]).count();
+            finalArr[i] = g;
+        }
+
+        return finalArr;
+    }
+
+    private int countSmallestLetterFrequency(String s) {
+        Map<Character, Integer> map = new HashMap<>();
+        char[] c = s.toCharArray();
+        for (char c1 : c) {
+            map.put(c1, map.getOrDefault(c1, 0) + 1);
+        }
+
+        return map.entrySet().stream().sorted(Map.Entry.<Character, Integer>comparingByKey())
+                .findFirst().get().getValue();
+    }
+
     public static int countVowelSubstrings(String word) {
-        if(word.length() < 5) return 0;
+        if (word.length() < 5) return 0;
         Set<String> set = new TreeSet<>();
         StringBuilder sb = new StringBuilder();
         char[] crr = word.toCharArray();
@@ -70,7 +105,7 @@ public class Leetcode21MainClass {
                 }
                 String s1 = sb.toString();
                 sb = new StringBuilder();
-                if(s1.length() >= 5 && s1.contains("a") && s1.contains("e") && s1.contains("i") && s1.contains("o") && s1.contains("u")){
+                if (s1.length() >= 5 && s1.contains("a") && s1.contains("e") && s1.contains("i") && s1.contains("o") && s1.contains("u")) {
                     set.add(s1);
                 }
             }
@@ -78,17 +113,17 @@ public class Leetcode21MainClass {
         return set.size();
     }
 
-    public static  boolean backspaceCompare(String s, String t) {
+    public static boolean backspaceCompare(String s, String t) {
 
-        while(s.contains("#")){
-            if(s.indexOf('#') == 0) break;
+        while (s.contains("#")) {
+            if (s.indexOf('#') == 0) break;
             int index = s.lastIndexOf('#');
             String s1 = s.charAt(index - 1) + "#";
             s = s.replaceFirst(s1, "");
         }
 
-        while(t.contains("#")){
-            if(s.indexOf('#') == 0) break;
+        while (t.contains("#")) {
+            if (s.indexOf('#') == 0) break;
             int index = t.indexOf('#');
             String s1 = t.charAt(index - 1) + "#";
             t = t.replaceFirst(s1, "");
@@ -97,34 +132,35 @@ public class Leetcode21MainClass {
         return s.equals(t);
 
     }
+
     public String modifyString(String s) {
-        if(s.length() == 1 && s.equals("?")) return "a";
+        if (s.length() == 1 && s.equals("?")) return "a";
         int len = s.length();
-        while(s.contains("?")){
+        while (s.contains("?")) {
             int index = s.indexOf('?');
-            if(index == 0 && index < len){
+            if (index == 0 && index < len) {
                 char a = 'a';
-                for(char i = 'a'; i <= 'z'; i++){
-                    String s1 = i+"";
-                    if(!String.valueOf(s.charAt(index+1)).equals(s1)){
+                for (char i = 'a'; i <= 'z'; i++) {
+                    String s1 = i + "";
+                    if (!String.valueOf(s.charAt(index + 1)).equals(s1)) {
                         s = s.replaceFirst("\\?", s1);
                         break;
                     }
                 }
-            }else if(index > 0 && index < len - 1){
+            } else if (index > 0 && index < len - 1) {
                 char a = 'a';
-                for(char i = 'a'; i <= 'z'; i++){
-                    String s1 = i+"";
-                    if(!String.valueOf(s.charAt(index+1)).equals(s1) && !String.valueOf(s.charAt(index-1)).equals(s1)){
+                for (char i = 'a'; i <= 'z'; i++) {
+                    String s1 = i + "";
+                    if (!String.valueOf(s.charAt(index + 1)).equals(s1) && !String.valueOf(s.charAt(index - 1)).equals(s1)) {
                         s = s.replaceFirst("\\?", s1);
                         break;
                     }
                 }
-            }else{
+            } else {
                 char a = 'a';
-                for(char i = 'a'; i <= 'z'; i++){
-                    String s1 = i+"";
-                    if(!String.valueOf(s.charAt(index-1)).equals(s1)){
+                for (char i = 'a'; i <= 'z'; i++) {
+                    String s1 = i + "";
+                    if (!String.valueOf(s.charAt(index - 1)).equals(s1)) {
                         s = s.replaceFirst("\\?", s1);
                         break;
                     }
@@ -146,20 +182,20 @@ public class Leetcode21MainClass {
         int event2EndHH = Integer.parseInt(event2[1].split(":")[0]);
         int event2EndMM = Integer.parseInt(event2[1].split(":")[1]);
 
-        if(event2StartHH > event1EndHH){
+        if (event2StartHH > event1EndHH) {
             return false;
-        }else{
-            if(event2StartHH == event1EndHH){
-                if(event2StartMM > event1EndMM ){
+        } else {
+            if (event2StartHH == event1EndHH) {
+                if (event2StartMM > event1EndMM) {
                     return false;
-                }else{
+                } else {
                     return true;
                 }
-            }else{
-                if(event2StartHH < event1StartHH && event2EndHH <event1StartHH){
+            } else {
+                if (event2StartHH < event1StartHH && event2EndHH < event1StartHH) {
                     return false;
-                }else if(event2StartHH == event1StartHH || event2EndHH == event1StartHH){
-                    if(event2StartMM < event1StartMM && event2EndMM < event1StartMM){
+                } else if (event2StartHH == event1StartHH || event2EndHH == event1StartHH) {
+                    if (event2StartMM < event1StartMM && event2EndMM < event1StartMM) {
                         return false;
                     }
                 }
@@ -174,21 +210,21 @@ public class Leetcode21MainClass {
             StringBuilder sb = new StringBuilder("");
             int len = str1.length();
             int index = 0;
-            while(true){
-                if(index < len && !sb.toString().contains(str1.substring(index, index + 1))){
+            while (true) {
+                if (index < len && !sb.toString().contains(str1.substring(index, index + 1))) {
                     sb.append(str1.substring(index, index + 1));
                     index++;
-                }else{
+                } else {
                     break;
                 }
             }
             int newLen = sb.length();
-            while(true){
-                if(sb.toString().equals(str2.substring(0, newLen))){
+            while (true) {
+                if (sb.toString().equals(str2.substring(0, newLen))) {
                     return sb.toString();
-                }else{
+                } else {
                     newLen--;
-                    if(newLen == 0){
+                    if (newLen == 0) {
                         break;
                     }
                 }
@@ -197,25 +233,25 @@ public class Leetcode21MainClass {
 
             return "";
 
-        }else{
+        } else {
             StringBuilder sb = new StringBuilder("");
             int len = str2.length();
             int index = 0;
-            while(true){
-                if(index < len && !sb.toString().contains(str2.substring(index, index + 1))){
+            while (true) {
+                if (index < len && !sb.toString().contains(str2.substring(index, index + 1))) {
                     sb.append(str2.substring(index, index + 1));
                     index++;
-                }else{
+                } else {
                     break;
                 }
             }
             int newLen = sb.length();
-            while(true){
-                if(sb.toString().equals(str1.substring(0, newLen))){
+            while (true) {
+                if (sb.toString().equals(str1.substring(0, newLen))) {
                     return sb.toString();
-                }else{
+                } else {
 
-                    if(newLen == 0){
+                    if (newLen == 0) {
                         break;
                     }
                     newLen--;
