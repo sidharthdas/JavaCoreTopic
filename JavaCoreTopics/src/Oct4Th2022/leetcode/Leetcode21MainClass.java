@@ -48,12 +48,33 @@ public class Leetcode21MainClass {
         //System.out.println(distinctAverages(new int[]{9, 5, 7, 8, 7, 9, 8, 2, 0, 7}));
         //System.out.println(gcdOfStrings("ABABAB", "ABAB"));
         //System.out.println(backspaceCompare("ab##", "c#d#"));
-        System.out.println(countVowelSubstrings("cuaieuouac"));
+        //System.out.println(countVowelSubstrings("cuaieuouac"));
+        System.out.println(winnerOfGame("AAABABB"));
+
 
     }
 
-    public boolean winnerOfGame(String colors) {
-        return false;
+    public static boolean winnerOfGame(String colors) {
+        System.out.println(colors.indexOf("AAA"));
+        int c = 0;
+        while(true){
+            if(c == 0){
+                c = 1;
+                if(colors.contains("AAA")){
+                    colors = colors.replaceFirst("AAA", "AA");
+                }else{
+                    return false;
+                }
+            }else{
+                c = 0;
+                if(colors.contains("BBB")){
+                    colors = colors.replaceFirst("BBB", "BB");
+                }else{
+                    return true;
+                }
+
+            }
+        }
     }
 
     public int[] numSmallerByFrequency(String[] queries, String[] words) {
