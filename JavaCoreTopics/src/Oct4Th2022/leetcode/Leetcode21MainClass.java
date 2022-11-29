@@ -46,7 +46,28 @@ public class Leetcode21MainClass {
         //System.out.println(countsubarraysOddProduct(new int[]{5, 1, 2, 3, 4}));
         //System.out.println(applyOperations(new int[]{1,2,2,1,1,0}));
         //System.out.println(distinctAverages(new int[]{9, 5, 7, 8, 7, 9, 8, 2, 0, 7}));
-        System.out.println(gcdOfStrings("ABABAB", "ABAB"));
+        //System.out.println(gcdOfStrings("ABABAB", "ABAB"));
+        System.out.println(backspaceCompare("ab##", "c#d#"));
+
+    }
+
+    public static  boolean backspaceCompare(String s, String t) {
+
+        while(s.contains("#")){
+            if(s.indexOf('#') == 0) break;
+            int index = s.lastIndexOf('#');
+            String s1 = s.charAt(index - 1) + "#";
+            s = s.replaceFirst(s1, "");
+        }
+
+        while(t.contains("#")){
+            if(s.indexOf('#') == 0) break;
+            int index = t.indexOf('#');
+            String s1 = t.charAt(index - 1) + "#";
+            t = t.replaceFirst(s1, "");
+        }
+
+        return s.equals(t);
 
     }
     public String modifyString(String s) {
