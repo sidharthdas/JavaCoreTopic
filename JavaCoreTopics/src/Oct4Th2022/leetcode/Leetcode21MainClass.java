@@ -51,7 +51,37 @@ public class Leetcode21MainClass {
     }
 
     public boolean haveConflict(String[] event1, String[] event2) {
-        return false;
+        int event1StartHH = Integer.parseInt(event1[0].split(":")[0]);
+        int event1StartMM = Integer.parseInt(event1[0].split(":")[1]);
+        int event1EndHH = Integer.parseInt(event1[1].split(":")[0]);
+        int event1EndMM = Integer.parseInt(event1[1].split(":")[1]);
+
+        int event2StartHH = Integer.parseInt(event2[0].split(":")[0]);
+        int event2StartMM = Integer.parseInt(event2[0].split(":")[1]);
+        int event2EndHH = Integer.parseInt(event2[1].split(":")[0]);
+        int event2EndMM = Integer.parseInt(event2[1].split(":")[1]);
+
+        if(event2StartHH > event1EndHH){
+            return false;
+        }else{
+            if(event2StartHH == event1EndHH){
+                if(event2StartMM > event1EndMM ){
+                    return false;
+                }else{
+                    return true;
+                }
+            }else{
+                if(event2StartHH < event1StartHH && event2EndHH <event1StartHH){
+                    return false;
+                }else if(event2StartHH == event1StartHH || event2EndHH == event1StartHH){
+                    if(event2StartMM < event1StartMM && event2EndMM < event1StartMM){
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
     }
 
     public static String gcdOfStrings(String str1, String str2) {
