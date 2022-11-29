@@ -53,28 +53,26 @@ public class Leetcode21MainClass {
     }
 
     public static int countVowelSubstrings(String word) {
-        Set<String> set = new TreeSet<>();
         if(word.length() < 5) return 0;
-        int count = 0;
-        String s1 = word;
-        int len = s1.length();
-        while(s1.length() >= 5){
-            if(s1.contains("a") && s1.contains("e") && s1.contains("i") && s1.contains("o") && s1.contains("u") ){
-                set.add(s1);
-                s1 = s1.substring(0, s1.length() -1 );
-            }else{
-                s1 = s1.substring(0, s1.length() -1 );
-            }
-        }
-        int current = 0;
-        while(word.length() >= 5){
-            if(word.contains("a") && word.contains("e") && word.contains("i") && word.contains("o") && word.contains("u") ){
-                set.add(word);
-                current++;
-                word = word.substring( current);
-            }else{
-                current++;
-                word = word.substring( current);
+        Set<String> set = new TreeSet<>();
+        StringBuilder sb = new StringBuilder();
+        char[] crr = word.toCharArray();
+        int size = word.length();
+        for (int len = 1; len <= size; len++) {
+            // Pick ending point
+            for (int i = 0; i <= size - len; i++) {
+                //  Print characters from current
+                // starting point to current ending
+                // point.
+                int j = i + len - 1;
+                for (int k = i; k <= j; k++) {
+                    sb.append(crr[k]);
+                }
+                String s1 = sb.toString();
+                sb = new StringBuilder();
+                if(s1.length() >= 5 && s1.contains("a") && s1.contains("e") && s1.contains("i") && s1.contains("o") && s1.contains("u")){
+                    set.add(s1);
+                }
             }
         }
         return set.size();
