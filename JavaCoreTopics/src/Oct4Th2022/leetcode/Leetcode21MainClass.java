@@ -49,6 +49,43 @@ public class Leetcode21MainClass {
         System.out.println(gcdOfStrings("ABABAB", "ABAB"));
 
     }
+    public String modifyString(String s) {
+        if(s.length() == 1 && s.equals("?")) return "a";
+        int len = s.length();
+        while(s.contains("?")){
+            int index = s.indexOf('?');
+            if(index == 0 && index < len){
+                char a = 'a';
+                for(char i = 'a'; i <= 'z'; i++){
+                    String s1 = i+"";
+                    if(!String.valueOf(s.charAt(index+1)).equals(s1)){
+                        s = s.replaceFirst("\\?", s1);
+                        break;
+                    }
+                }
+            }else if(index > 0 && index < len - 1){
+                char a = 'a';
+                for(char i = 'a'; i <= 'z'; i++){
+                    String s1 = i+"";
+                    if(!String.valueOf(s.charAt(index+1)).equals(s1) && !String.valueOf(s.charAt(index-1)).equals(s1)){
+                        s = s.replaceFirst("\\?", s1);
+                        break;
+                    }
+                }
+            }else{
+                char a = 'a';
+                for(char i = 'a'; i <= 'z'; i++){
+                    String s1 = i+"";
+                    if(!String.valueOf(s.charAt(index-1)).equals(s1)){
+                        s = s.replaceFirst("\\?", s1);
+                        break;
+                    }
+                }
+
+            }
+        }
+        return s;
+    }
 
     public boolean haveConflict(String[] event1, String[] event2) {
         int event1StartHH = Integer.parseInt(event1[0].split(":")[0]);
