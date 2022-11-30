@@ -52,7 +52,7 @@ public class Leetcode21MainClass {
         //System.out.println(winnerOfGame("AAABABB"));
         //System.out.println(triangularSum(new int[]{1, 2, 3, 4, 5}));
         //[["name","bob"],["age","two"]]
-        System.out.println(evaluate("(name)is(age)yearsold", Arrays.asList(Arrays.asList("name", "bob"), Arrays.asList("age", "two"))));
+        System.out.println(evaluate("(a)(b)", Arrays.asList(Arrays.asList("a", "b"), Arrays.asList("b", "a"))));
 
 
     }
@@ -71,9 +71,9 @@ public class Leetcode21MainClass {
             String word = sub.substring(1, sub.length() - 1);
 
             if(map.containsKey(word)){
-                s = s.replaceFirst(sub, map.get(word));
-                s = s.replaceFirst("\\(","");
-                s = s.replaceFirst("\\)","");
+                s = s.replaceFirst("\\("+word+"\\)" , map.get(word));
+                /*s = s.replaceFirst("\\(","");
+                s = s.replaceFirst("\\)","");*/
             }else{
                 s = s.replaceFirst(sub, "?");
                 s = s.replaceFirst("\\(","");
