@@ -49,8 +49,29 @@ public class Leetcode21MainClass {
         //System.out.println(gcdOfStrings("ABABAB", "ABAB"));
         //System.out.println(backspaceCompare("ab##", "c#d#"));
         //System.out.println(countVowelSubstrings("cuaieuouac"));
-        System.out.println(winnerOfGame("AAABABB"));
+        //System.out.println(winnerOfGame("AAABABB"));
+        System.out.println(triangularSum(new int[]{1,2,3,4,5}));
 
+
+    }
+
+    public static int triangularSum(int[] nums) {
+        List<Integer> list = Arrays.stream(nums).boxed().collect(Collectors.toList());
+
+        while (list.size() != 1){
+            List<Integer> temp = new ArrayList<>();
+
+            int len = list.size();
+
+            for(int i = 0; i < len - 1; i++){
+                temp.add((list.get(i) + list.get(i+1)) % 10);
+            }
+
+            list = new ArrayList<>();
+            list.addAll(temp);
+        }
+
+        return list.get(0);
 
     }
 
