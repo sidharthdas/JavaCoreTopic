@@ -50,9 +50,38 @@ public class Leetcode21MainClass {
         //System.out.println(backspaceCompare("ab##", "c#d#"));
         //System.out.println(countVowelSubstrings("cuaieuouac"));
         //System.out.println(winnerOfGame("AAABABB"));
-        System.out.println(triangularSum(new int[]{1,2,3,4,5}));
+        //System.out.println(triangularSum(new int[]{1, 2, 3, 4, 5}));
+        //[["name","bob"],["age","two"]]
+        System.out.println(evaluate("(name)is(age)yearsold", Arrays.asList(Arrays.asList("name", "bob"), Arrays.asList("age", "two"))));
 
 
+    }
+
+    public static String evaluate(String s, List<List<String>> knowledge) {
+        Map<String, String> map = new HashMap<>();
+
+        for (List<String> l : knowledge) {
+            map.put(l.get(0), l.get(1));
+        }
+
+        while (s.contains("(")) {
+            int startIndex = s.indexOf("(");
+            int endIndex = s.indexOf(")");
+            String sub = s.substring(startIndex, endIndex + 1);
+            String word = sub.substring(1, sub.length() - 1);
+
+            if(map.containsKey(word)){
+                s = s.replaceFirst(sub, map.get(word));
+                s = s.replaceFirst("\\(","");
+                s = s.replaceFirst("\\)","");
+            }else{
+                s = s.replaceFirst(sub, "?");
+                s = s.replaceFirst("\\(","");
+                s = s.replaceFirst("\\)","");
+            }
+        }
+
+        return s;
     }
 
     public int numTeams(int[] rating) {
@@ -60,10 +89,10 @@ public class Leetcode21MainClass {
 
         int len = rating.length;
 
-        for(int i = 0; i < len; i++){
-            for(int j = i + 1; j < len; j++){
-                for(int k = j + 1; k < len ; k++){
-                    if((rating[i] < rating[j] && rating[j] < rating[k]) || (rating[i] > rating[j] && rating[j] > rating[k])){
+        for (int i = 0; i < len; i++) {
+            for (int j = i + 1; j < len; j++) {
+                for (int k = j + 1; k < len; k++) {
+                    if ((rating[i] < rating[j] && rating[j] < rating[k]) || (rating[i] > rating[j] && rating[j] > rating[k])) {
                         count++;
                     }
                 }
@@ -75,13 +104,13 @@ public class Leetcode21MainClass {
     public static int triangularSum(int[] nums) {
         List<Integer> list = Arrays.stream(nums).boxed().collect(Collectors.toList());
 
-        while (list.size() != 1){
+        while (list.size() != 1) {
             List<Integer> temp = new ArrayList<>();
 
             int len = list.size();
 
-            for(int i = 0; i < len - 1; i++){
-                temp.add((list.get(i) + list.get(i+1)) % 10);
+            for (int i = 0; i < len - 1; i++) {
+                temp.add((list.get(i) + list.get(i + 1)) % 10);
             }
 
             list = new ArrayList<>();
@@ -95,19 +124,19 @@ public class Leetcode21MainClass {
     public static boolean winnerOfGame(String colors) {
         System.out.println(colors.indexOf("AAA"));
         int c = 0;
-        while(true){
-            if(c == 0){
+        while (true) {
+            if (c == 0) {
                 c = 1;
-                if(colors.contains("AAA")){
+                if (colors.contains("AAA")) {
                     colors = colors.replaceFirst("AAA", "AA");
-                }else{
+                } else {
                     return false;
                 }
-            }else{
+            } else {
                 c = 0;
-                if(colors.contains("BBB")){
+                if (colors.contains("BBB")) {
                     colors = colors.replaceFirst("BBB", "BB");
-                }else{
+                } else {
                     return true;
                 }
 
@@ -132,7 +161,7 @@ public class Leetcode21MainClass {
 
         for (int i = 0; i < lenQueries; i++) {
             int j = i;
-            int g = (int)Arrays.stream(intWords).boxed().filter(x -> x > intQueries[j]).count();
+            int g = (int) Arrays.stream(intWords).boxed().filter(x -> x > intQueries[j]).count();
             finalArr[i] = g;
         }
 
