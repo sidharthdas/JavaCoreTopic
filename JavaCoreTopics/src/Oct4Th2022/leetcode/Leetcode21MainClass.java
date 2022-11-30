@@ -55,6 +55,23 @@ public class Leetcode21MainClass {
 
     }
 
+    public int numTeams(int[] rating) {
+        int count = 0;
+
+        int len = rating.length;
+
+        for(int i = 0; i < len; i++){
+            for(int j = i + 1; j < len; j++){
+                for(int k = j + 1; k < len ; k++){
+                    if((rating[i] < rating[j] && rating[j] < rating[k]) || (rating[i] > rating[j] && rating[j] > rating[k])){
+                        count++;
+                    }
+                }
+            }
+        }
+        return count;
+    }
+
     public static int triangularSum(int[] nums) {
         List<Integer> list = Arrays.stream(nums).boxed().collect(Collectors.toList());
 
