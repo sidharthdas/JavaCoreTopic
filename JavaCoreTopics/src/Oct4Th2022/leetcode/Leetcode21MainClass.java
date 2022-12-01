@@ -52,36 +52,63 @@ public class Leetcode21MainClass {
         //System.out.println(winnerOfGame("AAABABB"));
         //System.out.println(triangularSum(new int[]{1, 2, 3, 4, 5}));
         //[["name","bob"],["age","two"]]
-        System.out.println(evaluate("(a)(b)", Arrays.asList(Arrays.asList("a", "b"), Arrays.asList("b", "a"))));
+        //System.out.println(evaluate("(a)(b)", Arrays.asList(Arrays.asList("a", "b"), Arrays.asList("b", "a"))));
+        System.out.println(findAndReplacePattern(new String[]{"badc", "abab", "dddd", "dede", "yyxx"}, "abab"));
 
 
     }
 
-    public List<String> findAndReplacePattern(String[] words, String pattern) {
-        List<String> l = new ArrayList<>();
-        Map<String, Integer> map = new LinkedHashMap<>();
-        String[] s = pattern.split("");
-        for(String s1 : s){
-            map.put(s1, map.getOrDefault(s1, 0)+ 1);
+    private static List<Integer> pat(String word) {
+        List<Integer> l = new ArrayList<>();
+        String[] s = word.split("");
+        int count = 0;
+        int len = word.length();
+        String currentString = "";
+        for (int i = 0; i < len; i++) {
+            if (i == 0) {
+                currentString = s[i];
+                count = 1;
+            } else {
+                if (s[i].equals(currentString)) {
+                    count++;
+                } else {
+                    l.add(count);
+                    count = 1;
+                    currentString = s[i];
+                }
+            }
         }
 
-        for(String word : words){
-            Map<String, Integer> wordMap = new LinkedHashMap<>();
-            String[] wordArr = word.split("");
-            for(String wordA : wordArr){
-                wordMap.put(wordA, wordMap.getOrDefault(wordA, 0)+ 1);
-            }
+        l.add(count);
+        return l;
+    }
+
+    public static List<String> findAndReplacePattern(String[] words, String pattern) {
+        List<String> l = new ArrayList<>();
+        List<Integer> partL = pat(pattern);
+        Map<String, Integer> map = new LinkedHashMap<>();
+        String[] s = pattern.split("");
+        for (String s1 : s) {
+            map.put(s1, map.getOrDefault(s1, 0) + 1);
+        }
+
+        for (String word : words) {
             boolean flag = true;
-            Iterator<Integer> targetIt = map.values().iterator();
-            for (int obj:wordMap.values())
-                if (!(obj == targetIt.next())){
-                    flag = false;
-                    break;
+            List<Integer> l1 = pat(word);
+            if (partL.size() == l1.size()) {
+                Iterator<Integer> targetIt = partL.iterator();
+                for (int obj : l1) {
+                    if (!(obj == targetIt.next())) {
+                        flag = false;
+                        break;
+                    }
                 }
 
-           if(flag){
-               l.add(word);
-           }
+                if (flag) {
+                    l.add(word);
+                }
+            }
+
 
         }
         return l;
@@ -106,14 +133,14 @@ public class Leetcode21MainClass {
             String sub = s.substring(startIndex, endIndex + 1);
             String word = sub.substring(1, sub.length() - 1);
 
-            if(map.containsKey(word)){
-                s = s.replaceFirst("\\("+word+"\\)" , map.get(word));
+            if (map.containsKey(word)) {
+                s = s.replaceFirst("\\(" + word + "\\)", map.get(word));
                 /*s = s.replaceFirst("\\(","");
                 s = s.replaceFirst("\\)","");*/
-            }else{
+            } else {
                 s = s.replaceFirst(sub, "?");
-                s = s.replaceFirst("\\(","");
-                s = s.replaceFirst("\\)","");
+                s = s.replaceFirst("\\(", "");
+                s = s.replaceFirst("\\)", "");
             }
         }
 
