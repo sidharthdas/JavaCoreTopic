@@ -62,6 +62,7 @@ public class Leetcode21MainClass {
 
     public boolean validateStackSequences(int[] pushed, int[] popped) {
         int pushSize = pushed.length;
+        System.out.println(pushSize);
         return false;
     }
 
