@@ -60,6 +60,15 @@ public class Leetcode21MainClass {
 
     }
 
+    public int[] pivotArray(int[] nums, int pivot) {
+        List<Integer> l = new ArrayList<>();
+        l.addAll(Arrays.stream(nums).boxed().filter(x -> x < pivot).toList());
+        l.addAll(Arrays.stream(nums).boxed().filter(x -> x == pivot).toList());
+        l.addAll(Arrays.stream(nums).boxed().filter(x -> x > pivot).toList());
+
+        return l.stream().mapToInt(Integer::new).toArray();
+    }
+
     public List<String> removeSubfolders(String[] folder) {
         List<String> l =  new ArrayList<>();
         Arrays.sort(folder);
