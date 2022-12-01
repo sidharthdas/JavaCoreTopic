@@ -57,6 +57,42 @@ public class Leetcode21MainClass {
 
     }
 
+    public List<String> findAndReplacePattern(String[] words, String pattern) {
+        List<String> l = new ArrayList<>();
+        Map<String, Integer> map = new LinkedHashMap<>();
+        String[] s = pattern.split("");
+        for(String s1 : s){
+            map.put(s1, map.getOrDefault(s1, 0)+ 1);
+        }
+
+        for(String word : words){
+            Map<String, Integer> wordMap = new LinkedHashMap<>();
+            String[] wordArr = word.split("");
+            for(String wordA : wordArr){
+                wordMap.put(wordA, wordMap.getOrDefault(wordA, 0)+ 1);
+            }
+            boolean flag = true;
+            Iterator<Integer> targetIt = map.values().iterator();
+            for (int obj:wordMap.values())
+                if (!(obj == targetIt.next())){
+                    flag = false;
+                    break;
+                }
+
+           if(flag){
+               l.add(word);
+           }
+
+        }
+        return l;
+    }
+
+    public List<String> removeSubfolders(String[] folder) {
+        Arrays.sort(folder);
+
+        return null;
+    }
+
     public static String evaluate(String s, List<List<String>> knowledge) {
         Map<String, String> map = new HashMap<>();
 
