@@ -56,8 +56,37 @@ public class Leetcode21MainClass {
         //[["name","bob"],["age","two"]]
         //System.out.println(evaluate("(a)(b)", Arrays.asList(Arrays.asList("a", "b"), Arrays.asList("b", "a"))));
         // System.out.println(findAndReplacePattern(new String[]{"badc", "abab", "dddd", "dede", "yyxx"}, "abab"));
-        System.out.println(canBeIncreasing(new int[]{2, 3, 1, 2}));
+        //System.out.println(canBeIncreasing(new int[]{2, 3, 1, 2}));
+        System.out.println(evaluate("(mrvv)(nbh)(tgsq)kmfhpzv(yaj)(f)y(jdjz)(ir)(v)(s)ak(tw)(y)w", Arrays.asList(Arrays.asList("jdvcuhnq", "g"), Arrays.asList("yediraal", "j"), Arrays.asList("vjpwbmgu", "w"), Arrays.asList("xmfaqppl", "r"), Arrays.asList("lembcicy", "p"), Arrays.asList("cyyslclq", "i"), Arrays.asList("mwcqdcwm", "p"), Arrays.asList("mdmbntgd", "h"), Arrays.asList("tpznnnyl", "t"), Arrays.asList("ftczphgc", "v"), Arrays.asList("vadgifxk", "h"), Arrays.asList("czquforc", "n"), Arrays.asList("vigqtimh", "v"), Arrays.asList("jiziptez", "s"), Arrays.asList("pwyelcth", "r"), Arrays.asList("wlkqozyf", "m"), Arrays.asList("xpygxnmj", "d"), Arrays.asList("adozymjw", "f"), Arrays.asList("bjxjtgna", "y"), Arrays.asList("ureemetw", "x"), Arrays.asList("eowfoeei", "q"), Arrays.asList("tw", "ungf"), Arrays.asList("vxoslleo", "g"), Arrays.asList("bawftokw", "b"), Arrays.asList("sfbyblto", "f"), Arrays.asList("lgbqnhpg", "f"), Arrays.asList("oknhudfq", "b"), Arrays.asList("sxiquhyg", "r"), Arrays.asList("cxfwklsn", "w"), Arrays.asList("rprjtget", "h"), Arrays.asList("hgqvkuwj", "p"), Arrays.asList("jdysaybt", "k"), Arrays.asList("rhersdzn", "x"), Arrays.asList("yftngzmr", "p"), Arrays.asList("arubuguk", "b"), Arrays.asList("xloxgmoz", "c"), Arrays.asList("jxuhxkkg", "b"), Arrays.asList("upsfbqgv", "h"), Arrays.asList("ehgttwer", "i"), Arrays.asList("fvspnzrs", "w"), Arrays.asList("nlhovrmk", "v"), Arrays.asList("jtiwewui", "l"), Arrays.asList("izsqicwu", "h"), Arrays.asList("pnjlmylt", "g"), Arrays.asList("f", "vava"), Arrays.asList("fsniyzec", "g"), Arrays.asList("xerbzwek", "v"), Arrays.asList("wpmfveht", "d"), Arrays.asList("aeynlizp", "b"), Arrays.asList("y", "rrkv"), Arrays.asList("mlajgsll", "u"), Arrays.asList("mdjwnyhh", "q"), Arrays.asList("fuubthmi", "i"), Arrays.asList("zytszqhy", "g"), Arrays.asList("nautvnmh", "q"), Arrays.asList("snsiaaze", "y"), Arrays.asList("guimbybe", "x"), Arrays.asList("gojbikaw", "v"), Arrays.asList("gbjvveec", "w"))));
 
+
+    }
+
+    public static String evaluate(String s, List<List<String>> knowledge) {
+        Map<String, String> map = new HashMap<>();
+
+        for (List<String> l : knowledge) {
+            map.put(l.get(0), l.get(1));
+        }
+
+        while (s.contains("(")) {
+            int startIndex = s.indexOf("(");
+            int endIndex = s.indexOf(")");
+            String sub = s.substring(startIndex, endIndex + 1);
+            String word = sub.substring(1, sub.length() - 1);
+
+            if(map.containsKey(word)){
+                s = s.replaceFirst("\\("+s.substring(startIndex+1, endIndex)+"\\)" , map.get(word));
+
+            }else{
+                s = s.replaceFirst("\\("+s.substring(startIndex+1, endIndex)+"\\)" , "?");
+                /*s = s.replace(s.substring(startIndex + 1, endIndex), "?");
+                s = s.replaceFirst("\\(","");
+                s = s.replaceFirst("\\)","");*/
+            }
+        }
+
+        return s;
     }
 
     public boolean validateStackSequences(int[] pushed, int[] popped) {
@@ -76,16 +105,16 @@ public class Leetcode21MainClass {
     }
 
     public List<String> removeSubfolders(String[] folder) {
-        List<String> l =  new ArrayList<>();
+        List<String> l = new ArrayList<>();
         Arrays.sort(folder);
         int len = folder.length;
         String curr = "";
         for (int i = 0; i < len; i++) {
-            if(i == 0){
+            if (i == 0) {
                 l.add(folder[0]);
                 curr = folder[0];
-            }else{
-                if(!folder[i].startsWith(curr+"/")){
+            } else {
+                if (!folder[i].startsWith(curr + "/")) {
                     l.add(folder[i]);
                     curr = folder[i];
                 }
@@ -179,33 +208,6 @@ public class Leetcode21MainClass {
         return l;
     }
 
-
-    public static String evaluate(String s, List<List<String>> knowledge) {
-        Map<String, String> map = new HashMap<>();
-
-        for (List<String> l : knowledge) {
-            map.put(l.get(0), l.get(1));
-        }
-
-        while (s.contains("(")) {
-            int startIndex = s.indexOf("(");
-            int endIndex = s.indexOf(")");
-            String sub = s.substring(startIndex, endIndex + 1);
-            String word = sub.substring(1, sub.length() - 1);
-
-            if (map.containsKey(word)) {
-                s = s.replaceFirst("\\(" + word + "\\)", map.get(word));
-                /*s = s.replaceFirst("\\(","");
-                s = s.replaceFirst("\\)","");*/
-            } else {
-                s = s.replaceFirst(sub, "?");
-                s = s.replaceFirst("\\(", "");
-                s = s.replaceFirst("\\)", "");
-            }
-        }
-
-        return s;
-    }
 
     public int numTeams(int[] rating) {
         int count = 0;
