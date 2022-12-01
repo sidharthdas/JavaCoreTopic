@@ -1,5 +1,7 @@
 package Oct4Th2022.leetcode;
 
+import override.A;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -53,24 +55,45 @@ public class Leetcode21MainClass {
         //System.out.println(triangularSum(new int[]{1, 2, 3, 4, 5}));
         //[["name","bob"],["age","two"]]
         //System.out.println(evaluate("(a)(b)", Arrays.asList(Arrays.asList("a", "b"), Arrays.asList("b", "a"))));
-       // System.out.println(findAndReplacePattern(new String[]{"badc", "abab", "dddd", "dede", "yyxx"}, "abab"));
-        System.out.println(canBeIncreasing(new int[]{2,3,1,2}));
+        // System.out.println(findAndReplacePattern(new String[]{"badc", "abab", "dddd", "dede", "yyxx"}, "abab"));
+        System.out.println(canBeIncreasing(new int[]{2, 3, 1, 2}));
 
     }
 
+    public List<String> removeSubfolders(String[] folder) {
+        List<String> l =  new ArrayList<>();
+        Arrays.sort(folder);
+        int len = folder.length;
+        String curr = "";
+        for (int i = 0; i < len; i++) {
+            if(i == 0){
+                l.add(folder[0]);
+                curr = folder[0];
+            }else{
+                if(!folder[i].startsWith(curr+"/")){
+                    l.add(folder[i]);
+                    curr = folder[i];
+                }
+            }
+        }
+
+        return l;
+    }
+
     public static boolean canBeIncreasing(int[] nums) {
+        String s = "";
+
         int len = nums.length;
         int prev = nums[0];
         int count = 0;
         for (int i = 1; i < len; i++) {
-            if(prev < nums[i]){
+            if (prev < nums[i]) {
                 prev = nums[i];
-            }else{
-                if(prev >= nums[i] && i -2 > 0) {
+            } else {
+                if (prev >= nums[i] && i - 2 > 0) {
 
                     prev = nums[i - 2];
-                }
-                else{
+                } else {
 
                     prev = nums[0];
 
@@ -78,7 +101,7 @@ public class Leetcode21MainClass {
                 count += 1;
             }
 
-            if(count > 1){
+            if (count > 1) {
                 return false;
             }
         }
@@ -141,11 +164,6 @@ public class Leetcode21MainClass {
         return l;
     }
 
-    public List<String> removeSubfolders(String[] folder) {
-        Arrays.sort(folder);
-
-        return null;
-    }
 
     public static String evaluate(String s, List<List<String>> knowledge) {
         Map<String, String> map = new HashMap<>();
