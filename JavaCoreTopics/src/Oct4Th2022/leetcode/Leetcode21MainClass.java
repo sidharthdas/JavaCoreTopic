@@ -53,9 +53,36 @@ public class Leetcode21MainClass {
         //System.out.println(triangularSum(new int[]{1, 2, 3, 4, 5}));
         //[["name","bob"],["age","two"]]
         //System.out.println(evaluate("(a)(b)", Arrays.asList(Arrays.asList("a", "b"), Arrays.asList("b", "a"))));
-        System.out.println(findAndReplacePattern(new String[]{"badc", "abab", "dddd", "dede", "yyxx"}, "abab"));
+       // System.out.println(findAndReplacePattern(new String[]{"badc", "abab", "dddd", "dede", "yyxx"}, "abab"));
+        System.out.println(canBeIncreasing(new int[]{2,3,1,2}));
 
+    }
 
+    public static boolean canBeIncreasing(int[] nums) {
+        int len = nums.length;
+        int prev = nums[0];
+        int count = 0;
+        for (int i = 1; i < len; i++) {
+            if(prev < nums[i]){
+                prev = nums[i];
+            }else{
+                if(prev >= nums[i] && i -2 > 0) {
+
+                    prev = nums[i - 2];
+                }
+                else{
+
+                    prev = nums[0];
+
+                }
+                count += 1;
+            }
+
+            if(count > 1){
+                return false;
+            }
+        }
+        return true;
     }
 
     private static List<Integer> pat(String word) {
