@@ -60,6 +60,11 @@ public class Leetcode21MainClass {
 
     }
 
+    public boolean validateStackSequences(int[] pushed, int[] popped) {
+        int pushSize = pushed.length;
+        return false;
+    }
+
     public int[] pivotArray(int[] nums, int pivot) {
         List<Integer> l = new ArrayList<>();
         l.addAll(Arrays.stream(nums).boxed().filter(x -> x < pivot).toList());
