@@ -57,9 +57,34 @@ public class Leetcode21MainClass {
         //System.out.println(evaluate("(a)(b)", Arrays.asList(Arrays.asList("a", "b"), Arrays.asList("b", "a"))));
         // System.out.println(findAndReplacePattern(new String[]{"badc", "abab", "dddd", "dede", "yyxx"}, "abab"));
         //System.out.println(canBeIncreasing(new int[]{2, 3, 1, 2}));
-        System.out.println(evaluate("(mrvv)(nbh)(tgsq)kmfhpzv(yaj)(f)y(jdjz)(ir)(v)(s)ak(tw)(y)w", Arrays.asList(Arrays.asList("jdvcuhnq", "g"), Arrays.asList("yediraal", "j"), Arrays.asList("vjpwbmgu", "w"), Arrays.asList("xmfaqppl", "r"), Arrays.asList("lembcicy", "p"), Arrays.asList("cyyslclq", "i"), Arrays.asList("mwcqdcwm", "p"), Arrays.asList("mdmbntgd", "h"), Arrays.asList("tpznnnyl", "t"), Arrays.asList("ftczphgc", "v"), Arrays.asList("vadgifxk", "h"), Arrays.asList("czquforc", "n"), Arrays.asList("vigqtimh", "v"), Arrays.asList("jiziptez", "s"), Arrays.asList("pwyelcth", "r"), Arrays.asList("wlkqozyf", "m"), Arrays.asList("xpygxnmj", "d"), Arrays.asList("adozymjw", "f"), Arrays.asList("bjxjtgna", "y"), Arrays.asList("ureemetw", "x"), Arrays.asList("eowfoeei", "q"), Arrays.asList("tw", "ungf"), Arrays.asList("vxoslleo", "g"), Arrays.asList("bawftokw", "b"), Arrays.asList("sfbyblto", "f"), Arrays.asList("lgbqnhpg", "f"), Arrays.asList("oknhudfq", "b"), Arrays.asList("sxiquhyg", "r"), Arrays.asList("cxfwklsn", "w"), Arrays.asList("rprjtget", "h"), Arrays.asList("hgqvkuwj", "p"), Arrays.asList("jdysaybt", "k"), Arrays.asList("rhersdzn", "x"), Arrays.asList("yftngzmr", "p"), Arrays.asList("arubuguk", "b"), Arrays.asList("xloxgmoz", "c"), Arrays.asList("jxuhxkkg", "b"), Arrays.asList("upsfbqgv", "h"), Arrays.asList("ehgttwer", "i"), Arrays.asList("fvspnzrs", "w"), Arrays.asList("nlhovrmk", "v"), Arrays.asList("jtiwewui", "l"), Arrays.asList("izsqicwu", "h"), Arrays.asList("pnjlmylt", "g"), Arrays.asList("f", "vava"), Arrays.asList("fsniyzec", "g"), Arrays.asList("xerbzwek", "v"), Arrays.asList("wpmfveht", "d"), Arrays.asList("aeynlizp", "b"), Arrays.asList("y", "rrkv"), Arrays.asList("mlajgsll", "u"), Arrays.asList("mdjwnyhh", "q"), Arrays.asList("fuubthmi", "i"), Arrays.asList("zytszqhy", "g"), Arrays.asList("nautvnmh", "q"), Arrays.asList("snsiaaze", "y"), Arrays.asList("guimbybe", "x"), Arrays.asList("gojbikaw", "v"), Arrays.asList("gbjvveec", "w"))));
+        //System.out.println(evaluate("(mrvv)(nbh)(tgsq)kmfhpzv(yaj)(f)y(jdjz)(ir)(v)(s)ak(tw)(y)w", Arrays.asList(Arrays.asList("jdvcuhnq", "g"), Arrays.asList("yediraal", "j"), Arrays.asList("vjpwbmgu", "w"), Arrays.asList("xmfaqppl", "r"), Arrays.asList("lembcicy", "p"), Arrays.asList("cyyslclq", "i"), Arrays.asList("mwcqdcwm", "p"), Arrays.asList("mdmbntgd", "h"), Arrays.asList("tpznnnyl", "t"), Arrays.asList("ftczphgc", "v"), Arrays.asList("vadgifxk", "h"), Arrays.asList("czquforc", "n"), Arrays.asList("vigqtimh", "v"), Arrays.asList("jiziptez", "s"), Arrays.asList("pwyelcth", "r"), Arrays.asList("wlkqozyf", "m"), Arrays.asList("xpygxnmj", "d"), Arrays.asList("adozymjw", "f"), Arrays.asList("bjxjtgna", "y"), Arrays.asList("ureemetw", "x"), Arrays.asList("eowfoeei", "q"), Arrays.asList("tw", "ungf"), Arrays.asList("vxoslleo", "g"), Arrays.asList("bawftokw", "b"), Arrays.asList("sfbyblto", "f"), Arrays.asList("lgbqnhpg", "f"), Arrays.asList("oknhudfq", "b"), Arrays.asList("sxiquhyg", "r"), Arrays.asList("cxfwklsn", "w"), Arrays.asList("rprjtget", "h"), Arrays.asList("hgqvkuwj", "p"), Arrays.asList("jdysaybt", "k"), Arrays.asList("rhersdzn", "x"), Arrays.asList("yftngzmr", "p"), Arrays.asList("arubuguk", "b"), Arrays.asList("xloxgmoz", "c"), Arrays.asList("jxuhxkkg", "b"), Arrays.asList("upsfbqgv", "h"), Arrays.asList("ehgttwer", "i"), Arrays.asList("fvspnzrs", "w"), Arrays.asList("nlhovrmk", "v"), Arrays.asList("jtiwewui", "l"), Arrays.asList("izsqicwu", "h"), Arrays.asList("pnjlmylt", "g"), Arrays.asList("f", "vava"), Arrays.asList("fsniyzec", "g"), Arrays.asList("xerbzwek", "v"), Arrays.asList("wpmfveht", "d"), Arrays.asList("aeynlizp", "b"), Arrays.asList("y", "rrkv"), Arrays.asList("mlajgsll", "u"), Arrays.asList("mdjwnyhh", "q"), Arrays.asList("fuubthmi", "i"), Arrays.asList("zytszqhy", "g"), Arrays.asList("nautvnmh", "q"), Arrays.asList("snsiaaze", "y"), Arrays.asList("guimbybe", "x"), Arrays.asList("gojbikaw", "v"), Arrays.asList("gbjvveec", "w"))));
+        System.out.println(decodeString("3[a]2[bc]"));
 
+    }
 
+    public static String decodeString(String s) {
+        int len = s.length();
+        while(s.contains("[")){
+            int lastIndex = s.lastIndexOf("[");
+            StringBuilder sb = new StringBuilder();
+            for(int i = lastIndex - 1; i < len; i++){
+                sb.append(s.charAt(i));
+                if(s.charAt(i)== ']'){
+                    break;
+                }
+            }
+            int times = Integer.parseInt(String.valueOf(sb.toString().charAt(0)));
+            int sbLen = sb.length();
+            String s1 = sb.toString().substring(2, sbLen - 1);
+            String sb1 = "";
+            while(times != 0){
+                sb1 += s1;
+                times--;
+
+            }
+            s = s.replace(sb.toString(), sb1);
+        }
+        return s;
     }
 
     public static String evaluate(String s, List<List<String>> knowledge) {
