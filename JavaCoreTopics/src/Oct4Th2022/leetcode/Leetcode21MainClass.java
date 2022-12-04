@@ -96,6 +96,7 @@ public class Leetcode21MainClass {
                 break;
             }
         }
+        System.out.println(s);
         return s;
     }
 
