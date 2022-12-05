@@ -64,6 +64,20 @@ public class Leetcode21MainClass {
 
     }
 
+    public int maxSubArray(int[] nums) {
+        int len = nums.length;
+        int sum = 0, maxi = nums[0];
+
+        for(int i = 0; i < len; i++){
+            sum += nums[i];
+            maxi = Math.max(maxi, sum);
+            if(sum < 0){
+                sum = 0;
+            }
+        }
+        return maxi;
+    }
+
     public static int distanceBetweenBusStops(int[] distance, int start, int destination) {
         int len = distance.length;
         int forward = 0;
