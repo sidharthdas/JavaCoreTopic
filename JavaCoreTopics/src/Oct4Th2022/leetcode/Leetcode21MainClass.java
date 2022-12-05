@@ -63,6 +63,30 @@ public class Leetcode21MainClass {
 
     }
 
+    public void duplicateZeros(int[] arr) {
+        int len = arr.length;
+
+        for(int i = 0; i < len ; i++){
+            if(arr[i] == 0){
+                if(i + 1 < len){
+                    move(i+1, arr);
+                    arr[i + 1] = 0;
+                    i++;
+                }
+            }
+        }
+    }
+
+    private void move(int index, int[] arr){
+        int prev = arr[index];
+
+        for(int i = index + 1; i <  arr.length; i++){
+            int temp = arr[i];
+            arr[i] = prev;
+            prev = temp;
+        }
+    }
+
     public static String removeDuplicates(String s, int k) {
         while (true) {
             int len = s.length();
