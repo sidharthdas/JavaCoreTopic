@@ -15,7 +15,6 @@ public class Leetcode21MainClass {
        /* ["Bank","deposit","transfer","transfer"]
 [[[0]],[1,2],[1,1,1],[1,1,3]]*//*
         Bank bank = new Bank(new long[]{0});
-
         bank.deposit(1, 2);     // return true, it is valid to deposit $20 to account 5.
         // Account 5 has $10 + $20 = $30.
         bank.transfer(3, 4, 15); // return false, the current balance of account 3 is $10,
