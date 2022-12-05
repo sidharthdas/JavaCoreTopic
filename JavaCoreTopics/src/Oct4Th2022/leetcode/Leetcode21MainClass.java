@@ -59,7 +59,47 @@ public class Leetcode21MainClass {
         //System.out.println(canBeIncreasing(new int[]{2, 3, 1, 2}));
         //System.out.println(evaluate("(mrvv)(nbh)(tgsq)kmfhpzv(yaj)(f)y(jdjz)(ir)(v)(s)ak(tw)(y)w", Arrays.asList(Arrays.asList("jdvcuhnq", "g"), Arrays.asList("yediraal", "j"), Arrays.asList("vjpwbmgu", "w"), Arrays.asList("xmfaqppl", "r"), Arrays.asList("lembcicy", "p"), Arrays.asList("cyyslclq", "i"), Arrays.asList("mwcqdcwm", "p"), Arrays.asList("mdmbntgd", "h"), Arrays.asList("tpznnnyl", "t"), Arrays.asList("ftczphgc", "v"), Arrays.asList("vadgifxk", "h"), Arrays.asList("czquforc", "n"), Arrays.asList("vigqtimh", "v"), Arrays.asList("jiziptez", "s"), Arrays.asList("pwyelcth", "r"), Arrays.asList("wlkqozyf", "m"), Arrays.asList("xpygxnmj", "d"), Arrays.asList("adozymjw", "f"), Arrays.asList("bjxjtgna", "y"), Arrays.asList("ureemetw", "x"), Arrays.asList("eowfoeei", "q"), Arrays.asList("tw", "ungf"), Arrays.asList("vxoslleo", "g"), Arrays.asList("bawftokw", "b"), Arrays.asList("sfbyblto", "f"), Arrays.asList("lgbqnhpg", "f"), Arrays.asList("oknhudfq", "b"), Arrays.asList("sxiquhyg", "r"), Arrays.asList("cxfwklsn", "w"), Arrays.asList("rprjtget", "h"), Arrays.asList("hgqvkuwj", "p"), Arrays.asList("jdysaybt", "k"), Arrays.asList("rhersdzn", "x"), Arrays.asList("yftngzmr", "p"), Arrays.asList("arubuguk", "b"), Arrays.asList("xloxgmoz", "c"), Arrays.asList("jxuhxkkg", "b"), Arrays.asList("upsfbqgv", "h"), Arrays.asList("ehgttwer", "i"), Arrays.asList("fvspnzrs", "w"), Arrays.asList("nlhovrmk", "v"), Arrays.asList("jtiwewui", "l"), Arrays.asList("izsqicwu", "h"), Arrays.asList("pnjlmylt", "g"), Arrays.asList("f", "vava"), Arrays.asList("fsniyzec", "g"), Arrays.asList("xerbzwek", "v"), Arrays.asList("wpmfveht", "d"), Arrays.asList("aeynlizp", "b"), Arrays.asList("y", "rrkv"), Arrays.asList("mlajgsll", "u"), Arrays.asList("mdjwnyhh", "q"), Arrays.asList("fuubthmi", "i"), Arrays.asList("zytszqhy", "g"), Arrays.asList("nautvnmh", "q"), Arrays.asList("snsiaaze", "y"), Arrays.asList("guimbybe", "x"), Arrays.asList("gojbikaw", "v"), Arrays.asList("gbjvveec", "w"))));
         //System.out.println(decodeString("3[z]2[2[y]pq4[2[jk]e1[f]]]ef"));
-        System.out.println(removeDuplicates("deeedbbcccbdaa", 3));
+        //System.out.println(removeDuplicates("deeedbbcccbdaa", 3));
+        System.out.println(distanceBetweenBusStops(new int[]{3,6,7,2,9,10,7,16,11}, 6, 2));
+
+    }
+
+    public static int distanceBetweenBusStops(int[] distance, int start, int destination) {
+        int len = distance.length;
+        int forward = 0;
+        int backward = 0;
+        int current = start;
+        while(current != destination){
+            forward += distance[current];
+            if(current == len - 1){
+                current = 0;
+            }else {
+                current++;
+            }
+        }
+        int backCurrent = start;
+
+        for(int i = start; ; i--){
+            if(i - 1 < 0){
+                i = len -1;
+            }
+            backward += distance[i];
+            if(i == destination){
+                break;
+            }
+        }
+        /*while(backCurrent != destination ){
+            backward += distance[backCurrent];
+            if(backCurrent == 0){
+                backCurrent = len - 1;
+            }else {
+                backCurrent--;
+            }
+        }*/
+
+        //backward = backward - distance[start];
+
+        return backward > forward ? forward : backward;
 
     }
 
