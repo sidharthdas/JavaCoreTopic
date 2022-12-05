@@ -1,5 +1,34 @@
 # JavaCoreTopic
 
+-> Kadane Algorithm:
+
+Maximum sum of sub-array:
+Notes:
+```
+Initially keep sum = 0 and maxi = arr[0] (this is coz sub-array can be atleast one element)
+then, for all elements of the array, follow 3 steps:
+Step 1. sum = sum + arr[i];
+Step 2. maxi = maximumOf(maxi, sum)
+Step 3. if(sum < 0) sum = 0
+Then, return maxi
+```
+Kadane Code:
+```
+public int maxSubArray(int[] nums) {
+        int len = nums.length;
+        int sum = 0, maxi = nums[0];
+
+        for(int i = 0; i < len; i++){
+            sum += nums[i];
+            maxi = Math.max(maxi, sum);
+            if(sum < 0){
+                sum = 0;
+            }
+        }
+        return maxi;
+    }
+```
+
 -> For Java core topics, refer package JavaCoreTopicsImplementation17thJul2021
 
 -> For BST please follow this package src.binarysearchtreefullimplementation
