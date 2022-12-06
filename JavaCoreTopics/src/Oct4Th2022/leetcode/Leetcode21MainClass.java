@@ -63,6 +63,30 @@ public class Leetcode21MainClass {
 
     }
 
+    public List<Integer> minSubsequence(int[] nums) {
+        Arrays.sort(nums);
+        int len = nums.length;
+        List<Integer> l = new ArrayList<>();
+        l.add(nums[len - 1]);
+        int currIndex = len - 2;
+        while(l.size() != len) {
+            int sum = 0;
+            int currListSum = l.stream().reduce(0, Integer::sum);
+            for (int i = currIndex; i >= 0; i--) {
+                sum+= nums[i];
+                if(sum > currListSum){
+                    break;
+                }
+            }
+            if(sum < currListSum){
+                break;
+            }
+            l.add(nums[currIndex]);
+            currIndex -= 1;
+        }
+        return l;
+    }
+
     public int maxSubArray(int[] nums) {
         int len = nums.length;
         int sum = 0, maxi = nums[0];
