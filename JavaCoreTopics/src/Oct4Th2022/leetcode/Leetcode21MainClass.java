@@ -63,6 +63,19 @@ public class Leetcode21MainClass {
 
     }
 
+    public int maximumValue(String[] strs) {
+        List<Integer> l = new ArrayList<>();
+        for(String s : strs){
+            if(s.matches("[0-9]+") ){
+                l.add(Integer.parseInt(s));
+            }else{
+                l.add(s.length());
+            }
+        }
+
+        return l.stream().sorted(Comparator.reverseOrder()).findFirst().get();
+    }
+
     public List<Integer> minSubsequence(int[] nums) {
         Arrays.sort(nums);
         int len = nums.length;
