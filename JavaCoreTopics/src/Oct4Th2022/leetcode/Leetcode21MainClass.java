@@ -59,8 +59,42 @@ public class Leetcode21MainClass {
         //System.out.println(evaluate("(mrvv)(nbh)(tgsq)kmfhpzv(yaj)(f)y(jdjz)(ir)(v)(s)ak(tw)(y)w", Arrays.asList(Arrays.asList("jdvcuhnq", "g"), Arrays.asList("yediraal", "j"), Arrays.asList("vjpwbmgu", "w"), Arrays.asList("xmfaqppl", "r"), Arrays.asList("lembcicy", "p"), Arrays.asList("cyyslclq", "i"), Arrays.asList("mwcqdcwm", "p"), Arrays.asList("mdmbntgd", "h"), Arrays.asList("tpznnnyl", "t"), Arrays.asList("ftczphgc", "v"), Arrays.asList("vadgifxk", "h"), Arrays.asList("czquforc", "n"), Arrays.asList("vigqtimh", "v"), Arrays.asList("jiziptez", "s"), Arrays.asList("pwyelcth", "r"), Arrays.asList("wlkqozyf", "m"), Arrays.asList("xpygxnmj", "d"), Arrays.asList("adozymjw", "f"), Arrays.asList("bjxjtgna", "y"), Arrays.asList("ureemetw", "x"), Arrays.asList("eowfoeei", "q"), Arrays.asList("tw", "ungf"), Arrays.asList("vxoslleo", "g"), Arrays.asList("bawftokw", "b"), Arrays.asList("sfbyblto", "f"), Arrays.asList("lgbqnhpg", "f"), Arrays.asList("oknhudfq", "b"), Arrays.asList("sxiquhyg", "r"), Arrays.asList("cxfwklsn", "w"), Arrays.asList("rprjtget", "h"), Arrays.asList("hgqvkuwj", "p"), Arrays.asList("jdysaybt", "k"), Arrays.asList("rhersdzn", "x"), Arrays.asList("yftngzmr", "p"), Arrays.asList("arubuguk", "b"), Arrays.asList("xloxgmoz", "c"), Arrays.asList("jxuhxkkg", "b"), Arrays.asList("upsfbqgv", "h"), Arrays.asList("ehgttwer", "i"), Arrays.asList("fvspnzrs", "w"), Arrays.asList("nlhovrmk", "v"), Arrays.asList("jtiwewui", "l"), Arrays.asList("izsqicwu", "h"), Arrays.asList("pnjlmylt", "g"), Arrays.asList("f", "vava"), Arrays.asList("fsniyzec", "g"), Arrays.asList("xerbzwek", "v"), Arrays.asList("wpmfveht", "d"), Arrays.asList("aeynlizp", "b"), Arrays.asList("y", "rrkv"), Arrays.asList("mlajgsll", "u"), Arrays.asList("mdjwnyhh", "q"), Arrays.asList("fuubthmi", "i"), Arrays.asList("zytszqhy", "g"), Arrays.asList("nautvnmh", "q"), Arrays.asList("snsiaaze", "y"), Arrays.asList("guimbybe", "x"), Arrays.asList("gojbikaw", "v"), Arrays.asList("gbjvveec", "w"))));
         //System.out.println(decodeString("3[z]2[2[y]pq4[2[jk]e1[f]]]ef"));
         //System.out.println(removeDuplicates("deeedbbcccbdaa", 3));
-        System.out.println(distanceBetweenBusStops(new int[]{3,6,7,2,9,10,7,16,11}, 6, 2));
+        //System.out.println(distanceBetweenBusStops(new int[]{3,6,7,2,9,10,7,16,11}, 6, 2));
+        //Map<String, String> m = new HashMap<>();
 
+        List<Hosting> list = new ArrayList<>();
+        list.add(new Hosting(1, "liquidweb.com", 80000));
+        list.add(new Hosting(2, "linode.com", 90000));
+        list.add(new Hosting(3, "digitalocean.com", 120000));
+        list.add(new Hosting(4, "aws.amazon.com", 200000));
+        list.add(new Hosting(5, "mkyong.com", 1));
+
+       /* Map<String, Long> result2 = list.stream().collect(
+                Collectors.toMap(Hosting::getName, Hosting::getWebsites));
+
+        System.out.println("Result 1 : " + result1);*/
+
+    }
+
+    public int getMaximumGenerated(int n) {
+        int[] arr = new int[n + 1];
+        if(n == 1) return 1;
+        if(n == 0) return 0;
+        arr[0] = 0;
+        arr[1] = 1;
+        int max = 0;
+
+        for(int i = 2; i <=n; i++){
+            if(i % 2 == 0){
+                arr[i] = arr[i / 2];
+            }else {
+                arr[i] = arr[i / 2] + arr[i / 2 + 1];
+            }
+
+            max = Math.max(arr[i], max);
+        }
+
+        return max;
     }
 
     public int maximumValue(String[] strs) {
@@ -1351,4 +1385,17 @@ class Trie {
         return false;
     }
 }
+ class Hosting {
 
+    private int Id;
+    private String name;
+    private long websites;
+
+    public Hosting(int id, String name, long websites) {
+        Id = id;
+        this.name = name;
+        this.websites = websites;
+    }
+
+    //getters, setters and toString()
+}
