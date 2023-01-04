@@ -62,18 +62,32 @@ public class Leetcode21MainClass {
         //System.out.println(distanceBetweenBusStops(new int[]{3,6,7,2,9,10,7,16,11}, 6, 2));
         //Map<String, String> m = new HashMap<>();
 
-        List<Hosting> list = new ArrayList<>();
+        /*List<Hosting> list = new ArrayList<>();
         list.add(new Hosting(1, "liquidweb.com", 80000));
         list.add(new Hosting(2, "linode.com", 90000));
         list.add(new Hosting(3, "digitalocean.com", 120000));
         list.add(new Hosting(4, "aws.amazon.com", 200000));
         list.add(new Hosting(5, "mkyong.com", 1));
 
-       /* Map<String, Long> result2 = list.stream().collect(
+       *//* Map<String, Long> result2 = list.stream().collect(
                 Collectors.toMap(Hosting::getName, Hosting::getWebsites));
 
-        System.out.println("Result 1 : " + result1);*/
+        System.out.println("Result 1 : " + result1);*//**/
+        System.out.println(5^2);
+        findArray(new int[]{5,2,0,3,1});
 
+    }
+
+    public static int[] findArray(int[] pref) {
+        int len = pref.length;
+        int[] finalArr = new int[len];
+
+        for(int i = len - 1; i>0; i--){
+
+            finalArr[i] = pref[i] ^ pref[i-1];
+        }
+        finalArr[0] = pref[0];
+        return finalArr;
     }
 
     public int getMaximumGenerated(int n) {
@@ -109,6 +123,7 @@ public class Leetcode21MainClass {
 
         return l.stream().sorted(Comparator.reverseOrder()).findFirst().get();
     }
+
 
     public List<Integer> minSubsequence(int[] nums) {
         Arrays.sort(nums);
