@@ -75,7 +75,7 @@ public class Leetcode21MainClass {
         System.out.println("Result 1 : " + result1);*//**/
         /*System.out.println(5^2);
         findArray(new int[]{5,2,0,3,1});*/
-        System.out.println(isCircularSentence("ab a"));
+        System.out.println(isCircularSentence("a a ba"));
 
     }
     public static boolean isCircularSentence(String sentence) {
@@ -99,7 +99,7 @@ public class Leetcode21MainClass {
             return false;
         }
         boolean flag = true;
-        for(int i = 0; i < len - 2; i++){
+        for(int i = 0; i < len - 1; i++){
             if(arr[i].charAt(arr[i].length()-1) != arr[i+1].charAt(0)){
                 flag = false;
                 break;
