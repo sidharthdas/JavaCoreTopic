@@ -73,9 +73,41 @@ public class Leetcode21MainClass {
                 Collectors.toMap(Hosting::getName, Hosting::getWebsites));
 
         System.out.println("Result 1 : " + result1);*//**/
-        System.out.println(5^2);
-        findArray(new int[]{5,2,0,3,1});
+        /*System.out.println(5^2);
+        findArray(new int[]{5,2,0,3,1});*/
+        System.out.println(isCircularSentence("ab a"));
 
+    }
+    public static boolean isCircularSentence(String sentence) {
+        String[] arr = sentence.split(" ");
+        if(arr.length == 1){
+            if(arr[0].charAt(0) != arr[0].charAt(arr[0].length()-1)){
+                return false;
+            }
+            return true;
+        }
+        if(arr.length == 2){
+            if(arr[0].charAt(0) == arr[1].charAt(arr[1].length() - 1) &&
+                arr[0].charAt(arr[0].length()-1) == arr[1].charAt(0)) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+        int len = arr.length;
+        if(arr[0].charAt(0) != arr[len - 1].charAt(arr[len-1].length() - 1) ) {
+            return false;
+        }
+        boolean flag = true;
+        for(int i = 0; i < len - 2; i++){
+            if(arr[i].charAt(arr[i].length()-1) != arr[i+1].charAt(0)){
+                flag = false;
+                break;
+            }
+        }
+
+
+        return flag;
     }
 
     public static int[] findArray(int[] pref) {
