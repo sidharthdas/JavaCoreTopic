@@ -76,36 +76,84 @@ public class Leetcode21MainClass {
         /*System.out.println(5^2);
         findArray(new int[]{5,2,0,3,1});*/
         //System.out.println(isCircularSentence("a a ba"));
-        System.out.println(compress(new char[]{'a'}));
+        System.out.println(findJudge(3, new int[][]{{1,3},{2,3}}));
 
     }
-    public static  int compress(char[] chars) {
+
+    public static int findJudge(int n, int[][] trust) {
+        Map<Integer, Integer> countTrust = new HashMap<>();
+        Map<Integer, Integer> countTrustBy = new HashMap<>();
+
+        for(int i = 1; i <= n ;i++){
+            countTrustBy.put(i,0);
+            countTrust.put(i, 0);
+        }
+
+        for(int[] i : trust){
+            countTrust.put(i[0], countTrust.get(i[0]) + 1);
+            countTrustBy.put(i[1], countTrustBy.get(i[1]) + 1);
+        }
+
+        countTrust = countTrust.entrySet().stream().filter(x ->x.getValue() == 0).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        countTrustBy = countTrustBy.entrySet().stream().filter(x ->x.getValue() == n - 1).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+        Map<Integer, Integer> finalCountTrustBy = countTrustBy;
+
+        for(Map.Entry<Integer, Integer> map : countTrust.entrySet()){
+            if(finalCountTrustBy.containsKey(map.getKey())){
+                return map.getKey();
+            }
+        }
+
+       return -1;
+    }
+
+    public List<String> removeComments(String[] source) {
+        List<String> l = new ArrayList<>();
+
+        for (String s : source) {
+            if(s.contains("/\\*")){
+                String s1 = s.substring(s.indexOf("/"), s.lastIndexOf("/"));
+                s = s.replaceFirst(s1, "");
+            }
+
+            if(s.contains("//")){
+                String s1 = s.substring(s.indexOf("//"));
+                s = s.replaceFirst(s1, "");
+            }
+            l.add(s);
+        }
+        return l;
+
+    }
+
+    public static int compress(char[] chars) {
         String s = "";
         int len = chars.length;
         int count = 1;
         char c = chars[0];
 
-        for(int i = 1; i < len; i++){
-            if(c == chars[i]){
-                count ++;
-            }else{
+        for (int i = 1; i < len; i++) {
+            if (c == chars[i]) {
+                count++;
+            } else {
                 s += c;
-                s+= count;
+                s += count;
                 c = chars[i];
                 count = 1;
             }
         }
 
         s += c;
-        s+= count;
+        s += count;
 
         char[] crr = s.toCharArray();
         int len1 = crr.length;
 
-        for(int i = 0; i < len1; i++){
-            if(i < len){
+        for (int i = 0; i < len1; i++) {
+            if (i < len) {
                 chars[i] = crr[i];
-            }else{
+            } else {
                 break;
             }
         }
@@ -114,27 +162,27 @@ public class Leetcode21MainClass {
 
     public static boolean isCircularSentence(String sentence) {
         String[] arr = sentence.split(" ");
-        if(arr.length == 1){
-            if(arr[0].charAt(0) != arr[0].charAt(arr[0].length()-1)){
+        if (arr.length == 1) {
+            if (arr[0].charAt(0) != arr[0].charAt(arr[0].length() - 1)) {
                 return false;
             }
             return true;
         }
-        if(arr.length == 2){
-            if(arr[0].charAt(0) == arr[1].charAt(arr[1].length() - 1) &&
-                arr[0].charAt(arr[0].length()-1) == arr[1].charAt(0)) {
+        if (arr.length == 2) {
+            if (arr[0].charAt(0) == arr[1].charAt(arr[1].length() - 1) &&
+                    arr[0].charAt(arr[0].length() - 1) == arr[1].charAt(0)) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
         }
         int len = arr.length;
-        if(arr[0].charAt(0) != arr[len - 1].charAt(arr[len-1].length() - 1) ) {
+        if (arr[0].charAt(0) != arr[len - 1].charAt(arr[len - 1].length() - 1)) {
             return false;
         }
         boolean flag = true;
-        for(int i = 0; i < len - 1; i++){
-            if(arr[i].charAt(arr[i].length()-1) != arr[i+1].charAt(0)){
+        for (int i = 0; i < len - 1; i++) {
+            if (arr[i].charAt(arr[i].length() - 1) != arr[i + 1].charAt(0)) {
                 flag = false;
                 break;
             }
@@ -148,9 +196,9 @@ public class Leetcode21MainClass {
         int len = pref.length;
         int[] finalArr = new int[len];
 
-        for(int i = len - 1; i>0; i--){
+        for (int i = len - 1; i > 0; i--) {
 
-            finalArr[i] = pref[i] ^ pref[i-1];
+            finalArr[i] = pref[i] ^ pref[i - 1];
         }
         finalArr[0] = pref[0];
         return finalArr;
@@ -158,16 +206,16 @@ public class Leetcode21MainClass {
 
     public int getMaximumGenerated(int n) {
         int[] arr = new int[n + 1];
-        if(n == 1) return 1;
-        if(n == 0) return 0;
+        if (n == 1) return 1;
+        if (n == 0) return 0;
         arr[0] = 0;
         arr[1] = 1;
         int max = 0;
 
-        for(int i = 2; i <=n; i++){
-            if(i % 2 == 0){
+        for (int i = 2; i <= n; i++) {
+            if (i % 2 == 0) {
                 arr[i] = arr[i / 2];
-            }else {
+            } else {
                 arr[i] = arr[i / 2] + arr[i / 2 + 1];
             }
 
@@ -179,10 +227,10 @@ public class Leetcode21MainClass {
 
     public int maximumValue(String[] strs) {
         List<Integer> l = new ArrayList<>();
-        for(String s : strs){
-            if(s.matches("[0-9]+") ){
+        for (String s : strs) {
+            if (s.matches("[0-9]+")) {
                 l.add(Integer.parseInt(s));
-            }else{
+            } else {
                 l.add(s.length());
             }
         }
@@ -197,16 +245,16 @@ public class Leetcode21MainClass {
         List<Integer> l = new ArrayList<>();
         l.add(nums[len - 1]);
         int currIndex = len - 2;
-        while(l.size() != len) {
+        while (l.size() != len) {
             int sum = 0;
             int currListSum = l.stream().reduce(0, Integer::sum);
             for (int i = currIndex; i >= 0; i--) {
-                sum+= nums[i];
-                if(sum > currListSum){
+                sum += nums[i];
+                if (sum > currListSum) {
                     break;
                 }
             }
-            if(sum < currListSum){
+            if (sum < currListSum) {
                 break;
             }
             l.add(nums[currIndex]);
@@ -219,10 +267,10 @@ public class Leetcode21MainClass {
         int len = nums.length;
         int sum = 0, maxi = nums[0];
 
-        for(int i = 0; i < len; i++){
+        for (int i = 0; i < len; i++) {
             sum += nums[i];
             maxi = Math.max(maxi, sum);
-            if(sum < 0){
+            if (sum < 0) {
                 sum = 0;
             }
         }
@@ -234,22 +282,22 @@ public class Leetcode21MainClass {
         int forward = 0;
         int backward = 0;
         int current = start;
-        while(current != destination){
+        while (current != destination) {
             forward += distance[current];
-            if(current == len - 1){
+            if (current == len - 1) {
                 current = 0;
-            }else {
+            } else {
                 current++;
             }
         }
         int backCurrent = start;
 
-        for(int i = start; ; i--){
-            if(i - 1 < 0){
-                i = len -1;
+        for (int i = start; ; i--) {
+            if (i - 1 < 0) {
+                i = len - 1;
             }
             backward += distance[i];
-            if(i == destination){
+            if (i == destination) {
                 break;
             }
         }
@@ -271,10 +319,10 @@ public class Leetcode21MainClass {
     public void duplicateZeros(int[] arr) {
         int len = arr.length;
 
-        for(int i = 0; i < len ; i++){
-            if(arr[i] == 0){
-                if(i + 1 < len){
-                    move(i+1, arr);
+        for (int i = 0; i < len; i++) {
+            if (arr[i] == 0) {
+                if (i + 1 < len) {
+                    move(i + 1, arr);
                     arr[i + 1] = 0;
                     i++;
                 }
@@ -282,10 +330,10 @@ public class Leetcode21MainClass {
         }
     }
 
-    private void move(int index, int[] arr){
+    private void move(int index, int[] arr) {
         int prev = arr[index];
 
-        for(int i = index + 1; i <  arr.length; i++){
+        for (int i = index + 1; i < arr.length; i++) {
             int temp = arr[i];
             arr[i] = prev;
             prev = temp;
@@ -331,20 +379,20 @@ public class Leetcode21MainClass {
 
     public static String decodeString(String s) {
         int len = s.length();
-        while(s.contains("[")){
+        while (s.contains("[")) {
             int lastIndex = s.lastIndexOf("[");
             String nums = "";
             int curr = lastIndex - 1;
-            while(curr >= 0 && Arrays.asList("1","2","3","4","5","6","7","8","9","0").contains(String.valueOf(s.charAt(curr)))
-                 ){
+            while (curr >= 0 && Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "0").contains(String.valueOf(s.charAt(curr)))
+            ) {
                 nums = s.charAt(curr) + nums;
-                curr --;
+                curr--;
             }
             len = s.length();
             StringBuilder sb = new StringBuilder();
-            for(int i = lastIndex; i < len; i++){
+            for (int i = lastIndex; i < len; i++) {
                 sb.append(s.charAt(i));
-                if(s.charAt(i)== ']'){
+                if (s.charAt(i) == ']') {
                     break;
                 }
             }
@@ -352,12 +400,12 @@ public class Leetcode21MainClass {
             int sbLen = sb.length();
             String s1 = sb.toString().substring(1, sbLen - 1);
             String sb1 = "";
-            while(times != 0){
+            while (times != 0) {
                 sb1 += s1;
                 times--;
 
             }
-            s = s.replace(nums+sb.toString(), sb1);
+            s = s.replace(nums + sb.toString(), sb1);
         }
         return s;
     }
@@ -375,11 +423,11 @@ public class Leetcode21MainClass {
             String sub = s.substring(startIndex, endIndex + 1);
             String word = sub.substring(1, sub.length() - 1);
 
-            if(map.containsKey(word)){
-                s = s.replaceFirst("\\("+s.substring(startIndex+1, endIndex)+"\\)" , map.get(word));
+            if (map.containsKey(word)) {
+                s = s.replaceFirst("\\(" + s.substring(startIndex + 1, endIndex) + "\\)", map.get(word));
 
-            }else{
-                s = s.replaceFirst("\\("+s.substring(startIndex+1, endIndex)+"\\)" , "?");
+            } else {
+                s = s.replaceFirst("\\(" + s.substring(startIndex + 1, endIndex) + "\\)", "?");
                 /*s = s.replace(s.substring(startIndex + 1, endIndex), "?");
                 s = s.replaceFirst("\\(","");
                 s = s.replaceFirst("\\)","");*/
@@ -1466,7 +1514,8 @@ class Trie {
         return false;
     }
 }
- class Hosting {
+
+class Hosting {
 
     private int Id;
     private String name;
