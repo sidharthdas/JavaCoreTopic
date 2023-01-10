@@ -88,6 +88,7 @@ public class Leetcode21MainClass {
             countTrustBy.put(i,0);
             countTrust.put(i, 0);
         }
+        System.out.println();
 
         for(int[] i : trust){
             countTrust.put(i[0], countTrust.get(i[0]) + 1);
