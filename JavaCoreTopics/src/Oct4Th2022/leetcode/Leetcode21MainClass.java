@@ -92,24 +92,7 @@ public class Leetcode21MainClass {
         if(line == 0){
             return false;
         }
-
-        double ab = Math.sqrt((b[0]-a[0])*(b[0]-a[0]) + (b[1] - a[1])*(b[1] - a[1]));
-        double ac = Math.sqrt((c[0]-a[0])*(c[0]-a[0]) + (c[1] - a[1])*(c[1] - a[1]));
-        double bc = Math.sqrt((c[0]-b[0])*(c[0]-b[0]) + (c[1] - b[1])*(c[1] - b[1]));
-
-        if(ab + ac > bc &&
-            ab+bc > ac &&
-            ac + bc > ab){
-            double perimeter = (ab + ac + bc) / 2;
-
-            double area = Math.sqrt(perimeter *(perimeter - ab)*(perimeter - ac)* (perimeter - bc));
-            System.out.println(area);
-            if(area > 0.0d){
-                return true;
-            }
-        }
-
-        return false;
+        return true;
     }
 
     public static int findJudge(int n, int[][] trust) {
