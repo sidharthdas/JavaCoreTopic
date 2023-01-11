@@ -76,8 +76,40 @@ public class Leetcode21MainClass {
         /*System.out.println(5^2);
         findArray(new int[]{5,2,0,3,1});*/
         //System.out.println(isCircularSentence("a a ba"));
-        System.out.println(findJudge(3, new int[][]{{1,3},{2,3}}));
+        System.out.println(isBoomerang(new int[][]{{1,1},{2,2},{7,7}}));
 
+    }
+
+    public static boolean isBoomerang(int[][] points) {
+        int[] a = points[0];
+        int[] b = points[1];
+        int []c = points[2];
+
+        int line = a[0] * (b[1] - c[1]) +
+                b[0] * (c[1] - a[1]) +
+                c[0] * (a[1] - b[1]);
+
+        if(line == 0){
+            return false;
+        }
+
+        double ab = Math.sqrt((b[0]-a[0])*(b[0]-a[0]) + (b[1] - a[1])*(b[1] - a[1]));
+        double ac = Math.sqrt((c[0]-a[0])*(c[0]-a[0]) + (c[1] - a[1])*(c[1] - a[1]));
+        double bc = Math.sqrt((c[0]-b[0])*(c[0]-b[0]) + (c[1] - b[1])*(c[1] - b[1]));
+
+        if(ab + ac > bc &&
+            ab+bc > ac &&
+            ac + bc > ab){
+            double perimeter = (ab + ac + bc) / 2;
+
+            double area = Math.sqrt(perimeter *(perimeter - ab)*(perimeter - ac)* (perimeter - bc));
+            System.out.println(area);
+            if(area > 0.0d){
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public static int findJudge(int n, int[][] trust) {
