@@ -20,7 +20,7 @@ public class Leetcode2MainClass2 {
         int[] finalRes = new int[k];
         for(int[] log : logs){
             if(map.containsKey(log[0])){
-                Set<Integer> s = map.get(log);
+                Set<Integer> s = map.get(log[0]);
                 s.add(log[1]);
                 map.put(log[0], s);
             }else{
