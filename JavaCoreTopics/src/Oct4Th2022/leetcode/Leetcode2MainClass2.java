@@ -43,7 +43,7 @@ public class Leetcode2MainClass2 {
 
         }
 
-        int finalVal = 0;
+        long finalVal = 0;
 
         for(List<Integer> l1 : l){
             finalVal += (l1.get(0) * l1.get(1));
