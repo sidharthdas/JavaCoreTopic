@@ -19,15 +19,8 @@ public class Leetcode2MainClass2 {
         Map<Integer, Set<Integer>> map = new HashMap<>();
         int[] finalRes = new int[k];
         for(int[] log : logs){
-            if(map.containsKey(log[0])){
-                Set<Integer> s = map.get(log[0]);
-                s.add(log[1]);
-                map.put(log[0], s);
-            }else{
-                Set<Integer> s = new HashSet<>();
-                s.add(log[1]);
-                map.put(log[0], s);
-            }
+            map.putIfAbsent(log[0], new HashSet<>());
+            map.get(log[0]).add(log[1]);
         }
 
         for (int key : map.keySet()) {
