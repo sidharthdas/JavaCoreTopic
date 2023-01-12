@@ -80,6 +80,7 @@ public class Leetcode21MainClass {
 
     }
 
+
     public static boolean isBoomerang(int[][] points) {
         int[] a = points[0];
         int[] b = points[1];
