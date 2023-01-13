@@ -26,6 +26,24 @@ public class Leetcode2MainClass2 {
         return finalRes;
     }
 
+    public int maxOperations(int[] nums, int k) {
+
+        Map<Integer, Integer> map = new HashMap<>();
+        int len = nums.length;
+        int totalCount = 0;
+        for(int i = 0; i < len; i++){
+            if(map.containsKey(k-nums[i]) && map.get(k-nums[i]) > 0){
+                totalCount++;
+                map.put(k-nums[i], map.get(k-nums[i]) - 1);
+            }else{
+                map.put(nums[i], map.getOrDefault(nums[i], 0)+1);
+            }
+        }
+
+        return totalCount;
+
+    }
+
     public long dividePlayers(int[] skill) {
         Arrays.sort(skill);
         int len = skill.length;
