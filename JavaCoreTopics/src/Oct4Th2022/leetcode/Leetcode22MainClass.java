@@ -29,12 +29,10 @@ class MagicDictionary {
     }
 
     public boolean search(String searchWord) {
-        if(words.contains(searchWord)){
-            return false;
-        }
+
         int lenOfSearchWord = searchWord.length();
 
-        List<String> searchList = words.stream().filter(x -> x.length() == lenOfSearchWord)
+        List<String> searchList = words.stream().filter(x -> x.length() == lenOfSearchWord && x.equals(x))
                 .toList();
 
         for(String word : searchList){
