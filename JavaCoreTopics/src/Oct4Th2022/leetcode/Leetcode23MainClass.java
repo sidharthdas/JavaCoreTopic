@@ -26,6 +26,9 @@ class NumberContainers {
     }
 
     public int find(int number) {
+        if(map.entrySet().stream().filter(x -> x.getValue() == number).count() == 0){
+            return -1;
+        }
         Map.Entry<Integer, Integer> e = map.entrySet().stream().filter(x -> x.getValue() == number)
                 .sorted(Map.Entry.comparingByKey()).findFirst().get();
         if( e == null){
