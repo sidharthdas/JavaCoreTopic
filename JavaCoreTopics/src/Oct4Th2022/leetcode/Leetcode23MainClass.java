@@ -2,6 +2,7 @@ package Oct4Th2022.leetcode;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * @author Sidharth Das
@@ -18,7 +19,7 @@ class NumberContainers {
     Map<Integer, Integer> map;
 
     public NumberContainers() {
-        map = new HashMap<>();
+        map = new TreeMap<>();
     }
 
     public void change(int index, int number) {
@@ -30,10 +31,7 @@ class NumberContainers {
             return -1;
         }
         Map.Entry<Integer, Integer> e = map.entrySet().stream().filter(x -> x.getValue() == number)
-                .sorted(Map.Entry.comparingByKey()).findFirst().get();
-        if( e == null){
-            return -1;
-        }
+                .findFirst().get();
         return e.getKey();
     }
 }
