@@ -15,19 +15,19 @@ public class Leetcode23MainClass {
 
     public List<List<String>> mostPopularCreator(String[] creators, String[] ids, int[] views) {
         Map<String, List<String>> creatorsWithIds = new HashMap<>();
-        Map<String, Integer> creatorsWithViews = new HashMap<>();
+        Map<String, Long> creatorsWithViews = new HashMap<>();
         Map<String, Map<String, Integer>> creatorsWithSeparate = new HashMap<>();
         int count = creators.length;
 
         for(int i = 0; i < count; i++){
             creatorsWithIds.putIfAbsent(creators[i],new ArrayList<>());
             creatorsWithIds.get(creators[i]).add(ids[i]);
-            creatorsWithViews.put(creators[i], creatorsWithViews.getOrDefault(creators[i], 0)+ views[i]);
+            creatorsWithViews.put(creators[i], creatorsWithViews.getOrDefault(creators[i], 0l)+ views[i]);
             creatorsWithSeparate.putIfAbsent(creators[i], new HashMap<>());
             creatorsWithSeparate.get(creators[i]).put(ids[i], views[i]);
         }
 
-        int highestView = creatorsWithViews.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+        long highestView = creatorsWithViews.entrySet().stream().sorted(Map.Entry.<String, Long>comparingByValue().reversed())
                 .findFirst().get().getValue();
 
         List<String> keys = creatorsWithViews.entrySet().stream().filter(x -> x.getValue() == highestView).map(Map.Entry::getKey)
