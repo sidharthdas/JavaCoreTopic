@@ -35,7 +35,7 @@ public class Leetcode23MainClass {
         keys.forEach(x -> {
             List<String> l = new ArrayList<>();
             l.add(x);
-            l.add(creatorsWithIds.get(x).stream().sorted().findFirst().get());
+            l.add(creatorsWithIds.get(x).stream().sorted(Comparator.reverseOrder()).findFirst().get());
             finalList.add(l);
         });
         return finalList;
