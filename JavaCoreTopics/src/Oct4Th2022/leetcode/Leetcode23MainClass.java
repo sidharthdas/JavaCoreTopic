@@ -16,12 +16,15 @@ public class Leetcode23MainClass {
     public List<List<String>> mostPopularCreator(String[] creators, String[] ids, int[] views) {
         Map<String, List<String>> creatorsWithIds = new HashMap<>();
         Map<String, Integer> creatorsWithViews = new HashMap<>();
+        Map<String, Map<String, Integer>> creatorsWithSeparate = new HashMap<>();
         int count = creators.length;
 
         for(int i = 0; i < count; i++){
             creatorsWithIds.putIfAbsent(creators[i],new ArrayList<>());
             creatorsWithIds.get(creators[i]).add(ids[i]);
             creatorsWithViews.put(creators[i], creatorsWithViews.getOrDefault(creators[i], 0)+ views[i]);
+            creatorsWithSeparate.putIfAbsent(creators[i], new HashMap<>());
+            creatorsWithSeparate.get(creators[i]).put(ids[i], views[i]);
         }
 
         int highestView = creatorsWithViews.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
@@ -35,7 +38,12 @@ public class Leetcode23MainClass {
         keys.forEach(x -> {
             List<String> l = new ArrayList<>();
             l.add(x);
-            l.add(creatorsWithIds.get(x).stream().sorted(Comparator.reverseOrder()).findFirst().get());
+            int val = creatorsWithSeparate.get(x).entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+                            .findFirst().get().getValue();
+            l.add(creatorsWithSeparate.get(x).entrySet().stream().filter(y -> y.getValue() == val)
+                    .map(Map.Entry::getKey)
+                    .sorted().findFirst().get());
+            //l.add(creatorsWithIds.get(x).stream().sorted(Comparator.reverseOrder()).findFirst().get());
             finalList.add(l);
         });
         return finalList;
