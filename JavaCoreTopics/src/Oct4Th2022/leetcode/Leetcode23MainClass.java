@@ -1,5 +1,6 @@
 package Oct4Th2022.leetcode;
 
+import java.text.NumberFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -10,6 +11,27 @@ import java.util.stream.Collectors;
 public class Leetcode23MainClass {
 
     public static void main(String[] args) {
+
+        /*double n = 3000.12;
+
+        NumberFormat nf = NumberFormat.getInstance(new Locale("en", "US"));
+        String val = nf.format(n);
+
+        System.out.println(val);
+
+        NumberFormat nf2 = NumberFormat.getInstance(new Locale("sk", "SK"));
+        String val2 = nf2.format(n);
+
+        System.out.println(val2);
+
+        NumberFormat nf3 = NumberFormat.getInstance(new Locale("da", "DK"));
+        String val3 = nf3.format(n);
+
+        System.out.println("DK : "+val3);*/
+
+        double d = 0;
+
+        System.out.println(d);
 
     }
 
