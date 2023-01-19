@@ -33,9 +33,23 @@ public class Leetcode23MainClass {
 
     }
 
-    public int hIndex(int[] citations) {
-        Arrays.sort(citations);
-        return 0;
+    public List<Integer> findClosestElements(int[] arr, int k, int x) {
+        int len = arr.length;
+        int indexOfX = Arrays.stream(arr).boxed().toList().indexOf(x);
+        int backIndex = indexOfX - 1;
+        int forwardIndex = indexOfX + 1;
+        List<Integer> in = new ArrayList<>();
+        while(in.size() <= k){
+            if(backIndex >= 0){
+                in.add(arr[backIndex]);
+                backIndex-=1;
+            }
+            if(forwardIndex < len){
+                in.add(arr[forwardIndex]);
+                forwardIndex +=1;
+            }
+        }
+        return in;
     }
 
     public List<List<String>> mostPopularCreator(String[] creators, String[] ids, int[] views) {
