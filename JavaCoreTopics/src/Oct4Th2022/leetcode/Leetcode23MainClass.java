@@ -12,7 +12,7 @@ public class Leetcode23MainClass {
 
     public static void main(String[] args) {
 
-        double n = 3000.12;
+        /*double n = 3000.12;
 
         NumberFormat nf = NumberFormat.getInstance(new Locale("en", "US"));
         String val = nf.format(n);
@@ -28,28 +28,33 @@ public class Leetcode23MainClass {
         String val3 = nf3.format(n);
 
         System.out.println("Double: "+ String.valueOf(n));
-        System.out.println("DK : "+val3);
+        System.out.println("DK : "+val3);*/
+
+        System.out.println(findClosestElements(new int[]{1,2,3,4,5},4,3));
 
 
     }
 
-    public List<Integer> findClosestElements(int[] arr, int k, int x) {
+    public static List<Integer> findClosestElements(int[] arr, int k, int x) {
         int len = arr.length;
         int indexOfX = Arrays.stream(arr).boxed().toList().indexOf(x);
         int backIndex = indexOfX - 1;
         int forwardIndex = indexOfX + 1;
         List<Integer> in = new ArrayList<>();
-        while(in.size() <= k){
+        in.add(x);
+        while(in.size() < k){
             if(backIndex >= 0){
                 in.add(arr[backIndex]);
                 backIndex-=1;
             }
-            if(forwardIndex < len){
-                in.add(arr[forwardIndex]);
-                forwardIndex +=1;
+            while(in.size() < k) {
+                if (forwardIndex < len) {
+                    in.add(arr[forwardIndex]);
+                    forwardIndex += 1;
+                }
             }
         }
-        return in;
+        return in.stream().sorted().toList();
     }
 
     public List<List<String>> mostPopularCreator(String[] creators, String[] ids, int[] views) {
