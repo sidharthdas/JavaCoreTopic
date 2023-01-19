@@ -35,6 +35,22 @@ public class Leetcode23MainClass {
 
     }
 
+    public int[] kthSmallestPrimeFraction(int[] arr, int k) {
+
+        Map<String, Double> map = new HashMap<>();
+        int len = arr.length;
+        for(int i = 0; i < len; i++){
+            for(int j = i + 1; j < len; j++){
+                map.put(arr[i] +"-"+arr[j], (double) (arr[i]/arr[j]));
+            }
+        }
+
+        List<String> l = map.entrySet().stream().sorted(Map.Entry.<String, Double>comparingByValue())
+                .map(Map.Entry::getKey).toList();
+        return new int[]{Integer.valueOf(l.get(k).split("-")[0]), Integer.valueOf(l.get(k).split("-")[1])};
+
+    }
+
     public static List<Integer> findClosestElements(int[] arr, int k, int x) {
         int len = arr.length;
         int indexOfX = Arrays.stream(arr).boxed().toList().indexOf(x);
