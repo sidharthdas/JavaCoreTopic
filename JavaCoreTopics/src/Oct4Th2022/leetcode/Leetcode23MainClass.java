@@ -12,7 +12,7 @@ public class Leetcode23MainClass {
 
     public static void main(String[] args) {
 
-        /*double n = 3000.12;
+        double n = 3000.12;
 
         NumberFormat nf = NumberFormat.getInstance(new Locale("en", "US"));
         String val = nf.format(n);
@@ -27,12 +27,15 @@ public class Leetcode23MainClass {
         NumberFormat nf3 = NumberFormat.getInstance(new Locale("da", "DK"));
         String val3 = nf3.format(n);
 
-        System.out.println("DK : "+val3);*/
+        System.out.println("Double: "+ String.valueOf(n));
+        System.out.println("DK : "+val3);
 
-        double d = 0;
 
-        System.out.println(d);
+    }
 
+    public int hIndex(int[] citations) {
+        Arrays.sort(citations);
+        return null;
     }
 
     public List<List<String>> mostPopularCreator(String[] creators, String[] ids, int[] views) {
