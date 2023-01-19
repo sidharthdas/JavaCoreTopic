@@ -35,7 +35,7 @@ public class Leetcode23MainClass {
 
     public int hIndex(int[] citations) {
         Arrays.sort(citations);
-        return null;
+        return 0;
     }
 
     public List<List<String>> mostPopularCreator(String[] creators, String[] ids, int[] views) {
