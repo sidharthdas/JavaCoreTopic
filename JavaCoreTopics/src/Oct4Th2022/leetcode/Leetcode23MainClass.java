@@ -31,7 +31,45 @@ public class Leetcode23MainClass {
         System.out.println("DK : "+val3);*/
 
         System.out.println(kthSmallestPrimeFraction(new int[]{1,2,3,5}, 3));
+    }
 
+    public int closetTarget(String[] words, String target, int startIndex) {
+
+        if(!Arrays.stream(words).toList().contains(target)){
+            return -1;
+        }
+
+        int left = 0;
+        int right = 0;
+        int len = words.length;
+
+        int startIndexForRight = startIndex;
+        int startIndexForLeft  = startIndex;
+        while(true){
+            if(words[startIndexForRight].equals(target)){
+                break;
+            }else{
+                left++;
+                startIndexForRight++;
+                if(startIndexForRight > len -1){
+                    startIndexForRight = 0;
+                }
+            }
+        }
+
+        while(true){
+            if(words[startIndexForLeft].equals(target)){
+                break;
+            }else{
+                right++;
+                startIndexForLeft--;
+                if(startIndexForLeft < 0){
+                    startIndexForLeft = len -1;
+                }
+            }
+        }
+
+        return left > right ? right : left;
 
     }
 
