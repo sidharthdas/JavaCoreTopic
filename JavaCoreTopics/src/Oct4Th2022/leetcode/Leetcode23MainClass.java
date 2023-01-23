@@ -61,6 +61,11 @@ public class Leetcode23MainClass {
 
     }
 
+    public int maximumPopulation(int[][] logs) {
+        return 0;
+
+    }
+
     public int maximumCount(int[] nums) {
 
         int  greater =(int) Arrays.stream(nums).boxed().filter(x -> x >0).count();
