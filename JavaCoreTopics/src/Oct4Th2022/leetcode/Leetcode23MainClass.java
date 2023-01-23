@@ -61,6 +61,15 @@ public class Leetcode23MainClass {
 
     }
 
+    public int maximumCount(int[] nums) {
+
+        int  greater =(int) Arrays.stream(nums).boxed().filter(x -> x >0).count();
+        int  smaller = (int )Arrays.stream(nums).boxed().filter(x -> x < 0).count();
+
+        return greater > smaller ? greater : smaller;
+
+    }
+
 
     public int closetTarget(String[] words, String target, int startIndex) {
 
