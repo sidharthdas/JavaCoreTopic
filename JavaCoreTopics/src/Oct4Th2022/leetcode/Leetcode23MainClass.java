@@ -33,6 +33,35 @@ public class Leetcode23MainClass {
         System.out.println(kthSmallestPrimeFraction(new int[]{1,2,3,5}, 3));
     }
 
+    public int countDaysTogether(String arriveAlice, String leaveAlice, String arriveBob, String leaveBob) {
+
+        Map<Integer, Integer> map = Map.ofEntries(
+                Map.entry(1,31),
+                Map.entry(2,28),
+                Map.entry(3,31),
+                Map.entry(4,3),
+                Map.entry(5,31),
+                Map.entry(6,3),
+                Map.entry(7,31),
+                Map.entry(8,31),
+                Map.entry(9,3),
+                Map.entry(10,31),
+                Map.entry(11,3),
+                Map.entry(12,31)
+        );
+        String[] arriveAliceArr = arriveAlice.split("-");
+        String[] leaveAliceArr = leaveAlice.split("-");
+        int monthOfArrivalAlice = Integer.parseInt(arriveAliceArr[0]);
+        int dayOfArrivalAlice = Integer.parseInt(arriveAliceArr[1]);
+
+        int monthOfLeaveAlice = Integer.parseInt(leaveAliceArr[0]);
+        int dayOfLeaveAlice = Integer.parseInt(leaveAliceArr[1]);
+
+        return 2;
+
+    }
+
+
     public int closetTarget(String[] words, String target, int startIndex) {
 
         if(!Arrays.stream(words).toList().contains(target)){
