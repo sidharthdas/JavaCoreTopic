@@ -3,6 +3,7 @@ package Oct4Th2022.leetcode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * @author Sidharth Das
@@ -39,6 +40,27 @@ public class Leetcode24MainClass {
         }
 
         return sum;
+    }
+
+    public int deleteGreatestValue(int[][] grid) {
+        List<List<Integer>> list = new ArrayList<>();
+        for (int[] array : grid) {
+            list.add(Arrays.stream(array).boxed().toList());
+        }
+
+        int len = list.get(0).size();
+        int finalRes = 0;
+        while(list.get(0).size() != 0){
+            List<Integer> maxDel = new ArrayList<>();
+            for(List<Integer> l : list){
+                int max  = l.stream().max(Integer::compare).get();
+                l.remove(new Integer(max));
+                maxDel.add(max);
+            }
+            finalRes += maxDel.stream().max(Integer::compare).get();
+        }
+
+        return finalRes;
     }
 }
 
