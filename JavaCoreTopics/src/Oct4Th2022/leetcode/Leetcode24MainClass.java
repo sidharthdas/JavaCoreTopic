@@ -3,6 +3,7 @@ package Oct4Th2022.leetcode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -12,7 +13,39 @@ import java.util.stream.Stream;
 public class Leetcode24MainClass {
 
     public static void main(String[] args) {
+        //System.out.println(deleteGreatestValue(new int[][]{{1,2,4},{3,3,1}}));
 
+        {
+            // Creating an object of List interface with
+            // reference to ArrayList
+            List<Integer> al = new ArrayList<>();
+
+            // Adding elements to ArrayList class
+            // using add() method
+            al.add(10);
+            al.add(20);
+            al.add(30);
+            al.add(1);
+            al.add(2);
+
+            al.add(null);
+
+
+
+            // Printing the current ArrayList
+            System.out.println(al);
+
+            // This makes a call to remove(Object) and
+            // removes element 1
+            al.remove(Integer.valueOf(10));
+
+            // This makes a call to remove(Object) and
+            // removes element 2
+            al.remove(Integer.valueOf(2));
+
+            // Printing the modified ArrayList
+            System.out.println(al);
+        }
     }
 
     public int differenceOfSum(int[] nums) {
@@ -42,10 +75,11 @@ public class Leetcode24MainClass {
         return sum;
     }
 
-    public int deleteGreatestValue(int[][] grid) {
+    public static int deleteGreatestValue(int[][] grid) {
         List<List<Integer>> list = new ArrayList<>();
         for (int[] array : grid) {
-            list.add(Arrays.stream(array).boxed().toList());
+            list.add(Arrays.stream(array).boxed().collect(Collectors.toList()));
+            //Arrays.stream(array).boxed().collect(Collectors.im)
         }
 
         int len = list.get(0).size();
@@ -54,7 +88,7 @@ public class Leetcode24MainClass {
             List<Integer> maxDel = new ArrayList<>();
             for(List<Integer> l : list){
                 int max  = l.stream().max(Integer::compare).get();
-                l.remove(new Integer(max));
+                l.remove(Integer.valueOf(max));
                 maxDel.add(max);
             }
             finalRes += maxDel.stream().max(Integer::compare).get();
