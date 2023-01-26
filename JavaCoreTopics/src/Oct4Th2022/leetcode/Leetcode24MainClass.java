@@ -75,6 +75,10 @@ public class Leetcode24MainClass {
         return sum;
     }
 
+    public double[] convertTemperature(double celsius) {
+        return new double[]{(celsius + 273.15),((celsius * 1.80)+ 32.00)};
+    }
+
     public static int deleteGreatestValue(int[][] grid) {
         List<List<Integer>> list = new ArrayList<>();
         for (int[] array : grid) {
