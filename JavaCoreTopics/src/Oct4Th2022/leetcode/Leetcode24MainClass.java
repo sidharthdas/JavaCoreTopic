@@ -74,13 +74,15 @@ public class Leetcode24MainClass {
     }
 
     public int countDigits(int num) {
+        int n = num;
         List<Integer> l = new ArrayList<>();
         while (num != 0) {
             int k = num % 10;
+            num = num / 10;
             l.add(k);
         }
 
-        return (int) l.stream().filter(x -> num % x == 0).count();
+        return (int) l.stream().filter(x -> n % x == 0).count();
     }
 
     public double[] convertTemperature(double celsius) {
