@@ -31,7 +31,6 @@ public class Leetcode24MainClass {
             al.add(null);
 
 
-
             // Printing the current ArrayList
             System.out.println(al);
 
@@ -60,11 +59,10 @@ public class Leetcode24MainClass {
             }
         }
 
-        return  Math.abs(totalSum - digitSum);
+        return Math.abs(totalSum - digitSum);
     }
 
-    private  int getSum(int n)
-    {
+    private int getSum(int n) {
         int sum = 0;
 
         while (n != 0) {
@@ -75,8 +73,18 @@ public class Leetcode24MainClass {
         return sum;
     }
 
+    public int countDigits(int num) {
+        List<Integer> l = new ArrayList<>();
+        while (num != 0) {
+            int k = num % 10;
+            l.add(k);
+        }
+
+        return (int) l.stream().filter(x -> num % x == 0).count();
+    }
+
     public double[] convertTemperature(double celsius) {
-        return new double[]{(celsius + 273.15),((celsius * 1.80)+ 32.00)};
+        return new double[]{(celsius + 273.15), ((celsius * 1.80) + 32.00)};
     }
 
     public static int deleteGreatestValue(int[][] grid) {
@@ -88,10 +96,10 @@ public class Leetcode24MainClass {
 
         int len = list.get(0).size();
         int finalRes = 0;
-        while(list.get(0).size() != 0){
+        while (list.get(0).size() != 0) {
             List<Integer> maxDel = new ArrayList<>();
-            for(List<Integer> l : list){
-                int max  = l.stream().max(Integer::compare).get();
+            for (List<Integer> l : list) {
+                int max = l.stream().max(Integer::compare).get();
                 l.remove(Integer.valueOf(max));
                 maxDel.add(max);
             }
