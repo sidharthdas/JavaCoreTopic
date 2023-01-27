@@ -73,6 +73,30 @@ public class Leetcode24MainClass {
         return sum;
     }
 
+    public int pivotInteger(int n) {
+        int mid = n /2;
+
+        while(!(mid > n)){
+            if(suminRange(1,mid) == suminRange(mid, n)){
+                return mid;
+            }
+            mid += 1;
+        }
+
+        return -1;
+    }
+
+    private int suminRange(int l, int r)
+    {
+        return sumNatural(r) - sumNatural(l - 1);
+    }
+
+    private int sumNatural(int n)
+    {
+        int sum = (n * (n + 1)) / 2;
+        return sum;
+    }
+
     public int countDigits(int num) {
         int n = num;
         List<Integer> l = new ArrayList<>();
