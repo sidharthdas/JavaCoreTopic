@@ -14,12 +14,13 @@ public class Leetcode24MainClass {
 
     public static void main(String[] args) {
         //System.out.println(deleteGreatestValue(new int[][]{{1,2,4},{3,3,1}}));
+        System.out.println(countOperations(2, 3));
 
     }
 
-    public int countOperations(int num1, int num2) {
+    public static int countOperations(int num1, int num2) {
         int count = 0;
-        while(num1 != 0 || num2 != 0){
+        while(num1 != 0 && num2 != 0){
             if(num1 >= num2){
                 count++;
                 num1 -= num2;
