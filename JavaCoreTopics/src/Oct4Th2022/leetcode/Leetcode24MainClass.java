@@ -15,36 +15,21 @@ public class Leetcode24MainClass {
     public static void main(String[] args) {
         //System.out.println(deleteGreatestValue(new int[][]{{1,2,4},{3,3,1}}));
 
-        {
-            // Creating an object of List interface with
-            // reference to ArrayList
-            List<Integer> al = new ArrayList<>();
+    }
 
-            // Adding elements to ArrayList class
-            // using add() method
-            al.add(10);
-            al.add(20);
-            al.add(30);
-            al.add(1);
-            al.add(2);
-
-            al.add(null);
-
-
-            // Printing the current ArrayList
-            System.out.println(al);
-
-            // This makes a call to remove(Object) and
-            // removes element 1
-            al.remove(Integer.valueOf(10));
-
-            // This makes a call to remove(Object) and
-            // removes element 2
-            al.remove(Integer.valueOf(2));
-
-            // Printing the modified ArrayList
-            System.out.println(al);
+    public int countOperations(int num1, int num2) {
+        int count = 0;
+        while(num1 != 0 || num2 != 0){
+            if(num1 >= num2){
+                count++;
+                num1 -= num2;
+            }else{
+                count++;
+                num2 -= num1;
+            }
         }
+
+        return count;
     }
 
     public int differenceOfSum(int[] nums) {
