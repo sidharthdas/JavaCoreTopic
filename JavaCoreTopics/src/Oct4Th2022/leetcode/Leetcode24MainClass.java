@@ -18,6 +18,28 @@ public class Leetcode24MainClass {
 
     }
 
+    public int alternateDigitSum(int n) {
+        List<Integer> l = new ArrayList<>();
+
+        while (n != 0) {
+            l.add(n % 10);
+            n = n / 10;
+        }
+        int sum = 0;
+        boolean flag = true;
+        for(int i : l){
+            if(flag){
+                sum += i;
+                flag = false;
+            }else{
+                sum -= i;
+                flag = true;
+            }
+
+        }
+        return sum;
+    }
+
     public static int countOperations(int num1, int num2) {
         int count = 0;
         while(num1 != 0 && num2 != 0){
