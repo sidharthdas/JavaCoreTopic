@@ -27,12 +27,13 @@ public class Leetcode24MainClass {
         }
         int sum = 0;
         boolean flag = true;
-        for(int i : l){
+        int len = l.size();
+        for(int i = len - 1; i >=0;i--){
             if(flag){
-                sum += i;
+                sum += l.get(i);
                 flag = false;
             }else{
-                sum -= i;
+                sum -= l.get(i);
                 flag = true;
             }
 
