@@ -39,11 +39,18 @@ public class Leetcode24MainClass {
         }
     }
 
-        public int[] getNoZeroIntegers(int n) {
-            return new int[]{n + 10, -10};
-        }
+    public int[] getNoZeroIntegers(int n) {
+        return new int[]{n + 10, -10};
+    }
 
-    public static  int divisorSubstrings(int num, int k) {
+    public int numberOfCuts(int n) {
+        if(n == 1){
+            return 0;
+        }
+        return n % 2 == 0 ? n / 2 : n;
+    }
+
+    public static int divisorSubstrings(int num, int k) {
         char[] str = String.valueOf(num).toCharArray();
         int n = String.valueOf(num).length();
         List<String> l = new ArrayList<>();
@@ -59,47 +66,45 @@ public class Leetcode24MainClass {
             }
         }
 
-        return (int)l.stream().filter(x -> String.valueOf(x).length() == k )
+        return (int) l.stream().filter(x -> String.valueOf(x).length() == k)
                 .map(x -> Integer.parseInt(x))
                 .filter(x -> x != 0)
                 .filter(x -> num % x == 0).count();
     }
 
 
-
     public boolean isThree(int n) {
 
         int count = 2;
-        int half = n/2;
+        int half = n / 2;
 
-        for(int i = 2; i <= half; i++){
-            if(count > 3){
+        for (int i = 2; i <= half; i++) {
+            if (count > 3) {
                 break;
             }
-            if(n % i == 0){
+            if (n % i == 0) {
                 count++;
             }
 
         }
 
-        return count == 3 ? true: false;
+        return count == 3 ? true : false;
     }
 
     public static int[] distributeCandies(int candies, int num_people) {
         int[] people = new int[num_people];
         int currIndex = 0;
         int initialCandy = 1;
-        while(candies != 0){
-            if(currIndex == num_people){
+        while (candies != 0) {
+            if (currIndex == num_people) {
                 currIndex = 0;
             }
-            if(initialCandy < candies) {
+            if (initialCandy < candies) {
                 people[currIndex] += initialCandy;
                 candies -= initialCandy;
                 initialCandy += 1;
                 currIndex++;
-            }
-            else{
+            } else {
                 people[currIndex] += candies;
                 break;
             }
@@ -118,11 +123,11 @@ public class Leetcode24MainClass {
         int sum = 0;
         boolean flag = true;
         int len = l.size();
-        for(int i = len - 1; i >=0;i--){
-            if(flag){
+        for (int i = len - 1; i >= 0; i--) {
+            if (flag) {
                 sum += l.get(i);
                 flag = false;
-            }else{
+            } else {
                 sum -= l.get(i);
                 flag = true;
             }
@@ -133,11 +138,11 @@ public class Leetcode24MainClass {
 
     public static int countOperations(int num1, int num2) {
         int count = 0;
-        while(num1 != 0 && num2 != 0){
-            if(num1 >= num2){
+        while (num1 != 0 && num2 != 0) {
+            if (num1 >= num2) {
                 count++;
                 num1 -= num2;
-            }else{
+            } else {
                 count++;
                 num2 -= num1;
             }
@@ -173,10 +178,10 @@ public class Leetcode24MainClass {
     }
 
     public int pivotInteger(int n) {
-        int mid = n /2;
+        int mid = n / 2;
 
-        while(!(mid > n)){
-            if(suminRange(1,mid) == suminRange(mid, n)){
+        while (!(mid > n)) {
+            if (suminRange(1, mid) == suminRange(mid, n)) {
                 return mid;
             }
             mid += 1;
@@ -185,13 +190,11 @@ public class Leetcode24MainClass {
         return -1;
     }
 
-    private int suminRange(int l, int r)
-    {
+    private int suminRange(int l, int r) {
         return sumNatural(r) - sumNatural(l - 1);
     }
 
-    private int sumNatural(int n)
-    {
+    private int sumNatural(int n) {
         int sum = (n * (n + 1)) / 2;
         return sum;
     }
