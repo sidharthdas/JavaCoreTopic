@@ -15,7 +15,7 @@ public class Leetcode24MainClass {
     public static void main(String[] args) {
         //System.out.println(deleteGreatestValue(new int[][]{{1,2,4},{3,3,1}}));
         //System.out.println(countOperations(2, 3));
-        System.out.println(distributeCandies(7,4));
+        System.out.println(distributeCandies(10,3));
 
     }
 
@@ -28,13 +28,13 @@ public class Leetcode24MainClass {
                 currIndex = 0;
             }
             if(initialCandy < candies) {
-                people[currIndex] = initialCandy;
+                people[currIndex] += initialCandy;
                 candies -= initialCandy;
                 initialCandy += 1;
                 currIndex++;
             }
             else{
-                people[currIndex] = candies;
+                people[currIndex] += candies;
                 break;
             }
         }
