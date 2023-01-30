@@ -18,6 +18,22 @@ public class Leetcode24MainClass {
 
     }
 
+    public int[] distributeCandies(int candies, int num_people) {
+        int[] people = new int[num_people];
+        int currIndex = 0;
+        int initialCandy = 1;
+        while(candies != 0){
+            if(currIndex == num_people){
+                currIndex = 0;
+            }
+            people[currIndex] = initialCandy;
+            candies -= initialCandy;
+            initialCandy += 1;
+        }
+
+        return people;
+    }
+
     public int alternateDigitSum(int n) {
         List<Integer> l = new ArrayList<>();
 
