@@ -27,10 +27,16 @@ public class Leetcode24MainClass {
             if(currIndex == num_people){
                 currIndex = 0;
             }
-            people[currIndex] = initialCandy;
-            candies -= initialCandy;
-            initialCandy += 1;
-            currIndex++;
+            if(initialCandy + 1 >= candies) {
+                people[currIndex] = initialCandy;
+                candies -= initialCandy;
+                initialCandy += 1;
+                currIndex++;
+            }
+            else{
+                people[currIndex] = candies;
+                break;
+            }
         }
 
         return people;
