@@ -42,6 +42,10 @@ public class Leetcode24MainClass {
     public int[] getNoZeroIntegers(int n) {
         return new int[]{n + 10, -10};
     }
+    //2525. Categorize Box According to Criteria
+    public String categorizeBox(int length, int width, int height, int mass) {
+        return null;
+    }
 
     public int numberOfCuts(int n) {
         if(n == 1){
