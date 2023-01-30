@@ -14,11 +14,12 @@ public class Leetcode24MainClass {
 
     public static void main(String[] args) {
         //System.out.println(deleteGreatestValue(new int[][]{{1,2,4},{3,3,1}}));
-        System.out.println(countOperations(2, 3));
+        //System.out.println(countOperations(2, 3));
+        System.out.println(distributeCandies(7,4));
 
     }
 
-    public int[] distributeCandies(int candies, int num_people) {
+    public static int[] distributeCandies(int candies, int num_people) {
         int[] people = new int[num_people];
         int currIndex = 0;
         int initialCandy = 1;
@@ -29,6 +30,7 @@ public class Leetcode24MainClass {
             people[currIndex] = initialCandy;
             candies -= initialCandy;
             initialCandy += 1;
+            currIndex++;
         }
 
         return people;
