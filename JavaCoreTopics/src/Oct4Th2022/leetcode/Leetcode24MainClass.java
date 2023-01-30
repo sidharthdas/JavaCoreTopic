@@ -27,7 +27,7 @@ public class Leetcode24MainClass {
             if(currIndex == num_people){
                 currIndex = 0;
             }
-            if(initialCandy + 1 < candies) {
+            if(initialCandy < candies) {
                 people[currIndex] = initialCandy;
                 candies -= initialCandy;
                 initialCandy += 1;
