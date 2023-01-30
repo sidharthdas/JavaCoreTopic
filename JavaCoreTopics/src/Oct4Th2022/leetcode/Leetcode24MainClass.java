@@ -15,9 +15,32 @@ public class Leetcode24MainClass {
     public static void main(String[] args) {
         //System.out.println(deleteGreatestValue(new int[][]{{1,2,4},{3,3,1}}));
         //System.out.println(countOperations(2, 3));
-        System.out.println(distributeCandies(10,3));
+        //System.out.println(distributeCandies(10,3));
+        System.out.println(divisorSubstrings(430043, 2));
 
     }
+
+    public static  int divisorSubstrings(int num, int k) {
+        char[] str = String.valueOf(num).toCharArray();
+        int n = String.valueOf(num).length();
+        List<Integer> l = new ArrayList<>();
+        for (int len = 1; len <= n; len++) {
+            for (int i = 0; i <= n - len; i++) {
+                int j = i + len - 1;
+                String s = "";
+                for (int k1 = i; k1 <= j; k1++) {
+                    s += str[k1];
+                }
+                l.add(Integer.parseInt(s));
+                s = "";
+            }
+        }
+        System.out.println(l);
+        System.out.println(l.stream().filter(x -> String.valueOf(x).length() == k && num % x == 0).toList());
+        return (int)l.stream().filter(x -> String.valueOf(x).length() == k && num % x == 0).count();
+    }
+
+
 
     public boolean isThree(int n) {
 
