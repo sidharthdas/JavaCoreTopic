@@ -19,6 +19,24 @@ public class Leetcode24MainClass {
 
     }
 
+    public boolean isThree(int n) {
+
+        int count = 2;
+        int half = n/2;
+
+        for(int i = 2; i <= half; i++){
+            if(count > 3){
+                break;
+            }
+            if(n % i == 0){
+                count++;
+            }
+
+        }
+
+        return count == 3 ? true: false;
+    }
+
     public static int[] distributeCandies(int candies, int num_people) {
         int[] people = new int[num_people];
         int currIndex = 0;
