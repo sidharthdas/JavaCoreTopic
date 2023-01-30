@@ -16,14 +16,37 @@ public class Leetcode24MainClass {
         //System.out.println(deleteGreatestValue(new int[][]{{1,2,4},{3,3,1}}));
         //System.out.println(countOperations(2, 3));
         //System.out.println(distributeCandies(10,3));
-        System.out.println(divisorSubstrings(430043, 2));
+        //System.out.println(divisorSubstrings(430043, 2));
+        subString("430043".toCharArray(), 6);
 
     }
+
+    static void subString(char str[], int n) {
+        // Pick starting point
+        for (int len = 1; len <= n; len++) {
+            // Pick ending point
+            for (int i = 0; i <= n - len; i++) {
+                //  Print characters from current
+                // starting point to current ending
+                // point.
+                int j = i + len - 1;
+                for (int k = i; k <= j; k++) {
+                    System.out.print(str[k]);
+                }
+
+                System.out.println();
+            }
+        }
+    }
+
+        public int[] getNoZeroIntegers(int n) {
+            return new int[]{n + 10, -10};
+        }
 
     public static  int divisorSubstrings(int num, int k) {
         char[] str = String.valueOf(num).toCharArray();
         int n = String.valueOf(num).length();
-        List<Integer> l = new ArrayList<>();
+        List<String> l = new ArrayList<>();
         for (int len = 1; len <= n; len++) {
             for (int i = 0; i <= n - len; i++) {
                 int j = i + len - 1;
@@ -31,13 +54,15 @@ public class Leetcode24MainClass {
                 for (int k1 = i; k1 <= j; k1++) {
                     s += str[k1];
                 }
-                l.add(Integer.parseInt(s));
+                l.add(s);
                 s = "";
             }
         }
-        System.out.println(l);
-        System.out.println(l.stream().filter(x -> String.valueOf(x).length() == k && num % x == 0).toList());
-        return (int)l.stream().filter(x -> String.valueOf(x).length() == k && num % x == 0).count();
+
+        return (int)l.stream().filter(x -> String.valueOf(x).length() == k )
+                .map(x -> Integer.parseInt(x))
+                .filter(x -> x != 0)
+                .filter(x -> num % x == 0).count();
     }
 
 
