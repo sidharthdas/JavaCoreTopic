@@ -1,8 +1,6 @@
 package Oct4Th2022.leetcode;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -42,13 +40,36 @@ public class Leetcode24MainClass {
     public int[] getNoZeroIntegers(int n) {
         return new int[]{n + 10, -10};
     }
+
     //2525. Categorize Box According to Criteria
     public String categorizeBox(int length, int width, int height, int mass) {
+        Map<String, Integer> map = new HashMap<>();
+        if ((length >= 10000 || width >= 10000 || height >= 10000 || mass >= 10000)
+                || (length * width * height > 1000000000)
+        ) {
+            map.put("Bulky", 1);
+        } else if (mass >= 100) {
+            map.put("Heavy", 1);
+        }
+        /*If the box is both "Bulky" and "Heavy", then its category is "Both".
+        If the box is neither "Bulky" nor "Heavy", then its category is "Neither".
+        If the box is "Bulky" but not "Heavy", then its category is "Bulky".
+        If the box is "Heavy" but not "Bulky", then its category is "Heavy".*/
+
+        if (map.containsKey("Bulky") && map.containsKey("Heavy")) {
+            return "Both";
+        } else if (!map.containsKey("Bulky") && !map.containsKey("Heavy")) {
+            return "Neither";
+        } else if(map.containsKey("Bulky") && !map.containsKey("Heavy")) {
+            return "Bulky";
+        } else if(!map.containsKey("Bulky") && map.containsKey("Heavy")) {
+            return "Heavy";
+        }
         return null;
     }
 
     public int numberOfCuts(int n) {
-        if(n == 1){
+        if (n == 1) {
             return 0;
         }
         return n % 2 == 0 ? n / 2 : n;
