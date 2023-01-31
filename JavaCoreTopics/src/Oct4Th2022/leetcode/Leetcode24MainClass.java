@@ -17,8 +17,38 @@ public class Leetcode24MainClass {
         //System.out.println(divisorSubstrings(430043, 2));
         //subString("430043".toCharArray(), 6);
         //System.out.println(categorizeBox(1000, 1000, 1000, 1000));
-        System.out.println(numberOfBeams(new String[]{"011001", "000000", "010100", "001000"}));
+       // System.out.println(numberOfBeams(new String[]{"011001", "000000", "010100", "001000"}));
+        System.out.println(oddCells(2,3, new int[][]{{0,1},{1,1}}));
 
+    }
+
+    public static int oddCells(int m, int n, int[][] indices) {
+        int[][] arr = new int[m][n];
+
+        for(int[] index : indices){
+            int r = index[0];
+            int n1 = 0;
+            while(n1 < n){
+                arr[r][n1] = arr[r][n1] + 1;
+                n1++;
+            }
+
+            int c = index[0];
+            int m1 = 0;
+            while(m1 < m){
+                arr[m1][c] = arr[m1][c] + 1;
+                m1++;
+            }
+
+        }
+
+        int totalOdds = 0;
+
+        for(int[] arr1 : arr){
+            totalOdds += (int) Arrays.stream(arr1).filter(x -> x%2 != 0).count();
+        }
+
+        return totalOdds;
     }
 
     public int unequalTriplets(int[] nums) {
