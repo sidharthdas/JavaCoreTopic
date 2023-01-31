@@ -16,17 +16,19 @@ public class Leetcode24MainClass {
         //System.out.println(distributeCandies(10,3));
         //System.out.println(divisorSubstrings(430043, 2));
         //subString("430043".toCharArray(), 6);
-        System.out.println(categorizeBox(1000, 1000, 1000, 1000));
+        //System.out.println(categorizeBox(1000, 1000, 1000, 1000));
+        System.out.println(numberOfBeams(new String[]{"011001","000000","010100","001000"}));
 
     }
 
-    public int numberOfBeams(String[] bank) {
+    public static int numberOfBeams(String[] bank) {
         int prev1s = 0;
         int totalBeams = 0;
         for(String s : bank){
             int current1s = (int)Arrays.stream(s.split("")).filter(x -> x.equals("1")).count();
             if(current1s != 0 && prev1s !=0){
                 totalBeams += (current1s * prev1s);
+                prev1s = current1s;
             }else if(prev1s == 0){
                 prev1s = current1s;
             }
