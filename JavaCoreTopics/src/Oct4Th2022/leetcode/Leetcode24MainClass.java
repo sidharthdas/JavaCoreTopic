@@ -20,6 +20,20 @@ public class Leetcode24MainClass {
 
     }
 
+    public int numberOfBeams(String[] bank) {
+        int prev1s = 0;
+        int totalBeams = 0;
+        for(String s : bank){
+            int current1s = (int)Arrays.stream(s.split("")).filter(x -> x.equals("1")).count();
+            if(current1s != 0 && prev1s !=0){
+                totalBeams += (current1s * prev1s);
+            }else if(prev1s == 0){
+                prev1s = current1s;
+            }
+        }
+        return totalBeams;
+    }
+
     static void subString(char str[], int n) {
         // Pick starting point
         for (int len = 1; len <= n; len++) {
