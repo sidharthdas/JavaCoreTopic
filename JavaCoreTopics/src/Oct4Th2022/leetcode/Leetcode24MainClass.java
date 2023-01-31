@@ -33,13 +33,20 @@ public class Leetcode24MainClass {
                 n1++;
             }
 
-            int c = index[0];
+            int c = index[1];
             int m1 = 0;
             while(m1 < m){
                 arr[m1][c] = arr[m1][c] + 1;
                 m1++;
             }
 
+        }
+
+        for(int[] arr1 : arr){
+            for(int i : arr1){
+                System.out.print(i+" ");
+            }
+            System.out.println();
         }
 
         int totalOdds = 0;
