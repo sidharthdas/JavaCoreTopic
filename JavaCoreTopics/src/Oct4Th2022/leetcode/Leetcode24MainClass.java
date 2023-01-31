@@ -17,42 +17,85 @@ public class Leetcode24MainClass {
         //System.out.println(divisorSubstrings(430043, 2));
         //subString("430043".toCharArray(), 6);
         //System.out.println(categorizeBox(1000, 1000, 1000, 1000));
-       // System.out.println(numberOfBeams(new String[]{"011001", "000000", "010100", "001000"}));
-        System.out.println(oddCells(2,3, new int[][]{{0,1},{1,1}}));
+        // System.out.println(numberOfBeams(new String[]{"011001", "000000", "010100", "001000"}));
+        //System.out.println(oddCells(2, 3, new int[][]{{0, 1}, {1, 1}}));
+        shortestToChar("loveleetcode", 'e');
 
+    }
+
+    public static int[] shortestToChar(String s, char c) {
+        int len = s.length();
+        char[] crr = s.toCharArray();
+        int[] finalArr = new int[len];
+        int startIndex = 0;
+        while (startIndex < len) {
+            if (crr[startIndex] == c) {
+                finalArr[startIndex] = 0;
+            } else {
+                int fromFornt = 0;
+                int fromBack = 0;
+
+                for (int i = startIndex + 1; i < len; i++) {
+                    if (crr[i] != c) {
+                        fromFornt++;
+                    } else {
+                        break;
+                    }
+                    if (i == len - 1) {
+                        i = -1;
+                    }
+                }
+
+                for (int i = startIndex == 0 ? len - 1 : startIndex - 1; i >= 0; i--) {
+                    if (crr[i] != c) {
+                        fromBack++;
+                    } else {
+                        break;
+                    }
+                    if (i == 0) {
+                        i = len - 1;
+                    }
+                }
+                finalArr[startIndex] = fromFornt > fromBack ? fromBack : fromFornt;
+            }
+
+            startIndex++;
+        }
+
+        return finalArr;
     }
 
     public static int oddCells(int m, int n, int[][] indices) {
         int[][] arr = new int[m][n];
 
-        for(int[] index : indices){
+        for (int[] index : indices) {
             int r = index[0];
             int n1 = 0;
-            while(n1 < n){
+            while (n1 < n) {
                 arr[r][n1] = arr[r][n1] + 1;
                 n1++;
             }
 
             int c = index[1];
             int m1 = 0;
-            while(m1 < m){
+            while (m1 < m) {
                 arr[m1][c] = arr[m1][c] + 1;
                 m1++;
             }
 
         }
 
-        for(int[] arr1 : arr){
-            for(int i : arr1){
-                System.out.print(i+" ");
+        for (int[] arr1 : arr) {
+            for (int i : arr1) {
+                System.out.print(i + " ");
             }
             System.out.println();
         }
 
         int totalOdds = 0;
 
-        for(int[] arr1 : arr){
-            totalOdds += (int) Arrays.stream(arr1).filter(x -> x%2 != 0).count();
+        for (int[] arr1 : arr) {
+            totalOdds += (int) Arrays.stream(arr1).filter(x -> x % 2 != 0).count();
         }
 
         return totalOdds;
@@ -63,10 +106,10 @@ public class Leetcode24MainClass {
         int len = nums.length;
         int count = 0;
         for (int i = 0; i < len; i++) {
-            for (int j = i+1; j < len; j++) {
-                for (int k = j+1; k < len; k++) {
-                    if(nums[i] != nums[j] && nums[j] != nums[k] && nums[i] != nums[k]){
-                        count ++;
+            for (int j = i + 1; j < len; j++) {
+                for (int k = j + 1; k < len; k++) {
+                    if (nums[i] != nums[j] && nums[j] != nums[k] && nums[i] != nums[k]) {
+                        count++;
                     }
                 }
             }
@@ -115,9 +158,7 @@ public class Leetcode24MainClass {
     //2525. Categorize Box According to Criteria
     public static String categorizeBox(int length, int width, int height, int mass) {
         Map<String, Integer> map = new HashMap<>();
-        if ((length >= 10000 || width >= 10000 || height >= 10000 || mass >= 10000)
-                || ((long) length * width * height >= 1000000000)
-        ) {
+        if ((length >= 10000 || width >= 10000 || height >= 10000 || mass >= 10000) || ((long) length * width * height >= 1000000000)) {
             map.put("Bulky", 1);
         }
         if (mass >= 100) {
@@ -163,10 +204,7 @@ public class Leetcode24MainClass {
             }
         }
 
-        return (int) l.stream().filter(x -> String.valueOf(x).length() == k)
-                .map(x -> Integer.parseInt(x))
-                .filter(x -> x != 0)
-                .filter(x -> num % x == 0).count();
+        return (int) l.stream().filter(x -> String.valueOf(x).length() == k).map(x -> Integer.parseInt(x)).filter(x -> x != 0).filter(x -> num % x == 0).count();
     }
 
 
