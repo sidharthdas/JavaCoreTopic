@@ -16,7 +16,7 @@ public class Leetcode24MainClass {
         //System.out.println(distributeCandies(10,3));
         //System.out.println(divisorSubstrings(430043, 2));
         //subString("430043".toCharArray(), 6);
-        System.out.println(categorizeBox(2909, 3968, 3272, 727));
+        System.out.println(categorizeBox(1000, 1000, 1000, 1000));
 
     }
 
@@ -46,7 +46,7 @@ public class Leetcode24MainClass {
     public static String categorizeBox(int length, int width, int height, int mass) {
         Map<String, Integer> map = new HashMap<>();
         if ((length >= 10000 || width >= 10000 || height >= 10000 || mass >= 10000)
-                || ((long) length * width * height > 1000000000)
+                || ((long) length * width * height >= 1000000000)
         ) {
             map.put("Bulky", 1);
         }
