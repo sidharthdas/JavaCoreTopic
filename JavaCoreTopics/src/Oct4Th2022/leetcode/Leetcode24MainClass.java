@@ -22,12 +22,13 @@ public class Leetcode24MainClass {
     }
 
     public int unequalTriplets(int[] nums) {
+
         int len = nums.length;
         int count = 0;
         for (int i = 0; i < len; i++) {
-            for (int j = 0; j < len; j++) {
-                for (int k = 0; k < len; k++) {
-                    if(i != j && j != k && i != k){
+            for (int j = i+1; j < len; j++) {
+                for (int k = j+1; k < len; k++) {
+                    if(nums[i] != nums[j] && nums[j] != nums[k] && nums[i] != nums[k]){
                         count ++;
                     }
                 }
