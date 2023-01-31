@@ -15,7 +15,8 @@ public class Leetcode24MainClass {
         //System.out.println(countOperations(2, 3));
         //System.out.println(distributeCandies(10,3));
         //System.out.println(divisorSubstrings(430043, 2));
-        subString("430043".toCharArray(), 6);
+        //subString("430043".toCharArray(), 6);
+        System.out.println(categorizeBox(2909, 3968, 3272, 727));
 
     }
 
@@ -42,13 +43,14 @@ public class Leetcode24MainClass {
     }
 
     //2525. Categorize Box According to Criteria
-    public String categorizeBox(int length, int width, int height, int mass) {
+    public static String categorizeBox(int length, int width, int height, int mass) {
         Map<String, Integer> map = new HashMap<>();
         if ((length >= 10000 || width >= 10000 || height >= 10000 || mass >= 10000)
-                || (length * width * height > 1000000000)
+                || ((long) length * width * height > 1000000000)
         ) {
             map.put("Bulky", 1);
-        } else if (mass >= 100) {
+        }
+        if (mass >= 100) {
             map.put("Heavy", 1);
         }
         /*If the box is both "Bulky" and "Heavy", then its category is "Both".
@@ -60,9 +62,9 @@ public class Leetcode24MainClass {
             return "Both";
         } else if (!map.containsKey("Bulky") && !map.containsKey("Heavy")) {
             return "Neither";
-        } else if(map.containsKey("Bulky") && !map.containsKey("Heavy")) {
+        } else if (map.containsKey("Bulky") && !map.containsKey("Heavy")) {
             return "Bulky";
-        } else if(!map.containsKey("Bulky") && map.containsKey("Heavy")) {
+        } else if (!map.containsKey("Bulky") && map.containsKey("Heavy")) {
             return "Heavy";
         }
         return null;
