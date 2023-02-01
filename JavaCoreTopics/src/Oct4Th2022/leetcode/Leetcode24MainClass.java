@@ -23,6 +23,31 @@ public class Leetcode24MainClass {
 
     }
 
+    public boolean isStrictlyPalindromic(int n) {
+        int startingBase = 2;
+
+        while (startingBase <= n - 2) {
+            int s = Integer.parseInt(String.valueOf(n), startingBase);
+            if(!checkPalin(n)){
+                return false;
+            }
+        }
+
+        return true;
+
+    }
+
+    private boolean checkPalin(int n){
+        int r,sum=0,temp;
+        temp=n;
+        while(n>0){
+            r=n%10;  //getting remainder
+            sum=(sum*10)+r;
+            n=n/10;
+        }
+        return temp == sum;
+    }
+
     public static int[] shortestToChar(String s, char c) {
         int len = s.length();
         char[] crr = s.toCharArray();
