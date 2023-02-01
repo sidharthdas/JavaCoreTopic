@@ -23,11 +23,31 @@ public class Leetcode24MainClass {
 
     }
 
+    public int minSetSize(int[] arr) {
+        Map<Integer, Integer> count = new HashMap<>();
+
+        for (int i : arr) {
+            count.put(i, count.getOrDefault(i, 0) + 1);
+        }
+
+        count = count.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+        int half = arr.length/2;
+        Set<Integer> s = new TreeSet<>();
+        for (Map.Entry<Integer, Integer> m : count.entrySet()) {
+            half -= m.getValue();
+            s.add(m.getKey());
+            if(half <= 0){
+                break;
+            }
+        }
+        return s.size();
+    }
+
     public int[][] sortTheStudents(int[][] score, int k) {
         Arrays.sort(score, (score1, score2) -> score2[k] - score1[k]);
         return score;
     }
-
 
 
     public boolean isStrictlyPalindromic(int n) {
@@ -35,7 +55,7 @@ public class Leetcode24MainClass {
 
         while (startingBase <= n - 2) {
             int s = Integer.parseInt(String.valueOf(n), startingBase);
-            if(!checkPalin(n)){
+            if (!checkPalin(n)) {
                 return false;
             }
         }
@@ -44,13 +64,13 @@ public class Leetcode24MainClass {
 
     }
 
-    private boolean checkPalin(int n){
-        int r,sum=0,temp;
-        temp=n;
-        while(n>0){
-            r=n%10;  //getting remainder
-            sum=(sum*10)+r;
-            n=n/10;
+    private boolean checkPalin(int n) {
+        int r, sum = 0, temp;
+        temp = n;
+        while (n > 0) {
+            r = n % 10;  //getting remainder
+            sum = (sum * 10) + r;
+            n = n / 10;
         }
         return temp == sum;
     }
