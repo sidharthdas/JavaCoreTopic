@@ -22,6 +22,31 @@ public class Leetcode24MainClass {
         shortestToChar("loveleetcode", 'e');
 
     }
+    public int[] kWeakestRows(int[][] mat, int k) {
+        Map<Integer, Long> map = new HashMap<>();
+        int index = 0;
+        for(int[] arr : mat){
+            map.put(index, Arrays.stream(arr).boxed().filter(x -> x ==1).count());
+            index ++;
+        }
+
+        map = map.entrySet().stream().sorted(Map.Entry.comparingByValue())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2)-> e1, LinkedHashMap::new));
+
+        int[] arr = new int[k];
+        int start = 0;
+
+        for(Map.Entry<Integer, Long> m : map.entrySet()){
+            if(start < k){
+                arr[start] = (int) m.getKey();
+                start ++;
+            }else{
+                break;
+            }
+        }
+
+        return arr;
+    }
 
     public int minSetSize(int[] arr) {
         Map<Integer, Integer> count = new HashMap<>();
