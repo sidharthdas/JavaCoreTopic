@@ -23,6 +23,13 @@ public class Leetcode24MainClass {
 
     }
 
+    public int[][] sortTheStudents(int[][] score, int k) {
+        Arrays.sort(score, (score1, score2) -> score2[k] - score1[k]);
+        return score;
+    }
+
+
+
     public boolean isStrictlyPalindromic(int n) {
         int startingBase = 2;
 
