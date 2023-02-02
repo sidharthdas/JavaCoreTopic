@@ -29,7 +29,7 @@ public class Leetcode24MainClass {
         int median = 0;
         if (len % 2 == 0) {
             int sec = arr[len / 2];
-            int first = arr[sec - 1];
+            int first = arr[(len / 2) - 1];
             median = (first + sec) / 2;
         } else {
             median = arr[len / 2];
