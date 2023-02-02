@@ -26,16 +26,7 @@ public class Leetcode24MainClass {
     public int[] getStrongest(int[] arr, int k) {
         Arrays.sort(arr);
         int len = arr.length;
-        int median = 0;
-        if (len % 2 == 0) {
-            int sec = arr[len / 2];
-            int first = arr[(len / 2) - 1];
-            median = (first + sec) / 2;
-        } else {
-            median = arr[len / 2];
-        }
-
-        int  m = median;
+        int  m =  arr[(arr.length - 1) / 2];;
         Comparator<Integer> comp = (a, b) -> {
             return Math.abs(a - m) == Math.abs(b - m) ? b - a : Math.abs(b - m) - Math.abs(a - m);
         };
