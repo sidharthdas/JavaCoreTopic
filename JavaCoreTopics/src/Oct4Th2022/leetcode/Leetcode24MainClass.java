@@ -22,25 +22,56 @@ public class Leetcode24MainClass {
         shortestToChar("loveleetcode", 'e');
 
     }
+
+    public int[] getStrongest(int[] arr, int k) {
+        Arrays.sort(arr);
+        int len = arr.length;
+        int median = 0;
+        if (len % 2 == 0) {
+            int sec = arr[len / 2];
+            int first = arr[sec - 1];
+            median = (first + sec) / 2;
+        } else {
+            median = arr[len / 2];
+        }
+
+        int  m = median;
+        Comparator<Integer> comp = (a, b) -> {
+            return Math.abs(a - m) == Math.abs(b - m) ? b - a : Math.abs(b - m) - Math.abs(a - m);
+        };
+
+        List<Integer> l = Arrays.stream(arr).boxed().sorted(comp).collect(Collectors.toList());
+
+        int[] arrF = new int[k];
+        int index = 0;
+
+        while(index < k){
+            arrF[index] = l.get(index);
+            index++;
+        }
+
+        return arrF;
+    }
+
     public int[] kWeakestRows(int[][] mat, int k) {
         Map<Integer, Long> map = new HashMap<>();
         int index = 0;
-        for(int[] arr : mat){
-            map.put(index, Arrays.stream(arr).boxed().filter(x -> x ==1).count());
-            index ++;
+        for (int[] arr : mat) {
+            map.put(index, Arrays.stream(arr).boxed().filter(x -> x == 1).count());
+            index++;
         }
 
         map = map.entrySet().stream().sorted(Map.Entry.comparingByValue())
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2)-> e1, LinkedHashMap::new));
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
 
         int[] arr = new int[k];
         int start = 0;
 
-        for(Map.Entry<Integer, Long> m : map.entrySet()){
-            if(start < k){
+        for (Map.Entry<Integer, Long> m : map.entrySet()) {
+            if (start < k) {
                 arr[start] = (int) m.getKey();
-                start ++;
-            }else{
+                start++;
+            } else {
                 break;
             }
         }
@@ -57,12 +88,12 @@ public class Leetcode24MainClass {
 
         count = count.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed())
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
-        int half = arr.length/2;
+        int half = arr.length / 2;
         Set<Integer> s = new TreeSet<>();
         for (Map.Entry<Integer, Integer> m : count.entrySet()) {
             half -= m.getValue();
             s.add(m.getKey());
-            if(half <= 0){
+            if (half <= 0) {
                 break;
             }
         }
