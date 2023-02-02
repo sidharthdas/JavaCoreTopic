@@ -23,6 +23,31 @@ public class Leetcode24MainClass {
 
     }
 
+    public int rangeSum(int[] nums, int n, int left, int right) {
+        List<Integer> l = new ArrayList<>();
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = i; j < n; j++)
+            {
+                ArrayList<Integer> subArrays = new ArrayList<Integer>();
+                for (int k = i; k <= j; k++)
+                {
+                    subArrays.add(nums[k]);
+
+                }
+                l.add(subArrays.stream().reduce(Integer::sum).get());
+            }
+        }
+
+        l = l.stream().sorted().collect(Collectors.toList());
+        int[] arr = new int[n * (n + 1) / 2];
+        int sum = 0;
+        for(int i = left - 1; i <= right - 1; i++){
+            sum += l.get(i);
+        }
+        return sum;
+    }
+
     public int minDeletions(String s) {
 
         Map<String, Integer> map = new HashMap<>();
