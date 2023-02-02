@@ -23,10 +23,44 @@ public class Leetcode24MainClass {
 
     }
 
+    public int minDeletions(String s) {
+
+        Map<String, Integer> map = new HashMap<>();
+        String[] srr = s.split("");
+
+        for (String s1 : srr) {
+            map.put(s1, map.getOrDefault(s1, 0) + 1);
+        }
+
+        map = map.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+
+        Set<Integer> set = new HashSet<>();
+        int count = 0;
+
+        for(String s1 : map.keySet()){
+            int val = map.get(s1);
+            if(!set.contains(val)){
+                set.add(val);
+            } else {
+                while(val > 0 && set.contains(val)){
+                    val --;
+                    count ++;
+                }
+
+                if(val > 0){
+                    set.add(val);
+                }
+            }
+        }
+        return count;
+    }
+
     public int[] getStrongest(int[] arr, int k) {
         Arrays.sort(arr);
         int len = arr.length;
-        int  m =  arr[(arr.length - 1) / 2];;
+        int m = arr[(arr.length - 1) / 2];
+        ;
         Comparator<Integer> comp = (a, b) -> {
             return Math.abs(a - m) == Math.abs(b - m) ? b - a : Math.abs(b - m) - Math.abs(a - m);
         };
@@ -36,7 +70,7 @@ public class Leetcode24MainClass {
         int[] arrF = new int[k];
         int index = 0;
 
-        while(index < k){
+        while (index < k) {
             arrF[index] = l.get(index);
             index++;
         }
