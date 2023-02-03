@@ -33,7 +33,7 @@ public class Leetcode24MainClass {
         }
         for(int i = 0; i < a - 1; i++){
             while(!(Math.abs(arr[i + 1] - arr[i]) <= 1)){
-                arr[i + 1]--;
+                arr[i + 1] -= arr[i];
             }
         }
         return Arrays.stream(arr).boxed().sorted(Comparator.reverseOrder()).findFirst().get();
