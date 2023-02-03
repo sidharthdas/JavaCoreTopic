@@ -20,19 +20,40 @@ public class Leetcode24MainClass {
         // System.out.println(numberOfBeams(new String[]{"011001", "000000", "010100", "001000"}));
         //System.out.println(oddCells(2, 3, new int[][]{{0, 1}, {1, 1}}));
         //shortestToChar("loveleetcode", 'e');
-        System.out.println(maximumElementAfterDecrementingAndRearranging(new int[]{100,1,1000}));
+        System.out.println(maximumElementAfterDecrementingAndRearranging(new int[]{100, 1, 1000}));
 
+    }
+
+    public boolean check(int[] nums) {
+        int len = nums.length;
+        int count = 0;
+        for (int i = 0; i < len - 1; i++) {
+            if(nums[i] > nums[i + 1]){
+                count ++;
+            }
+        }
+
+        if(nums[len - 1] >  nums[0]){
+            count ++;
+        }
+
+        return count > 1 ? false: true;
+    }
+
+
+    public String baseNeg2(int n) {
+        return String.valueOf(Integer.parseInt(String.valueOf(n), 2));
     }
 
     public static int maximumElementAfterDecrementingAndRearranging(int[] arr) {
 
         Arrays.sort(arr);
-        int a =arr.length;
-        if(arr[0] != 1){
+        int a = arr.length;
+        if (arr[0] != 1) {
             arr[0] = 1;
         }
-        for(int i = 0; i < a - 1; i++){
-            while(!(Math.abs(arr[i + 1] - arr[i]) <= 1)){
+        for (int i = 0; i < a - 1; i++) {
+            while (!(Math.abs(arr[i + 1] - arr[i]) <= 1)) {
                 arr[i + 1] -= 1;
             }
         }
@@ -41,13 +62,10 @@ public class Leetcode24MainClass {
 
     public int rangeSum(int[] nums, int n, int left, int right) {
         List<Integer> l = new ArrayList<>();
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = i; j < n; j++)
-            {
+        for (int i = 0; i < n; i++) {
+            for (int j = i; j < n; j++) {
                 ArrayList<Integer> subArrays = new ArrayList<Integer>();
-                for (int k = i; k <= j; k++)
-                {
+                for (int k = i; k <= j; k++) {
                     subArrays.add(nums[k]);
 
                 }
@@ -58,7 +76,7 @@ public class Leetcode24MainClass {
         l = l.stream().sorted().collect(Collectors.toList());
         int[] arr = new int[n * (n + 1) / 2];
         int sum = 0;
-        for(int i = left - 1; i <= right - 1; i++){
+        for (int i = left - 1; i <= right - 1; i++) {
             sum += l.get(i);
         }
         return sum;
@@ -79,17 +97,17 @@ public class Leetcode24MainClass {
         Set<Integer> set = new HashSet<>();
         int count = 0;
 
-        for(String s1 : map.keySet()){
+        for (String s1 : map.keySet()) {
             int val = map.get(s1);
-            if(!set.contains(val)){
+            if (!set.contains(val)) {
                 set.add(val);
             } else {
-                while(val > 0 && set.contains(val)){
-                    val --;
-                    count ++;
+                while (val > 0 && set.contains(val)) {
+                    val--;
+                    count++;
                 }
 
-                if(val > 0){
+                if (val > 0) {
                     set.add(val);
                 }
             }
