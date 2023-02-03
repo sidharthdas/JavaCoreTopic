@@ -23,6 +23,21 @@ public class Leetcode24MainClass {
 
     }
 
+    public int maximumElementAfterDecrementingAndRearranging(int[] arr) {
+
+        Arrays.sort(arr);
+        int a =arr.length;
+        if(arr[0] != 1){
+            arr[0] = 1;
+        }
+        for(int i = 0; i < a - 1; i++){
+            while(Math.abs(arr[i + 1] - arr[i]) <= 1){
+                arr[i + 1]--;
+            }
+        }
+        return Arrays.stream(arr).boxed().sorted(Comparator.reverseOrder()).findFirst().get();
+    }
+
     public int rangeSum(int[] nums, int n, int left, int right) {
         List<Integer> l = new ArrayList<>();
         for (int i = 0; i < n; i++)
