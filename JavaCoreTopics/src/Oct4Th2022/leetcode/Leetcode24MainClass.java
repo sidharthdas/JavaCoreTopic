@@ -19,11 +19,12 @@ public class Leetcode24MainClass {
         //System.out.println(categorizeBox(1000, 1000, 1000, 1000));
         // System.out.println(numberOfBeams(new String[]{"011001", "000000", "010100", "001000"}));
         //System.out.println(oddCells(2, 3, new int[][]{{0, 1}, {1, 1}}));
-        shortestToChar("loveleetcode", 'e');
+        //shortestToChar("loveleetcode", 'e');
+        System.out.println(maximumElementAfterDecrementingAndRearranging(new int[]{100,1,1000}));
 
     }
 
-    public int maximumElementAfterDecrementingAndRearranging(int[] arr) {
+    public static int maximumElementAfterDecrementingAndRearranging(int[] arr) {
 
         Arrays.sort(arr);
         int a =arr.length;
@@ -31,7 +32,7 @@ public class Leetcode24MainClass {
             arr[0] = 1;
         }
         for(int i = 0; i < a - 1; i++){
-            while(Math.abs(arr[i + 1] - arr[i]) <= 1){
+            while(!(Math.abs(arr[i + 1] - arr[i]) <= 1)){
                 arr[i + 1]--;
             }
         }
