@@ -44,6 +44,13 @@ public int maxSubArray(int[] nums) {
 Map<String, Employee> mapEmpl = empList.stream().collect(Collectors.groupingBy(x -> x.dept.deptCode, Collectors.collectingAndThen(Collectors.maxBy(Comparator.comparingInt(x -> x.empSalary)),
                 Optional::get)));
 ```
+
+-> Sort map by value and if values are equal then sort by key
+```
+map = map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed()
+                .thenComparing(Map.Entry.comparingByKey()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+```
  
  
  1. Insert a node
