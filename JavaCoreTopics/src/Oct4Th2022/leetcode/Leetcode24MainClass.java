@@ -24,20 +24,52 @@ public class Leetcode24MainClass {
 
     }
 
+    public List<Integer> topStudents(String[] positive_feedback, String[] negative_feedback, String[] report, int[] student_id, int k) {
+
+        Map<Integer, Integer> map = new HashMap<>();
+        List<String> positive_feedback_list = Arrays.stream(positive_feedback).toList();
+        List<String> negative_feedback_list = Arrays.stream(negative_feedback).toList();
+
+        int reportLen = report.length;
+
+        for (int i = 0; i < reportLen; i++) {
+            String[] words = report[i].split(" ");
+            int positiveCount = 0;
+            int negativeCount = 0;
+            for(String word : words){
+                if(positive_feedback_list.contains(word)){
+                    positiveCount += 3;
+                }
+
+                if(negative_feedback_list.contains(word)){
+                    negativeCount += 1;
+                }
+            }
+
+            map.put(student_id[i], positiveCount - negativeCount);
+        }
+
+        map = map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed()
+                .thenComparing(Map.Entry.comparingByKey()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+
+        return map.keySet().stream().limit(k).toList();
+    }
+
     public boolean check(int[] nums) {
         int len = nums.length;
         int count = 0;
         for (int i = 0; i < len - 1; i++) {
-            if(nums[i] > nums[i + 1]){
-                count ++;
+            if (nums[i] > nums[i + 1]) {
+                count++;
             }
         }
 
-        if(nums[len - 1] >  nums[0]){
-            count ++;
+        if (nums[len - 1] > nums[0]) {
+            count++;
         }
 
-        return count > 1 ? false: true;
+        return count > 1 ? false : true;
     }
 
 
