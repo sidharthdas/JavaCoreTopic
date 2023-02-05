@@ -20,11 +20,12 @@ public class Leetcode24MainClass {
         // System.out.println(numberOfBeams(new String[]{"011001", "000000", "010100", "001000"}));
         //System.out.println(oddCells(2, 3, new int[][]{{0, 1}, {1, 1}}));
         //shortestToChar("loveleetcode", 'e');
-        System.out.println(maximumElementAfterDecrementingAndRearranging(new int[]{100, 1, 1000}));
+        //System.out.println(maximumElementAfterDecrementingAndRearranging(new int[]{100, 1, 1000}));
+        System.out.println(sumFourDivisors(new int[]{21, 4, 7}));
 
     }
 
-    public int sumFourDivisors(int[] nums) {
+    public static int sumFourDivisors(int[] nums) {
 
         List<List<Integer>> l = new ArrayList<>();
 
@@ -35,21 +36,27 @@ public class Leetcode24MainClass {
             int x = i / 2;
             boolean flag = true;
             for (int j = 2; j <= x; j++) {
-                if(i % j == 0){
+                if (i % j == 0) {
                     l1.add(j);
-                    if(l1.size() > 4){
+                    if (l1.size() > 4) {
                         flag = false;
                         break;
                     }
                 }
             }
-            if(flag){
+            if (flag) {
                 l.add(l1);
             }
         }
 
-        return l.stream().filter(x -> x.size() == 4).map(x -> x.stream().reduce(Integer::sum).get()).reduce(Integer::sum).get();
+        l = l.stream().filter(x -> x.size() == 4).toList();
 
+        int totalSum = 0;
+        for (List<Integer> l2 : l) {
+            totalSum += l2.stream().reduce(Integer::sum).get();
+        }
+
+        return totalSum;
     }
 
     public List<Integer> topStudents(String[] positive_feedback, String[] negative_feedback, String[] report, int[] student_id, int k) {
