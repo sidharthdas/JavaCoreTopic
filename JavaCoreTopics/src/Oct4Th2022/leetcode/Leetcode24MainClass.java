@@ -24,6 +24,34 @@ public class Leetcode24MainClass {
 
     }
 
+    public int sumFourDivisors(int[] nums) {
+
+        List<List<Integer>> l = new ArrayList<>();
+
+        for (int i : nums) {
+            List<Integer> l1 = new ArrayList<>();
+            l1.add(1);
+            l1.add(i);
+            int x = i / 2;
+            boolean flag = true;
+            for (int j = 2; j <= x; j++) {
+                if(i % j == 0){
+                    l1.add(j);
+                    if(l1.size() > 4){
+                        flag = false;
+                        break;
+                    }
+                }
+            }
+            if(flag){
+                l.add(l1);
+            }
+        }
+
+        return l.stream().filter(x -> x.size() == 4).map(x -> x.stream().reduce(Integer::sum).get()).reduce(Integer::sum).get();
+
+    }
+
     public List<Integer> topStudents(String[] positive_feedback, String[] negative_feedback, String[] report, int[] student_id, int k) {
 
         Map<Integer, Integer> map = new HashMap<>();
@@ -36,12 +64,12 @@ public class Leetcode24MainClass {
             String[] words = report[i].split(" ");
             int positiveCount = 0;
             int negativeCount = 0;
-            for(String word : words){
-                if(positive_feedback_list.contains(word)){
+            for (String word : words) {
+                if (positive_feedback_list.contains(word)) {
                     positiveCount += 3;
                 }
 
-                if(negative_feedback_list.contains(word)){
+                if (negative_feedback_list.contains(word)) {
                     negativeCount += 1;
                 }
             }
@@ -50,7 +78,7 @@ public class Leetcode24MainClass {
         }
 
         map = map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed()
-                .thenComparing(Map.Entry.comparingByKey()))
+                        .thenComparing(Map.Entry.comparingByKey()))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
 
         return map.keySet().stream().limit(k).toList();
