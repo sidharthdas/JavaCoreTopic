@@ -51,6 +51,11 @@ map = map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValu
                 .thenComparing(Map.Entry.comparingByKey()))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
 ```
+-> Flatten the List using flatMap method:
+```
+l.stream().filter(x -> x.size() == 4)
+                .flatMap(List::stream).reduce(Integer::sum).get();
+```
  
  
  1. Insert a node
