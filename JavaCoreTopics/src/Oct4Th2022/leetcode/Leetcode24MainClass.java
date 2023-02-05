@@ -51,12 +51,14 @@ public class Leetcode24MainClass {
 
         l = l.stream().filter(x -> x.size() == 4).toList();
 
-        int totalSum = 0;
+        /*int totalSum = 0;
         for (List<Integer> l2 : l) {
             totalSum += l2.stream().reduce(Integer::sum).get();
-        }
+        }*/
 
-        return totalSum;
+
+        return l.size() == 0 ? 0 : l.stream().filter(x -> x.size() == 4)
+                .flatMap(List::stream).reduce(Integer::sum).get();
     }
 
     public List<Integer> topStudents(String[] positive_feedback, String[] negative_feedback, String[] report, int[] student_id, int k) {
