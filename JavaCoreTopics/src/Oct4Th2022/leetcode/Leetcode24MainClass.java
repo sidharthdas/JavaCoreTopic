@@ -27,6 +27,10 @@ public class Leetcode24MainClass {
 
     }
 
+    public List<Integer> luckyNumbers (int[][] matrix) {
+        return null;
+    }
+
     public boolean checkPowersOfThree(int n) {
         if (n < 3) {
             return false;
