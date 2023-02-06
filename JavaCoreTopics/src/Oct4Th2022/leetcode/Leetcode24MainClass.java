@@ -1,6 +1,7 @@
 package Oct4Th2022.leetcode;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -22,7 +23,24 @@ public class Leetcode24MainClass {
         //shortestToChar("loveleetcode", 'e');
         //System.out.println(maximumElementAfterDecrementingAndRearranging(new int[]{100, 1, 1000}));
         //System.out.println(sumFourDivisors(new int[]{21, 4, 7}));
-        System.out.println(calculateTax(new int[][]{{3,50},{7,10},{12,25}}, 10));
+        System.out.println(calculateTax(new int[][]{{3, 50}, {7, 10}, {12, 25}}, 10));
+
+    }
+
+    public boolean checkPowersOfThree(int n) {
+        if (n < 3) {
+            return false;
+        }
+
+        while (n != 1) {
+            if (n % 3 == 0) {
+                n = n / 3;
+            } else {
+                return false;
+            }
+        }
+
+        return true;
 
     }
 
@@ -30,17 +48,17 @@ public class Leetcode24MainClass {
         //income, tax %
         double totalTax = 0;
         for (int[] bracket : brackets) {
-            if(bracket[0] <= income){
-                totalTax += (double)((bracket[1] / 100d)) * (double)bracket[0];
+            if (bracket[0] <= income) {
+                totalTax += (double) ((bracket[1] / 100d)) * (double) bracket[0];
                 income -= bracket[0];
             } else {
-                totalTax += (double)((bracket[1] / 100d)) * (double)income;
+                totalTax += (double) ((bracket[1] / 100d)) * (double) income;
                 income = 0;
 
             }
-                if(income == 0){
-                    break;
-                }
+            if (income == 0) {
+                break;
+            }
 
         }
         return totalTax;
@@ -689,4 +707,38 @@ class DataStream {
 
         return false;
     }
+
+    public int[] findMode(TreeNode root) {
+        BST b = new BST();
+        b.inOrder(root);
+        List<Integer> l = b.l;
+
+        /*Map<String, Long> result  = items.stream().
+				collect(Collectors.groupingBy(Function.identity(), Collectors. counting()))
+				.entrySet().stream().filter(x -> x.getValue() ==1)
+				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+		*/
+
+        Map<Integer, Long> map = l.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        long val = map.entrySet().stream().sorted(Map.Entry.<Integer, Long>comparingByValue().reversed()).findFirst().get().getValue();
+        map = map.entrySet().stream().filter(x -> x.getValue() == val).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+
+        return map.keySet().stream().mapToInt(i -> i).toArray();
+    }
+}
+
+class BST {
+
+    List<Integer> l = new ArrayList<>();
+
+    public void inOrder(TreeNode node) {
+        if (node == null) {
+            return;
+        }
+        inOrder(node.left);
+        l.add(node.val);
+        inOrder(node.right);
+    }
+
+
 }
