@@ -21,8 +21,29 @@ public class Leetcode24MainClass {
         //System.out.println(oddCells(2, 3, new int[][]{{0, 1}, {1, 1}}));
         //shortestToChar("loveleetcode", 'e');
         //System.out.println(maximumElementAfterDecrementingAndRearranging(new int[]{100, 1, 1000}));
-        System.out.println(sumFourDivisors(new int[]{21, 4, 7}));
+        //System.out.println(sumFourDivisors(new int[]{21, 4, 7}));
+        System.out.println(calculateTax(new int[][]{{3,50},{7,10},{12,25}}, 10));
 
+    }
+
+    public static double calculateTax(int[][] brackets, int income) {
+        //income, tax %
+        double totalTax = 0;
+        for (int[] bracket : brackets) {
+            if(bracket[0] <= income){
+                totalTax += (double)((bracket[1] / 100d)) * (double)bracket[0];
+                income -= bracket[0];
+            } else {
+                totalTax += (double)((bracket[1] / 100d)) * (double)income;
+                income = 0;
+
+            }
+                if(income == 0){
+                    break;
+                }
+
+        }
+        return totalTax;
     }
 
     public static int sumFourDivisors(int[] nums) {
