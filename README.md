@@ -33,9 +33,26 @@ public int maxSubArray(int[] nums) {
  Arrays.sort(score, (score1, score2) -> score2[k] - score1[k]);
 ```
 
+-> PriorityQueue Implementation
+```
+PriorityQueue<Integer> pq = new PriorityQueue<>((a1, a2) -> a2 - a1); 
+//Here, in the argument, we need to pass the Comparator (Added lamda exp for sorting)
+```
+
 -> For Java core topics, refer package JavaCoreTopicsImplementation17thJul2021
 
 -> For BST please follow this package src.binarysearchtreefullimplementation
+
+ 1. Insert a node
+ 2. Remove a node
+ 3. inOrder
+ 4. preOrder
+ 5. postOrder
+ 6. Print left side of node
+ 7. Print right side of node
+ 8. Descending order
+ 9. Height of BST
+10. Mirror image of BST
 
 -> For java8 functional interface, refer JavaCoreTopicsImplementation17thJul2021.java8FunctionalInterfaces.
 
@@ -58,16 +75,6 @@ l.stream().filter(x -> x.size() == 4)
 ```
  
  
- 1. Insert a node
- 2. Remove a node
- 3. inOrder
- 4. preOrder
- 5. postOrder
- 6. Print left side of node
- 7. Print right side of node
- 8. Descending order
- 9. Height of BST
-10. Mirror image of BST
 
 -> For Callable, Future Object and ExecutorService Implementation, please refer JUNE.callableImplementation
 
