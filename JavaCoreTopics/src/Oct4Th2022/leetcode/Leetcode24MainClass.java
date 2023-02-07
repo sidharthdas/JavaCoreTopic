@@ -25,8 +25,22 @@ public class Leetcode24MainClass {
         //System.out.println(sumFourDivisors(new int[]{21, 4, 7}));
         //System.out.println(calculateTax(new int[][]{{3, 50}, {7, 10}, {12, 25}}, 10));
         //Arrays.asList("", "").contains("");
-        System.out.println(maximumPopulation(new int[][]{{1950,1961},{1960,1971},{1970,1981}}));
+        //System.out.println(maximumPopulation(new int[][]{{1950,1961},{1960,1971},{1970,1981}}));
+        System.out.println(getCommon1(new int[]{12,16,24,24,25,27,31,37,38,41,43,50,57,70,71,71,74,76,77,78},
+                new int[]{5,5,9,11,12,17,20,34,36,51,61,68,70,79,85,87,88,90,91,97}));
 
+    }
+
+    public static int getCommon1(int[] nums1, int[] nums2) {
+        Set<Integer> l1 = Arrays.stream(nums1).boxed().collect(Collectors.toSet());
+        Set<Integer> l2 = Arrays.stream(nums2).boxed().collect(Collectors.toSet());
+        List<Integer> common = new ArrayList<>();
+        for(int i : l2){
+            if(!l1.add(i)){
+                common.add(i);
+            }
+        }
+        return common.stream().sorted().findFirst().get();
     }
 
     public static int maximumPopulation(int[][] logs) {
@@ -65,16 +79,7 @@ public class Leetcode24MainClass {
 
     }
 
-    public int getCommon1(int[] nums1, int[] nums2) {
-        Set<Integer> l1 = Arrays.stream(nums1).boxed().collect(Collectors.toSet());
-        List<Integer> common = new ArrayList<>();
-        for(int i : nums2){
-            if(!l1.add(i)){
-               common.add(i);
-            }
-        }
-        return common.stream().sorted().findFirst().get();
-    }
+
 
 
 
