@@ -31,6 +31,15 @@ public class Leetcode24MainClass {
 
     }
 
+    public int similarPairs(String[] words) {
+        Map<String, Integer> map = new HashMap<>();
+        for(String word : words){
+            String s = Arrays.toString(Arrays.stream(word.split("")).collect(Collectors.toSet()).stream().sorted().toArray());
+            map.put(s, map.getOrDefault(s, 0) + 1);
+        }
+        return (int)map.entrySet().stream().filter(x -> x.getValue() > 1).count();
+    }
+
     public static int getCommon1(int[] nums1, int[] nums2) {
         Set<Integer> l1 = Arrays.stream(nums1).boxed().collect(Collectors.toSet());
         Set<Integer> l2 = Arrays.stream(nums2).boxed().collect(Collectors.toSet());
