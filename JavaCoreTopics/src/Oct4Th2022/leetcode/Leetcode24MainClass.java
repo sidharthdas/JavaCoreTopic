@@ -40,7 +40,7 @@ public class Leetcode24MainClass {
                 common.add(i);
             }
         }
-        return common.stream().sorted().findFirst().get();
+        return common.size() == 0 ? -1 : common.stream().sorted().findFirst().get();
     }
 
     public static int maximumPopulation(int[][] logs) {
