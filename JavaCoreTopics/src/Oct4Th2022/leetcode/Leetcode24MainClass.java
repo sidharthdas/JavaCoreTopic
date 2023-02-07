@@ -37,6 +37,20 @@ public class Leetcode24MainClass {
         System.out.println(countValidWords("he bought 2 pencils, 3 erasers, and 1  pencil-sharpener."));
 
     }
+    public long pickGifts(int[] gifts, int k) {
+
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a1, a2) -> a2 - a1);
+        for(int i : gifts){
+            pq.add(i);
+        }
+
+        while(k > 0){
+            pq.add((int)Math.sqrt(pq.remove()));
+            k--;
+        }
+
+        return pq.stream().map(x -> (long)x).reduce(Long::sum).get();
+    }
 
     public static int countValidWords(String sentence) {
         sentence = sentence.replaceAll("\\s+", " ");
