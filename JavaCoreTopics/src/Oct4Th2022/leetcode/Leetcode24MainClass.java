@@ -76,8 +76,9 @@ public class Leetcode24MainClass {
                         if (s.charAt(0) == '-' || s.charAt(len - 1) == '-') {
                             flag = false;
                         }
+                        System.out.println(s);
                         int hypenIndex = s.indexOf('-');
-                        if (hypenIndex != 0 && !(alphaList.contains(String.valueOf(s.charAt(hypenIndex - 1))) && alphaList.contains(String.valueOf(s.charAt(hypenIndex + 1))))) {
+                        if ((hypenIndex != 0  || hypenIndex != len -1 )&& !(alphaList.contains(String.valueOf(s.charAt(hypenIndex - 1))) && alphaList.contains(String.valueOf(s.charAt(hypenIndex + 1))))) {
                             flag = false;
                         }
                     }
@@ -92,7 +93,7 @@ public class Leetcode24MainClass {
                 }
 
                 if (flag) {
-                    System.out.println(s);
+                    //System.out.println(s);
                     count++;
                 }
             }
