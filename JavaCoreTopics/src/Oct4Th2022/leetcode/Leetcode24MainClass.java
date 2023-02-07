@@ -39,7 +39,7 @@ public class Leetcode24MainClass {
     }
 
     public static int countValidWords(String sentence) {
-        Map<String, Integer> map = new HashMap<>();
+        sentence = sentence.replaceAll("\\s+", " ");
         String words[] = sentence.split(" ");
         int count = 0;
         //'!', '.', and ','
@@ -76,6 +76,10 @@ public class Leetcode24MainClass {
                         if (s.charAt(0) == '-' || s.charAt(len - 1) == '-') {
                             flag = false;
                         }
+                        int hypenIndex = s.indexOf('-');
+                        if (!(alphaList.contains(s.charAt(hypenIndex - 1)) && alphaList.contains(s.charAt(hypenIndex + 1)))) {
+                            flag = false;
+                        }
                     }
 
                     if (pun == 1) {
@@ -88,6 +92,7 @@ public class Leetcode24MainClass {
                 }
 
                 if (flag) {
+                    System.out.println(s);
                     count++;
                 }
             }
