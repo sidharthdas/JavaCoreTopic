@@ -30,13 +30,15 @@ public class Leetcode24MainClass {
         // new int[]{5,5,9,11,12,17,20,34,36,51,61,68,70,79,85,87,88,90,91,97}));
         //System.out.println(similarPairs(new String[]{"aba","aabb","abcd","bac","aabc"}));
 
-        for (int c = 0; c <= 9; c++) {
+       /* for (int c = 0; c <= 9; c++) {
             System.out.print("\"" + c + "\",");
-        }
+        }*/
+
+        System.out.println(countValidWords("cat and  dog"));
 
     }
 
-    public int countValidWords(String sentence) {
+    public static int countValidWords(String sentence) {
         Map<String, Integer> map = new HashMap<>();
         String words[] = sentence.split(" ");
         int alpha = 0;
@@ -49,41 +51,44 @@ public class Leetcode24MainClass {
         List<String> intList = List.of("0", "1", "2", "3", "4", "5", "6", "7", "8", "9");
         List<String> punList = List.of("!", ".", ",");
         for (String s : words) {
+            s = s.trim();
             int len = s.length();
-            String[] arr = s.split("");
-            for (String s1 : arr) {
-                if (alphaList.contains(s1)) {
-                    alpha++;
-                }
-                if (intList.contains(s1)) {
-                    in++;
-                }
-                if (punList.contains(s1)) {
-                    pun++;
-                }
-                if (s1.equals("-")) {
-                    hypens++;
-                }
-            }
-            boolean flag = true;
-            if (in == 0 && (hypens == 0 || hypens == 1) && (pun == 0 || pun == 1)) {
-                if (hypens == 1) {
-                    if (s.charAt(0) == '-' || s.charAt(len - 1) == '-') {
-                        flag = false;
+            if (len > 0) {
+                String[] arr = s.split("");
+                for (String s1 : arr) {
+                    if (alphaList.contains(s1)) {
+                        alpha++;
+                    }
+                    if (intList.contains(s1)) {
+                        in++;
+                    }
+                    if (punList.contains(s1)) {
+                        pun++;
+                    }
+                    if (s1.equals("-")) {
+                        hypens++;
                     }
                 }
-
-                if (pun == 1) {
-                    if(!punList.contains(String.valueOf(s.charAt(len - 1)))){
-                        flag = false;
+                boolean flag = true;
+                if (in == 0 && (hypens == 0 || hypens == 1) && (pun == 0 || pun == 1)) {
+                    if (hypens == 1) {
+                        if (s.charAt(0) == '-' || s.charAt(len - 1) == '-') {
+                            flag = false;
+                        }
                     }
-                }
-            } else {
-                flag = false;
-            }
 
-            if (flag) {
-                count++;
+                    if (pun == 1) {
+                        if (!punList.contains(String.valueOf(s.charAt(len - 1)))) {
+                            flag = false;
+                        }
+                    }
+                } else {
+                    flag = false;
+                }
+
+                if (flag) {
+                    count++;
+                }
             }
         }
         return count;
