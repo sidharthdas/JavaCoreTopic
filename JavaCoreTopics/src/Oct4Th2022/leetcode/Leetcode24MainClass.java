@@ -65,6 +65,19 @@ public class Leetcode24MainClass {
 
     }
 
+    public int getCommon1(int[] nums1, int[] nums2) {
+        Set<Integer> l1 = Arrays.stream(nums1).boxed().collect(Collectors.toSet());
+        List<Integer> common = new ArrayList<>();
+        for(int i : nums2){
+            if(!l1.add(i)){
+               common.add(i);
+            }
+        }
+        return common.stream().sorted().findFirst().get();
+    }
+
+
+
     public List<Integer> luckyNumbers(int[][] matrix) {
         return null;
     }
