@@ -77,7 +77,7 @@ public class Leetcode24MainClass {
                             flag = false;
                         }
                         int hypenIndex = s.indexOf('-');
-                        if (!(alphaList.contains(String.valueOf(s.charAt(hypenIndex - 1))) && alphaList.contains(String.valueOf(s.charAt(hypenIndex + 1))))) {
+                        if (hypenIndex != 0 && !(alphaList.contains(String.valueOf(s.charAt(hypenIndex - 1))) && alphaList.contains(String.valueOf(s.charAt(hypenIndex + 1))))) {
                             flag = false;
                         }
                     }
