@@ -23,11 +23,33 @@ public class Leetcode24MainClass {
         //shortestToChar("loveleetcode", 'e');
         //System.out.println(maximumElementAfterDecrementingAndRearranging(new int[]{100, 1, 1000}));
         //System.out.println(sumFourDivisors(new int[]{21, 4, 7}));
-        System.out.println(calculateTax(new int[][]{{3, 50}, {7, 10}, {12, 25}}, 10));
+        //System.out.println(calculateTax(new int[][]{{3, 50}, {7, 10}, {12, 25}}, 10));
+        //Arrays.asList("", "").contains("");
+        System.out.println(maximumPopulation(new int[][]{{1950,1961},{1960,1971},{1970,1981}}));
 
     }
 
-    public List<Integer> luckyNumbers (int[][] matrix) {
+    public static int maximumPopulation(int[][] logs) {
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int[] i : logs) {
+            map.put(i[0], 0);
+        }
+
+        for (int[] i : logs) {
+            map.forEach((x, y) -> {
+                if (i[0] <= x && i[1] >= x) {
+                    map.put(x, y + 1);
+                }
+
+            });
+        }
+
+        return map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed().thenComparing(Map.Entry.comparingByKey()))
+                .findFirst().get().getKey();
+    }
+
+    public List<Integer> luckyNumbers(int[][] matrix) {
         return null;
     }
 
