@@ -32,6 +32,26 @@ public class Leetcode24MainClass {
 
     }
 
+    public boolean isAlienSorted(String[] words, String order) {
+
+        String[] wordArr = order.split("");
+        String[] cloneWords = words;
+
+        Arrays.sort(cloneWords, Comparator.comparingInt(x -> indexOf(wordArr, x)));
+
+        return Arrays.toString(cloneWords).equals(Arrays.toString(words));
+
+    }
+
+    private static int indexOf(String[] array, String value) {
+        for (int i = 0; i < array.length; i++) {
+            if (array[i].equals(value)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public int minOperations(String s) {
         String[] srr = s.split("");
         int len = srr.length;
