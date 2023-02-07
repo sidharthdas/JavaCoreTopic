@@ -28,7 +28,7 @@ public class Leetcode24MainClass {
         //System.out.println(maximumPopulation(new int[][]{{1950,1961},{1960,1971},{1970,1981}}));
        // System.out.println(getCommon1(new int[]{12,16,24,24,25,27,31,37,38,41,43,50,57,70,71,71,74,76,77,78},
                // new int[]{5,5,9,11,12,17,20,34,36,51,61,68,70,79,85,87,88,90,91,97}));
-        System.out.println(similarPairs(new String[]{"aabb","ab","ba"}));
+        System.out.println(similarPairs(new String[]{"aba","aabb","abcd","bac","aabc"}));
 
     }
 
@@ -45,7 +45,7 @@ public class Leetcode24MainClass {
         for(int i = 0; i < len; i++){
 
             for(int j = i + 1; j < len; j++){
-                if(l.get(i).equals(j)){
+                if(l.get(i).equals(l.get(j))){
                     count++;
                 }
             }
