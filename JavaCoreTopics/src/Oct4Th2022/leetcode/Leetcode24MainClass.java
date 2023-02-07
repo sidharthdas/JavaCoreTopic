@@ -32,6 +32,37 @@ public class Leetcode24MainClass {
 
     }
 
+    public int minOperations(String s) {
+        String[] srr = s.split("");
+        int len = srr.length;
+        int countLeft = 0;
+        int countRight = 0;
+        for(int i = 0; i < len; i++){
+            if(i % 2 == 0){
+                if(!srr[i].equals("0")){
+                    countLeft ++;
+                }
+            } else{
+                if(!srr[i].equals("1")){
+                    countLeft ++;
+                }
+            }
+        }
+        for(int i = 0; i < len; i++){
+            if(i % 2 == 0){
+                if(!srr[i].equals("1")){
+                    countRight ++;
+                }
+            } else{
+                if(!srr[i].equals("0")){
+                    countRight ++;
+                }
+            }
+        }
+
+        return Math.min(countLeft, countRight);
+    }
+
     public static int similarPairs(String[] words) {
         Map<String, Integer> map = new HashMap<>();
         List<String> l = new ArrayList<>();
