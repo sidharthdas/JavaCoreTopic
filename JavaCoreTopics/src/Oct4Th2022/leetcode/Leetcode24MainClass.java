@@ -34,17 +34,13 @@ public class Leetcode24MainClass {
             System.out.print("\"" + c + "\",");
         }*/
 
-        System.out.println(countValidWords("cat and  dog"));
+        System.out.println(countValidWords("he bought 2 pencils, 3 erasers, and 1  pencil-sharpener."));
 
     }
 
     public static int countValidWords(String sentence) {
         Map<String, Integer> map = new HashMap<>();
         String words[] = sentence.split(" ");
-        int alpha = 0;
-        int in = 0;
-        int hypens = 0;
-        int pun = 0;
         int count = 0;
         //'!', '.', and ','
         List<String> alphaList = List.of("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z");
@@ -53,6 +49,11 @@ public class Leetcode24MainClass {
         for (String s : words) {
             s = s.trim();
             int len = s.length();
+            int alpha = 0;
+            int in = 0;
+            int hypens = 0;
+            int pun = 0;
+
             if (len > 0) {
                 String[] arr = s.split("");
                 for (String s1 : arr) {
