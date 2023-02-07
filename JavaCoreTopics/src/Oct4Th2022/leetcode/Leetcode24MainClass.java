@@ -26,10 +26,67 @@ public class Leetcode24MainClass {
         //System.out.println(calculateTax(new int[][]{{3, 50}, {7, 10}, {12, 25}}, 10));
         //Arrays.asList("", "").contains("");
         //System.out.println(maximumPopulation(new int[][]{{1950,1961},{1960,1971},{1970,1981}}));
-       // System.out.println(getCommon1(new int[]{12,16,24,24,25,27,31,37,38,41,43,50,57,70,71,71,74,76,77,78},
-               // new int[]{5,5,9,11,12,17,20,34,36,51,61,68,70,79,85,87,88,90,91,97}));
-        System.out.println(similarPairs(new String[]{"aba","aabb","abcd","bac","aabc"}));
+        // System.out.println(getCommon1(new int[]{12,16,24,24,25,27,31,37,38,41,43,50,57,70,71,71,74,76,77,78},
+        // new int[]{5,5,9,11,12,17,20,34,36,51,61,68,70,79,85,87,88,90,91,97}));
+        //System.out.println(similarPairs(new String[]{"aba","aabb","abcd","bac","aabc"}));
 
+        for (int c = 0; c <= 9; c++) {
+            System.out.print("\"" + c + "\",");
+        }
+
+    }
+
+    public int countValidWords(String sentence) {
+        Map<String, Integer> map = new HashMap<>();
+        String words[] = sentence.split(" ");
+        int alpha = 0;
+        int in = 0;
+        int hypens = 0;
+        int pun = 0;
+        int count = 0;
+        //'!', '.', and ','
+        List<String> alphaList = List.of("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z");
+        List<String> intList = List.of("0", "1", "2", "3", "4", "5", "6", "7", "8", "9");
+        List<String> punList = List.of("!", ".", ",");
+        for (String s : words) {
+            int len = s.length();
+            String[] arr = s.split("");
+            for (String s1 : arr) {
+                if (alphaList.contains(s1)) {
+                    alpha++;
+                }
+                if (intList.contains(s1)) {
+                    in++;
+                }
+                if (punList.contains(s1)) {
+                    pun++;
+                }
+                if (s1.equals("-")) {
+                    hypens++;
+                }
+            }
+            boolean flag = true;
+            if (in == 0 && (hypens == 0 || hypens == 1) && (pun == 0 || pun == 1)) {
+                if (hypens == 1) {
+                    if (s.charAt(0) == '-' || s.charAt(len - 1) == '-') {
+                        flag = false;
+                    }
+                }
+
+                if (pun == 1) {
+                    if(!punList.contains(String.valueOf(s.charAt(len - 1)))){
+                        flag = false;
+                    }
+                }
+            } else {
+                flag = false;
+            }
+
+            if (flag) {
+                count++;
+            }
+        }
+        return count;
     }
 
     public boolean isAlienSorted(String[] words, String order) {
@@ -57,25 +114,25 @@ public class Leetcode24MainClass {
         int len = srr.length;
         int countLeft = 0;
         int countRight = 0;
-        for(int i = 0; i < len; i++){
-            if(i % 2 == 0){
-                if(!srr[i].equals("0")){
-                    countLeft ++;
+        for (int i = 0; i < len; i++) {
+            if (i % 2 == 0) {
+                if (!srr[i].equals("0")) {
+                    countLeft++;
                 }
-            } else{
-                if(!srr[i].equals("1")){
-                    countLeft ++;
+            } else {
+                if (!srr[i].equals("1")) {
+                    countLeft++;
                 }
             }
         }
-        for(int i = 0; i < len; i++){
-            if(i % 2 == 0){
-                if(!srr[i].equals("1")){
-                    countRight ++;
+        for (int i = 0; i < len; i++) {
+            if (i % 2 == 0) {
+                if (!srr[i].equals("1")) {
+                    countRight++;
                 }
-            } else{
-                if(!srr[i].equals("0")){
-                    countRight ++;
+            } else {
+                if (!srr[i].equals("0")) {
+                    countRight++;
                 }
             }
         }
@@ -86,17 +143,17 @@ public class Leetcode24MainClass {
     public static int similarPairs(String[] words) {
         Map<String, Integer> map = new HashMap<>();
         List<String> l = new ArrayList<>();
-        for(String word : words){
-            l.add( Arrays.toString(Arrays.stream(word.split("")).collect(Collectors.toSet()).stream().sorted().toArray()));
+        for (String word : words) {
+            l.add(Arrays.toString(Arrays.stream(word.split("")).collect(Collectors.toSet()).stream().sorted().toArray()));
         }
 
         int len = l.size();
         int count = 0;
 
-        for(int i = 0; i < len; i++){
+        for (int i = 0; i < len; i++) {
 
-            for(int j = i + 1; j < len; j++){
-                if(l.get(i).equals(l.get(j))){
+            for (int j = i + 1; j < len; j++) {
+                if (l.get(i).equals(l.get(j))) {
                     count++;
                 }
             }
@@ -108,8 +165,8 @@ public class Leetcode24MainClass {
         Set<Integer> l1 = Arrays.stream(nums1).boxed().collect(Collectors.toSet());
         Set<Integer> l2 = Arrays.stream(nums2).boxed().collect(Collectors.toSet());
         List<Integer> common = new ArrayList<>();
-        for(int i : l2){
-            if(!l1.add(i)){
+        for (int i : l2) {
+            if (!l1.add(i)) {
                 common.add(i);
             }
         }
@@ -143,7 +200,7 @@ public class Leetcode24MainClass {
         List<Integer> common = new ArrayList<>();
 
         l1.forEach(x -> {
-            if(l2.contains(x)){
+            if (l2.contains(x)) {
                 common.add(x);
             }
         });
@@ -151,9 +208,6 @@ public class Leetcode24MainClass {
         return common.stream().sorted().findFirst().get();
 
     }
-
-
-
 
 
     public List<Integer> luckyNumbers(int[][] matrix) {
