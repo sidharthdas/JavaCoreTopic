@@ -26,18 +26,31 @@ public class Leetcode24MainClass {
         //System.out.println(calculateTax(new int[][]{{3, 50}, {7, 10}, {12, 25}}, 10));
         //Arrays.asList("", "").contains("");
         //System.out.println(maximumPopulation(new int[][]{{1950,1961},{1960,1971},{1970,1981}}));
-        System.out.println(getCommon1(new int[]{12,16,24,24,25,27,31,37,38,41,43,50,57,70,71,71,74,76,77,78},
-                new int[]{5,5,9,11,12,17,20,34,36,51,61,68,70,79,85,87,88,90,91,97}));
+       // System.out.println(getCommon1(new int[]{12,16,24,24,25,27,31,37,38,41,43,50,57,70,71,71,74,76,77,78},
+               // new int[]{5,5,9,11,12,17,20,34,36,51,61,68,70,79,85,87,88,90,91,97}));
+        System.out.println(similarPairs(new String[]{"aabb","ab","ba"}));
 
     }
 
-    public int similarPairs(String[] words) {
+    public static int similarPairs(String[] words) {
         Map<String, Integer> map = new HashMap<>();
+        List<String> l = new ArrayList<>();
         for(String word : words){
-            String s = Arrays.toString(Arrays.stream(word.split("")).collect(Collectors.toSet()).stream().sorted().toArray());
-            map.put(s, map.getOrDefault(s, 0) + 1);
+            l.add( Arrays.toString(Arrays.stream(word.split("")).collect(Collectors.toSet()).stream().sorted().toArray()));
         }
-        return (int)map.entrySet().stream().filter(x -> x.getValue() > 1).count();
+
+        int len = l.size();
+        int count = 0;
+
+        for(int i = 0; i < len; i++){
+
+            for(int j = i + 1; j < len; j++){
+                if(l.get(i).equals(j)){
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 
     public static int getCommon1(int[] nums1, int[] nums2) {
