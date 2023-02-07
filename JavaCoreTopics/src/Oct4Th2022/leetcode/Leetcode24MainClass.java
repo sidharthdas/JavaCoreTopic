@@ -45,8 +45,24 @@ public class Leetcode24MainClass {
             });
         }
 
-        return map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed().thenComparing(Map.Entry.comparingByKey()))
+        return map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed().
+                        thenComparing(Map.Entry.comparingByKey()))
                 .findFirst().get().getKey();
+    }
+
+    public int getCommon(int[] nums1, int[] nums2) {
+        List<Integer> l1 = Arrays.stream(nums1).boxed().toList();
+        List<Integer> l2 = Arrays.stream(nums2).boxed().toList();
+        List<Integer> common = new ArrayList<>();
+
+        l1.forEach(x -> {
+            if(l2.contains(x)){
+                common.add(x);
+            }
+        });
+
+        return common.stream().sorted().findFirst().get();
+
     }
 
     public List<Integer> luckyNumbers(int[][] matrix) {
