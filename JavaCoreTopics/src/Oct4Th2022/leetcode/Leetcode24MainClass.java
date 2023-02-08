@@ -37,19 +37,52 @@ public class Leetcode24MainClass {
         System.out.println(countValidWords("he bought 2 pencils, 3 erasers, and 1  pencil-sharpener."));
 
     }
+
+    public int largestInteger(int num) {
+        List<Integer> l = new ArrayList<>();
+        while (num != 0) {
+            l.add(num % 10);
+            num = num / 10;
+        }
+        int len = l.size();
+
+        List<Integer> evenList = l.stream().filter(x -> x % 2 == 0).sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+        int evenSize = evenList.size();
+        List<Integer> oddList = l.stream().filter(x -> x % 2 != 0).sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+        int oddSize = oddList.size();
+
+        int evenStartIndex = 0;
+        int oddStartIndex = 0;
+
+        String ans = "";
+
+        for (int i = len - 1; i >= 0; i--) {
+            if(l.get(i) % 2 == 0){
+                ans += String.valueOf(evenList.get(evenStartIndex));
+                evenStartIndex++;
+            } else {
+                ans += String.valueOf(oddList.get(oddStartIndex));
+                oddStartIndex++;
+            }
+        }
+
+        return Integer.parseInt(ans);
+
+    }
+
     public long pickGifts(int[] gifts, int k) {
 
         PriorityQueue<Integer> pq = new PriorityQueue<>((a1, a2) -> a2 - a1);
-        for(int i : gifts){
+        for (int i : gifts) {
             pq.add(i);
         }
 
-        while(k > 0){
-            pq.add((int)Math.sqrt(pq.remove()));
+        while (k > 0) {
+            pq.add((int) Math.sqrt(pq.remove()));
             k--;
         }
 
-        return pq.stream().map(x -> (long)x).reduce(Long::sum).get();
+        return pq.stream().map(x -> (long) x).reduce(Long::sum).get();
     }
 
     public static int countValidWords(String sentence) {
@@ -92,7 +125,7 @@ public class Leetcode24MainClass {
                         }
                         System.out.println(s);
                         int hypenIndex = s.indexOf('-');
-                        if ((hypenIndex != 0  && hypenIndex != len -1 )&& !(alphaList.contains(String.valueOf(s.charAt(hypenIndex - 1))) && alphaList.contains(String.valueOf(s.charAt(hypenIndex + 1))))) {
+                        if ((hypenIndex != 0 && hypenIndex != len - 1) && !(alphaList.contains(String.valueOf(s.charAt(hypenIndex - 1))) && alphaList.contains(String.valueOf(s.charAt(hypenIndex + 1))))) {
                             flag = false;
                         }
                     }
