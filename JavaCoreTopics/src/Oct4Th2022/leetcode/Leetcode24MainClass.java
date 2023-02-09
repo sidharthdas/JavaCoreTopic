@@ -38,6 +38,18 @@ public class Leetcode24MainClass {
 
     }
 
+    public int minMovesToSeat(int[] seats, int[] students) {
+        Arrays.sort(seats);
+        Arrays.sort(students);
+        int len = seats.length;
+        int sum = 0;
+        for(int i = 0; i < len; i++){
+            sum += Math.abs(seats[i] - students[i]);
+        }
+
+        return sum;
+    }
+
     public int largestInteger(int num) {
         List<Integer> l = new ArrayList<>();
         while (num != 0) {
