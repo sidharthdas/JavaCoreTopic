@@ -38,14 +38,19 @@ public class Leetcode24MainClass {
 
     }
 
+    public boolean checkTree(TreeNode root) {
+        return root.val == root.left.val + root.right.val;
+    }
+
     public boolean hasAllCodes(String s, int k) {
-        Set<String> set = new HashSet<>();
+        List<String> set = new ArrayList<>();
         int len = s.length();
         for (int i = 0; i < len; i++) {
             for (int j = i+1; j <= len; j++) {
-                if(s.substring(i,j).length() == k){
-                    set.add(s.substring(i,j));
-                }
+                set.add(s.substring(i,j));
+                /*if(s.substring(i,j).length() == k){
+
+                }*/
             }
         }
 
