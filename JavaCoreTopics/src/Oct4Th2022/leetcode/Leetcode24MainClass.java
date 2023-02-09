@@ -38,6 +38,22 @@ public class Leetcode24MainClass {
 
     }
 
+    public boolean hasAllCodes(String s, int k) {
+        Set<String> set = new HashSet<>();
+        int len = s.length();
+        for (int i = 0; i < len; i++) {
+            for (int j = i+1; j <= len; j++) {
+                if(s.substring(i,j).length() == k){
+                    set.add(s.substring(i,j));
+                }
+            }
+        }
+
+        int size = set.size();
+        int sizeAfterFilter = (int) set.stream().filter(x -> s.contains(x)).count();
+        return size == sizeAfterFilter;
+    }
+
     public int minMovesToSeat(int[] seats, int[] students) {
         Arrays.sort(seats);
         Arrays.sort(students);
