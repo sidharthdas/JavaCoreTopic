@@ -26,6 +26,11 @@ public class Leetcode25MainClass {
         // Actual bill = 14700 * ((100 - 50) / 100) = 7350.
         cashier.getBill(new int[]{2, 3, 5}, new int[]{5, 3, 2});                    // return 2500.0.  6th customer, no discount.
     }
+
+    public int distinctIntegers(int n) {
+        if( n == 1) return 1;
+        return n - 1;
+    }
 }
 
 class Cashier {
