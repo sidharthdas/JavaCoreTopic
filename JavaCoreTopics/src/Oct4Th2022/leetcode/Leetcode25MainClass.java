@@ -1,7 +1,10 @@
 package Oct4Th2022.leetcode;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Sidharth Das
@@ -31,7 +34,28 @@ public class Leetcode25MainClass {
         if( n == 1) return 1;
         return n - 1;
     }
+
+    public int hIndex(int[] citations) {
+        Arrays.sort(citations);
+        List<Integer> l = Arrays.stream(citations).boxed().collect(Collectors.toList());
+        List<Integer> l1 = new ArrayList<>();
+        int len = citations.length;
+        for(int i = 0; i < len; i++){
+            int finalI = i;
+            int countEqualOrGreater = (int)l.stream().filter(x -> x >= citations[finalI]).count();
+            int countLess = (int)l.stream().filter(x -> x <= citations[finalI]).count();
+
+            if(citations[i] == countEqualOrGreater && (len - countEqualOrGreater == countLess - 1)){
+                l1.add(citations[i]);
+            }
+        }
+
+        return l1.stream().sorted(Comparator.reverseOrder()).findFirst().get();
+
+    }
 }
+
+
 
 class Cashier {
 
