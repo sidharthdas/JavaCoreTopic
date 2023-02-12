@@ -52,6 +52,24 @@ public class Leetcode25MainClass {
         return l1.stream().sorted(Comparator.reverseOrder()).findFirst().get();
 
     }
+
+    public int[] separateDigits(int[] nums) {
+        List<Integer> l = new ArrayList<>();
+        for(int num : nums){
+            if(num < 10){
+                l.add(num);
+            } else {
+                List<Integer> l1 = new ArrayList<>();
+                while(num != 0) {
+                    l1.add(0, num % 10);
+                    num = num /10;
+                }
+                l.addAll(l1);
+            }
+        }
+
+        return l.stream().mapToInt(x -> x).toArray();
+    }
 }
 
 
