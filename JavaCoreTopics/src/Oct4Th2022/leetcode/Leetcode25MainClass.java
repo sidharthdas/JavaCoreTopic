@@ -53,6 +53,28 @@ public class Leetcode25MainClass {
 
     }
 
+    public int numberOfSubarrays(int[] nums, int p) {
+
+        List<List<Integer>> l = new ArrayList<>();
+        for (int i = 0; i < nums.length; i++)
+        {
+            // j is the number of elements which should be printed
+            for (int j = i; j < nums.length; j++)
+            {
+                List<Integer> l1 = new ArrayList<>();
+                // print the array from i to j
+                for (int k = i; k <= j; k++)
+                {
+                    l1.add(nums[k]);
+                }
+                l.add(l1);
+            }
+        }
+
+        //l.stream().filter(x -> x.size() > p).filter(y -> y.stream().filter(y % 2!= 0).toList());
+        return 0;
+    }
+
     public int[] separateDigits(int[] nums) {
         List<Integer> l = new ArrayList<>();
         for(int num : nums){
