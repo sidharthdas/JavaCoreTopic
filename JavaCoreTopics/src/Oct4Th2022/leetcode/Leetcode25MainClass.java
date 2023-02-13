@@ -27,7 +27,7 @@ public class Leetcode25MainClass {
         cashier.getBill(new int[]{2, 3, 5}, new int[]{5, 3, 2});     */               // return 2500.0.  6th customer, no discount.
 
         //hIndex(new int[]{1,3,1});
-        System.out.println(isPossibleDivide(new int[]{1, 2, 3, 3, 4, 4, 5, 6}, 4));
+        System.out.println(isPossibleDivide(new int[]{1,1,2,2,3,3}, 2));
     }
 
     public static boolean isPossibleDivide(int[] nums, int k) {
@@ -42,6 +42,9 @@ public class Leetcode25MainClass {
 
             int len = k;
             for (int i = 0; i < k - 1; i++) {
+                if(l1.size() < (i + 1)){
+                    return false;
+                }
                 if (l1.get(i) - l1.get(i + 1) != -1) {
                     return false;
                 } else {
