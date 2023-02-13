@@ -37,7 +37,7 @@ public class Leetcode25MainClass {
         List<Integer> l = Arrays.stream(nums).boxed().collect(Collectors.toList());
 
         while (l.size() != 0) {
-            Set<Integer> s = new TreeSet<>(l.stream().collect(Collectors.toSet()));
+            Set<Integer> s = new TreeSet<>(l);
             List<Integer> l1 = s.stream().toList();
 
             int len = k;
