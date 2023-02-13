@@ -27,36 +27,34 @@ public class Leetcode25MainClass {
         cashier.getBill(new int[]{2, 3, 5}, new int[]{5, 3, 2});     */               // return 2500.0.  6th customer, no discount.
 
         //hIndex(new int[]{1,3,1});
-        System.out.println(isPossibleDivide(new int[]{1,2,3,3,4,4,5,6}, 4));
+        System.out.println(isPossibleDivide(new int[]{1, 2, 3, 3, 4, 4, 5, 6}, 4));
     }
 
     public static boolean isPossibleDivide(int[] nums, int k) {
+        if(nums.length % k != 0){
+            return false;
+        }
         List<Integer> l = Arrays.stream(nums).boxed().collect(Collectors.toList());
 
-        while(l.size() != 0){
+        while (l.size() != 0) {
             Set<Integer> s = new TreeSet<>(l.stream().collect(Collectors.toSet()));
             List<Integer> l1 = s.stream().toList();
 
             int len = k;
-            for(int i = 0; i < k - 1 ; i++){
-                if(l1.get(i) - l1.get(i + 1) != -1){
+            for (int i = 0; i < k - 1; i++) {
+                if (l1.get(i) - l1.get(i + 1) != -1) {
                     return false;
-                }else{
-                    System.out.println(l1.get(i));
-                    l.remove(l1.get(i));
-                }
-
-                if(i == k - 1){
-                    l.remove(l1.get(i + 1));
+                } else {
+                    l.remove(new Integer(l1.get(i)));
                 }
             }
-
+            l.remove(new Integer(l1.get(k - 1)));
         }
         return true;
     }
 
     public int distinctIntegers(int n) {
-        if( n == 1) return 1;
+        if (n == 1) return 1;
         return n - 1;
     }
 
@@ -65,12 +63,12 @@ public class Leetcode25MainClass {
         List<Integer> l = Arrays.stream(citations).boxed().collect(Collectors.toList());
         List<Integer> l1 = new ArrayList<>();
         int len = citations.length;
-        for(int i = 0; i < len; i++){
+        for (int i = 0; i < len; i++) {
             int finalI = i;
-            int countEqualOrGreater = (int)l.stream().filter(x -> x >= citations[finalI]).count();
-            int countLess = (int)l.stream().filter(x -> x <= citations[finalI]).count();
+            int countEqualOrGreater = (int) l.stream().filter(x -> x >= citations[finalI]).count();
+            int countLess = (int) l.stream().filter(x -> x <= citations[finalI]).count();
 
-            if(citations[i] == countEqualOrGreater && (len - countEqualOrGreater == countLess - 1)){
+            if (citations[i] == countEqualOrGreater && (len - countEqualOrGreater == countLess - 1)) {
                 l1.add(citations[i]);
             }
         }
@@ -82,15 +80,12 @@ public class Leetcode25MainClass {
     public int numberOfSubarrays(int[] nums, int p) {
 
         List<List<Integer>> l = new ArrayList<>();
-        for (int i = 0; i < nums.length; i++)
-        {
+        for (int i = 0; i < nums.length; i++) {
             // j is the number of elements which should be printed
-            for (int j = i; j < nums.length; j++)
-            {
+            for (int j = i; j < nums.length; j++) {
                 List<Integer> l1 = new ArrayList<>();
                 // print the array from i to j
-                for (int k = i; k <= j; k++)
-                {
+                for (int k = i; k <= j; k++) {
                     l1.add(nums[k]);
                 }
                 l.add(l1);
@@ -98,9 +93,9 @@ public class Leetcode25MainClass {
         }
         int count = 0;
         l = l.stream().filter(x -> x.size() > p).collect(Collectors.toList());
-        for(List<Integer> l2 : l){
-            if(l2.stream().filter(t -> t% 2 != 0).count() == p){
-                count ++;
+        for (List<Integer> l2 : l) {
+            if (l2.stream().filter(t -> t % 2 != 0).count() == p) {
+                count++;
             }
         }
         return count;
@@ -108,14 +103,14 @@ public class Leetcode25MainClass {
 
     public int[] separateDigits(int[] nums) {
         List<Integer> l = new ArrayList<>();
-        for(int num : nums){
-            if(num < 10){
+        for (int num : nums) {
+            if (num < 10) {
                 l.add(num);
             } else {
                 List<Integer> l1 = new ArrayList<>();
-                while(num != 0) {
+                while (num != 0) {
                     l1.add(0, num % 10);
-                    num = num /10;
+                    num = num / 10;
                 }
                 l.addAll(l1);
             }
@@ -124,7 +119,6 @@ public class Leetcode25MainClass {
         return l.stream().mapToInt(x -> x).toArray();
     }
 }
-
 
 
 class Cashier {
@@ -161,7 +155,7 @@ class Cashier {
 
 class AuthenticationManager {
     int time;
-    Map<String, Integer> map ;
+    Map<String, Integer> map;
 
     public AuthenticationManager(int timeToLive) {
         time = timeToLive;
@@ -173,7 +167,7 @@ class AuthenticationManager {
     }
 
     public void renew(String tokenId, int currentTime) {
-        if(map.containsKey(tokenId) && map.get(tokenId) > currentTime){
+        if (map.containsKey(tokenId) && map.get(tokenId) > currentTime) {
             map.put(tokenId, currentTime + time);
         }
     }
