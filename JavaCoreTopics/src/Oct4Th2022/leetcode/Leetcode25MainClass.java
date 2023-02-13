@@ -70,9 +70,14 @@ public class Leetcode25MainClass {
                 l.add(l1);
             }
         }
-
-        //l.stream().filter(x -> x.size() > p).filter(y -> y.stream().filter(y % 2!= 0).toList());
-        return 0;
+        int count = 0;
+        l = l.stream().filter(x -> x.size() > p).collect(Collectors.toList());
+        for(List<Integer> l2 : l){
+            if(l2.stream().filter(t -> t% 2 != 0).count() == p){
+                count ++;
+            }
+        }
+        return count;
     }
 
     public int[] separateDigits(int[] nums) {
