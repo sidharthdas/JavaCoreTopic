@@ -42,7 +42,7 @@ public class Leetcode25MainClass {
 
             int len = k;
             for (int i = 0; i < k - 1; i++) {
-                if(l1.size() < (i + 1)){
+                if(l1.size() < (2)){
                     return false;
                 }
                 if (l1.get(i) - l1.get(i + 1) != -1) {
