@@ -29,6 +29,26 @@ public class Leetcode25MainClass {
         hIndex(new int[]{1,3,1});
     }
 
+    public boolean isPossibleDivide(int[] nums, int k) {
+        List<Integer> l = Arrays.stream(nums).boxed().collect(Collectors.toList());
+
+        while(l.size() != 0){
+            Set<Integer> s = new TreeSet<>(l.stream().collect(Collectors.toSet()));
+            List<Integer> l1 = s.stream().toList();
+
+            int len = k;
+            for(int i = 0; i < k - 1 ; i++){
+                if(l1.get(i) - l1.get(i + 1) != -1){
+                    return false;
+                }else{
+                    l.remove(l1.get(i));
+                }
+            }
+
+        }
+        return true;
+    }
+
     public int distinctIntegers(int n) {
         if( n == 1) return 1;
         return n - 1;
@@ -130,5 +150,29 @@ class Cashier {
         }
 
         return sum;
+    }
+}
+
+class AuthenticationManager {
+    int time;
+    Map<String, Integer> map ;
+
+    public AuthenticationManager(int timeToLive) {
+        time = timeToLive;
+        map = new HashMap<>();
+    }
+
+    public void generate(String tokenId, int currentTime) {
+        map.put(tokenId, currentTime + time);
+    }
+
+    public void renew(String tokenId, int currentTime) {
+        if(map.containsKey(tokenId) && map.get(tokenId) > currentTime){
+            map.put(tokenId, currentTime + time);
+        }
+    }
+
+    public int countUnexpiredTokens(int currentTime) {
+        return (int) map.entrySet().stream().filter(x -> x.getValue() > currentTime).count();
     }
 }
