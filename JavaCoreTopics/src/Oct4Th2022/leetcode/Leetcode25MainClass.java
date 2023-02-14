@@ -27,11 +27,49 @@ public class Leetcode25MainClass {
         cashier.getBill(new int[]{2, 3, 5}, new int[]{5, 3, 2});     */               // return 2500.0.  6th customer, no discount.
 
         //hIndex(new int[]{1,3,1});
-        System.out.println(isPossibleDivide(new int[]{1,1,2,2,3,3}, 2));
+        //System.out.println(isPossibleDivide(new int[]{1, 1, 2, 2, 3, 3}, 2));
+        //test("123".describeConstable());
+        System.out.println(largeGroupPositions("abcdddeeeeaabbbcd"));
+    }
+
+    public static List<List<Integer>> largeGroupPositions(String s) {
+
+        String[] srr = s.split("");
+        int len = srr.length;
+        int count = 1;
+        String currString = srr[0];
+        int sIndex = 0;
+        int lIndex = 0;
+        List<List<Integer>> l = new ArrayList<>();
+        for (int i = 1; i < len; i++) {
+            if(currString.equals(srr[i])){
+                count ++;
+            } else {
+                if(count >= 3){
+                    l.add(List.of(sIndex, i - 1));
+                }
+                count = 1;
+                currString = srr[i];
+                sIndex = i;
+            }
+        }
+
+        //System.out.println(l);
+        return l;
+
+    }
+
+    private static void test(Optional<String> s) {
+        if (s.isEmpty()) {
+            System.out.println("s is empty");
+            System.out.println(s.get());
+        } else {
+            System.out.println(s.get());
+        }
     }
 
     public static boolean isPossibleDivide(int[] nums, int k) {
-        if(nums.length % k != 0){
+        if (nums.length % k != 0) {
             return false;
         }
         List<Integer> l = Arrays.stream(nums).boxed().collect(Collectors.toList());
@@ -42,7 +80,7 @@ public class Leetcode25MainClass {
 
             int len = k;
             for (int i = 0; i < k - 1; i++) {
-                if(l1.size() < (2)){
+                if (l1.size() < (2)) {
                     return false;
                 }
                 if (l1.get(i) - l1.get(i + 1) != -1) {
