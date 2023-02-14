@@ -54,6 +54,10 @@ public class Leetcode25MainClass {
             }
         }
 
+        if(count >= 3){
+            l.add(List.of(sIndex, len - 1));
+        }
+
         //System.out.println(l);
         return l;
 
