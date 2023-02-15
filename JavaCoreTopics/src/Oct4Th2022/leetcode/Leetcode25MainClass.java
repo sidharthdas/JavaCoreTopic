@@ -38,7 +38,46 @@ public class Leetcode25MainClass {
                     'C'.Invalidate the previous score, removing it from the record.
         * */
 
-        System.out.println(calPoints(new String[]{"5","-2","4","C","D","9","+","+"}));
+        System.out.println(calPoints(new String[]{"5", "-2", "4", "C", "D", "9", "+", "+"}));
+    }
+
+    public int findShortestSubArray(int[] nums) {
+
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int i : nums) {
+            map.put(i, map.getOrDefault(i, 0) + 1);
+        }
+
+        Map.Entry<Integer, Integer> e = map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed()).findFirst()
+                .get();
+
+        List<List<Integer>> l = new ArrayList<>();
+        for (int i = 0; i < nums.length; i++) {
+            // j is the number of elements which should be printed
+            for (int j = i; j < nums.length; j++) {
+                List<Integer> l1 = new ArrayList<>();
+                // print the array from i to j
+                for (int k = i; k <= j; k++) {
+                    l1.add(nums[k]);
+                }
+                l.add(l1);
+            }
+        }
+
+        l = l.stream().filter(x -> x.size() >= e.getValue()).collect(Collectors.toList());
+
+        Set<Integer> lens = new TreeSet<>();
+
+
+
+        for (List<Integer> l1 : l) {
+            if((int) l1.stream().filter(x ->x == e.getKey()).count() == e.getValue() ){
+                lens.add(l1.size());
+            }
+        }
+
+        return lens.stream().findFirst().get();
     }
 
     public static int calPoints(String[] operations) {
@@ -64,7 +103,7 @@ public class Leetcode25MainClass {
                 }
             }
         }
-        return list .size() == 0 ? 0 : list.stream().reduce(Integer::sum).get();
+        return list.size() == 0 ? 0 : list.stream().reduce(Integer::sum).get();
     }
 
     public boolean lemonadeChange(int[] bills) {
