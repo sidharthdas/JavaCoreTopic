@@ -67,7 +67,7 @@ public class Leetcode25MainClass {
 
         l = l.stream().filter(x -> x.size() >= e.getValue()).collect(Collectors.toList());
 
-        Set<Integer> lens = new TreeSet<>();
+        List<Integer> lens = new ArrayList<>();
 
 
 
@@ -77,7 +77,7 @@ public class Leetcode25MainClass {
             }
         }
 
-        return lens.stream().findFirst().get();
+        return lens.stream().sorted().findFirst().get();
     }
 
     public static int calPoints(String[] operations) {
