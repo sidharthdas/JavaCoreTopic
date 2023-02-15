@@ -29,7 +29,40 @@ public class Leetcode25MainClass {
         //hIndex(new int[]{1,3,1});
         //System.out.println(isPossibleDivide(new int[]{1, 1, 2, 2, 3, 3}, 2));
         //test("123".describeConstable());
-        System.out.println(largeGroupPositions("abcdddeeeeaabbbcd"));
+        //System.out.println(largeGroupPositions("abcdddeeeeaabbbcd"));
+        //System.out.println(Integer.parseInt("-2"));
+        /*
+        * An integer x. Record a new score of x.
+                    '+'. Record a new score that is the sum of the previous two scores.
+                    'D'.Record a new score that is the double of the previous score.
+                    'C'.Invalidate the previous score, removing it from the record.
+        * */
+    }
+
+    public int calPoints(String[] operations) {
+        List<Integer> list = new ArrayList<>();
+
+        for (String operation : operations) {
+            if (operation.length() == 2 || operation.matches("[0-9]+")) {
+                list.add(Integer.parseInt(operation));
+            } else {
+                switch (operation) {
+                    case "+":
+                        int len = list.size();
+                        list.add(list.get(len - 1) + list.get(len - 2));
+                        break;
+                    case "D":
+                        len = list.size();
+                        list.add(list.get(len - 1) * 2);
+                        break;
+                    case "C":
+                        len = list.size();
+                        list.remove(len - 1);
+                        break;
+                }
+            }
+        }
+        return list.stream().reduce(Integer::sum).get();
     }
 
     public boolean lemonadeChange(int[] bills) {
@@ -46,13 +79,13 @@ public class Leetcode25MainClass {
                 if (map.get(5) != 0 && map.get(10) != 0) {
                     map.put(5, map.get(5) - 1);
                     map.put(10, map.get(10) - 1);
-                } else if( map.get(5) >= 3){
+                } else if (map.get(5) >= 3) {
                     map.put(5, map.get(5) - 3);
-                }else{
+                } else {
                     return false;
                 }
 
-            } else{
+            } else {
                 return false;
             }
         }
