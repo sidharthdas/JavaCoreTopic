@@ -45,7 +45,7 @@ public class Leetcode25MainClass {
         List<Integer> list = new ArrayList<>();
 
         for (String operation : operations) {
-            if (operation.length() == 2 || operation.matches("[0-9]+")) {
+            if (operation.length() >= 2 || operation.matches("[0-9]+")) {
                 list.add(Integer.parseInt(operation));
             } else {
                 switch (operation) {
@@ -64,7 +64,7 @@ public class Leetcode25MainClass {
                 }
             }
         }
-        return list .size() == 0 ? 0 : list.stream().reduce(Integer::sum).get() < 0 ? 0 : list.stream().reduce(Integer::sum).get();
+        return list .size() == 0 ? 0 : list.stream().reduce(Integer::sum).get();
     }
 
     public boolean lemonadeChange(int[] bills) {
