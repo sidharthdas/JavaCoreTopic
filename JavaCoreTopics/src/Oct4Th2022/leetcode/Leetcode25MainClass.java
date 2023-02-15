@@ -37,9 +37,11 @@ public class Leetcode25MainClass {
                     'D'.Record a new score that is the double of the previous score.
                     'C'.Invalidate the previous score, removing it from the record.
         * */
+
+        System.out.println(calPoints(new String[]{"5","-2","4","C","D","9","+","+"}));
     }
 
-    public int calPoints(String[] operations) {
+    public static int calPoints(String[] operations) {
         List<Integer> list = new ArrayList<>();
 
         for (String operation : operations) {
@@ -62,7 +64,7 @@ public class Leetcode25MainClass {
                 }
             }
         }
-        return list.stream().reduce(Integer::sum).get();
+        return list .size() == 0 ? 0 : list.stream().reduce(Integer::sum).get();
     }
 
     public boolean lemonadeChange(int[] bills) {
