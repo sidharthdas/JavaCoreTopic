@@ -38,10 +38,22 @@ public class Leetcode25MainClass {
                     'C'.Invalidate the previous score, removing it from the record.
         * */
 
-        System.out.println(calPoints(new String[]{"5", "-2", "4", "C", "D", "9", "+", "+"}));
+        //System.out.println(calPoints(new String[]{"5", "-2", "4", "C", "D", "9", "+", "+"}));
+        System.out.println(findShortestSubArray(new int[]{1,2,2,3,1}));
     }
 
-    public int findShortestSubArray(int[] nums) {
+    public int[][] merge(int[][] intervals) {
+
+        Arrays.sort(intervals, (a, b) -> a[0] -b[0]);
+        int start = intervals[0][0];
+        int end = intervals[0][1];
+        for(int[] interval : intervals){
+
+        }
+        return null;
+    }
+
+    public static int findShortestSubArray(int[] nums) {
 
         Map<Integer, Integer> map = new HashMap<>();
 
