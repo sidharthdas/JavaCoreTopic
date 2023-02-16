@@ -53,7 +53,7 @@ public class Leetcode25MainClass {
         int j = 0;
         int currPointer = 0;
 
-        while (i != m - 1) {
+        while (i < m) {
             j = 0;
             while(j < n){
                 finalArr[i][j] = original[currPointer];
