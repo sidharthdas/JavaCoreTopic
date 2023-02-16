@@ -42,7 +42,7 @@ public class Leetcode25MainClass {
         //System.out.println(findShortestSubArray(new int[]{1,2,2,3,1}));
         //getNoZeroIntegers(11);
         //System.out.println(zeroFilledSubarray(new int[]{1, 3, 0, 0, 2, 0, 0, 4}));
-        construct2DArray(new int[]{1,2,3,4}, 2, 2);
+        construct2DArray(new int[]{1,2}, 1, 1);
     }
 
     public static int[][] construct2DArray(int[] original, int m, int n) {
@@ -64,7 +64,7 @@ public class Leetcode25MainClass {
             i++;
         }
 
-        return count == original.length ? finalArr : new int[m][n];
+        return count == original.length ? finalArr : new int[0][0];
 
     }
 
