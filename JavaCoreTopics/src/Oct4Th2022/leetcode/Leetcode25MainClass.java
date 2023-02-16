@@ -42,6 +42,16 @@ public class Leetcode25MainClass {
         System.out.println(findShortestSubArray(new int[]{1,2,2,3,1}));
     }
 
+    public int[] getNoZeroIntegers(int n) {
+        for (int i = 1; i <=n; i++){
+            if(n - i != 0){
+                return new int[]{i, n-1};
+            }
+        }
+
+        return null;
+    }
+
     public int[][] merge(int[][] intervals) {
 
         Arrays.sort(intervals, (a, b) -> a[0] -b[0]);
