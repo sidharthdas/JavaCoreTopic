@@ -40,13 +40,57 @@ public class Leetcode25MainClass {
 
         //System.out.println(calPoints(new String[]{"5", "-2", "4", "C", "D", "9", "+", "+"}));
         //System.out.println(findShortestSubArray(new int[]{1,2,2,3,1}));
-        getNoZeroIntegers(11);
+        //getNoZeroIntegers(11);
+        //System.out.println(zeroFilledSubarray(new int[]{1, 3, 0, 0, 2, 0, 0, 4}));
+        construct2DArray(new int[]{1,2,3,4}, 2, 2);
+    }
+
+    public static int[][] construct2DArray(int[] original, int m, int n) {
+
+        int[][] finalArr = new int[m][n];
+
+        int i = 0;
+        int j = 0;
+        int currPointer = 0;
+
+        while (i != m - 1) {
+            j = 0;
+            while(j < n){
+                finalArr[i][j] = original[currPointer];
+                currPointer++;
+                j++;
+            }
+            i++;
+        }
+
+        return finalArr;
+
+    }
+
+    public static long zeroFilledSubarray(int[] nums) {
+
+        List<List<Integer>> l = new ArrayList<>();
+        for (int i = 0; i < nums.length; i++) {
+            // j is the number of elements which should be printed
+            for (int j = i; j < nums.length; j++) {
+                List<Integer> l1 = new ArrayList<>();
+                // print the array from i to j
+                for (int k = i; k <= j; k++) {
+                    l1.add(nums[k]);
+                }
+                System.out.println(l1);
+                l.add(l1);
+            }
+        }
+
+        return 0;
+
     }
 
     public static int[] getNoZeroIntegers(int n) {
-        for (int i = 1; i <=n; i++){
-            if(!String.valueOf(i).contains("0") &&!String.valueOf(n - i).contains("0")){
-                return new int[]{i, n-i};
+        for (int i = 1; i <= n; i++) {
+            if (!String.valueOf(i).contains("0") && !String.valueOf(n - i).contains("0")) {
+                return new int[]{i, n - i};
             }
         }
 
@@ -55,10 +99,10 @@ public class Leetcode25MainClass {
 
     public int[][] merge(int[][] intervals) {
 
-        Arrays.sort(intervals, (a, b) -> a[0] -b[0]);
+        Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
         int start = intervals[0][0];
         int end = intervals[0][1];
-        for(int[] interval : intervals){
+        for (int[] interval : intervals) {
 
         }
         return null;
@@ -93,9 +137,8 @@ public class Leetcode25MainClass {
         List<Integer> lens = new ArrayList<>();
 
 
-
         for (List<Integer> l1 : l) {
-            if((int) l1.stream().filter(x ->x == e.getKey()).count() == e.getValue() ){
+            if ((int) l1.stream().filter(x -> x == e.getKey()).count() == e.getValue()) {
                 lens.add(l1.size());
             }
         }
