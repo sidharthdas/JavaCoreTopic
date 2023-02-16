@@ -52,18 +52,19 @@ public class Leetcode25MainClass {
         int i = 0;
         int j = 0;
         int currPointer = 0;
-
+        int count = 0;
         while (i < m) {
             j = 0;
             while(j < n){
                 finalArr[i][j] = original[currPointer];
                 currPointer++;
                 j++;
+                count++;
             }
             i++;
         }
 
-        return finalArr;
+        return count == original.length ? finalArr : new int[m][n];
 
     }
 
