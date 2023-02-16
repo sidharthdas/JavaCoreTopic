@@ -45,7 +45,7 @@ public class Leetcode25MainClass {
 
     public static int[] getNoZeroIntegers(int n) {
         for (int i = 1; i <=n; i++){
-            if((n - i) % 10 != 0){
+            if(!String.valueOf(n - i).contains("0")){
                 return new int[]{i, n-i};
             }
         }
