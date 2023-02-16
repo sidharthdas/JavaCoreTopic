@@ -39,13 +39,14 @@ public class Leetcode25MainClass {
         * */
 
         //System.out.println(calPoints(new String[]{"5", "-2", "4", "C", "D", "9", "+", "+"}));
-        System.out.println(findShortestSubArray(new int[]{1,2,2,3,1}));
+        //System.out.println(findShortestSubArray(new int[]{1,2,2,3,1}));
+        getNoZeroIntegers(11);
     }
 
-    public int[] getNoZeroIntegers(int n) {
+    public static int[] getNoZeroIntegers(int n) {
         for (int i = 1; i <=n; i++){
             if((n - i) % 10 != 0){
-                return new int[]{i, n-1};
+                return new int[]{i, n-i};
             }
         }
 
