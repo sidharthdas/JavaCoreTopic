@@ -42,11 +42,72 @@ public class Leetcode25MainClass {
         //System.out.println(findShortestSubArray(new int[]{1,2,2,3,1}));
         //getNoZeroIntegers(11);
         //System.out.println(zeroFilledSubarray(new int[]{1, 3, 0, 0, 2, 0, 0, 4}));
-        construct2DArray(new int[]{1,2}, 1, 1);
+        //construct2DArray(new int[]{1, 2}, 1, 1);
+        Stack<String> s = new Stack<>();
+        System.out.println("s : " + s.peek());
+    }
+
+    public static String removeDuplicates(String s) {
+        String[] srr = s.split("");
+        Stack<String> stack = new Stack<>();
+
+        for (String s1 : srr) {
+            if (stack.isEmpty()) {
+                stack.push(s1);
+            } else {
+                if(stack.peek().equals(s1)){
+                    stack.pop();
+                }else{
+                    stack.push(s1);
+                }
+            }
+        }
+
+        int l = stack.size();
+        String s2 = "";
+        while(l != 0){
+            s2 = stack.pop() + s2;
+        }
+        return s2;
+    }
+
+    public int[][] matrixReshape(int[][] mat, int r, int c) {
+
+        int row = mat.length;
+        int col = mat[0].length;
+
+        if (row * col != r * c) {
+            return mat;
+        }
+
+        if (row == r && col == c) {
+            return mat;
+        }
+
+        int[][] finalArr = new int[r][c];
+        int currRow = 0;
+        int currCol = 0;
+        for (int[] m : mat) {
+            for (int n : m) {
+                if (currRow < r) {
+                    if (currCol < c) {
+                        finalArr[currRow][currCol] = n;
+                        currCol++;
+                    } else {
+                        currCol = 0;
+                    }
+                } else {
+                    currRow++;
+                }
+            }
+        }
+
+        return finalArr;
+
     }
 
     public static int[][] construct2DArray(int[] original, int m, int n) {
-        if(original.length != m * n){
+        if (original.length != m * n) {
             return new int[0][0];
         }
 
@@ -55,20 +116,18 @@ public class Leetcode25MainClass {
         int i = 0;
         int j = 0;
         int currPointer = 0;
-        int count = 0;
         int len = original.length;
         while (i < m) {
             j = 0;
-            while(j < n){
+            while (j < n) {
                 finalArr[i][j] = original[currPointer];
                 currPointer++;
                 j++;
-                count++;
             }
             i++;
         }
 
-        return count == original.length ? finalArr : new int[0][0];
+        return finalArr;
 
     }
 
