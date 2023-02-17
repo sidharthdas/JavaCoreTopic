@@ -46,6 +46,9 @@ public class Leetcode25MainClass {
     }
 
     public static int[][] construct2DArray(int[] original, int m, int n) {
+        if(original.length != m * n){
+            return new int[0][0];
+        }
 
         int[][] finalArr = new int[m][n];
 
@@ -53,6 +56,7 @@ public class Leetcode25MainClass {
         int j = 0;
         int currPointer = 0;
         int count = 0;
+        int len = original.length;
         while (i < m) {
             j = 0;
             while(j < n){
