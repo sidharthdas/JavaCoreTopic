@@ -48,6 +48,33 @@ public class Leetcode25MainClass {
         matrixReshape(new int[][]{{1, 2}, {3, 4}}, 4, 1);
     }
 
+    public boolean isToeplitzMatrix(int[][] matrix) {
+        int row = matrix.length;
+        int col = matrix[0].length;
+
+        int currRow = 0;
+        int currCol = 0;
+
+        while(true){
+
+        }
+    }
+
+    public int countStudents(int[] students, int[] sandwiches) {
+        Queue<Integer> queue = new LinkedList<>();
+        int count = 0;
+        int len = sandwiches.length;
+        for (int i : students) {
+            queue.add(i);
+        }
+
+        while (count != len) {
+
+        }
+
+        return 0;
+    }
+
     public static String removeDuplicates(String s) {
         String[] srr = s.split("");
         Stack<String> stack = new Stack<>();
