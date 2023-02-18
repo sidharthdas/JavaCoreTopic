@@ -43,8 +43,9 @@ public class Leetcode25MainClass {
         //getNoZeroIntegers(11);
         //System.out.println(zeroFilledSubarray(new int[]{1, 3, 0, 0, 2, 0, 0, 4}));
         //construct2DArray(new int[]{1, 2}, 1, 1);
-        Stack<String> s = new Stack<>();
-        System.out.println("s : " + s.peek());
+        //Stack<String> s = new Stack<>();
+        //System.out.println("s : " + s.peek());
+        matrixReshape(new int[][]{{1,2},{3,4}}, 4, 1);
     }
 
     public static String removeDuplicates(String s) {
@@ -55,9 +56,9 @@ public class Leetcode25MainClass {
             if (stack.isEmpty()) {
                 stack.push(s1);
             } else {
-                if(stack.peek().equals(s1)){
+                if (stack.peek().equals(s1)) {
                     stack.pop();
-                }else{
+                } else {
                     stack.push(s1);
                 }
             }
@@ -65,13 +66,13 @@ public class Leetcode25MainClass {
 
         int l = stack.size();
         String s2 = "";
-        while(l != 0){
+        while (l != 0) {
             s2 = stack.pop() + s2;
         }
         return s2;
     }
 
-    public int[][] matrixReshape(int[][] mat, int r, int c) {
+    public static int[][] matrixReshape(int[][] mat, int r, int c) {
 
         int row = mat.length;
         int col = mat[0].length;
@@ -80,10 +81,9 @@ public class Leetcode25MainClass {
             return mat;
         }
 
-        if (row == r && col == c) {
+            if (row == r && col == c) {
             return mat;
         }
-
         int[][] finalArr = new int[r][c];
         int currRow = 0;
         int currCol = 0;
@@ -95,9 +95,9 @@ public class Leetcode25MainClass {
                         currCol++;
                     } else {
                         currCol = 0;
+                        currRow ++;
+                        finalArr[currRow][currCol] = n;
                     }
-                } else {
-                    currRow++;
                 }
             }
         }
