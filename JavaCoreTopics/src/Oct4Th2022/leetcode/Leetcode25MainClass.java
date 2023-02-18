@@ -48,6 +48,37 @@ public class Leetcode25MainClass {
         matrixReshape(new int[][]{{1, 2}, {3, 4}}, 4, 1);
     }
 
+    public static  String makeFancyString(String s) {
+        String srr[] = s.split("");
+        Stack<String> stack = new Stack<>();
+
+        int count = 0;
+        String prevChr = srr[0];
+        for(String s1 : srr){
+            if(s1.equals(prevChr)){
+                count ++;
+                stack.push(s1);
+            } else {
+                if(count > 2){
+                    while(count != 2){
+                        stack.pop();
+                        count--;
+                    }
+                    count = 1;
+                    stack.push(s1);
+                    prevChr = s1;
+                } else {
+                    count = 1;
+                    stack.push(s1);
+                    prevChr = s1;
+                }
+            }
+        }
+
+        System.out.println(stack);
+        return null;
+    }
+
     public boolean isToeplitzMatrix(int[][] matrix) {
         int row = matrix.length;
         int col = matrix[0].length;
