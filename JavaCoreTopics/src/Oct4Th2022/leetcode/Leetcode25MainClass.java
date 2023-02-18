@@ -45,7 +45,7 @@ public class Leetcode25MainClass {
         //construct2DArray(new int[]{1, 2}, 1, 1);
         //Stack<String> s = new Stack<>();
         //System.out.println("s : " + s.peek());
-        matrixReshape(new int[][]{{1,2},{3,4}}, 4, 1);
+        matrixReshape(new int[][]{{1, 2}, {3, 4}}, 4, 1);
     }
 
     public static String removeDuplicates(String s) {
@@ -81,7 +81,7 @@ public class Leetcode25MainClass {
             return mat;
         }
 
-            if (row == r && col == c) {
+        if (row == r && col == c) {
             return mat;
         }
         int[][] finalArr = new int[r][c];
@@ -95,8 +95,9 @@ public class Leetcode25MainClass {
                         currCol++;
                     } else {
                         currCol = 0;
-                        currRow ++;
+                        currRow += 1;
                         finalArr[currRow][currCol] = n;
+                        currCol += 1;
                     }
                 }
             }
