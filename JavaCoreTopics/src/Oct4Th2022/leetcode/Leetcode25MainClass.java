@@ -49,18 +49,18 @@ public class Leetcode25MainClass {
         System.out.println(makeFancyString("aaaaa"));
     }
 
-    public static  String makeFancyString(String s) {
+    public static String makeFancyString(String s) {
         String srr[] = s.split("");
         Stack<String> stack = new Stack<>();
 
         int count = 0;
         String prevChr = srr[0];
-        for(String s1 : srr){
-            if(count < 2 && prevChr.equals(s1)){
-                count ++;
+        for (String s1 : srr) {
+            if (count < 2 && prevChr.equals(s1)) {
+                count++;
                 stack.push(s1);
             } else {
-                if(!prevChr.equals(s1)){
+                if (!prevChr.equals(s1)) {
                     stack.push(s1);
                     prevChr = s1;
                     count = 1;
@@ -71,7 +71,7 @@ public class Leetcode25MainClass {
 
         System.out.println(stack);
         String finalAns = "";
-        while(!stack.isEmpty()){
+        while (!stack.isEmpty()) {
             finalAns = stack.pop() + finalAns;
         }
         return finalAns;
@@ -84,7 +84,7 @@ public class Leetcode25MainClass {
         int currRow = 0;
         int currCol = 0;
 
-        while(true){
+        while (true) {
 
         }
     }
