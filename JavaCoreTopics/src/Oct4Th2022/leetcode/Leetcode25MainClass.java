@@ -45,7 +45,8 @@ public class Leetcode25MainClass {
         //construct2DArray(new int[]{1, 2}, 1, 1);
         //Stack<String> s = new Stack<>();
         //System.out.println("s : " + s.peek());
-        matrixReshape(new int[][]{{1, 2}, {3, 4}}, 4, 1);
+        //matrixReshape(new int[][]{{1, 2}, {3, 4}}, 4, 1);
+        System.out.println(makeFancyString("aaaaa"));
     }
 
     public static  String makeFancyString(String s) {
@@ -55,28 +56,25 @@ public class Leetcode25MainClass {
         int count = 0;
         String prevChr = srr[0];
         for(String s1 : srr){
-            if(s1.equals(prevChr)){
+            if(count < 2 && prevChr.equals(s1)){
                 count ++;
                 stack.push(s1);
             } else {
-                if(count > 2){
-                    while(count != 2){
-                        stack.pop();
-                        count--;
-                    }
-                    count = 1;
+                if(!prevChr.equals(s1)){
                     stack.push(s1);
                     prevChr = s1;
-                } else {
                     count = 1;
-                    stack.push(s1);
-                    prevChr = s1;
                 }
             }
+
         }
 
         System.out.println(stack);
-        return null;
+        String finalAns = "";
+        while(!stack.isEmpty()){
+            finalAns = stack.pop() + finalAns;
+        }
+        return finalAns;
     }
 
     public boolean isToeplitzMatrix(int[][] matrix) {
