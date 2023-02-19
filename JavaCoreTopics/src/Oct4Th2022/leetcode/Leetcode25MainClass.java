@@ -47,7 +47,35 @@ public class Leetcode25MainClass {
         //System.out.println("s : " + s.peek());
         //matrixReshape(new int[][]{{1, 2}, {3, 4}}, 4, 1);
         //System.out.println(makeFancyString("aaaaa"));
-        System.out.println(luckyNumbers(new int[][]{{1,10,4,2},{9,3,8,7},{15,16,17,12}} ));
+        //System.out.println(luckyNumbers(new int[][]{{1,10,4,2},{9,3,8,7},{15,16,17,12}}));
+        //int a[] = new int[]{1,10,4,2};
+        //System.out.println(String.valueOf(a));
+        //Input: arr = {91,4,64,78}, pieces = {{78},{4,64},{91}}
+        System.out.println(canFormArray(new int[]{91,4,64,78}, new int[][]{{78},{4,64},{91}}));
+    }
+
+    public static boolean canFormArray(int[] arr, int[][] pieces) {
+        StringBuffer sb = new StringBuffer();
+        for(int a : arr){
+            sb.append(a + ",");
+        }
+        for(int[] a1 : pieces ){
+            if(a1.length == 1){
+                if(!sb.toString().contains(String.valueOf(a1[0]))){
+                    return false;
+                }
+            }else{
+                StringBuffer sb1 = new StringBuffer();
+                for(int i : a1){
+                    sb1.append(i+",");
+                }
+
+                if(!sb.toString().contains(sb1.toString())){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     public static List<Integer> luckyNumbers (int[][] matrix) {
