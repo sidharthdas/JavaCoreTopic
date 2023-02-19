@@ -46,10 +46,11 @@ public class Leetcode25MainClass {
         //Stack<String> s = new Stack<>();
         //System.out.println("s : " + s.peek());
         //matrixReshape(new int[][]{{1, 2}, {3, 4}}, 4, 1);
-        System.out.println(makeFancyString("aaaaa"));
+        //System.out.println(makeFancyString("aaaaa"));
+        System.out.println(luckyNumbers(new int[][]{{3,7,8},{9,11,13},{15,16,17}}));
     }
 
-    public List<Integer> luckyNumbers (int[][] matrix) {
+    public static List<Integer> luckyNumbers (int[][] matrix) {
         List<Integer> minInRow = new ArrayList<>();
         List<Integer> maxInCol = new ArrayList<>();
 
@@ -62,14 +63,14 @@ public class Leetcode25MainClass {
         }
 
         while(startRow < row){
-            int min = Integer.MAX_VALUE;
+            int max = Integer.MIN_VALUE;
             while(startCol < col){
-                if(matrix[startRow][startCol] < min){
-                    min = matrix[startRow][startCol];
+                if(matrix[startRow][startCol] > max){
+                    max = matrix[startRow][startCol];
                 }
                 startCol++;
             }
-            maxInCol.add(min);
+            maxInCol.add(max);
             startRow++;
         }
 
