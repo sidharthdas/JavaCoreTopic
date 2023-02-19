@@ -51,26 +51,41 @@ public class Leetcode25MainClass {
         //int a[] = new int[]{1,10,4,2};
         //System.out.println(String.valueOf(a));
         //Input: arr = {91,4,64,78}, pieces = {{78},{4,64},{91}}
-        System.out.println(canFormArray(new int[]{91,4,64,78}, new int[][]{{78},{4,64},{91}}));
+        System.out.println(canFormArray(new int[]{91, 4, 64, 78}, new int[][]{{78}, {4, 64}, {91}}));
+    }
+
+    public List<Integer> partitionLabels(String s) {
+        List<Integer> l = new ArrayList<>();
+
+        String[] srr = s.split("");
+        String temp = "";
+        int len = s.length();
+
+        for (int i = 0; i < len; i++) {
+            //s.substring(i+1).contains(srr[])
+        }
+
+        return null;
+
     }
 
     public static boolean canFormArray(int[] arr, int[][] pieces) {
         StringBuffer sb = new StringBuffer();
-        for(int a : arr){
+        for (int a : arr) {
             sb.append(a + ",");
         }
-        for(int[] a1 : pieces ){
-            if(a1.length == 1){
-                if(!sb.toString().contains(String.valueOf(a1[0]))){
+        for (int[] a1 : pieces) {
+            if (a1.length == 1) {
+                if (!sb.toString().contains(String.valueOf(a1[0]))) {
                     return false;
                 }
-            }else{
+            } else {
                 StringBuffer sb1 = new StringBuffer();
-                for(int i : a1){
-                    sb1.append(i+",");
+                for (int i : a1) {
+                    sb1.append(i + ",");
                 }
 
-                if(!sb.toString().contains(sb1.toString())){
+                if (!sb.toString().contains(sb1.toString())) {
                     return false;
                 }
             }
@@ -78,7 +93,7 @@ public class Leetcode25MainClass {
         return true;
     }
 
-    public static List<Integer> luckyNumbers (int[][] matrix) {
+    public static List<Integer> luckyNumbers(int[][] matrix) {
         List<Integer> minInRow = new ArrayList<>();
         List<Integer> maxInCol = new ArrayList<>();
 
@@ -86,15 +101,15 @@ public class Leetcode25MainClass {
         int col = matrix[0].length;
         int startRow = 0;
         int startCol = 0;
-        for(int[] i : matrix){
+        for (int[] i : matrix) {
             minInRow.add(Arrays.stream(i).boxed().min(Integer::compareTo).orElse(0));
         }
 
-        while(startCol < col){
+        while (startCol < col) {
             int max = Integer.MIN_VALUE;
             startRow = 0;
-            while(startRow < row){
-                if(matrix[startRow][startCol] > max){
+            while (startRow < row) {
+                if (matrix[startRow][startCol] > max) {
                     max = matrix[startRow][startCol];
                 }
                 startRow++;
@@ -106,7 +121,7 @@ public class Leetcode25MainClass {
         List<Integer> finalList = new ArrayList<>();
 
         minInRow.forEach(x -> {
-            if(maxInCol.contains(x)){
+            if (maxInCol.contains(x)) {
                 finalList.add(x);
             }
         });
