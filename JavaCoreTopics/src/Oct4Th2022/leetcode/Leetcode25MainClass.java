@@ -47,7 +47,7 @@ public class Leetcode25MainClass {
         //System.out.println("s : " + s.peek());
         //matrixReshape(new int[][]{{1, 2}, {3, 4}}, 4, 1);
         //System.out.println(makeFancyString("aaaaa"));
-        System.out.println(luckyNumbers(new int[][]{{3,7,8},{9,11,13},{15,16,17}}));
+        System.out.println(luckyNumbers(new int[][]{{1,10,4,2},{9,3,8,7},{15,16,17,12}} ));
     }
 
     public static List<Integer> luckyNumbers (int[][] matrix) {
@@ -64,6 +64,7 @@ public class Leetcode25MainClass {
 
         while(startCol < col){
             int max = Integer.MIN_VALUE;
+            startRow = 0;
             while(startRow < row){
                 if(matrix[startRow][startCol] > max){
                     max = matrix[startRow][startCol];
