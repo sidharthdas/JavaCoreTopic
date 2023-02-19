@@ -49,6 +49,41 @@ public class Leetcode25MainClass {
         System.out.println(makeFancyString("aaaaa"));
     }
 
+    public List<Integer> luckyNumbers (int[][] matrix) {
+        List<Integer> minInRow = new ArrayList<>();
+        List<Integer> maxInCol = new ArrayList<>();
+
+        int row = matrix.length;
+        int col = matrix[0].length;
+        int startRow = 0;
+        int startCol = 0;
+        for(int[] i : matrix){
+            minInRow.add(Arrays.stream(i).boxed().min(Integer::compareTo).orElse(0));
+        }
+
+        while(startRow < row){
+            int min = Integer.MAX_VALUE;
+            while(startCol < col){
+                if(matrix[startRow][startCol] < min){
+                    min = matrix[startRow][startCol];
+                }
+                startCol++;
+            }
+            maxInCol.add(min);
+            startRow++;
+        }
+
+        List<Integer> finalList = new ArrayList<>();
+
+        minInRow.forEach(x -> {
+            if(maxInCol.contains(x)){
+                finalList.add(x);
+            }
+        });
+
+        return finalList;
+    }
+
     public static String makeFancyString(String s) {
         String srr[] = s.split("");
         Stack<String> stack = new Stack<>();
