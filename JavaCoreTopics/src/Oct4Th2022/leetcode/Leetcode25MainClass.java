@@ -51,7 +51,40 @@ public class Leetcode25MainClass {
         //int a[] = new int[]{1,10,4,2};
         //System.out.println(String.valueOf(a));
         //Input: arr = {91,4,64,78}, pieces = {{78},{4,64},{91}}
-        System.out.println(canFormArray(new int[]{91, 4, 64, 78}, new int[][]{{78}, {4, 64}, {91}}));
+        //System.out.println(canFormArray(new int[]{91, 4, 64, 78}, new int[][]{{78}, {4, 64}, {91}}));
+        System.out.println(makeGood("leEeetcode"));
+        char c = 'a';
+        System.out.println(String.valueOf(c));
+
+    }
+
+    public static String makeGood(String s) {
+        String caps = "QWERTYUIOPASDFGHJKLZXCVBNM";
+        String small = "qwertyuiopasdfghjklzxcvbnm";
+        char[] srr = s.toCharArray();
+        Stack<Character> stack = new Stack<>();
+        for (char  s1 : srr) {
+            if(stack.isEmpty()){
+                stack.push(s1);
+            } else {
+                if(caps.contains(String.valueOf(s1)) && String.valueOf((char)(stack.peek() - 32)).equals(String.valueOf(s1))){
+                    stack.pop();
+                } else if(small.contains(String.valueOf(s1)) && String.valueOf((char)(stack.peek() + 32)).equals(String.valueOf(s1))){
+                    stack.pop();
+                } else{
+                    stack.push(s1);
+                }
+            }
+        }
+
+        if(stack.isEmpty()){
+            return "";
+        }
+        String finalS = "";
+        while(!stack.isEmpty()){
+            finalS = stack.pop() + finalS;
+        }
+        return finalS;
     }
 
     public List<Integer> partitionLabels(String s) {
