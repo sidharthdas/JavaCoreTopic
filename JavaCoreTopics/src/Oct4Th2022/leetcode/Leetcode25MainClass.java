@@ -62,16 +62,16 @@ public class Leetcode25MainClass {
             minInRow.add(Arrays.stream(i).boxed().min(Integer::compareTo).orElse(0));
         }
 
-        while(startRow < row){
+        while(startCol < col){
             int max = Integer.MIN_VALUE;
-            while(startCol < col){
+            while(startRow < row){
                 if(matrix[startRow][startCol] > max){
                     max = matrix[startRow][startCol];
                 }
-                startCol++;
+                startRow++;
             }
             maxInCol.add(max);
-            startRow++;
+            startCol++;
         }
 
         List<Integer> finalList = new ArrayList<>();
