@@ -63,27 +63,29 @@ public class Leetcode25MainClass {
         String small = "qwertyuiopasdfghjklzxcvbnm";
         char[] srr = s.toCharArray();
         Stack<Character> stack = new Stack<>();
-        for (char  s1 : srr) {
-            if(stack.isEmpty()){
+        for (char s1 : srr) {
+            if (stack.isEmpty()) {
                 stack.push(s1);
             } else {
-                if(caps.contains(String.valueOf(s1)) && String.valueOf((char)(stack.peek() - 32)).equals(String.valueOf(s1))){
+                if (caps.contains(String.valueOf(s1)) && String.valueOf((char) (stack.peek() - 32)).equals(String.valueOf(s1))) {
                     stack.pop();
-                } else if(small.contains(String.valueOf(s1)) && String.valueOf((char)(stack.peek() + 32)).equals(String.valueOf(s1))){
+                } else if (small.contains(String.valueOf(s1)) && String.valueOf((char) (stack.peek() + 32)).equals(String.valueOf(s1))) {
                     stack.pop();
-                } else{
+                } else {
                     stack.push(s1);
                 }
             }
         }
 
-        if(stack.isEmpty()){
+        if (stack.isEmpty()) {
             return "";
         }
+
         String finalS = "";
-        while(!stack.isEmpty()){
+        while (!stack.isEmpty()) {
             finalS = stack.pop() + finalS;
         }
+
         return finalS;
     }
 
