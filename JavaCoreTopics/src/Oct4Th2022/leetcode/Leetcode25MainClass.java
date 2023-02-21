@@ -111,7 +111,7 @@ public class Leetcode25MainClass {
         }
         for (int[] a1 : pieces) {
             if (a1.length == 1) {
-                if (!sb.toString().contains(String.valueOf(a1[0]))) {
+                if (!sb.toString().contains(String.valueOf(a1[0] + ","))) {
                     return false;
                 }
             } else {
