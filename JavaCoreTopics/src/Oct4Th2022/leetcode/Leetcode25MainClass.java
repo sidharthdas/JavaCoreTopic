@@ -58,6 +58,21 @@ public class Leetcode25MainClass {
 
     }
 
+    public static boolean checkDistances(String s, int[] distance) {
+
+        int len = s.length();
+        int currentIndex = 0;
+        for(char i = 'a'; i <= 'z'; i++){
+            int first = s.indexOf(i);
+            int last = s.lastIndexOf(i);
+            if(first != -1 && (last - first - 1) != distance[currentIndex]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public static String makeGood(String s) {
         String caps = "QWERTYUIOPASDFGHJKLZXCVBNM";
         String small = "qwertyuiopasdfghjklzxcvbnm";
