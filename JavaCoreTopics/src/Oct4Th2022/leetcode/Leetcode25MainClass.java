@@ -52,24 +52,58 @@ public class Leetcode25MainClass {
         //System.out.println(String.valueOf(a));
         //Input: arr = {91,4,64,78}, pieces = {{78},{4,64},{91}}
         //System.out.println(canFormArray(new int[]{91, 4, 64, 78}, new int[][]{{78}, {4, 64}, {91}}));
-        System.out.println(makeGood("leEeetcode"));
-        char c = 'a';
-        System.out.println(String.valueOf(c));
-
+        //System.out.println(makeGood("leEeetcode"));
+        //char c = 'a';
+        //  System.out.println(String.valueOf(c));
+        System.out.println(checkDistances("abaccb", new int[]{1, 3, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}));
     }
 
-    public static boolean checkDistances(String s, int[] distance) {
-
-        int len = s.length();
-        int currentIndex = 0;
-        for(char i = 'a'; i <= 'z'; i++){
-            int first = s.indexOf(i);
-            int last = s.lastIndexOf(i);
-            if(first != -1 && (last - first - 1) != distance[currentIndex]) {
-                return false;
+    public String longestNiceSubstring(String s) {
+        String[] srr = s.split("");
+        List<String> list = new ArrayList<>();
+        int len = srr.length;
+        for (int i = 0; i < len; i++) {
+            // j is the number of elements which should be printed
+            for (int j = i; j < len; j++) {
+                String s1 = "";
+                for (int k = i; k <= j; k++) {
+                    s1 += srr[k];
+                }
+                System.out.println(s1);
+                if(checkNice(s1)){
+                    list.add(s1);
+                }
             }
         }
 
+        if(list.size() == 0 ){
+            return "";
+        }
+        Collections.sort(list, (a1,a2) -> a2.length() - a1.length());
+        return list.get(0);
+    }
+
+    private boolean checkNice(String s) {
+        String lowerCase = "qwertyuiopasdfghjklzxcvbnm";
+        char[] c = s.toCharArray();
+        for(char c1 : c){
+            if(lowerCase.contains(String.valueOf(c1)) && !s.contains(String.valueOf(c1).toUpperCase())){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean checkDistances(String s, int[] distance) {
+        int currentIndex = 0;
+        for (char i = 'a'; i <= 'z'; i++) {
+            int first = s.indexOf(i);
+            int last = s.lastIndexOf(i);
+            if (first != -1 && (last - first - 1) != distance[currentIndex]) {
+                return false;
+            }
+            currentIndex++;
+        }
         return true;
     }
 
