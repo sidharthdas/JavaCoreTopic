@@ -62,12 +62,49 @@ public class Leetcode25MainClass {
         //str1 = "ABCABC", str2 = "ABC"
     }
 
+    public String reverseStr(String s, int k) {
+        StringBuffer sb = new StringBuffer();
+        int twoK = k * 2;
+        while (!s.equals("")) {
+
+            if (s.length() >= twoK) {
+                String sub = s.substring(0, twoK);
+                s = s.replaceFirst(sub, "");
+                sb.append(reverse(sub.substring(0, k)) + sub.substring(k));
+            } else if (s.length() < k) {
+                sb.append(reverse(s));
+                s = "";
+            } else if (s.length() < twoK && s.length() > k) {
+                sb.append(reverse(s.substring(0, k))+s.substring(k));
+                s = "";
+            }
+        }
+
+        return sb.toString();
+    }
+
+    private String reverse(String str) {
+        String nstr = "";
+        char ch;
+        int len = str.length();
+
+        System.out.print("Original word: ");
+        System.out.println("Geeks"); //Example word
+
+        for (int i = 0; i < len; i++) {
+            ch = str.charAt(i); //extracts each character
+            nstr = ch + nstr; //adds each character in front of the existing string
+        }
+        System.out.println("Reversed word: " + nstr);
+        return nstr;
+    }
+
     public static String gcdOfStrings(String str1, String str2) {
         String gcd = str1.length() > str2.length() ? str2 : str1;
 
-        while(gcd.length() != 0){
+        while (gcd.length() != 0) {
             int len = gcd.length();
-            if(gcd.equals(str1.substring(0, len)) && gcd.equals(str2.substring(0, len ))){
+            if (gcd.equals(str1.substring(0, len)) && gcd.equals(str2.substring(0, len))) {
                 return gcd;
             }
             gcd = gcd.substring(0, len - 1);
@@ -75,19 +112,20 @@ public class Leetcode25MainClass {
 
         return gcd;
     }
-    public static  String makeFancyString1(String s) {
+
+    public static String makeFancyString1(String s) {
         char srr[] = s.toCharArray();
         Stack<Character> stack = new Stack<>();
         String s2 = "";
         int count = 0;
         char prevChr = srr[0];
-        for(char s1 : srr){
-            if(count < 2 && prevChr == s1){
-                count ++;
+        for (char s1 : srr) {
+            if (count < 2 && prevChr == s1) {
+                count++;
                 stack.push(s1);
                 s2 += s1;
             } else {
-                if(prevChr != s1){
+                if (prevChr != s1) {
                     stack.push(s1);
                     prevChr = s1;
                     s2 += s1;
@@ -109,37 +147,36 @@ public class Leetcode25MainClass {
         int[] arrFinal = new int[len];
 
         for (int i = 0; i < len; i++) {
-            if(String.valueOf(c).equals(arr[i])){
+            if (String.valueOf(c).equals(arr[i])) {
                 arrFinal[i] = 0;
             } else {
                 int rightIndex = -1;
                 int leftIndex = -1;
 
-                for(int j = i + 1; j < len; j++){
-                    if(String.valueOf(c).equals(arr[j])){
+                for (int j = i + 1; j < len; j++) {
+                    if (String.valueOf(c).equals(arr[j])) {
                         rightIndex = j;
                         break;
                     }
                 }
 
-                for(int j = i - 1; j >= 0; j--){
-                    if(String.valueOf(c).equals(arr[j])){
+                for (int j = i - 1; j >= 0; j--) {
+                    if (String.valueOf(c).equals(arr[j])) {
                         leftIndex = j;
                         break;
                     }
                 }
 
-                if(leftIndex == -1){
-                    arrFinal[i] = Math.abs(i-rightIndex);
-                } else if(rightIndex == -1){
-                    arrFinal[i] = Math.abs(i-leftIndex);
-                }else{
-                    int path1 = Math.abs(i-leftIndex);
+                if (leftIndex == -1) {
+                    arrFinal[i] = Math.abs(i - rightIndex);
+                } else if (rightIndex == -1) {
+                    arrFinal[i] = Math.abs(i - leftIndex);
+                } else {
+                    int path1 = Math.abs(i - leftIndex);
                     int path2 = Math.abs(i - rightIndex);
 
                     arrFinal[i] = path1 > path2 ? path2 : path1;
                 }
-
 
 
             }
