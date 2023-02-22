@@ -71,6 +71,7 @@ public class Leetcode25MainClass {
                     s1 += srr[k];
                 }
                 if (checkNice(s1) && s1.length() > 1) {
+                    System.out.println(s1);
                     list.add(s1);
                 }
             }
@@ -85,9 +86,13 @@ public class Leetcode25MainClass {
 
     private static boolean checkNice(String s) {
         String lowerCase = "qwertyuiopasdfghjklzxcvbnm";
+        String upperCase = "QWERTYUIOPASDFGHJKLZXCVBNM";
         char[] c = s.toCharArray();
         for (char c1 : c) {
             if (lowerCase.contains(String.valueOf(c1)) && !s.contains(String.valueOf(c1).toUpperCase())) {
+                return false;
+            }
+            if (upperCase.contains(String.valueOf(c1)) && !s.contains(String.valueOf(c1).toLowerCase())) {
                 return false;
             }
         }
