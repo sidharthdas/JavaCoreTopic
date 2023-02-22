@@ -69,25 +69,24 @@ public class Leetcode25MainClass {
                 for (int k = i; k <= j; k++) {
                     s1 += srr[k];
                 }
-                System.out.println(s1);
-                if(checkNice(s1)){
+                if (checkNice(s1) && s1.length() > 1) {
                     list.add(s1);
                 }
             }
         }
 
-        if(list.size() == 0 ){
+        if (list.size() == 0) {
             return "";
         }
-        Collections.sort(list, (a1,a2) -> a2.length() - a1.length());
+        Collections.sort(list, (a1, a2) -> a2.length() - a1.length());
         return list.get(0);
     }
 
     private boolean checkNice(String s) {
         String lowerCase = "qwertyuiopasdfghjklzxcvbnm";
         char[] c = s.toCharArray();
-        for(char c1 : c){
-            if(lowerCase.contains(String.valueOf(c1)) && !s.contains(String.valueOf(c1).toUpperCase())){
+        for (char c1 : c) {
+            if (lowerCase.contains(String.valueOf(c1)) && !s.contains(String.valueOf(c1).toUpperCase())) {
                 return false;
             }
         }
@@ -401,8 +400,7 @@ public class Leetcode25MainClass {
             map.put(i, map.getOrDefault(i, 0) + 1);
         }
 
-        Map.Entry<Integer, Integer> e = map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed()).findFirst()
-                .get();
+        Map.Entry<Integer, Integer> e = map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed()).findFirst().get();
 
         List<List<Integer>> l = new ArrayList<>();
         for (int i = 0; i < nums.length; i++) {
