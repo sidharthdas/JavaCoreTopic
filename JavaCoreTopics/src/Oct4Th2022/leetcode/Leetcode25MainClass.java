@@ -56,10 +56,11 @@ public class Leetcode25MainClass {
         //char c = 'a';
         //  System.out.println(String.valueOf(c));
         //System.out.println(checkDistances("abaccb", new int[]{1, 3, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}));
-        System.out.println(longestNiceSubstring("qQUjJ"));
+        //System.out.println(longestNiceSubstring("qQUjJ"));
+        System.out.println(shortestToChar("loveleetcode", 'e'));
     }
 
-    public int[] shortestToChar(String s, char c) {
+    public static int[] shortestToChar(String s, char c) {
         String[] arr = s.split("");
         int len = arr.length;
         int[] arrFinal = new int[len];
@@ -78,7 +79,7 @@ public class Leetcode25MainClass {
                     }
                 }
 
-                for(int j = 0; j < i; j++){
+                for(int j = i - 1; j >= 0; j--){
                     if(String.valueOf(c).equals(arr[j])){
                         leftIndex = j;
                         break;
