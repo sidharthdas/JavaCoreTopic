@@ -59,6 +59,51 @@ public class Leetcode25MainClass {
         System.out.println(longestNiceSubstring("qQUjJ"));
     }
 
+    public int[] shortestToChar(String s, char c) {
+        String[] arr = s.split("");
+        int len = arr.length;
+        int[] arrFinal = new int[len];
+
+        for (int i = 0; i < len; i++) {
+            if(String.valueOf(c).equals(arr[i])){
+                arrFinal[i] = 0;
+            } else {
+                int rightIndex = -1;
+                int leftIndex = -1;
+
+                for(int j = i + 1; j < len; j++){
+                    if(String.valueOf(c).equals(arr[j])){
+                        rightIndex = j;
+                        break;
+                    }
+                }
+
+                for(int j = 0; j < i; j++){
+                    if(String.valueOf(c).equals(arr[j])){
+                        leftIndex = j;
+                        break;
+                    }
+                }
+
+                if(leftIndex == -1){
+                    arrFinal[i] = Math.abs(i-rightIndex);
+                } else if(rightIndex == -1){
+                    arrFinal[i] = Math.abs(i-leftIndex);
+                }else{
+                    int path1 = Math.abs(i-leftIndex);
+                    int path2 = Math.abs(i - rightIndex);
+
+                    arrFinal[i] = path1 > path2 ? path2 : path1;
+                }
+
+
+
+            }
+        }
+
+        return arrFinal;
+    }
+
     public static String longestNiceSubstring(String s) {
         String[] srr = s.split("");
         List<String> list = new ArrayList<>();
