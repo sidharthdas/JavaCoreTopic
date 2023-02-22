@@ -57,7 +57,50 @@ public class Leetcode25MainClass {
         //  System.out.println(String.valueOf(c));
         //System.out.println(checkDistances("abaccb", new int[]{1, 3, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}));
         //System.out.println(longestNiceSubstring("qQUjJ"));
-        System.out.println(shortestToChar("loveleetcode", 'e'));
+        //System.out.println(shortestToChar("loveleetcode", 'e'));
+        System.out.println(gcdOfStrings("ABCABC", "ABC"));
+        //str1 = "ABCABC", str2 = "ABC"
+    }
+
+    public static String gcdOfStrings(String str1, String str2) {
+        String gcd = str1.length() > str2.length() ? str2 : str1;
+
+        while(gcd.length() != 0){
+            int len = gcd.length();
+            if(gcd.equals(str1.substring(0, len)) && gcd.equals(str2.substring(0, len ))){
+                return gcd;
+            }
+            gcd = gcd.substring(0, len - 1);
+        }
+
+        return gcd;
+    }
+    public static  String makeFancyString1(String s) {
+        char srr[] = s.toCharArray();
+        Stack<Character> stack = new Stack<>();
+        String s2 = "";
+        int count = 0;
+        char prevChr = srr[0];
+        for(char s1 : srr){
+            if(count < 2 && prevChr == s1){
+                count ++;
+                stack.push(s1);
+                s2 += s1;
+            } else {
+                if(prevChr != s1){
+                    stack.push(s1);
+                    prevChr = s1;
+                    s2 += s1;
+                    count = 1;
+                }
+            }
+
+        }
+        /*String finalAns = "";
+        while(!stack.isEmpty()){
+            finalAns = stack.pop() + finalAns;
+        }*/
+        return s2;
     }
 
     public static int[] shortestToChar(String s, char c) {
