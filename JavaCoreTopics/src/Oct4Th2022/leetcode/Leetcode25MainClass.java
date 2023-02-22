@@ -55,10 +55,11 @@ public class Leetcode25MainClass {
         //System.out.println(makeGood("leEeetcode"));
         //char c = 'a';
         //  System.out.println(String.valueOf(c));
-        System.out.println(checkDistances("abaccb", new int[]{1, 3, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}));
+        //System.out.println(checkDistances("abaccb", new int[]{1, 3, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}));
+        System.out.println(longestNiceSubstring("qQUjJ"));
     }
 
-    public String longestNiceSubstring(String s) {
+    public static String longestNiceSubstring(String s) {
         String[] srr = s.split("");
         List<String> list = new ArrayList<>();
         int len = srr.length;
@@ -82,7 +83,7 @@ public class Leetcode25MainClass {
         return list.get(0);
     }
 
-    private boolean checkNice(String s) {
+    private static boolean checkNice(String s) {
         String lowerCase = "qwertyuiopasdfghjklzxcvbnm";
         char[] c = s.toCharArray();
         for (char c1 : c) {
