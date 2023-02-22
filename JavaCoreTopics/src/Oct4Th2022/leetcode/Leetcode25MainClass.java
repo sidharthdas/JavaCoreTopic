@@ -88,12 +88,9 @@ public class Leetcode25MainClass {
         char ch;
         int len = str.length();
 
-        System.out.print("Original word: ");
-        System.out.println("Geeks"); //Example word
-
         for (int i = 0; i < len; i++) {
-            ch = str.charAt(i); //extracts each character
-            nstr = ch + nstr; //adds each character in front of the existing string
+            ch = str.charAt(i);
+            nstr = ch + nstr;
         }
         System.out.println("Reversed word: " + nstr);
         return nstr;
