@@ -75,12 +75,20 @@ public class Leetcode25MainClass {
                 sb.append(reverse(s));
                 s = "";
             } else if (s.length() < twoK && s.length() > k) {
-                sb.append(reverse(s.substring(0, k))+s.substring(k));
+                sb.append(reverse(s.substring(0, k)) + s.substring(k));
                 s = "";
             }
         }
 
         return sb.toString();
+    }
+
+    public int findTheLongestSubstring(String s) {
+        if(!s.contains("a") && !s.contains("e") && !s.contains("i") && !s.contains("o") && !s.contains("u")) {
+            return s.length();
+        }
+
+        return 0;
     }
 
     private String reverse(String str) {
@@ -92,7 +100,6 @@ public class Leetcode25MainClass {
             ch = str.charAt(i);
             nstr = ch + nstr;
         }
-        System.out.println("Reversed word: " + nstr);
         return nstr;
     }
 
