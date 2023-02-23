@@ -58,8 +58,40 @@ public class Leetcode25MainClass {
         //System.out.println(checkDistances("abaccb", new int[]{1, 3, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}));
         //System.out.println(longestNiceSubstring("qQUjJ"));
         //System.out.println(shortestToChar("loveleetcode", 'e'));
-        System.out.println(gcdOfStrings("ABCABC", "ABC"));
+        //System.out.println(gcdOfStrings("ABCABC", "ABC"));
         //str1 = "ABCABC", str2 = "ABC"
+        //s = "ab#c", t = "ad#c"
+        System.out.println(backspaceCompare("ab#c","ad#c"));
+
+    }
+
+    public static boolean backspaceCompare(String s, String t) {
+
+        String srr[] = s.split("");
+        int lenS = srr.length;
+
+        String trr[] = t.split("");
+        int lenT = trr.length;
+
+        StringBuffer sb = new StringBuffer();
+        for (int i = lenS - 1; i >= 0; i--) {
+            if (!srr[i].equals("#")) {
+                sb.append(srr[i]);
+            } else {
+                i = i - 1;
+            }
+        }
+
+        StringBuffer tb = new StringBuffer();
+        for (int i = lenT - 1; i >= 0; i--) {
+            if (!trr[i].equals("#")) {
+                tb.append(trr[i]);
+            } else {
+                i = i - 1;
+            }
+        }
+
+        return sb.toString().equals(tb.toString());
     }
 
     public String reverseStr(String s, int k) {
