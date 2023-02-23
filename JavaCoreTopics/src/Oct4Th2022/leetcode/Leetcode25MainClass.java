@@ -61,7 +61,8 @@ public class Leetcode25MainClass {
         //System.out.println(gcdOfStrings("ABCABC", "ABC"));
         //str1 = "ABCABC", str2 = "ABC"
         //s = "ab#c", t = "ad#c"
-        System.out.println(backspaceCompare("ab#c","ad#c"));
+        //s = "ab##", t = "c#d#"
+        System.out.println(backspaceCompare("ab##","c#d#"));
 
     }
 
@@ -73,21 +74,32 @@ public class Leetcode25MainClass {
         String trr[] = t.split("");
         int lenT = trr.length;
 
-        StringBuffer sb = new StringBuffer();
+        StringBuffer sb = new StringBuffer("");
+        int count = 0;
         for (int i = lenS - 1; i >= 0; i--) {
             if (!srr[i].equals("#")) {
-                sb.append(srr[i]);
+                i = i - count;
+                count = 0;
+                if(i>= 0) {
+                    sb.append(srr[i]);
+                }
             } else {
-                i = i - 1;
+                count++;
+                //i = i - 1;
             }
         }
 
-        StringBuffer tb = new StringBuffer();
+        StringBuffer tb = new StringBuffer("");
         for (int i = lenT - 1; i >= 0; i--) {
             if (!trr[i].equals("#")) {
-                tb.append(trr[i]);
+                i = i - count;
+                count = 0;
+                if(i >=0) {
+                    tb.append(trr[i]);
+                }
             } else {
-                i = i - 1;
+                count++;
+                //i = i - 1;
             }
         }
 
