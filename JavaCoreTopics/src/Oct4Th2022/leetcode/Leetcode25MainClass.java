@@ -84,11 +84,46 @@ public class Leetcode25MainClass {
     }
 
     public int findTheLongestSubstring(String s) {
-        if(!s.contains("a") && !s.contains("e") && !s.contains("i") && !s.contains("o") && !s.contains("u")) {
+        if (!s.contains("a") && !s.contains("e") && !s.contains("i") && !s.contains("o") && !s.contains("u")) {
             return s.length();
         }
 
-        return 0;
+        List<String> list = new ArrayList<>();
+        int len = s.length();
+        String[] srr = s.split("");
+        for (int i = 0; i < len; i++) {
+            // j is the number of elements which should be printed
+            for (int j = i; j < len; j++) {
+                String s1 = "";
+                for (int k = i; k <= j; k++) {
+                    s1 += srr[k];
+                }
+                if (checkEvenVowels(s1)) {
+                    System.out.println(s1);
+                    list.add(s1);
+                }
+            }
+        }
+        Collections.sort(list, (a1, a2) -> a2.length() - a1.length());
+        return list.get(0).length();
+    }
+
+    private boolean checkEvenVowels(String s) {
+        Map<String, Integer> map = new HashMap<>();
+        map.put("a", 0);
+        map.put("e", 0);
+        map.put("i", 0);
+        map.put("o", 0);
+        map.put("u", 0);
+
+        String[] str = s.split("");
+        for (String s1 : str) {
+            if (map.containsKey(s1)) {
+                map.put(s1, map.get(s1) + 1);
+            }
+        }
+
+        return map.entrySet().stream().filter(x -> x.getValue() % 2 != 0).count() == 0;
     }
 
     private String reverse(String str) {
