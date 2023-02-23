@@ -79,10 +79,6 @@ public class Leetcode25MainClass {
         for (int i = lenS - 1; i >= 0; i--) {
             if (!srr[i].equals("#")) {
                 i = i - count;
-                count = 0;
-                if(i>= 0) {
-                    sb.append(srr[i]);
-                }
             } else {
                 count++;
                 //i = i - 1;
@@ -94,8 +90,10 @@ public class Leetcode25MainClass {
             if (!trr[i].equals("#")) {
                 i = i - count;
                 count = 0;
-                if(i >=0) {
+                if(i >=0 && !trr[i].equals("#")) {
                     tb.append(trr[i]);
+                } else{
+                    count ++;
                 }
             } else {
                 count++;
