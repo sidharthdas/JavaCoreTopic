@@ -32,6 +32,7 @@ sandwiches =
             }else{
                 if(stack.isEmpty()){
                     count++;
+
                 }else{
                     stack.pop();
                 }
