@@ -21,6 +21,26 @@ sandwiches =
         //s = "ab#c", t = "ad#c"
     }
 
+    public int minAddToMakeValid(String s) {
+
+        Stack stack = new Stack();
+        String[] srr = s.split("");
+        int count = 0;
+        for(String s1 : srr){
+            if(s1.equals("(")){
+                stack.push(s1);
+            }else{
+                if(stack.isEmpty()){
+                    count++;
+                }else{
+                    stack.pop();
+                }
+            }
+        }
+
+        return stack.isEmpty() ? count : stack.size();
+    }
+
     public static boolean backspaceCompare(String s, String t) {
         Stack stack = new Stack();
         Stack ttack = new Stack();
