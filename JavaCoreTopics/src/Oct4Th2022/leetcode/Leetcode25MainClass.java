@@ -105,6 +105,9 @@ public class Leetcode25MainClass {
     }
 
     public String reverseStr(String s, int k) {
+        if(s.length() == k){
+            return new StringBuffer(s).reverse().toString();
+        }
         StringBuffer sb = new StringBuffer();
         int twoK = k * 2;
         while (!s.equals("")) {
