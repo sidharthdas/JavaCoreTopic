@@ -3,6 +3,7 @@ package Oct4Th2022.leetcode;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 /**
  * @author Sidharth Das
@@ -15,7 +16,47 @@ public class LeetcodeMainClass26 {
 [1,1,0,0]
 sandwiches =
 [0,1,0,1]*/
-        System.out.println(countStudents(new int[]{1,1,1,0,0,1}, new int[]{1,0,0,0,1,1}));
+       //System.out.println(countStudents(new int[]{1,1,1,0,0,1}, new int[]{1,0,0,0,1,1}));
+        System.out.println(backspaceCompare("ab#c","ad#c"));
+        //s = "ab#c", t = "ad#c"
+    }
+
+    public static boolean backspaceCompare(String s, String t) {
+        Stack stack = new Stack();
+        Stack ttack = new Stack();
+        String[] srr = s.split("");
+        String[] trr = t.split("");
+        int lenS = s.length();
+        int lenT = t.length();
+
+        for(int i = 0; i< lenS; i++){
+            if(srr[i].equals("#")){
+                stack.push(srr[i]);
+            } else {
+                stack.pop();
+            }
+        }
+
+        for(int i = 0; i< lenT; i++){
+            if(trr[i].equals("#")){
+                ttack.push(trr[i]);
+            } else {
+                ttack.pop();
+            }
+        }
+
+        StringBuffer sb = new StringBuffer("");
+        StringBuffer tb = new StringBuffer("");
+
+        while(!stack.isEmpty()){
+            sb.append(stack.pop());
+        }
+
+        while(!ttack.isEmpty()){
+            tb.append(ttack.pop());
+        }
+
+        return sb.toString().equals(tb.toString());
     }
 
     public static int countStudents(int[] students, int[] sandwiches) {
@@ -40,11 +81,15 @@ sandwiches =
             if(sandwichesQueue.isEmpty()){
                 break;
             }
-            if(count(students, sandwichesQueue.peek()) == 0){
+            if(count2(studentsQueue, sandwichesQueue.peek()) == 0){
                 break;
             }
         }
         return studentsQueue.size();
+    }
+
+    private static int  count2 (Queue<Integer> q, int i){
+        return (int)q.stream().filter(x ->x ==i).count();
     }
 
     private static int count(int[] arr, int i) {
