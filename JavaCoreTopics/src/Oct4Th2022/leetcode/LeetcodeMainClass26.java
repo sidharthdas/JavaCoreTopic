@@ -30,7 +30,7 @@ sandwiches =
         int lenT = t.length();
 
         for(int i = 0; i< lenS; i++){
-            if(srr[i].equals("#")){
+            if(!srr[i].equals("#")){
                 stack.push(srr[i]);
             } else {
                 stack.pop();
@@ -38,7 +38,7 @@ sandwiches =
         }
 
         for(int i = 0; i< lenT; i++){
-            if(trr[i].equals("#")){
+            if(!trr[i].equals("#")){
                 ttack.push(trr[i]);
             } else {
                 ttack.pop();
