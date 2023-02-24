@@ -29,7 +29,7 @@ sandwiches =
         }
         while ((!((count(students, 1) != 0 && count(sandwiches, 1) == 0) ||
                 (count(students, 0) != 0 && count(sandwiches, 0) == 0)))
-                || !sandwichesQueue.isEmpty()) {
+                && !sandwichesQueue.isEmpty()) {
             if (studentsQueue.peek() == sandwichesQueue.peek()) {
                 studentsQueue.poll();
                 sandwichesQueue.poll();
