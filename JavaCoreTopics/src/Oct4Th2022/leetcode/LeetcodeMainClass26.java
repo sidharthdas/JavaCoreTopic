@@ -41,6 +41,46 @@ sandwiches =
         return stack.isEmpty() ? count : stack.size();
     }
 
+    public static boolean backspaceCompare1(String s, String t) {
+        Stack stack = new Stack();
+        Stack ttack = new Stack();
+        String[] srr = s.split("");
+        String[] trr = t.split("");
+        int lenS = s.length();
+        int lenT = t.length();
+
+        for(int i = 0; i< lenS; i++){
+            if(!srr[i].equals("#")){
+                stack.push(srr[i]);
+            } else {
+                if(!stack.isEmpty())
+                    stack.pop();
+            }
+        }
+
+        for(int i = 0; i< lenT; i++){
+            if(!trr[i].equals("#")){
+                ttack.push(trr[i]);
+            } else {
+                if(!ttack.isEmpty())
+                    ttack.pop();
+            }
+        }
+
+        StringBuffer sb = new StringBuffer("");
+        StringBuffer tb = new StringBuffer("");
+
+        while(!stack.isEmpty()){
+            sb.append(stack.pop());
+        }
+
+        while(!ttack.isEmpty()){
+            tb.append(ttack.pop());
+        }
+
+        return sb.toString().equals(tb.toString());
+    }
+
     public static boolean backspaceCompare(String s, String t) {
         Stack stack = new Stack();
         Stack ttack = new Stack();
