@@ -1,9 +1,7 @@
 package Oct4Th2022.leetcode;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author Sidharth Das
@@ -16,9 +14,41 @@ public class LeetcodeMainClass26 {
 [1,1,0,0]
 sandwiches =
 [0,1,0,1]*/
-       //System.out.println(countStudents(new int[]{1,1,1,0,0,1}, new int[]{1,0,0,0,1,1}));
-        System.out.println(backspaceCompare("ab#c","ad#c"));
+        //System.out.println(countStudents(new int[]{1,1,1,0,0,1}, new int[]{1,0,0,0,1,1}));
+        //System.out.println(backspaceCompare("ab#c", "ad#c"));
+        System.out.println(maxCoins(new int[]{2,4,1,2,7,8}));
         //s = "ab#c", t = "ad#c"
+    }
+
+    public int findContentChildren(int[] g, int[] s) {
+        Arrays.sort(g);
+        Arrays.sort(s);
+        int slen = s.length;
+        int count = 0;
+        int len = g.length;
+        for (int i = slen - 1; i >= 0; i--) {
+
+            for (int j = len - 1; j >= 0; j--) {
+
+                if (g[j] != -1 && s[i] >= g[j]) {
+                    count++;
+                    g[j] = -1;
+                    break;
+                }
+            }
+        }
+        return count;
+    }
+
+    public static int maxCoins(int[] piles) {
+        int count = 0;
+        List<Integer> list = Arrays.stream(piles).boxed().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+        while (list.size() != 0) {
+            list.remove(0);
+            count += list.remove(0);
+            list.remove(list.size()-1);
+        }
+        return count;
     }
 
     public int minAddToMakeValid(String s) {
@@ -26,13 +56,13 @@ sandwiches =
         Stack stack = new Stack();
         String[] srr = s.split("");
         int count = 0;
-        for(String s1 : srr){
-            if(s1.equals("(")){
+        for (String s1 : srr) {
+            if (s1.equals("(")) {
                 stack.push(s1);
-            }else{
-                if(stack.isEmpty()){
+            } else {
+                if (stack.isEmpty()) {
                     count++;
-                }else{
+                } else {
                     stack.pop();
                 }
             }
@@ -49,20 +79,20 @@ sandwiches =
         int lenS = s.length();
         int lenT = t.length();
 
-        for(int i = 0; i< lenS; i++){
-            if(!srr[i].equals("#")){
+        for (int i = 0; i < lenS; i++) {
+            if (!srr[i].equals("#")) {
                 stack.push(srr[i]);
             } else {
-                if(!stack.isEmpty())
+                if (!stack.isEmpty())
                     stack.pop();
             }
         }
 
-        for(int i = 0; i< lenT; i++){
-            if(!trr[i].equals("#")){
+        for (int i = 0; i < lenT; i++) {
+            if (!trr[i].equals("#")) {
                 ttack.push(trr[i]);
             } else {
-                if(!ttack.isEmpty())
+                if (!ttack.isEmpty())
                     ttack.pop();
             }
         }
@@ -70,11 +100,11 @@ sandwiches =
         StringBuffer sb = new StringBuffer("");
         StringBuffer tb = new StringBuffer("");
 
-        while(!stack.isEmpty()){
+        while (!stack.isEmpty()) {
             sb.append(stack.pop());
         }
 
-        while(!ttack.isEmpty()){
+        while (!ttack.isEmpty()) {
             tb.append(ttack.pop());
         }
 
@@ -89,16 +119,16 @@ sandwiches =
         int lenS = s.length();
         int lenT = t.length();
 
-        for(int i = 0; i< lenS; i++){
-            if(!srr[i].equals("#")){
+        for (int i = 0; i < lenS; i++) {
+            if (!srr[i].equals("#")) {
                 stack.push(srr[i]);
             } else {
                 stack.pop();
             }
         }
 
-        for(int i = 0; i< lenT; i++){
-            if(!trr[i].equals("#")){
+        for (int i = 0; i < lenT; i++) {
+            if (!trr[i].equals("#")) {
                 ttack.push(trr[i]);
             } else {
                 ttack.pop();
@@ -108,11 +138,11 @@ sandwiches =
         StringBuffer sb = new StringBuffer("");
         StringBuffer tb = new StringBuffer("");
 
-        while(!stack.isEmpty()){
+        while (!stack.isEmpty()) {
             sb.append(stack.pop());
         }
 
-        while(!ttack.isEmpty()){
+        while (!ttack.isEmpty()) {
             tb.append(ttack.pop());
         }
 
@@ -138,18 +168,18 @@ sandwiches =
                 studentsQueue.add(studentsQueue.poll());
             }
 
-            if(sandwichesQueue.isEmpty()){
+            if (sandwichesQueue.isEmpty()) {
                 break;
             }
-            if(count2(studentsQueue, sandwichesQueue.peek()) == 0){
+            if (count2(studentsQueue, sandwichesQueue.peek()) == 0) {
                 break;
             }
         }
         return studentsQueue.size();
     }
 
-    private static int  count2 (Queue<Integer> q, int i){
-        return (int)q.stream().filter(x ->x ==i).count();
+    private static int count2(Queue<Integer> q, int i) {
+        return (int) q.stream().filter(x -> x == i).count();
     }
 
     private static int count(int[] arr, int i) {
