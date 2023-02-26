@@ -1,6 +1,7 @@
 package Oct4Th2022.leetcode;
 
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -16,8 +17,24 @@ sandwiches =
 [0,1,0,1]*/
         //System.out.println(countStudents(new int[]{1,1,1,0,0,1}, new int[]{1,0,0,0,1,1}));
         //System.out.println(backspaceCompare("ab#c", "ad#c"));
-        System.out.println(maxCoins(new int[]{2, 4, 1, 2, 7, 8}));
+        //System.out.println(maxCoins(new int[]{2, 4, 1, 2, 7, 8}));
         //s = "ab#c", t = "ad#c"
+
+        Predicate<Integer> p =(a) -> a % 2 ==0;
+        List<Integer> l = List.of(1,2,3,4,5,6,7,8,9);
+        System.out.println(listAsPerReq(p, l));
+    }
+
+    public static List<Integer> listAsPerReq(Predicate<Integer> p , List<Integer> l){
+        List<Integer> l1 = new ArrayList<>();
+
+        l.forEach(x -> {
+            if(p.test(x)){
+                l1.add(x);
+            }
+        });
+
+        return l1;
     }
 
     public int findContentChildren(int[] g, int[] s) {
