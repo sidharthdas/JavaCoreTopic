@@ -25,6 +25,10 @@ sandwiches =
         System.out.println(listAsPerReq(p, l));
     }
 
+    public static  String removeDuplicates(String s, int k) {
+
+    }
+
     public static List<Integer> listAsPerReq(Predicate<Integer> p , List<Integer> l){
         List<Integer> l1 = new ArrayList<>();
 
