@@ -16,7 +16,7 @@ sandwiches =
 [0,1,0,1]*/
         //System.out.println(countStudents(new int[]{1,1,1,0,0,1}, new int[]{1,0,0,0,1,1}));
         //System.out.println(backspaceCompare("ab#c", "ad#c"));
-        System.out.println(maxCoins(new int[]{2,4,1,2,7,8}));
+        System.out.println(maxCoins(new int[]{2, 4, 1, 2, 7, 8}));
         //s = "ab#c", t = "ad#c"
     }
 
@@ -40,13 +40,35 @@ sandwiches =
         return count;
     }
 
+    public String removeStars(String s) {
+        String[] srr = s.split("");
+        Stack<String> stack = new Stack<>();
+        for (String s1 : srr) {
+            if (s1.equals("*")) {
+                if (!stack.isEmpty()) {
+                    stack.pop();
+                }
+            } else {
+
+                stack.push(s1);
+            }
+        }
+
+        String fS = "";
+        while (!stack.isEmpty()) {
+            fS = stack.pop() + fS;
+        }
+
+        return fS;
+    }
+
     public static int maxCoins(int[] piles) {
         int count = 0;
         List<Integer> list = Arrays.stream(piles).boxed().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
         while (list.size() != 0) {
             list.remove(0);
             count += list.remove(0);
-            list.remove(list.size()-1);
+            list.remove(list.size() - 1);
         }
         return count;
     }
