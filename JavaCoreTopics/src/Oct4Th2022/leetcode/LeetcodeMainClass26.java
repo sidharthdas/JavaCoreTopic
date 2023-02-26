@@ -49,7 +49,6 @@ sandwiches =
                     stack.pop();
                 }
             } else {
-
                 stack.push(s1);
             }
         }
