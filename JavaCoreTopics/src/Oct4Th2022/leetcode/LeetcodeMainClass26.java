@@ -20,20 +20,60 @@ sandwiches =
         //System.out.println(maxCoins(new int[]{2, 4, 1, 2, 7, 8}));
         //s = "ab#c", t = "ad#c"
 
-        Predicate<Integer> p =(a) -> a % 2 ==0;
+        /*Predicate<Integer> p =(a) -> a % 2 ==0;
         List<Integer> l = List.of(1,2,3,4,5,6,7,8,9);
-        System.out.println(listAsPerReq(p, l));
+        System.out.println(listAsPerReq(p, l));*/
+
+        removeDuplicates("pbbcggttciiippooaais", 2);
     }
 
-    public static  String removeDuplicates(String s, int k) {
+    public int minDeletion(int[] nums) {
+        Stack<Integer> s = new Stack<>();
+        int count = 0;
+        for (int i : nums) {
+            if (!s.isEmpty() && s.peek() == i) {
+                s.pop();
+                count++;
+            } else {
+                s.push(i);
+            }
+        }
 
+        if (s.size() % 2 == 0) {
+            return count;
+        }
+
+        return count + 1;
     }
 
-    public static List<Integer> listAsPerReq(Predicate<Integer> p , List<Integer> l){
+    public static String removeDuplicates(String s, int k) {
+        Map<String, Integer> map = new HashMap<>();
+        String[] srr = s.split("");
+        Stack<String> stack = new Stack<>();
+        for (String s1 : srr) {
+            map.put(s1, map.getOrDefault(s1, 0) + 1);
+            if (map.get(s1) == k) {
+                int temp = k - 1;
+                while (temp != 0) {
+                    stack.pop();
+                    temp--;
+                }
+            } else {
+                stack.push(s1);
+            }
+        }
+        String fs = "";
+        while (!stack.isEmpty()) {
+            fs = stack.pop() + fs;
+        }
+        return fs;
+    }
+
+    public static List<Integer> listAsPerReq(Predicate<Integer> p, List<Integer> l) {
         List<Integer> l1 = new ArrayList<>();
 
         l.forEach(x -> {
-            if(p.test(x)){
+            if (p.test(x)) {
                 l1.add(x);
             }
         });
