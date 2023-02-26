@@ -24,15 +24,15 @@ sandwiches =
         List<Integer> l = List.of(1,2,3,4,5,6,7,8,9);
         System.out.println(listAsPerReq(p, l));*/
 
-        removeDuplicates("pbbcggttciiippooaais", 2);
+        //removeDuplicates("pbbcggttciiippooaais", 2);
+        System.out.println(minDeletion(new int[]{1,1,2,2,3,3}));
     }
 
-    public int minDeletion(int[] nums) {
+    public static int minDeletion(int[] nums) {
         Stack<Integer> s = new Stack<>();
         int count = 0;
         for (int i : nums) {
             if (!s.isEmpty() && s.peek() == i) {
-                s.pop();
                 count++;
             } else {
                 s.push(i);
@@ -43,7 +43,7 @@ sandwiches =
             return count;
         }
 
-        return count + 1;
+        return count - 1;
     }
 
     public static String removeDuplicates(String s, int k) {
