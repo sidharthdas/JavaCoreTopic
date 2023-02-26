@@ -89,7 +89,7 @@ sandwiches =
             }
         }
 
-        return stack.isEmpty() ? count : stack.size();
+        return stack.isEmpty() ? count : stack.size() + count;
     }
 
     public static boolean backspaceCompare1(String s, String t) {
