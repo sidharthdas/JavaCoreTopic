@@ -1,6 +1,7 @@
 package Oct4Th2022.leetcode;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -25,7 +26,29 @@ sandwiches =
         System.out.println(listAsPerReq(p, l));*/
 
         //removeDuplicates("pbbcggttciiippooaais", 2);
-        System.out.println(minDeletion(new int[]{1,1,2,2,3,3}));
+        //System.out.println(minDeletion(new int[]{1,1,2,2,3,3}));
+        System.out.println(minStoneSum(new int[]{5,4,9}, 2));
+
+        //Convert list to Map and filter whose value is one
+        List<String> items  = Arrays.asList("apple ", "apple", "banana", "banana", "papaya");
+        Map<String, Long> result  = items.stream().
+                collect(Collectors.groupingBy(x -> x, Collectors.counting()))
+                .entrySet().stream().filter(x -> x.getValue() ==1)
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+        System.out .println(result);
+    }
+
+    public static int minStoneSum(int[] piles, int k) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a,b) -> b-a);
+        for(int i : piles){
+            pq.add(i);
+        }
+        while(k != 0){
+            pq.add((pq.poll() + 1) / 2);
+            k--;
+        }
+
+        return pq.stream().reduce(Integer::sum).get();
     }
 
     public static int minDeletion(int[] nums) {
