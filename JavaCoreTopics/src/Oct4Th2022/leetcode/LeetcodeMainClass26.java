@@ -30,12 +30,71 @@ sandwiches =
         System.out.println(minStoneSum(new int[]{5, 4, 9}, 2));
 
         //Convert list to Map and filter whose value is one
-        List<String> items = Arrays.asList("apple ", "apple", "banana", "banana", "papaya");
+        /*List<String> items = Arrays.asList("apple ", "apple", "banana", "banana", "papaya");
         Map<String, Long> result = items.stream().
                 collect(Collectors.groupingBy(x -> x, Collectors.counting()))
                 .entrySet().stream().filter(x -> x.getValue() == 1)
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
-        System.out.println(result);
+        System.out.println(result);*/
+    }
+
+    public boolean strongPasswordCheckerII(String password) {
+        if (password.length() < 8) {
+            return false;
+        }
+        Map<String, Integer> map = new HashMap<>();
+        Set<String> s = Set.of("!", "@", "#", "<", "$", "%", "^", "&", "*", "(", ")", "-", "+");
+        boolean flag = false;
+
+        for (String s1 : s) {
+            if (password.contains(s1)) {
+                flag = true;
+                break;
+            }
+        }
+        if (!flag) {
+            return flag;
+        }
+
+        flag = false;
+
+        for (char a = 'a'; a <= 'z'; a++) {
+            if (password.contains(String.valueOf(a))) {
+                flag = true;
+                break;
+            }
+        }
+        if (!flag) {
+            return flag;
+        }
+
+        flag = false;
+
+        for (char a = 'A'; a <= 'Z'; a++) {
+            if (password.contains(String.valueOf(a))) {
+                flag = true;
+                break;
+            }
+        }
+        if (!flag) {
+            return flag;
+        }
+
+        String[] passwordArr = password.split("");
+        int len = passwordArr.length;
+
+        String prev = passwordArr[0];
+
+        for (int i = 1; i < len; i++) {
+
+            if(passwordArr[i].equals(prev)){
+                return false;
+            }
+
+            prev = passwordArr[i];
+        }
+
+        return true;
     }
 
     public List<String> summaryRanges(int[] nums) {
