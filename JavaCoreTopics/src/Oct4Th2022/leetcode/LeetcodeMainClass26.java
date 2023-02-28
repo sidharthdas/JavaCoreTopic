@@ -27,23 +27,45 @@ sandwiches =
 
         //removeDuplicates("pbbcggttciiippooaais", 2);
         //System.out.println(minDeletion(new int[]{1,1,2,2,3,3}));
-        System.out.println(minStoneSum(new int[]{5,4,9}, 2));
+        System.out.println(minStoneSum(new int[]{5, 4, 9}, 2));
 
         //Convert list to Map and filter whose value is one
-        List<String> items  = Arrays.asList("apple ", "apple", "banana", "banana", "papaya");
-        Map<String, Long> result  = items.stream().
+        List<String> items = Arrays.asList("apple ", "apple", "banana", "banana", "papaya");
+        Map<String, Long> result = items.stream().
                 collect(Collectors.groupingBy(x -> x, Collectors.counting()))
-                .entrySet().stream().filter(x -> x.getValue() ==1)
+                .entrySet().stream().filter(x -> x.getValue() == 1)
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
-        System.out .println(result);
+        System.out.println(result);
+    }
+
+    public List<String> summaryRanges(int[] nums) {
+        List<String> l = new ArrayList<>();
+        int prev = nums[0];
+        int len = nums.length;
+        int curr = nums[0];
+        for (int i = 1; i < len; i++) {
+            if (curr + 1 == nums[i]) {
+                curr = nums[i];
+            } else {
+                if(curr == prev){
+                    l.add(String.valueOf(curr));
+                }else{
+                    l.add(String.valueOf(prev) + "->" + String.valueOf(curr));
+                }
+
+                prev = nums[i];
+                curr = nums[i];
+            }
+        }
+        return l;
     }
 
     public static int minStoneSum(int[] piles, int k) {
-        PriorityQueue<Integer> pq = new PriorityQueue<>((a,b) -> b-a);
-        for(int i : piles){
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> b - a);
+        for (int i : piles) {
             pq.add(i);
         }
-        while(k != 0){
+        while (k != 0) {
             pq.add((pq.poll() + 1) / 2);
             k--;
         }
