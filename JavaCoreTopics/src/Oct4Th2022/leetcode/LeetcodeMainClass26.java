@@ -47,15 +47,21 @@ sandwiches =
             if (curr + 1 == nums[i]) {
                 curr = nums[i];
             } else {
-                if(curr == prev){
+                if (curr == prev) {
                     l.add(String.valueOf(curr));
-                }else{
+                } else {
                     l.add(String.valueOf(prev) + "->" + String.valueOf(curr));
                 }
 
                 prev = nums[i];
                 curr = nums[i];
             }
+        }
+
+        if (curr == prev) {
+            l.add(String.valueOf(curr));
+        } else {
+            l.add(String.valueOf(prev) + "->" + String.valueOf(curr));
         }
         return l;
     }
