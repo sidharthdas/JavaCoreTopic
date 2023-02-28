@@ -41,18 +41,19 @@ PriorityQueue<Integer> pq = new PriorityQueue<>((a1, a2) -> a2 - a1);
 
 -> For Java core topics, refer package JavaCoreTopicsImplementation17thJul2021
 
--> For BST please follow this package src.binarysearchtreefullimplementation
+-> For BST please follow this package src/binarysearchtree20Feb2023
 
- 1. Insert a node
- 2. Remove a node
- 3. inOrder
- 4. preOrder
- 5. postOrder
- 6. Print left side of node
- 7. Print right side of node
- 8. Descending order
- 9. Height of BST
-10. Mirror image of BST
+    Insert a node
+    Remove a node
+    Check Node is Present
+    inOrder
+    preOrder
+    postOrder
+    Print left side of node
+    Print right side of node
+    Descending order
+    Height of BST
+    Mirror image of BST
 
 -> For java8 functional interface, refer JavaCoreTopicsImplementation17thJul2021.java8FunctionalInterfaces.
 
