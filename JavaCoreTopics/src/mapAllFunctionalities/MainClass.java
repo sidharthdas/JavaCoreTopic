@@ -87,6 +87,8 @@ public class MainClass {
 
         //group the student based by class
 
-        /*Map<String, List<StudentDTD>> map2 = list.stream().collect(Collectors.groupingBy(StudentDTD::getClassName,));*/
+        Map<String, List<StudentDTD>> map2 = list.stream().collect(Collectors.groupingBy(StudentDTD::getClassName));
+
+        System.out.println(map2);
     }
 }
