@@ -38,6 +38,34 @@ sandwiches =
         System.out.println(result);*/
     }
 
+    public int maximumScore(int a, int b, int c) {
+        int count = 0;
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a1, a2) -> a2 - a1);
+
+        pq.add(a);
+        pq.add(b);
+        pq.add(c);
+
+        while (true) {
+            count++;
+            int a1 = pq.poll() - 1;
+            int a2 = pq.poll() - 1;
+            int a3 = pq.poll();
+
+            pq.add(a1);
+            pq.add(a2);
+            pq.add(a3);
+
+            if (a1 == 0 && a2 == 0 ||
+                    a2 == 0 && a3 == 0 ||
+                    a1 == 0 && a3 == 0) {
+                break;
+            }
+        }
+
+        return count;
+    }
+
     public boolean strongPasswordCheckerII(String password) {
         if (password.length() < 8) {
             return false;
@@ -87,7 +115,7 @@ sandwiches =
 
         for (int i = 1; i < len; i++) {
 
-            if(passwordArr[i].equals(prev)){
+            if (passwordArr[i].equals(prev)) {
                 return false;
             }
 
@@ -98,7 +126,7 @@ sandwiches =
     }
 
     public List<String> summaryRanges(int[] nums) {
-        if(nums.length == 0){
+        if (nums.length == 0) {
             return new ArrayList<>();
         }
         List<String> l = new ArrayList<>();
