@@ -64,9 +64,12 @@ public class MainClass {
         map1.put(7, 50);
         map1.put(101, 8);
 
-        /*map.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue().reversed()
-                .thenComparing(Comparator.comparing(Map.Entry.<String, Integer>comparingByKey())))
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));*/
+        Map<String, Integer> m1 = map.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue()
+                .thenComparing(Map.Entry.comparingByKey())).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+                (e1, e2) -> e1, LinkedHashMap::new));
+
+        System.out.println(m1);
+
 
         map1 = map1.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed()
                         .thenComparing(Map.Entry.comparingByKey()))
