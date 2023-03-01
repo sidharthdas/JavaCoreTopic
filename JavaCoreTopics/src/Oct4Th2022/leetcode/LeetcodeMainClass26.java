@@ -36,6 +36,7 @@ sandwiches =
                 .entrySet().stream().filter(x -> x.getValue() == 1)
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
         System.out.println(result);*/
+        System.out.println(strongPasswordCheckerII(""));
     }
 
     public int maximumScore(int a, int b, int c) {
@@ -66,8 +67,12 @@ sandwiches =
         return count;
     }
 
-    public boolean strongPasswordCheckerII(String password) {
+    public static boolean strongPasswordCheckerII(String password) {
         if (password.length() < 8) {
+            return false;
+        }
+
+        if(password.contains("\"")){
             return false;
         }
         Map<String, Integer> map = new HashMap<>();
