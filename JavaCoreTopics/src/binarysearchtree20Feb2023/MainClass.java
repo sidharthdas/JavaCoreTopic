@@ -1,9 +1,5 @@
 package binarysearchtree20Feb2023;
 
-/**
- * @author Sidharth Das
- * created on  28/02/23
- */
 public class MainClass {
 
     public static void main(String[] args) {
