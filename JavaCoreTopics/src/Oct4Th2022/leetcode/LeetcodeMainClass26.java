@@ -39,6 +39,26 @@ sandwiches =
         System.out.println(strongPasswordCheckerII(""));
     }
 
+    public ListNode swapPairs(ListNode head) {
+
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        ListNode curr = head;
+
+        while (curr != null && curr.next != null) {
+            int val = curr.val;
+            curr.val = curr.next.val;
+            curr.next.val = val;
+
+            curr = curr.next.next;
+        }
+
+        return head;
+
+    }
+
     public int maximumScore(int a, int b, int c) {
         int count = 0;
         PriorityQueue<Integer> pq = new PriorityQueue<>((a1, a2) -> a2 - a1);
@@ -72,7 +92,7 @@ sandwiches =
             return false;
         }
 
-        if(password.contains("\"")){
+        if (password.contains("\"")) {
             return false;
         }
         Map<String, Integer> map = new HashMap<>();
@@ -104,6 +124,18 @@ sandwiches =
         flag = false;
 
         for (char a = 'A'; a <= 'Z'; a++) {
+            if (password.contains(String.valueOf(a))) {
+                flag = true;
+                break;
+            }
+        }
+        if (!flag) {
+            return flag;
+        }
+
+        flag = false;
+
+        for (int a = 0; a <= 9; a++) {
             if (password.contains(String.valueOf(a))) {
                 flag = true;
                 break;
