@@ -98,7 +98,6 @@ sandwiches =
         Map<String, Integer> map = new HashMap<>();
         Set<String> s = Set.of("!", "@", "#", "<", "$", "%", "^", "&", "*", "(", ")", "-", "+");
         boolean flag = false;
-
         for (String s1 : s) {
             if (password.contains(s1)) {
                 flag = true;
@@ -108,9 +107,7 @@ sandwiches =
         if (!flag) {
             return flag;
         }
-
         flag = false;
-
         for (char a = 'a'; a <= 'z'; a++) {
             if (password.contains(String.valueOf(a))) {
                 flag = true;
@@ -120,9 +117,7 @@ sandwiches =
         if (!flag) {
             return flag;
         }
-
         flag = false;
-
         for (char a = 'A'; a <= 'Z'; a++) {
             if (password.contains(String.valueOf(a))) {
                 flag = true;
@@ -132,9 +127,7 @@ sandwiches =
         if (!flag) {
             return flag;
         }
-
         flag = false;
-
         for (int a = 0; a <= 9; a++) {
             if (password.contains(String.valueOf(a))) {
                 flag = true;
@@ -144,7 +137,6 @@ sandwiches =
         if (!flag) {
             return flag;
         }
-
         String[] passwordArr = password.split("");
         int len = passwordArr.length;
 
@@ -155,7 +147,6 @@ sandwiches =
             if (passwordArr[i].equals(prev)) {
                 return false;
             }
-
             prev = passwordArr[i];
         }
 
