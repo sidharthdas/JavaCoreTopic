@@ -39,6 +39,34 @@ sandwiches =
         System.out.println(strongPasswordCheckerII(""));
     }
 
+    public int evalRPN(String[] tokens) {
+        Stack<String> stack = new Stack<>();
+        String operations = "+-*/";
+        for (String token : tokens) {
+            if (operations.contains(token)) {
+                int a = Integer.parseInt(stack.pop());
+                int b = Integer.parseInt(stack.pop());
+                int c = 0;
+                if (token.equals("*")) {
+                    c = b * a;
+                } else if (token.equals("+")) {
+                    c = b + a;
+                } else if (token.equals("-")) {
+                    c = b - a;
+                } else if (token.equals("/")) {
+                    c = b / a;
+                }
+
+                stack.push(String.valueOf(c));
+
+            } else {
+                stack.push(token);
+            }
+        }
+
+        return Integer.parseInt(stack.pop());
+    }
+
     public ListNode swapPairs(ListNode head) {
 
         if (head == null || head.next == null) {
