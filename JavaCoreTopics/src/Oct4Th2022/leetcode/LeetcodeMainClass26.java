@@ -27,7 +27,7 @@ sandwiches =
 
         //removeDuplicates("pbbcggttciiippooaais", 2);
         //System.out.println(minDeletion(new int[]{1,1,2,2,3,3}));
-        System.out.println(minStoneSum(new int[]{5, 4, 9}, 2));
+        //System.out.println(minStoneSum(new int[]{5, 4, 9}, 2));
 
         //Convert list to Map and filter whose value is one
         /*List<String> items = Arrays.asList("apple ", "apple", "banana", "banana", "papaya");
@@ -36,7 +36,37 @@ sandwiches =
                 .entrySet().stream().filter(x -> x.getValue() == 1)
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
         System.out.println(result);*/
-        System.out.println(strongPasswordCheckerII(""));
+        //System.out.println(strongPasswordCheckerII(""));
+        //ushed = [1,2,3,4,5], popped = [4,5,3,2,1]
+        System.out.println(validateStackSequences(new int[]{1,2,3,4,5}, new int[]{4,5,3,2,1}));
+    }
+
+    public static boolean validateStackSequences(int[] pushed, int[] popped) {
+
+        int pushLen = pushed.length;
+        int popLen = popped.length;
+
+        int currPoppedIndex = 0;
+
+        Stack<Integer> stack = new Stack<>();
+
+        for (int i = 0; i < pushLen; i++) {
+            stack.push(pushed[i]);
+            if(stack.peek() == popped[currPoppedIndex]){
+                stack.pop();
+                currPoppedIndex++;
+            }
+        }
+
+        for(int i = currPoppedIndex; i < popLen; i++){
+            if(stack.pop() != popped[i]){
+                return false;
+            }
+
+        }
+
+        return stack.isEmpty();
+
     }
 
     public int scoreOfParentheses(String s) {
@@ -199,6 +229,8 @@ sandwiches =
         return true;
     }
 
+
+
     public List<String> summaryRanges(int[] nums) {
         if (nums.length == 0) {
             return new ArrayList<>();
@@ -272,31 +304,31 @@ sandwiches =
             while (!stack.isEmpty()) {
                 s1 = stack.pop() + s1;
             }
-                String[] arr = s1.split("");
-                int len = arr.length;
-                int count = 0;
+            String[] arr = s1.split("");
+            int len = arr.length;
+            int count = 0;
 
-                for (int i = 0; i < len; i++) {
-                    if (stack.isEmpty()) {
-                        stack.push(arr[i]);
-                        count++;
-                    } else if (stack.peek().equals(arr[i])) {
-                        if (count == k - 1) {
-                            while (count != 0) {
-                                stack.pop();
-                                count--;
-                            }
-                        } else {
-                            stack.push(arr[i]);
-                            count++;
+            for (int i = 0; i < len; i++) {
+                if (stack.isEmpty()) {
+                    stack.push(arr[i]);
+                    count++;
+                } else if (stack.peek().equals(arr[i])) {
+                    if (count == k - 1) {
+                        while (count != 0) {
+                            stack.pop();
+                            count--;
                         }
                     } else {
-                        count = 1;
                         stack.push(arr[i]);
+                        count++;
                     }
+                } else {
+                    count = 1;
+                    stack.push(arr[i]);
                 }
-
             }
+
+        }
 
         String s1 = "";
         while (!stack.isEmpty()) {
@@ -308,19 +340,19 @@ sandwiches =
     }
 
     public boolean check(Stack<String> stack, int k) {
-        if(stack.isEmpty()) return true;
+        if (stack.isEmpty()) return true;
 
         int count = 0;
         String peek = stack.peek();
 
-        while(!stack.isEmpty()){
-            if(stack.peek().equals(peek)){
+        while (!stack.isEmpty()) {
+            if (stack.peek().equals(peek)) {
                 stack.pop();
                 count++;
-                if(count == k){
+                if (count == k) {
                     return true;
                 }
-            }else{
+            } else {
                 peek = stack.peek();
                 stack.pop();
                 count = 1;
