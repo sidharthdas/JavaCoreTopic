@@ -39,6 +39,23 @@ sandwiches =
         System.out.println(strongPasswordCheckerII(""));
     }
 
+    public int scoreOfParentheses(String s) {
+        Stack<String> stack = new Stack<>();
+        String srr[] = s.split("");
+        int count = 0;
+        for (String s1 : srr) {
+            if (s1.equals("(")) {
+                stack.push(s1);
+            } else {
+                stack.pop();
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+
     public int evalRPN(String[] tokens) {
         Stack<String> stack = new Stack<>();
         String operations = "+-*/";
@@ -244,28 +261,74 @@ sandwiches =
         return count - 1;
     }
 
-    public static String removeDuplicates(String s, int k) {
-        Map<String, Integer> map = new HashMap<>();
-        String[] srr = s.split("");
+    public String removeDuplicates(String s, int k) {
+
+        String str[] = s.split("");
         Stack<String> stack = new Stack<>();
-        for (String s1 : srr) {
-            map.put(s1, map.getOrDefault(s1, 0) + 1);
-            if (map.get(s1) == k) {
-                int temp = k - 1;
-                while (temp != 0) {
-                    stack.pop();
-                    temp--;
+
+        int currIndex = 0;
+        while (check(stack, k)) {
+            String s1 = "";
+            while (!stack.isEmpty()) {
+                s1 = stack.pop() + s1;
+            }
+                String[] arr = s1.split("");
+                int len = arr.length;
+                int count = 0;
+
+                for (int i = 0; i < len; i++) {
+                    if (stack.isEmpty()) {
+                        stack.push(arr[i]);
+                        count++;
+                    } else if (stack.peek().equals(arr[i])) {
+                        if (count == k - 1) {
+                            while (count != 0) {
+                                stack.pop();
+                                count--;
+                            }
+                        } else {
+                            stack.push(arr[i]);
+                            count++;
+                        }
+                    } else {
+                        count = 1;
+                        stack.push(arr[i]);
+                    }
                 }
-            } else {
-                stack.push(s1);
+
+            }
+
+        String s1 = "";
+        while (!stack.isEmpty()) {
+            s1 = stack.pop() + s1;
+        }
+
+        return s1;
+
+    }
+
+    public boolean check(Stack<String> stack, int k) {
+        if(stack.isEmpty()) return true;
+
+        int count = 0;
+        String peek = stack.peek();
+
+        while(!stack.isEmpty()){
+            if(stack.peek().equals(peek)){
+                stack.pop();
+                count++;
+                if(count == k){
+                    return true;
+                }
+            }else{
+                peek = stack.peek();
+                stack.pop();
+                count = 1;
             }
         }
-        String fs = "";
-        while (!stack.isEmpty()) {
-            fs = stack.pop() + fs;
-        }
-        return fs;
+        return false;
     }
+
 
     public static List<Integer> listAsPerReq(Predicate<Integer> p, List<Integer> l) {
         List<Integer> l1 = new ArrayList<>();
