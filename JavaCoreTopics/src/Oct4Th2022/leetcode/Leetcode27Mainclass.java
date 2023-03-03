@@ -192,14 +192,14 @@ class CustomStack1 {
         if (stack.size() <= k) {
             l1 = l1.stream().map(x -> x + val).collect(Collectors.toList());
         } else {
-
+            int len = l1.size();
             List<Integer> temp = new ArrayList<>();
-            for (int x : l1) {
+            for (int i = len -1 ; i>=0; i--) {
                 if (k >= 1) {
-                    temp.add(x + val);
+                    temp.add(l1.get(i) + val);
                     k--;
                 } else {
-                    temp.add(x);
+                    temp.add(l1.get(i));
                 }
             }
             l1 = temp;
