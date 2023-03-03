@@ -87,51 +87,63 @@ sandwiches =
 
             }
 
+            if (temp.size() == 1) {
+                return Integer.parseInt(temp.get(0));
+            }
+
 
             //multiply
             len = temp.size();
-            temp = new ArrayList<>();
+            List<String> temp1 = new ArrayList<>();
             for (int i = 0; i < len; i++) {
-                if (list.get(i).equals("/")) {
-                    String t = String.valueOf(Integer.parseInt(list.get(i - 1)) / Integer.parseInt(list.get(i + 1)));
-                    temp.add(t);
+                if (temp.get(i).equals("/")) {
+                    String t = String.valueOf(Integer.parseInt(temp.get(i - 1)) / Integer.parseInt(temp.get(i + 1)));
+                    temp1.add(t);
                     i++;
                 } else {
-                    temp.add(list.get(i));
+                    temp1.add(list.get(i));
                 }
 
+            }
+
+            if (temp1.size() == 1) {
+                return Integer.parseInt(temp1.get(0));
             }
 
             //add
-            len = temp.size();
-            temp = new ArrayList<>();
+            len = temp1.size();
+            List<String> temp2 = new ArrayList<>();
             for (int i = 0; i < len; i++) {
-                if (list.get(i).equals("/")) {
-                    String t = String.valueOf(Integer.parseInt(list.get(i - 1)) / Integer.parseInt(list.get(i + 1)));
-                    temp.add(t);
+                if (temp1.get(i).equals("/")) {
+                    String t = String.valueOf(Integer.parseInt(temp1.get(i - 1)) / Integer.parseInt(temp1.get(i + 1)));
+                    temp2.add(t);
                     i++;
                 } else {
-                    temp.add(list.get(i));
+                    temp2.add(list.get(i));
                 }
 
+            }
+
+            if (temp2.size() == 1) {
+                return Integer.parseInt(temp2.get(0));
             }
 
             //sub
-            len = temp.size();
-            temp = new ArrayList<>();
+            len = temp2.size();
+            List<String> temp3 = new ArrayList<>();
             for (int i = 0; i < len; i++) {
-                if (list.get(i).equals("/")) {
-                    String t = String.valueOf(Integer.parseInt(list.get(i - 1)) / Integer.parseInt(list.get(i + 1)));
-                    temp.add(t);
+                if (temp2.get(i).equals("/")) {
+                    String t = String.valueOf(Integer.parseInt(temp2.get(i - 1)) / Integer.parseInt(temp2.get(i + 1)));
+                    temp3.add(t);
                     i++;
                 } else {
-                    temp.add(list.get(i));
+                    temp3.add(list.get(i));
                 }
 
             }
 
-            if (temp.size() == 1) {
-                return Integer.parseInt(temp.get(0));
+            if (temp3.size() == 1) {
+                return Integer.parseInt(temp3.get(0));
             }
         }
     }
