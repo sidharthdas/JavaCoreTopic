@@ -39,7 +39,7 @@ sandwiches =
         //System.out.println(strongPasswordCheckerII(""));
         //ushed = [1,2,3,4,5], popped = [4,5,3,2,1]
         //System.out.println(validateStackSequences(new int[]{1, 2, 3, 4, 5}, new int[]{4, 5, 3, 2, 1}));
-        System.out.println(clumsy(4));
+        System.out.println(clumsy(10));
     }
 
     public static int clumsy(int n) {
@@ -79,7 +79,7 @@ sandwiches =
             for (int i = 0; i < len; i++) {
                 if (list.get(i).equals("/")) {
                     String t = String.valueOf(Integer.parseInt(list.get(i - 1)) / Integer.parseInt(list.get(i + 1)));
-                    temp.remove(i - 1);
+                    temp.remove(temp.size() - 2);
                     temp.add(t);
                     i++;
                 } else {
@@ -97,14 +97,14 @@ sandwiches =
             len = temp.size();
             List<String> temp1 = new ArrayList<>();
             for (int i = 0; i < len; i++) {
-                if (temp.get(i).equals("/")) {
+                if (temp.get(i).equals("*")) {
                     String t = String.valueOf(Integer.parseInt(temp.get(i - 1)) / Integer.parseInt(temp.get(i + 1)));
-                    temp1.remove(i - 1);
+                    temp1.remove(temp1.size()-2);
                     temp1.add(t);
 
                     i++;
                 } else {
-                    temp1.add(list.get(i));
+                    temp1.add(temp.get(i));
                 }
 
             }
@@ -117,13 +117,13 @@ sandwiches =
             len = temp1.size();
             List<String> temp2 = new ArrayList<>();
             for (int i = 0; i < len; i++) {
-                if (temp1.get(i).equals("/")) {
+                if (temp1.get(i).equals("+")) {
                     String t = String.valueOf(Integer.parseInt(temp1.get(i - 1)) / Integer.parseInt(temp1.get(i + 1)));
                     temp2.add(t);
-                    temp2.remove(i - 1);
+                    temp2.remove(temp2.size()-2);
                     i++;
                 } else {
-                    temp2.add(list.get(i));
+                    temp2.add(temp1.get(i));
                 }
 
             }
@@ -136,13 +136,13 @@ sandwiches =
             len = temp2.size();
             List<String> temp3 = new ArrayList<>();
             for (int i = 0; i < len; i++) {
-                if (temp2.get(i).equals("/")) {
+                if (temp2.get(i).equals("-")) {
                     String t = String.valueOf(Integer.parseInt(temp2.get(i - 1)) / Integer.parseInt(temp2.get(i + 1)));
                     temp3.add(t);
-                    temp3.remove(i - 1);
+                    temp3.remove(temp2.size()-2);
                     i++;
                 } else {
-                    temp3.add(list.get(i));
+                    temp3.add(temp2.get(i));
                 }
 
             }
