@@ -39,34 +39,101 @@ sandwiches =
         //System.out.println(strongPasswordCheckerII(""));
         //ushed = [1,2,3,4,5], popped = [4,5,3,2,1]
         //System.out.println(validateStackSequences(new int[]{1, 2, 3, 4, 5}, new int[]{4, 5, 3, 2, 1}));
-        System.out.println(clumsy(4));
+        System.out.println(clumsy(10));
     }
 
     public static int clumsy(int n) {
-        int sum = n;
+        List<String> list = new ArrayList<>();
+        list.add(String.valueOf(n));
         int count = 1;
-        for (int i = n - 1; i <= 1; i--) {
+        for (int i = n - 1; i >= 1; i--) {
             if (count == 1) {
-                sum *= i;
+                list.add("*");
+                list.add(String.valueOf(i));
                 count++;
 
             } else if (count == 2) {
-                sum /= i;
+                list.add("/");
+                list.add(String.valueOf(i));
                 count++;
 
             } else if (count == 3) {
-                sum += i;
+                list.add("+");
+                list.add(String.valueOf(i));
                 count++;
 
             } else if (count == 4) {
-                sum -= i;
+                list.add("-");
+                list.add(String.valueOf(i));
                 count = 1;
 
             }
 
         }
+        System.out.println(list);
 
-        return sum;
+        while (true) {
+            //divide
+            int len = list.size();
+            List<String> temp = new ArrayList<>();
+            for (int i = 0; i < len; i++) {
+                if (list.get(i).equals("/")) {
+                    String t = String.valueOf(Integer.parseInt(list.get(i - 1)) / Integer.parseInt(list.get(i + 1)));
+                    temp.add(t);
+                    i++;
+                } else {
+                    temp.add(list.get(i));
+                }
+
+            }
+
+
+            //multiply
+            len = temp.size();
+            temp = new ArrayList<>();
+            for (int i = 0; i < len; i++) {
+                if (list.get(i).equals("/")) {
+                    String t = String.valueOf(Integer.parseInt(list.get(i - 1)) / Integer.parseInt(list.get(i + 1)));
+                    temp.add(t);
+                    i++;
+                } else {
+                    temp.add(list.get(i));
+                }
+
+            }
+
+            //add
+            len = temp.size();
+            temp = new ArrayList<>();
+            for (int i = 0; i < len; i++) {
+                if (list.get(i).equals("/")) {
+                    String t = String.valueOf(Integer.parseInt(list.get(i - 1)) / Integer.parseInt(list.get(i + 1)));
+                    temp.add(t);
+                    i++;
+                } else {
+                    temp.add(list.get(i));
+                }
+
+            }
+
+            //sub
+            len = temp.size();
+            temp = new ArrayList<>();
+            for (int i = 0; i < len; i++) {
+                if (list.get(i).equals("/")) {
+                    String t = String.valueOf(Integer.parseInt(list.get(i - 1)) / Integer.parseInt(list.get(i + 1)));
+                    temp.add(t);
+                    i++;
+                } else {
+                    temp.add(list.get(i));
+                }
+
+            }
+
+            if (temp.size() == 1) {
+                return Integer.parseInt(temp.get(0));
+            }
+        }
     }
 
     public static boolean validateStackSequences(int[] pushed, int[] popped) {
