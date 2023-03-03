@@ -194,7 +194,7 @@ class CustomStack1 {
         } else {
             int len = l1.size();
             List<Integer> temp = new ArrayList<>();
-            for (int i = len -1 ; i>=0; i--) {
+            for (int i = 0; i < len; i++) {
                 if (k >= 1) {
                     temp.add(l1.get(i) + val);
                     k--;
