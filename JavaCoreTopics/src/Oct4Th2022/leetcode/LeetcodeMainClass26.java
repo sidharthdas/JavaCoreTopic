@@ -38,7 +38,7 @@ sandwiches =
         System.out.println(result);*/
         //System.out.println(strongPasswordCheckerII(""));
         //ushed = [1,2,3,4,5], popped = [4,5,3,2,1]
-        System.out.println(validateStackSequences(new int[]{1,2,3,4,5}, new int[]{4,5,3,2,1}));
+        System.out.println(validateStackSequences(new int[]{1, 2, 3, 4, 5}, new int[]{4, 5, 3, 2, 1}));
     }
 
     public static boolean validateStackSequences(int[] pushed, int[] popped) {
@@ -52,14 +52,14 @@ sandwiches =
 
         for (int i = 0; i < pushLen; i++) {
             stack.push(pushed[i]);
-            if(stack.peek() == popped[currPoppedIndex]){
+            if (stack.peek() == popped[currPoppedIndex]) {
                 stack.pop();
                 currPoppedIndex++;
             }
         }
 
-        for(int i = currPoppedIndex; i < popLen; i++){
-            if(stack.pop() != popped[i]){
+        for (int i = currPoppedIndex; i < popLen; i++) {
+            if (stack.pop() != popped[i]) {
                 return false;
             }
 
@@ -228,7 +228,6 @@ sandwiches =
 
         return true;
     }
-
 
 
     public List<String> summaryRanges(int[] nums) {
@@ -559,5 +558,40 @@ sandwiches =
 
     private static int count(int[] arr, int i) {
         return (int) Arrays.stream(arr).boxed().filter(x -> x == i).count();
+    }
+}
+
+
+class StockSpanner {
+
+    List<Integer> l;
+    int currIndex;
+
+    public StockSpanner() {
+        l = new ArrayList<>();
+        currIndex = 0;
+    }
+
+    public int next(int price) {
+        if (currIndex == 0) {
+            l.add(currIndex, price);
+            currIndex++;
+            return 1;
+        } else {
+
+            l.add(currIndex, price);
+            int count = 0;
+            for (int i = currIndex; i >= 0; i--) {
+                if (l.get(i) <= price) {
+                    count++;
+                } else {
+                    break;
+                }
+            }
+            currIndex++;
+            return count;
+
+        }
+
     }
 }
