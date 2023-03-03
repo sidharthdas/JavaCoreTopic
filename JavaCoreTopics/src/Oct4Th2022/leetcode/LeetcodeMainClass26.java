@@ -55,6 +55,7 @@ sandwiches =
                     c = b - a;
                 } else if (token.equals("/")) {
                     c = b / a;
+
                 }
 
                 stack.push(String.valueOf(c));
