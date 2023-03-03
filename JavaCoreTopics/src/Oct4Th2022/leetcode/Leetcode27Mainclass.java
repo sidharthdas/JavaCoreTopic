@@ -189,7 +189,7 @@ class CustomStack1 {
             l1.add(0, stack.pop());
         }
 
-        if (stack.size() <= k) {
+        if (l1.size() <= k) {
             l1 = l1.stream().map(x -> x + val).collect(Collectors.toList());
         } else {
             int len = l1.size();
