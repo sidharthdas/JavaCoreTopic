@@ -39,7 +39,25 @@ sandwiches =
         //System.out.println(strongPasswordCheckerII(""));
         //ushed = [1,2,3,4,5], popped = [4,5,3,2,1]
         //System.out.println(validateStackSequences(new int[]{1, 2, 3, 4, 5}, new int[]{4, 5, 3, 2, 1}));
-        System.out.println(clumsy(10));
+        //System.out.println(clumsy(10));
+        System.out.println(subarraySum(new int[]{1, 1, 1}, 2));
+
+    }
+
+    public static int subarraySum(int[] nums, int k) {
+        int len = nums.length;
+        int count = 0;
+        for (int i = 0; i < len; i++) {
+            int sum = 0;
+            for (int j = i; j < len; j++) {
+                for (int k1 = i; k <= j; k++) {
+                    sum += nums[k1];
+                    System.out.print(nums[k1]+" ");
+                }
+                System.out.println();
+            }
+        }
+        return count;
     }
 
     public static int clumsy(int n) {
@@ -99,7 +117,7 @@ sandwiches =
             for (int i = 0; i < len; i++) {
                 if (temp.get(i).equals("*")) {
                     String t = String.valueOf(Integer.parseInt(temp.get(i - 1)) / Integer.parseInt(temp.get(i + 1)));
-                    temp1.remove(temp1.size()-1);
+                    temp1.remove(temp1.size() - 1);
                     temp1.add(t);
 
                     i++;
@@ -120,7 +138,7 @@ sandwiches =
                 if (temp1.get(i).equals("+")) {
                     String t = String.valueOf(Integer.parseInt(temp1.get(i - 1)) / Integer.parseInt(temp1.get(i + 1)));
                     temp2.add(t);
-                    temp2.remove(temp2.size()-1);
+                    temp2.remove(temp2.size() - 1);
                     i++;
                 } else {
                     temp2.add(temp1.get(i));
@@ -139,7 +157,7 @@ sandwiches =
                 if (temp2.get(i).equals("-")) {
                     String t = String.valueOf(Integer.parseInt(temp2.get(i - 1)) / Integer.parseInt(temp2.get(i + 1)));
                     temp3.add(t);
-                    temp3.remove(temp2.size()-1);
+                    temp3.remove(temp2.size() - 1);
                     i++;
                 } else {
                     temp3.add(temp3.get(i));
@@ -267,9 +285,7 @@ sandwiches =
             pq.add(a2);
             pq.add(a3);
 
-            if (a1 == 0 && a2 == 0 ||
-                    a2 == 0 && a3 == 0 ||
-                    a1 == 0 && a3 == 0) {
+            if (a1 == 0 && a2 == 0 || a2 == 0 && a3 == 0 || a1 == 0 && a3 == 0) {
                 break;
             }
         }
@@ -571,8 +587,7 @@ sandwiches =
             if (!srr[i].equals("#")) {
                 stack.push(srr[i]);
             } else {
-                if (!stack.isEmpty())
-                    stack.pop();
+                if (!stack.isEmpty()) stack.pop();
             }
         }
 
@@ -580,8 +595,7 @@ sandwiches =
             if (!trr[i].equals("#")) {
                 ttack.push(trr[i]);
             } else {
-                if (!ttack.isEmpty())
-                    ttack.pop();
+                if (!ttack.isEmpty()) ttack.pop();
             }
         }
 
@@ -646,9 +660,7 @@ sandwiches =
         for (int i : sandwiches) {
             sandwichesQueue.add(i);
         }
-        while ((!((count(students, 1) != 0 && count(sandwiches, 1) == 0) ||
-                (count(students, 0) != 0 && count(sandwiches, 0) == 0)))
-                || !sandwichesQueue.isEmpty()) {
+        while ((!((count(students, 1) != 0 && count(sandwiches, 1) == 0) || (count(students, 0) != 0 && count(sandwiches, 0) == 0))) || !sandwichesQueue.isEmpty()) {
             if (studentsQueue.peek() == sandwichesQueue.peek()) {
                 studentsQueue.poll();
                 sandwichesQueue.poll();
