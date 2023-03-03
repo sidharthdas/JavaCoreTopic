@@ -193,10 +193,17 @@ class CustomStack1 {
             l1 = l1.stream().map(x -> x + val).collect(Collectors.toList());
         } else {
 
-            List<Integer> finalL = l1;
-            l1.replaceAll(i -> finalL.indexOf(i) < k ? i + 10 : i);
+            List<Integer> temp = new ArrayList<>();
+            for (int x : l1) {
+                if (k >= 1) {
+                    temp.add(x + val);
+                    k--;
+                } else {
+                    temp.add(x);
+                }
+            }
+            l1 = temp;
         }
-
         l1.forEach(x -> {
             stack.push(x);
         });
