@@ -38,7 +38,35 @@ sandwiches =
         System.out.println(result);*/
         //System.out.println(strongPasswordCheckerII(""));
         //ushed = [1,2,3,4,5], popped = [4,5,3,2,1]
-        System.out.println(validateStackSequences(new int[]{1, 2, 3, 4, 5}, new int[]{4, 5, 3, 2, 1}));
+        //System.out.println(validateStackSequences(new int[]{1, 2, 3, 4, 5}, new int[]{4, 5, 3, 2, 1}));
+        System.out.println(clumsy(4));
+    }
+
+    public static int clumsy(int n) {
+        int sum = n;
+        int count = 1;
+        for (int i = n - 1; i <= 1; i--) {
+            if (count == 1) {
+                sum *= i;
+                count++;
+
+            } else if (count == 2) {
+                sum /= i;
+                count++;
+
+            } else if (count == 3) {
+                sum += i;
+                count++;
+
+            } else if (count == 4) {
+                sum -= i;
+                count = 1;
+
+            }
+
+        }
+
+        return sum;
     }
 
     public static boolean validateStackSequences(int[] pushed, int[] popped) {
