@@ -79,7 +79,7 @@ sandwiches =
             for (int i = 0; i < len; i++) {
                 if (list.get(i).equals("/")) {
                     String t = String.valueOf(Integer.parseInt(list.get(i - 1)) / Integer.parseInt(list.get(i + 1)));
-                    temp.remove(temp.size() - 2);
+                    temp.remove(temp.size() - 1);
                     temp.add(t);
                     i++;
                 } else {
@@ -99,7 +99,7 @@ sandwiches =
             for (int i = 0; i < len; i++) {
                 if (temp.get(i).equals("*")) {
                     String t = String.valueOf(Integer.parseInt(temp.get(i - 1)) / Integer.parseInt(temp.get(i + 1)));
-                    temp1.remove(temp1.size()-2);
+                    temp1.remove(temp1.size()-1);
                     temp1.add(t);
 
                     i++;
@@ -120,7 +120,7 @@ sandwiches =
                 if (temp1.get(i).equals("+")) {
                     String t = String.valueOf(Integer.parseInt(temp1.get(i - 1)) / Integer.parseInt(temp1.get(i + 1)));
                     temp2.add(t);
-                    temp2.remove(temp2.size()-2);
+                    temp2.remove(temp2.size()-1);
                     i++;
                 } else {
                     temp2.add(temp1.get(i));
@@ -139,10 +139,10 @@ sandwiches =
                 if (temp2.get(i).equals("-")) {
                     String t = String.valueOf(Integer.parseInt(temp2.get(i - 1)) / Integer.parseInt(temp2.get(i + 1)));
                     temp3.add(t);
-                    temp3.remove(temp2.size()-2);
+                    temp3.remove(temp2.size()-1);
                     i++;
                 } else {
-                    temp3.add(temp2.get(i));
+                    temp3.add(temp3.get(i));
                 }
 
             }
