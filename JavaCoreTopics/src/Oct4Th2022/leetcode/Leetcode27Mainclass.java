@@ -188,7 +188,6 @@ class CustomStack1 {
         while (!stack.isEmpty()) {
             l1.add(0, stack.pop());
         }
-
         if (l1.size() <= k) {
             l1 = l1.stream().map(x -> x + val).collect(Collectors.toList());
         } else {
