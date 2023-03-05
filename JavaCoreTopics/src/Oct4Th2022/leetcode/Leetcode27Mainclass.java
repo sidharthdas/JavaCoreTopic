@@ -29,6 +29,19 @@ public class Leetcode27Mainclass {
 
     }
 
+    public int countPrimes(int n) {
+        List<Integer> l = List.of(2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53);
+        int count = 0;
+        for (int i = 2; i < n; i++) {
+            if (l.contains(i)) {
+                count++;
+            } else if (i % 2 != 0 && i % 3 != 0 && i % 5 != 0 && i % 7 != 0) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     public TreeNode removeLeafNodes(TreeNode root, int target) {
         BinarySearchTreeImpl b = new BinarySearchTreeImpl();
         while (b.checkTreeNode(root, target)) {
