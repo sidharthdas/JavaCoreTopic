@@ -1,5 +1,6 @@
 package Oct4Th2022.leetcode;
 
+import java.math.BigInteger;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -38,11 +39,32 @@ sandwiches =
         System.out.println(result);*/
         //System.out.println(strongPasswordCheckerII(""));
         //ushed = [1,2,3,4,5], popped = [4,5,3,2,1]
-        System.out.println(validateStackSequences(new int[]{2,1,0}, new int[]{1,2,0}));
+        //System.out.println(validateStackSequences(new int[]{2,1,0}, new int[]{1,2,0}));
         //System.out.println(clumsy(10));
         //System.out.println(subarraySum(new int[]{1, 1, 1}, 2));
+        //System.out.println(trailingZeroes(30));
 
     }
+
+/*    public static  int trailingZeroes(int n) {
+        BigInteger mul = new BigInteger(String.valueOf(2));
+        int count = 0;
+        for(int i = 3; i <= n; i++){
+            mul = mul.multiply(new BigInteger(String.valueOf(i)));
+        }
+
+        while(mul.equals(0)){
+            long remainder = mul % 10;
+            if(remainder == 0){
+                count++;
+            }else{
+                break;
+            }
+            mul = mul/10;
+        }
+
+        return count;
+    }*/
 
     public static int subarraySum(int[] nums, int k) {
         int len = nums.length;
