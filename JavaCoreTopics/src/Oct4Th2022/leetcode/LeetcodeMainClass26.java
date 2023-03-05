@@ -43,6 +43,41 @@ sandwiches =
         //System.out.println(clumsy(10));
         //System.out.println(subarraySum(new int[]{1, 1, 1}, 2));
         //System.out.println(trailingZeroes(30));
+        System.out.println(validateStackSequences1(new int[]{1,2,3,4,5}, new int[]{4,5,3,2,1}));
+
+    }
+
+
+    public static boolean validateStackSequences1(int[] pushed, int[] popped) {
+
+        int pushLen = pushed.length;
+        int popLen = popped.length;
+        Stack<Integer> stackPop = new Stack<>();
+        for(int i = popLen - 1; i>=0; i--){
+            stackPop.push(popped[i]);
+        }
+
+        int currPoppedIndex = 0;
+
+        Stack<Integer> stack = new Stack<>();
+
+        for (int i = 0; i < pushLen; i++) {
+            stack.push(pushed[i]);
+            if(stack.peek() == stackPop.peek()){
+                stack.pop();
+                stackPop.pop();
+            }
+        }
+
+        while(!stack.isEmpty()){
+
+            if(stack.pop() != stackPop.pop()){
+                return false;
+            }
+
+        }
+
+        return stack.isEmpty() && stackPop.isEmpty();
 
     }
 
