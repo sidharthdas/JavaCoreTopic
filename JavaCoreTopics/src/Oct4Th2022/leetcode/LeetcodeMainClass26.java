@@ -61,9 +61,7 @@ sandwiches =
 
         int len = l.size();
         int max = Integer.MIN_VALUE;
-
         List<Integer> l1 = new ArrayList<>();
-
         for (int i = len - 1; i >= 0; i--) {
             if (max < l.get(i)) {
                 max = l.get(i);
