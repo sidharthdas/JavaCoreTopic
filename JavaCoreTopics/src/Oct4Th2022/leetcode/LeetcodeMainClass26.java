@@ -43,7 +43,7 @@ sandwiches =
         //System.out.println(clumsy(10));
         //System.out.println(subarraySum(new int[]{1, 1, 1}, 2));
         //System.out.println(trailingZeroes(30));
-        System.out.println(validateStackSequences1(new int[]{1,2,3,4,5}, new int[]{4,5,3,2,1}));
+        System.out.println(validateStackSequences1(new int[]{2,1,0}, new int[]{1,2,0}));
 
     }
 
@@ -61,7 +61,7 @@ sandwiches =
 
         Stack<Integer> stack = new Stack<>();
 
-        for (int i = 0; i < pushLen; i++) {
+        for(int i = pushLen - 1; i>=0; i--){
             stack.push(pushed[i]);
             if(stack.peek() == stackPop.peek()){
                 stack.pop();
