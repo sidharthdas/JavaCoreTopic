@@ -49,6 +49,53 @@ sandwiches =
 
     }
 
+    public static boolean validateStackSequences11(int[] pushed, int[] popped) {
+
+        int pushLen = pushed.length;
+        int popLen = popped.length;
+        Stack<Integer> stackPop = new Stack<>();
+        for (int i = 0; i < popLen; i++) {
+            stackPop.push(popped[i]);
+        }
+
+        int currPoppedIndex = 0;
+
+        Stack<Integer> stack = new Stack<>();
+
+        for (int i = 0; i < pushLen; i++) {
+            stack.push(pushed[i]);
+            if (stack.peek() == stackPop.peek()) {
+                stack.pop();
+                stackPop.pop();
+            }
+        }
+        while (!stack.isEmpty()) {
+
+            if (stack.pop() != stackPop.pop()) {
+                return false;
+            }
+
+        }
+        return stack.isEmpty() && stackPop.isEmpty();
+
+    }
+
+    public List<List<Integer>> permute(int[] nums) {
+        int len = nums.length;
+        List<List<Integer>> l = new ArrayList<>();
+
+        for (int i = 0; i < len; i++) {
+            for (int j = i; j < len; j++) {
+                List<Integer> list = new ArrayList<>();
+                for (int k = i; k <= j; k++) {
+                    list.add(nums[k]);
+                }
+                l.add(list);
+            }
+        }
+        return l.stream().filter(x -> x.size() == len).toList();
+    }
+
     public boolean isIsomorphic1(String s, String t) {
         Map<String, String> map = new HashMap<>();
 
@@ -63,10 +110,10 @@ sandwiches =
                 if (!map.get(rr1[i]).equals(rr2[i])) {
                     return false;
                 }
-            }else{
-                if(map.values().contains(rr2[i])){
+            } else {
+                if (map.values().contains(rr2[i])) {
                     return false;
-                }else{
+                } else {
                     map.put(rr1[i], rr2[i]);
                 }
             }
