@@ -48,6 +48,77 @@ sandwiches =
 
     }
 
+    public boolean isIsomorphic(String s, String t) {
+        if (s.length() != t.length()) {
+            return false;
+        }
+        Map<String, Integer> map1 = convertToMap(s);
+        Map<String, Integer> map2 = convertToMap(s);
+        List<String> l1 = getL(s);
+        List<String> l2 = getL(t);
+
+        String s1 = r(l1);
+        String s2 = r(l2);
+
+        return s1.equals(s2) && compareSequence(map1, map2);
+
+    }
+
+    public boolean compareSequence(Map<String, Integer> map1, Map<String, Integer> map2){
+        if(map1.size() != map2.size()){
+            return false;
+        }
+
+        List<Integer> l1 = map1.values().stream().toList();
+        List<Integer> l2 = map2.values().stream().toList();
+        int len = l1.size();
+        for(int i = 0; i < len; i++){
+            if(l1.get(i) != l2.get(i)){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private Map<String, Integer> convertToMap(String s) {
+        Map<String, Integer> map = new LinkedHashMap<>();
+        String srr[] = s.split("");
+        for(String s1 : srr){
+            map.put(s1, map.getOrDefault(s1, 0)+ 1);
+        }
+
+        return map;
+    }
+
+    private String r(List<String> l) {
+        String s3 = "";
+        for (String s : l) {
+            String[] srr = s.split("-");
+            s3 += srr[1];
+        }
+        return s3;
+    }
+
+    private List<String> getL(String s1) {
+        String[] srr = s1.split("");
+        String c = srr[0];
+        int count = 1;
+        int len = s1.length();
+        List<String> l = new ArrayList<>();
+        for (int i = 1; i < len; i++) {
+            if (c.equals(srr[i])) {
+                count += 1;
+            } else {
+                l.add(c + "-" + count);
+                c = srr[i];
+                count = 1;
+            }
+        }
+        l.add(c + "-" + count);
+        return l;
+    }
+
     public static int pivotIndex(int[] nums) {
         int len = nums.length;
         int sumLeft = 0;
