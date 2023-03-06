@@ -60,7 +60,7 @@ sandwiches =
         for (int i = 0; i < len; i++) {
             leftSum = 0;
             rightSum = 0;
-            for (int j = 0; i < i; j++) {
+            for (int j = 0; j < i; j++) {
                 leftSum += nums[j];
             }
 
