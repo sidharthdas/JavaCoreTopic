@@ -50,6 +50,44 @@ sandwiches =
 
     }
 
+    public ListNode removeNodes(ListNode head) {
+
+        List<Integer> l = new ArrayList<>();
+
+        while (head != null) {
+            l.add(head.val);
+            head = head.next;
+        }
+
+        int len = l.size();
+        int max = Integer.MIN_VALUE;
+
+        List<Integer> l1 = new ArrayList<>();
+
+        for (int i = len - 1; i >= 0; i--) {
+            if (max < l.get(i)) {
+                max = l.get(i);
+                l1.add(0, max);
+            } else {
+                l.remove(l.get(i));
+            }
+        }
+
+        ListNode node = new ListNode();
+        node.val = l1.get(0);
+        ListNode currNode = node;
+
+        int newLen = l1.size();
+
+        for (int i = 1; i < newLen; i++) {
+            ListNode n = new ListNode();
+            n.val = l1.get(i);
+            currNode.next = n;
+            currNode = n;
+        }
+        return node;
+    }
+
     public static int[] leftRigthDifference(int[] nums) {
         int len = nums.length;
         int leftSum = 0;
