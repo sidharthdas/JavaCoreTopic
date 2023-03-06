@@ -49,6 +49,32 @@ sandwiches =
 
     }
 
+    public boolean isIsomorphic1(String s, String t) {
+        Map<String, String> map = new HashMap<>();
+
+        if (s.length() != t.length()) {
+            return false;
+        }
+        String[] rr1 = s.split("");
+        String[] rr2 = t.split("");
+        int len = s.length();
+        for (int i = 0; i < len; i++) {
+            if (map.containsKey(rr1[i])) {
+                if (!map.get(rr1[i]).equals(rr2[i])) {
+                    return false;
+                }
+            }else{
+                if(map.values().contains(rr2[i])){
+                    return false;
+                }else{
+                    map.put(rr1[i], rr2[i]);
+                }
+            }
+        }
+
+        return true;
+    }
+
     public static boolean isIsomorphic(String s, String t) {
         if (s.length() != t.length()) {
             return false;
@@ -65,16 +91,16 @@ sandwiches =
 
     }
 
-    public static boolean compareSequence(Map<String, Integer> map1, Map<String, Integer> map2){
-        if(map1.size() != map2.size()){
+    public static boolean compareSequence(Map<String, Integer> map1, Map<String, Integer> map2) {
+        if (map1.size() != map2.size()) {
             return false;
         }
 
         List<Integer> l1 = map1.values().stream().toList();
         List<Integer> l2 = map2.values().stream().toList();
         int len = l1.size();
-        for(int i = 0; i < len; i++){
-            if(l1.get(i) != l2.get(i)){
+        for (int i = 0; i < len; i++) {
+            if (l1.get(i) != l2.get(i)) {
                 return false;
             }
         }
@@ -85,8 +111,8 @@ sandwiches =
     private static Map<String, Integer> convertToMap(String s) {
         Map<String, Integer> map = new LinkedHashMap<>();
         String srr[] = s.split("");
-        for(String s1 : srr){
-            map.put(s1, map.getOrDefault(s1, 0)+ 1);
+        for (String s1 : srr) {
+            map.put(s1, map.getOrDefault(s1, 0) + 1);
         }
 
         return map;
@@ -137,7 +163,7 @@ sandwiches =
                 sumRight += nums[k];
             }
 
-            if(sumLeft == sumRight){
+            if (sumLeft == sumRight) {
                 return i;
             }
         }
