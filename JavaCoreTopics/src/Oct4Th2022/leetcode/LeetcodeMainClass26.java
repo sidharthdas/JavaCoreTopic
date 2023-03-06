@@ -43,8 +43,34 @@ sandwiches =
         //System.out.println(clumsy(10));
         //System.out.println(subarraySum(new int[]{1, 1, 1}, 2));
         //System.out.println(trailingZeroes(30));
-        System.out.println(validateStackSequences1(new int[]{2, 1, 0}, new int[]{1, 2, 0}));
+        //System.out.println(validateStackSequences1(new int[]{2, 1, 0}, new int[]{1, 2, 0}));
+        System.out.println(pivotIndex(new int[]{1,7,3,6,5,6}));
 
+    }
+
+    public static int pivotIndex(int[] nums) {
+        int len = nums.length;
+        int sumLeft = 0;
+        int sumRight = 0;
+
+        for (int i = 0; i < len; i++) {
+            sumLeft = 0;
+            sumRight = 0;
+            for (int j = 0; j < i; j++) {
+                sumLeft += nums[j];
+
+            }
+
+            for (int k = i + 1; k < len; k++) {
+                sumRight += nums[k];
+            }
+
+            if(sumLeft == sumRight){
+                return i;
+            }
+        }
+
+        return -1;
     }
 
 
