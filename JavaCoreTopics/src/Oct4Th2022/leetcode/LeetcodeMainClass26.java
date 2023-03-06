@@ -45,8 +45,32 @@ sandwiches =
         //System.out.println(trailingZeroes(30));
         //System.out.println(validateStackSequences1(new int[]{2, 1, 0}, new int[]{1, 2, 0}));
         //System.out.println(pivotIndex(new int[]{1,7,3,6,5,6}));
-        System.out.println(isIsomorphic("badc", "baba"));
+        //System.out.println(isIsomorphic("badc", "baba"));
+        System.out.println(leftRigthDifference(new int[]{10, 4, 8, 3}));
 
+    }
+
+    public static int[] leftRigthDifference(int[] nums) {
+        int len = nums.length;
+        int leftSum = 0;
+        int rightSum = 0;
+
+        int[] finalArr = new int[len];
+//|0 - 15|
+        for (int i = 0; i < len; i++) {
+            leftSum = 0;
+            rightSum = 0;
+            for (int j = 0; i < i; j++) {
+                leftSum += nums[j];
+            }
+
+            for (int j = i + 1; j < len; j++) {
+                rightSum += nums[j];
+            }
+
+            finalArr[i] = Math.abs(rightSum - leftSum);
+        }
+        return finalArr;
     }
 
     public static boolean validateStackSequences11(int[] pushed, int[] popped) {
