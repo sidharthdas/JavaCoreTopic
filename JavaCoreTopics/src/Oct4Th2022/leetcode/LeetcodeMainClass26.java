@@ -44,16 +44,17 @@ sandwiches =
         //System.out.println(subarraySum(new int[]{1, 1, 1}, 2));
         //System.out.println(trailingZeroes(30));
         //System.out.println(validateStackSequences1(new int[]{2, 1, 0}, new int[]{1, 2, 0}));
-        System.out.println(pivotIndex(new int[]{1,7,3,6,5,6}));
+        //System.out.println(pivotIndex(new int[]{1,7,3,6,5,6}));
+        System.out.println(isIsomorphic("badc", "baba"));
 
     }
 
-    public boolean isIsomorphic(String s, String t) {
+    public static boolean isIsomorphic(String s, String t) {
         if (s.length() != t.length()) {
             return false;
         }
         Map<String, Integer> map1 = convertToMap(s);
-        Map<String, Integer> map2 = convertToMap(s);
+        Map<String, Integer> map2 = convertToMap(t);
         List<String> l1 = getL(s);
         List<String> l2 = getL(t);
 
@@ -64,7 +65,7 @@ sandwiches =
 
     }
 
-    public boolean compareSequence(Map<String, Integer> map1, Map<String, Integer> map2){
+    public static boolean compareSequence(Map<String, Integer> map1, Map<String, Integer> map2){
         if(map1.size() != map2.size()){
             return false;
         }
@@ -81,7 +82,7 @@ sandwiches =
         return true;
     }
 
-    private Map<String, Integer> convertToMap(String s) {
+    private static Map<String, Integer> convertToMap(String s) {
         Map<String, Integer> map = new LinkedHashMap<>();
         String srr[] = s.split("");
         for(String s1 : srr){
@@ -91,7 +92,7 @@ sandwiches =
         return map;
     }
 
-    private String r(List<String> l) {
+    private static String r(List<String> l) {
         String s3 = "";
         for (String s : l) {
             String[] srr = s.split("-");
@@ -100,7 +101,7 @@ sandwiches =
         return s3;
     }
 
-    private List<String> getL(String s1) {
+    private static List<String> getL(String s1) {
         String[] srr = s1.split("");
         String c = srr[0];
         int count = 1;
