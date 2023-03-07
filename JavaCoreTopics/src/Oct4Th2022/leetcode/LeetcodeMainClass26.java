@@ -50,6 +50,43 @@ sandwiches =
 
     }
 
+    public void flatten(TreeNode root) {
+
+
+    }
+
+    public ListNode mergeNodes(ListNode head) {
+
+        List<Integer> l = new ArrayList<>();
+        int sum = 0;
+        while (head != null) {
+            if (head.val == 0 && sum != 0) {
+                l.add(sum);
+                sum = 0;
+            } else {
+                sum += head.val;
+            }
+
+            head = head.next;
+        }
+
+        System.out.println(l);
+
+        ListNode node = new ListNode();
+        node.val = l.get(0);
+        ListNode currNode = node;
+
+        int newLen = l.size();
+
+        for (int i = 1; i < newLen; i++) {
+            ListNode n = new ListNode();
+            n.val = l.get(i);
+            currNode.next = n;
+            currNode = n;
+        }
+        return node;
+    }
+
     public ListNode removeNodes(ListNode head) {
 
         List<Integer> l = new ArrayList<>();
@@ -1006,6 +1043,11 @@ class StockSpanner {
             return count;
 
         }
+
+    }
+
+    public void flatten(TreeNode root) {
+
 
     }
 }
