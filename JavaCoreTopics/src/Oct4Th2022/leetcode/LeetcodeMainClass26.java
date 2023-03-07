@@ -1046,8 +1046,5 @@ class StockSpanner {
 
     }
 
-    public void flatten(TreeNode root) {
 
-
-    }
 }
