@@ -12,9 +12,29 @@ import java.util.stream.Collectors;
 public class LeetcodeMainClass27 {
 
     public static void main(String[] args) {
-        //System.out.println(isToeplitzMatrix(new int[][]{new int[]{1, 2, 3, 4}, new int[]{5, 1, 2, 3}, new int[]{9, 5, 1, 2}}));
-        System.out.println(shortestCompletingWord("1s3 PSt", new String[]{"step","steps","stripe","stepple"}));
+
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public static String shortestCompletingWord(String licensePlate, String[] words) {
 
@@ -27,8 +47,8 @@ public class LeetcodeMainClass27 {
 
         StringBuffer sb = new StringBuffer();
 
-        for(String s : arr){
-            if(cap.contains(s) || small.contains(s)){
+        for (String s : arr) {
+            if (cap.contains(s) || small.contains(s)) {
                 sb.append(s);
             }
         }
@@ -37,20 +57,20 @@ public class LeetcodeMainClass27 {
 
         List<String> l = new ArrayList<>();
 
-        for(String s : words){
+        for (String s : words) {
             String temp = s;
             String[] lic = license.split("");
             boolean flag = true;
-            for(String s1 : lic){
-                if(temp.contains(s1)){
+            for (String s1 : lic) {
+                if (temp.contains(s1)) {
                     temp = temp.replaceFirst(s1, "#");
-                }else{
+                } else {
                     flag = false;
                     break;
                 }
             }
 
-            if(flag){
+            if (flag) {
                 l.add(s);
             }
         }
@@ -61,14 +81,14 @@ public class LeetcodeMainClass27 {
 
         l = l.stream().filter(x -> x.length() == len1).toList();
 
-        if(l.size() == 1){
+        if (l.size() == 1) {
             return l.get(0);
         }
 
 
         Map<String, Integer> map = new HashMap<>();
 
-        for(String s : l){
+        for (String s : l) {
             map.put(s, wordList.indexOf(s));
         }
 
@@ -86,7 +106,7 @@ public class LeetcodeMainClass27 {
 
         for (int i = 0; i < len; i++) {
             for (int j = 0; j < len; j++) {
-                if(Math.abs(i-j) <= k && nums[j] == key){
+                if (Math.abs(i - j) <= k && nums[j] == key) {
                     l.add(i);
                 }
             }
