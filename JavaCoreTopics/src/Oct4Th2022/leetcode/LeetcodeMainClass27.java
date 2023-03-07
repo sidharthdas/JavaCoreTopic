@@ -2,8 +2,7 @@ package Oct4Th2022.leetcode;
 
 import com.sun.source.tree.Tree;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -14,6 +13,66 @@ public class LeetcodeMainClass27 {
 
     public static void main(String[] args) {
         System.out.println(isToeplitzMatrix(new int[][]{new int[]{1, 2, 3, 4}, new int[]{5, 1, 2, 3}, new int[]{9, 5, 1, 2}}));
+    }
+
+    public String shortestCompletingWord(String licensePlate, String[] words) {
+
+        List<String> wordList = Arrays.stream(words).toList();
+
+        String cap = "QWERTYUIOPASDFGHJKLZXCVBNM";
+        String small = "qwertyuiopasdfghjklzxcvbnm";
+
+        String[] arr = licensePlate.split("");
+
+        StringBuffer sb = new StringBuffer();
+
+        for(String s : arr){
+            if(cap.contains(s) || small.contains(s)){
+                sb.append(s);
+            }
+        }
+
+        String license = sb.toString().toLowerCase();
+
+        List<String> l = new ArrayList<>();
+
+        for(String s : words){
+            String temp = s;
+            String[] lic = license.split("");
+            boolean flag = true;
+            for(String s1 : lic){
+                if(temp.contains(s1)){
+                    temp = temp.replace(s1, "#");
+                }else{
+                    flag = false;
+                    break;
+                }
+            }
+
+            if(flag){
+                l.add(s);
+            }
+        }
+
+        Collections.sort(l, (a1, a2) -> a1.length() - a2.length());
+
+        int len1 = l.get(0).length();
+
+        l = l.stream().filter(x -> x.length() == len1).toList();
+
+        if(l.size() == 1){
+            return l.get(0);
+        }
+
+
+        Map<String, Integer> map = new HashMap<>();
+
+        for(String s : l){
+            map.put(s, wordList.indexOf(s));
+        }
+
+        return map.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue()).findFirst().get().getKey();
+
     }
 
 
