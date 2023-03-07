@@ -12,10 +12,11 @@ import java.util.stream.Collectors;
 public class LeetcodeMainClass27 {
 
     public static void main(String[] args) {
-        System.out.println(isToeplitzMatrix(new int[][]{new int[]{1, 2, 3, 4}, new int[]{5, 1, 2, 3}, new int[]{9, 5, 1, 2}}));
+        //System.out.println(isToeplitzMatrix(new int[][]{new int[]{1, 2, 3, 4}, new int[]{5, 1, 2, 3}, new int[]{9, 5, 1, 2}}));
+        System.out.println(shortestCompletingWord("1s3 PSt", new String[]{"step","steps","stripe","stepple"}));
     }
 
-    public String shortestCompletingWord(String licensePlate, String[] words) {
+    public static String shortestCompletingWord(String licensePlate, String[] words) {
 
         List<String> wordList = Arrays.stream(words).toList();
 
@@ -42,7 +43,7 @@ public class LeetcodeMainClass27 {
             boolean flag = true;
             for(String s1 : lic){
                 if(temp.contains(s1)){
-                    temp = temp.replace(s1, "#");
+                    temp = temp.replaceFirst(s1, "#");
                 }else{
                     flag = false;
                     break;
