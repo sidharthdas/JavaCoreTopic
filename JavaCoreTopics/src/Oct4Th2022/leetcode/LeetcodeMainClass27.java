@@ -4,6 +4,7 @@ import com.sun.source.tree.Tree;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Sidharth Das
@@ -12,7 +13,53 @@ import java.util.List;
 public class LeetcodeMainClass27 {
 
     public static void main(String[] args) {
-        System.out.println(isToeplitzMatrix(new int[][]{new int[]{1,2,3,4},new int[]{5,1,2,3},new int[]{9,5,1,2}}));
+        System.out.println(isToeplitzMatrix(new int[][]{new int[]{1, 2, 3, 4}, new int[]{5, 1, 2, 3}, new int[]{9, 5, 1, 2}}));
+    }
+
+
+    //You are given a 0-indexed integer array nums and two integers key and k.
+    // A k-distant index is an index i of nums for which there exists at least one index j such that |i - j| <= k and nums[j] == key.
+    public List<Integer> findKDistantIndices(int[] nums, int key, int k) {
+
+        int len = nums.length;
+        List<Integer> l = new ArrayList<>();
+
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j < len; j++) {
+                if(Math.abs(i-j) <= k && nums[j] == key){
+                    l.add(i);
+                }
+            }
+        }
+
+        return l.stream().sorted().collect(Collectors.toSet()).stream().toList();
+    }
+
+    public static int findMiddleIndex(int[] nums) {
+        int left = 0;
+        int right = 0;
+
+        int len = nums.length;
+
+        for (int i = 0; i < len; i++) {
+
+            left = 0;
+            right = 0;
+
+            for (int j = 0; i < i; j++) {
+                left += nums[j];
+            }
+
+            for (int j = i + 1; i < len; j++) {
+                right += nums[j];
+            }
+
+            if (left == right) {
+                return i;
+            }
+        }
+
+        return -1;
     }
 
     public static boolean isToeplitzMatrix(int[][] matrix) {
@@ -22,7 +69,7 @@ public class LeetcodeMainClass27 {
         for (int i = 1; i < row; i++) {
 
             for (int j = 1; j < col; j++) {
-                if(matrix[i][j] != matrix[i-1][j-1]){
+                if (matrix[i][j] != matrix[i - 1][j - 1]) {
                     return false;
                 }
             }

@@ -123,6 +123,8 @@ sandwiches =
         return node;
     }
 
+
+
     public static int[] leftRigthDifference(int[] nums) {
         int len = nums.length;
         int leftSum = 0;
