@@ -13,7 +13,6 @@ public class LeetcodeMainClass27 {
 
     public static void main(String[] args) {
 
-        //System.out.println(findFirstNonDuplicate(new char[]{'a' , 'b', 'c' , 'a', 'c', 'e' ,'b', 'd' }));
     }
 
         public static String shortestCompletingWord (String licensePlate, String[]words){
