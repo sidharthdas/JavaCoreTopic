@@ -18,10 +18,8 @@ public class LeetcodeMainClass27 {
     public long findTheArrayConcVal(int[] nums) {
 
         int len = nums.length;
-
         String concat = "";
         int sum = 0;
-
         int currLastIndex = len - 1;
         for (int i = 0; i < len / 2; i++) {
             concat += String.valueOf(nums[i]) + String.valueOf(nums[currLastIndex]);
