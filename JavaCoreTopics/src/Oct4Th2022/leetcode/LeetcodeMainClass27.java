@@ -27,11 +27,9 @@ public class LeetcodeMainClass27 {
             concat = "";
             currLastIndex--;
         }
-
         if (len % 2 != 0) {
             sum += nums[len / 2];
         }
-
         return sum;
 
     }
