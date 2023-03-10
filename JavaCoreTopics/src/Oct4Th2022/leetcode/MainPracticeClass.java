@@ -38,7 +38,6 @@ public class MainPracticeClass {
                     start --;
                     time--;
                 }
-
             }
         }
         return start;
