@@ -15,6 +15,47 @@ public class MainPracticeClass {
         System.out.println(passThePillow(4, 5));
     }
 
+    public int convertTime(String current, String correct) {
+
+        String[] currentTime = current.split(":");
+        int currentTimeInMins = 0;
+        currentTimeInMins = Integer.parseInt(currentTime[0]) * 60 + Integer.parseInt(currentTime[1]);
+        String[] correctTime = current.split(":");
+        int correctTimeInMins = Integer.parseInt(correctTime[0]) * 60 + Integer.parseInt(correctTime[1]);
+
+        int count = 0;
+
+        while (currentTimeInMins != correctTimeInMins) {
+            if (currentTimeInMins + 60 <= correctTimeInMins) {
+                count++;
+                currentTimeInMins += 60;
+                if (currentTimeInMins == correctTimeInMins) {
+                    return count;
+                }
+            } else if (currentTimeInMins + 15 <= correctTimeInMins) {
+                count++;
+                currentTimeInMins += 15;
+                if (currentTimeInMins == correctTimeInMins) {
+                    return count;
+                }
+            } else if (currentTimeInMins + 5 <= correctTimeInMins) {
+                count++;
+                currentTimeInMins += 5;
+                if (currentTimeInMins == correctTimeInMins) {
+                    return count;
+                }
+            } else if (currentTimeInMins + 1 <= correctTimeInMins) {
+                count++;
+                currentTimeInMins += 1;
+                if (currentTimeInMins == correctTimeInMins) {
+                    return count;
+                }
+            }
+        }
+
+        return count;
+    }
+
     public List<Integer> findKDistantIndices(int[] nums, int key, int k) {
 
         int len = nums.length;
@@ -22,7 +63,7 @@ public class MainPracticeClass {
 
         for (int i = 0; i < len; i++) {
             for (int j = 0; j < len; j++) {
-                if(Math.abs(i-j) <= k && nums[j] == key){
+                if (Math.abs(i - j) <= k && nums[j] == key) {
                     l.add(i);
                 }
             }
