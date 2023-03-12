@@ -12,15 +12,16 @@ import java.util.stream.Collectors;
 public class MainPracticeClass {
 
     public static void main(String[] args) {
-        System.out.println(passThePillow(4, 5));
+        //System.out.println(passThePillow(4, 5));
+        System.out.println(convertTime("02:30", "04:35"));
     }
 
-    public int convertTime(String current, String correct) {
+    public static int convertTime(String current, String correct) {
 
         String[] currentTime = current.split(":");
         int currentTimeInMins = 0;
         currentTimeInMins = Integer.parseInt(currentTime[0]) * 60 + Integer.parseInt(currentTime[1]);
-        String[] correctTime = current.split(":");
+        String[] correctTime = correct.split(":");
         int correctTimeInMins = Integer.parseInt(correctTime[0]) * 60 + Integer.parseInt(correctTime[1]);
 
         int count = 0;
