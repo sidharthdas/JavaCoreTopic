@@ -1,5 +1,6 @@
 package Oct4Th2022.leetcode;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,6 +14,23 @@ public class MainPracticeClass {
     public static void main(String[] args) {
         System.out.println(passThePillow(4, 5));
     }
+
+    public List<Integer> findKDistantIndices(int[] nums, int key, int k) {
+
+        int len = nums.length;
+        List<Integer> l = new ArrayList<>();
+
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j < len; j++) {
+                if(Math.abs(i-j) <= k && nums[j] == key){
+                    l.add(i);
+                }
+            }
+        }
+
+        return l.stream().sorted().collect(Collectors.toSet()).stream().sorted().toList();
+    }
+
 
     public static int passThePillow(int n, int time) {
         int start = 1;
