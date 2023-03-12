@@ -43,7 +43,6 @@ public class MainPracticeClass {
     }
 
     public int deleteAndEarn(int[] nums) {
-
         List<Integer> l = Arrays.stream(nums).boxed().collect(Collectors.toList());
         int earn = 0;
         while (l.size() != 0) {
