@@ -28,14 +28,13 @@ public class MainPracticeClass {
                     start++;
                     time--;
                 }
-
             } else {
-                if(start == 1){
+                if (start == 1) {
                     direction = 0;
-                    start ++;
+                    start++;
                     time--;
                 } else {
-                    start --;
+                    start--;
                     time--;
                 }
             }
