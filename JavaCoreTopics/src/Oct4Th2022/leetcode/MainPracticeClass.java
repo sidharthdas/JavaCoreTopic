@@ -23,7 +23,6 @@ public class MainPracticeClass {
         currentTimeInMins = Integer.parseInt(currentTime[0]) * 60 + Integer.parseInt(currentTime[1]);
         String[] correctTime = correct.split(":");
         int correctTimeInMins = Integer.parseInt(correctTime[0]) * 60 + Integer.parseInt(correctTime[1]);
-
         int count = 0;
 
         while (currentTimeInMins != correctTimeInMins) {
