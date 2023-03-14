@@ -16,13 +16,26 @@ public class MainPracticeClass {
         System.out.println(convertTime("02:30", "04:35"));
     }
 
+    public int vowelStrings(String[] words, int left, int right) {
+
+        int count = 0;
+        List<String> vowels = List.of("a", "e", "i", "o", "u");
+        for (int i = left; i <= right; i++) {
+            int len = words[i].length();
+            if (vowels.contains(words[i].charAt(0) + "") && vowels.contains(words[i].charAt(len - 1) + "")) {
+                count ++;
+            }
+        }
+        return count;
+    }
+
     public static int convertTime(String current, String correct) {
 
         String[] currentTime = current.split(":");
         int currentTimeInMins = 0;
         currentTimeInMins = Integer.parseInt(currentTime[0]) * 60 + Integer.parseInt(currentTime[1]);
         String[] correctTime = correct.split(":");
-        
+
         int correctTimeInMins = Integer.parseInt(correctTime[0]) * 60 + Integer.parseInt(correctTime[1]);
 
         int count = 0;
