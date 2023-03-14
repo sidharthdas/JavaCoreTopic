@@ -3,6 +3,7 @@ package Oct4Th2022.leetcode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Stack;
 import java.util.stream.Collectors;
 
 /**
@@ -16,6 +17,79 @@ public class MainPracticeClass {
         System.out.println(convertTime("02:30", "04:35"));
     }
 
+    public int numRookCaptures(char[][] board) {
+        int len = 8;
+        int[] postionOfRock = null;
+
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (board[i][j] == 'R') {
+                    postionOfRock = new int[]{i, j};
+                    break;
+                }
+            }
+        }
+
+        int count = 0;
+
+        for (int i = postionOfRock[1] + 1; i < 8; i++) {
+            if (board[postionOfRock[0]][i] == '.') {
+                continue;
+            } else {
+                if (board[postionOfRock[0]][i] == 'B') {
+                    break;
+                } else if(board[postionOfRock[0]][i] == 'p') {
+                    count++;
+                    break;
+                }
+            }
+        }
+
+        for (int i = postionOfRock[1] - 1; i >= 0 ; i--) {
+            if (board[postionOfRock[0]][i] == '.') {
+                continue;
+            } else {
+                if (board[postionOfRock[0]][i] == 'B') {
+                    break;
+                } else if(board[postionOfRock[0]][i] == 'p') {
+                    count++;
+                    break;
+                }
+            }
+        }
+
+        for (int i = postionOfRock[0] + 1; i < 8; i++) {
+            if (board[i][postionOfRock[1]] == '.') {
+                continue;
+            } else {
+                if (board[i][postionOfRock[1]] == 'B') {
+                    break;
+                } else if(board[i][postionOfRock[1]] == 'p') {
+                    count++;
+                    break;
+                }
+            }
+        }
+
+        for (int i = postionOfRock[0] - 1; i >= 0; i--) {
+            if (board[i][postionOfRock[1]] == '.') {
+                continue;
+            } else {
+                if (board[i][postionOfRock[1]] == 'B') {
+                    break;
+                } else if(board[i][postionOfRock[1]] == 'p') {
+                    count++;
+                    break;
+                }
+            }
+        }
+
+
+        return count;
+
+
+    }
+
     public int vowelStrings(String[] words, int left, int right) {
 
         int count = 0;
@@ -23,7 +97,7 @@ public class MainPracticeClass {
         for (int i = left; i <= right; i++) {
             int len = words[i].length();
             if (vowels.contains(words[i].charAt(0) + "") && vowels.contains(words[i].charAt(len - 1) + "")) {
-                count ++;
+                count++;
             }
         }
         return count;
@@ -127,5 +201,40 @@ public class MainPracticeClass {
         }
 
         return earn;
+    }
+}
+
+class MyQueue {
+
+    Stack<Integer> stack1;
+    Stack<Integer> stack2;
+
+    public MyQueue() {
+        stack1 = new Stack<>();
+        stack2 = new Stack<>();
+
+    }
+
+    public void push(int x) {
+        stack1.push(x);
+
+    }
+
+    public int pop() {
+
+        while (!stack1.isEmpty()) {
+            stack2.push(stack1.pop());
+        }
+
+        return stack2.pop();
+
+    }
+
+    public int peek() {
+        return stack2.peek();
+    }
+
+    public boolean empty() {
+        return stack2.isEmpty();
     }
 }
