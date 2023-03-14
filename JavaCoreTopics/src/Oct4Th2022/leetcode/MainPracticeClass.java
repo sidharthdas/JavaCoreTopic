@@ -17,6 +17,97 @@ public class MainPracticeClass {
         System.out.println(convertTime("02:30", "04:35"));
     }
 
+    public List<Integer> getRow(int rowIndex) {
+        if (rowIndex == 0) {
+            return new ArrayList<>();
+        }
+        if (rowIndex == 1) {
+            return List.of(1);
+        }
+        if (rowIndex == 2) {
+            return List.of(1, 1);
+        }
+
+        List<List<Integer>> l = new ArrayList<>();
+        l.add(List.of(1));
+        l.add(List.of(1, 1));
+
+        rowIndex = rowIndex - 2;
+        int currIndex = 1;
+
+        while (rowIndex != 0) {
+            List<Integer> temp = l.get(currIndex);
+            List<Integer> listToBeAdded = new ArrayList<>();
+            listToBeAdded.add(1);
+            int len = temp.size();
+
+            for (int i = 0; i < len - 1; i++) {
+                listToBeAdded.add(temp.get(i) + temp.get(i + 1));
+            }
+
+            listToBeAdded.add(1);
+            l.add(listToBeAdded);
+            rowIndex--;
+        }
+
+        int size = l.size();
+
+        return l.get(size - 1);
+    }
+
+    public List<List<Integer>> generate(int numRows) {
+        if (numRows == 0) {
+            return new ArrayList<>();
+        }
+        if (numRows == 1) {
+            return List.of(List.of(1));
+        }
+        if (numRows == 2) {
+            return List.of(List.of(1), List.of(1, 1));
+        }
+
+        List<List<Integer>> l = new ArrayList<>();
+        l.add(List.of(1));
+        l.add(List.of(1, 1));
+
+        numRows = numRows - 2;
+        int currIndex = 1;
+
+        while (numRows != 0) {
+            List<Integer> temp = l.get(currIndex);
+            List<Integer> listToBeAdded = new ArrayList<>();
+            listToBeAdded.add(1);
+            int len = temp.size();
+
+            for (int i = 0; i < len - 1; i++) {
+                listToBeAdded.add(temp.get(i) + temp.get(i + 1));
+            }
+
+            listToBeAdded.add(1);
+            l.add(listToBeAdded);
+            numRows--;
+        }
+
+        return l;
+    }
+
+    public boolean checkIfCanBreak(String s1, String s2) {
+        String[] s1Arr = s1.split("");
+        String[] s2Arr = s2.split("");
+
+        Arrays.sort(s1Arr);
+        Arrays.sort(s2Arr);
+
+        int len = s1Arr.length;
+
+        for (int i = 0; i < len; i++) {
+
+        }
+
+        return true;
+
+    }
+
     public int numRookCaptures(char[][] board) {
         int len = 8;
         int[] postionOfRock = null;
@@ -38,20 +129,20 @@ public class MainPracticeClass {
             } else {
                 if (board[postionOfRock[0]][i] == 'B') {
                     break;
-                } else if(board[postionOfRock[0]][i] == 'p') {
+                } else if (board[postionOfRock[0]][i] == 'p') {
                     count++;
                     break;
                 }
             }
         }
 
-        for (int i = postionOfRock[1] - 1; i >= 0 ; i--) {
+        for (int i = postionOfRock[1] - 1; i >= 0; i--) {
             if (board[postionOfRock[0]][i] == '.') {
                 continue;
             } else {
                 if (board[postionOfRock[0]][i] == 'B') {
                     break;
-                } else if(board[postionOfRock[0]][i] == 'p') {
+                } else if (board[postionOfRock[0]][i] == 'p') {
                     count++;
                     break;
                 }
@@ -64,7 +155,7 @@ public class MainPracticeClass {
             } else {
                 if (board[i][postionOfRock[1]] == 'B') {
                     break;
-                } else if(board[i][postionOfRock[1]] == 'p') {
+                } else if (board[i][postionOfRock[1]] == 'p') {
                     count++;
                     break;
                 }
@@ -77,7 +168,7 @@ public class MainPracticeClass {
             } else {
                 if (board[i][postionOfRock[1]] == 'B') {
                     break;
-                } else if(board[i][postionOfRock[1]] == 'p') {
+                } else if (board[i][postionOfRock[1]] == 'p') {
                     count++;
                     break;
                 }
