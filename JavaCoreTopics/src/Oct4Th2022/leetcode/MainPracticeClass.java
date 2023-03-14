@@ -28,6 +28,7 @@ public class MainPracticeClass {
             return List.of(1, 1);
         }
 
+        rowIndex += 1;
         List<List<Integer>> l = new ArrayList<>();
         l.add(List.of(1));
         l.add(List.of(1, 1));
@@ -49,7 +50,6 @@ public class MainPracticeClass {
             l.add(listToBeAdded);
             rowIndex--;
         }
-
         int size = l.size();
 
         return l.get(size - 1);
