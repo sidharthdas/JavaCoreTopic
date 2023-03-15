@@ -1,9 +1,6 @@
 package Oct4Th2022.leetcode;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -14,10 +11,74 @@ public class MainPracticeClass {
 
     public static void main(String[] args) {
         //System.out.println(passThePillow(4, 5));
-        System.out.println(convertTime("02:30", "04:35"));
+        //System.out.println(convertTime("02:30", "04:35"));
+        System.out.println(getRow(3));
     }
 
-    public List<Integer> getRow(int rowIndex) {
+    public int countDaysTogether(String arriveAlice, String leaveAlice, String arriveBob, String leaveBob) {
+        Map<Integer, Integer> map = Map.ofEntries(
+                //31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
+                Map.entry(1, 31),
+                Map.entry(2, 28),
+                Map.entry(3, 31),
+                Map.entry(4, 30),
+                Map.entry(5, 31),
+                Map.entry(6, 30),
+                Map.entry(7, 31),
+                Map.entry(8, 31),
+                Map.entry(9, 30),
+                Map.entry(10, 31),
+                Map.entry(11, 30),
+                Map.entry(12, 31)
+        );
+        String[] arriveAliceArr = arriveAlice.split("");
+        int aliceMonthArrival = Integer.parseInt(arriveAliceArr[0]);
+        int aliceDayArrival = Integer.parseInt(arriveAliceArr[1]);
+
+        String[] leaveAliceArr = leaveAlice.split("");
+        int aliceMonthLeave = Integer.parseInt(leaveAliceArr[0]);
+        int aliceDayLeave = Integer.parseInt(leaveAliceArr[1]);
+
+        String[] arriveBobArr = arriveBob.split("");
+        int bobMonthArrival = Integer.parseInt(arriveBobArr[0]);
+        int bobDayArrival = Integer.parseInt(arriveBobArr[1]);
+
+        String[] leaveBobArr = leaveBob.split("");
+        int bobMonthLeave = Integer.parseInt(leaveBobArr[0]);
+        int bobDayLeave = Integer.parseInt(leaveBobArr[1]);
+
+        return 0;
+
+    }
+
+    public int[][] mergeArrays(int[][] nums1, int[][] nums2) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int[] i : nums1) {
+            map.put(i[0], i[1]);
+        }
+
+        for (int[] i : nums2) {
+            map.put(i[0], map.getOrDefault(i[0], 0) + i[1]);
+        }
+
+        map = map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByKey()).collect(Collectors.toMap(
+                Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new
+        ));
+
+        int size = map.size();
+        int[][] finalAns = new int[size][2];
+        int curr = 0;
+
+        for (Map.Entry<Integer, Integer> m : map.entrySet()) {
+            finalAns[curr][0] = m.getKey();
+            finalAns[curr][1] = m.getValue();
+            curr++;
+        }
+
+        return finalAns;
+    }
+
+    public static List<Integer> getRow(int rowIndex) {
         if (rowIndex == 0) {
             return new ArrayList<>();
         }
@@ -48,6 +109,7 @@ public class MainPracticeClass {
 
             listToBeAdded.add(1);
             l.add(listToBeAdded);
+            currIndex++;
             rowIndex--;
         }
 
