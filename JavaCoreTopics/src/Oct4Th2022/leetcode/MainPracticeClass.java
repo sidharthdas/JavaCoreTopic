@@ -50,6 +50,7 @@ public class MainPracticeClass {
             l.add(listToBeAdded);
             rowIndex--;
         }
+
         int size = l.size();
 
         return l.get(size - 1);
