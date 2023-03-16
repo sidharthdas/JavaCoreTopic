@@ -16,6 +16,10 @@ public class MainPracticeClass {
         System.out.println(removeDigit("551", '5'));
     }
 
+    public String maximumTime(String time) {
+        Map<String, Integer>
+    }
+
     public static String removeDigit(String number, char digit) {
 
         int len = number.length();
