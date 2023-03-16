@@ -12,7 +12,33 @@ public class MainPracticeClass {
     public static void main(String[] args) {
         //System.out.println(passThePillow(4, 5));
         //System.out.println(convertTime("02:30", "04:35"));
-        System.out.println(getRow(3));
+        //System.out.println(getRow(3));
+        System.out.println(removeDigit("551", '5'));
+    }
+
+    public static String removeDigit(String number, char digit) {
+
+        int len = number.length();
+        int currIndex = 0;
+
+        String temp = number;
+
+        List<Integer> l = new ArrayList<>();
+
+        while (currIndex != len) {
+            for (int i = currIndex; i < len; i++) {
+                if (number.charAt(i) == digit) {
+                    currIndex = i + 1;
+                    l.add(Integer.parseInt(number.substring(0, i) + number.substring(i + 1)));
+                    break;
+                } else if (i == len - 1) {
+                    currIndex = i + 1;
+                    break;
+                }
+            }
+        }
+
+        return String.valueOf(l.stream().sorted(Comparator.reverseOrder()).findFirst().get());
     }
 
     public int countDaysTogether(String arriveAlice, String leaveAlice, String arriveBob, String leaveBob) {
