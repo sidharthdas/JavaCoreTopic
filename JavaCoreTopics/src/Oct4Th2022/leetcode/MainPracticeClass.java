@@ -17,7 +17,7 @@ public class MainPracticeClass {
     }
 
     public String maximumTime(String time) {
-        Map<String, Integer>
+        Map<String, Integer> map = new HashMap<>();
     }
 
     public static String removeDigit(String number, char digit) {
