@@ -17,7 +17,41 @@ public class MainPracticeClass {
     }
 
     public String maximumTime(String time) {
-        Map<String, Integer> map = new HashMap<>();
+        String[] arr = new String[4];
+        arr[0] = String.valueOf(time.charAt(0));
+        arr[1] = String.valueOf(time.charAt(1));
+        arr[2] = String.valueOf(time.charAt(3));
+        arr[3] = String.valueOf(time.charAt(4));
+
+        if (arr[0].equals("?")) {
+            if (arr[1].equals("?")) {
+                arr[0] = "2";
+                arr[1] = "3";
+            } else if (arr[1].equals("0") || arr[1].equals("1") || arr[1].equals("2") || arr[1].equals("3")) {
+                arr[0] = "2";
+            } else {
+                arr[0] = "1";
+            }
+        }
+
+        if (arr[1].equals("?")) {
+            if (arr[0].equals("0") || arr[0].equals("1")) {
+                arr[1] = "9";
+            } else if (arr[0].equals("2")) {
+                arr[1] = "3";
+            }
+        }
+
+        if (arr[2].equals("?")) {
+            arr[2] = "5";
+        }
+
+        if (arr[3].equals("?")) {
+            arr[3] = "9";
+        }
+
+        return arr[0] + arr[1] + ":" + arr[2] + arr[3];
+
     }
 
     public static String removeDigit(String number, char digit) {
