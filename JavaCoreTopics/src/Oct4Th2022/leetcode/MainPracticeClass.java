@@ -14,6 +14,39 @@ public class MainPracticeClass {
         //System.out.println(convertTime("02:30", "04:35"));
         //System.out.println(getRow(3));
         //System.out.println(removeDigit("551", '5'));
+        System.out.println(removeDuplicates(new int[]{0,0,1,1,1,1,2,3,3}));
+    }
+
+    public static int removeDuplicates(int[] nums) {
+        int count = 0;
+        int len = nums.length;
+        int currNum = nums[0];
+        int currCount = 1;
+        for (int i = 1; i < len; i++) {
+            if (nums[i] == currNum) {
+                currCount++;
+            } else {
+                currNum = nums[i];
+                currCount = 1;
+            }
+            if (currCount > 2) {
+                currCount--;
+                count++;
+                shift(nums, i, len);
+                i--;
+            }
+        }
+
+        return len - count;
+    }
+
+    public static void shift(int[] nums, int index, int len) {
+
+        for (int i = index; i < len - 1; i++) {
+            int temp = nums[i];
+            nums[i] = nums[i + 1];
+            nums[i + 1] = temp;
+        }
     }
 
     public String maximumTime(String time) {
