@@ -26,6 +26,7 @@ public class MainPracticeClass {
             if (nums[i] == currNum) {
                 currCount++;
             } else {
+
                 currNum = nums[i];
                 currCount = 1;
             }
