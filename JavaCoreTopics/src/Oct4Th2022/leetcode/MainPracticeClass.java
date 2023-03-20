@@ -17,6 +17,24 @@ public class MainPracticeClass {
         System.out.println(removeDuplicates(new int[]{0,0,1,1,1,1,2,3,3}));
     }
 
+    public int partitionString(String s) {
+
+        Set<String> set = new HashSet<>();
+
+        String[] srr = s.split("");
+        int count = 0;
+
+        for(String s1 : srr){
+            if(!set.add(s1)){
+                count++;
+                set = new HashSet<>();
+                set.add(s1);
+            }
+        }
+
+        return count + 1;
+    }
+
     public static int removeDuplicates(int[] nums) {
         int count = 0;
         int len = nums.length;
