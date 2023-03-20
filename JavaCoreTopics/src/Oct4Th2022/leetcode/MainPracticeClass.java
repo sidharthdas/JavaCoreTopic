@@ -14,7 +14,99 @@ public class MainPracticeClass {
         //System.out.println(convertTime("02:30", "04:35"));
         //System.out.println(getRow(3));
         //System.out.println(removeDigit("551", '5'));
-        System.out.println(removeDuplicates(new int[]{0,0,1,1,1,1,2,3,3}));
+        System.out.println(removeDuplicates(new int[]{0, 0, 1, 1, 1, 1, 2, 3, 3}));
+    }
+
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+        if (!wordList.contains(endWord)) {
+            return 0;
+        }
+        int count = 0;
+        String currWord = beginWord;
+        while (!currWord.equals(endWord) || wordList.size() != 0) {
+            boolean flag = false;
+            for (String s : wordList) {
+                if (compare(currWord, s)) {
+                    currWord = s;
+                    count++;
+                    flag = true;
+                    break;
+                }
+            }
+
+            if(flag){
+                wordList.remove(currWord);
+            }
+        }
+
+        return count;
+    }
+
+    public boolean compare(String s1, String s2) {
+
+        int count = 0;
+        char[] c1 = s1.toCharArray();
+        char[] c2 = s2.toCharArray();
+        Arrays.sort(c1);
+        Arrays.sort(c2);
+        int len = c1.length;
+
+        for (int i = 0; i < len; i++) {
+            if (c1[i] != c2[i]) {
+                count++;
+            }
+
+            if (count > 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public void setZeroes(int[][] matrix) {
+        List<List<Integer>> indexes = new ArrayList<>();
+        int row = matrix.length;
+        int col = matrix[0].length;
+
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (matrix[i][j] == 0) {
+                    indexes.add(List.of(i, j));
+                }
+            }
+        }
+        for (List<Integer> l : indexes) {
+            for (int i = 0; i < row; i++) {
+                matrix[i][l.get(1)] = 0;
+            }
+
+            for (int i = 0; i < col; i++) {
+                matrix[l.get(0)][i] = 0;
+            }
+
+        }
+    }
+
+    public int romanToInt(String s) {
+        Map<String, Integer> map = Map.ofEntries(
+                Map.entry("I", 1),
+                Map.entry("V", 5),
+                Map.entry("X", 10),
+                Map.entry("L", 50),
+                Map.entry("C", 100),
+                Map.entry("D", 500),
+                Map.entry("M", 1000)
+        );
+
+        int count = 0;
+        String[] srr = s.split("");
+        int len = srr.length;
+
+        for (int i = len - 1; i >= 0; i--) {
+            count += map.get(srr[i]);
+        }
+        return count;
     }
 
     public int partitionString(String s) {
@@ -24,8 +116,8 @@ public class MainPracticeClass {
         String[] srr = s.split("");
         int count = 0;
 
-        for(String s1 : srr){
-            if(!set.add(s1)){
+        for (String s1 : srr) {
+            if (!set.add(s1)) {
                 count++;
                 set = new HashSet<>();
                 set.add(s1);
