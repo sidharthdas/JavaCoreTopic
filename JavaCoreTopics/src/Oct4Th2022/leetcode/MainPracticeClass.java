@@ -14,7 +14,50 @@ public class MainPracticeClass {
         //System.out.println(convertTime("02:30", "04:35"));
         //System.out.println(getRow(3));
         //System.out.println(removeDigit("551", '5'));
-        System.out.println(removeDuplicates(new int[]{0, 0, 1, 1, 1, 1, 2, 3, 3}));
+        //System.out.println(removeDuplicates(new int[]{0, 0, 1, 1, 1, 1, 2, 3, 3}));
+        //System.out.println(findPairs(new int[]{3, 1, 4, 1, 5}, 2));
+        System.out.println(Math.log(8) / Math.log(2));
+    }
+
+
+    //x * log2(2) = log2(4)
+
+    public int countPairs(int[] deliciousness) {
+        int len = deliciousness.length;
+        int count = 0;
+
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j < len; j++) {
+                if (i != j) {
+                    Double d = Math.log(deliciousness[i] + deliciousness[j]) / Math.log(2);
+                    if (String.valueOf(d).split("\\.")[1].equals("0")) {
+                        count ++;
+                    }
+
+                }
+            }
+        }
+        return count;
+    }
+
+
+    public static int findPairs(int[] nums, int k) {
+
+        int len = nums.length;
+        Set<Integer> set = new HashSet<>();
+        int count = 0;
+        for (int i = 0; i < len; i++) {
+            for (int j = i + 1; j < len; j++) {
+                if (Math.abs(nums[i] - nums[j]) == k && (!set.contains(nums[i]) && !set.contains(nums[j]))) {
+                    count++;
+                    set.add(nums[i]);
+                    set.add(nums[j]);
+                }
+            }
+        }
+
+        return count;
+
     }
 
     public String removeDigit1(String number, char digit) {
@@ -59,7 +102,7 @@ public class MainPracticeClass {
                 }
             }
 
-            if(flag){
+            if (flag) {
                 wordList.remove(currWord);
             }
         }
