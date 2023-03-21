@@ -17,6 +17,31 @@ public class MainPracticeClass {
         System.out.println(removeDuplicates(new int[]{0, 0, 1, 1, 1, 1, 2, 3, 3}));
     }
 
+    public String removeDigit1(String number, char digit) {
+
+        int len = number.length();
+        int currIndex = 0;
+
+        String temp = number;
+
+        List<String> l = new ArrayList<>();
+
+        while (currIndex != len) {
+            for (int i = currIndex; i < len; i++) {
+                if (number.charAt(i) == digit) {
+                    currIndex = i + 1;
+                    l.add(number.substring(0, i) + number.substring(i + 1));
+                    break;
+                } else if (i == len - 1) {
+                    currIndex = i + 1;
+                    break;
+                }
+            }
+        }
+
+        return String.valueOf(l.stream().sorted(Comparator.reverseOrder()).findFirst().get());
+    }
+
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
         if (!wordList.contains(endWord)) {
             return 0;
