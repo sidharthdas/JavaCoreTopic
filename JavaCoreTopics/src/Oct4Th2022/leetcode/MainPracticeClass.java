@@ -19,6 +19,18 @@ public class MainPracticeClass {
         System.out.println(Math.log(8) / Math.log(2));
     }
 
+    public boolean find132pattern(int[] nums) {
+        int len = nums.length;
+
+        for (int i = 0; i < len - 2; i++) {
+            if (nums[i] < nums[i + 2] && nums[i+ 2] < nums[i + 1]) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 
     //x * log2(2) = log2(4)
 
@@ -31,7 +43,7 @@ public class MainPracticeClass {
                 if (i != j) {
                     Double d = Math.log(deliciousness[i] + deliciousness[j]) / Math.log(2);
                     if (String.valueOf(d).split("\\.")[1].equals("0")) {
-                        count ++;
+                        count++;
                     }
 
                 }
