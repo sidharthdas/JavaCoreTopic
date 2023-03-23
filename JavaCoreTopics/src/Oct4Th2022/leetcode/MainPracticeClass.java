@@ -14,9 +14,9 @@ public class MainPracticeClass {
         //System.out.println(convertTime("02:30", "04:35"));
         //System.out.println(getRow(3));
         //System.out.println(removeDigit("551", '5'));
-        //System.out.println(removeDuplicates(new int[]{0, 0, 1, 1, 1, 1, 2, 3, 3}));
+        System.out.println(removeDuplicates(new int[]{ 1,2,2,2}));
         //System.out.println(findPairs(new int[]{3, 1, 4, 1, 5}, 2));
-        System.out.println(Math.log(8) / Math.log(2));
+        //System.out.println(Math.log(8) / Math.log(2));
     }
 
     public boolean find132pattern(int[] nums) {
@@ -208,8 +208,12 @@ public class MainPracticeClass {
     }
 
     public static int removeDuplicates(int[] nums) {
+        if(Arrays.stream(nums).boxed().collect(Collectors.toSet()).size() == 1){
+            return 2;
+        }
         int count = 0;
         int len = nums.length;
+        int tempLen = len;
         int currNum = nums[0];
         int currCount = 1;
         for (int i = 1; i < len; i++) {
@@ -223,12 +227,18 @@ public class MainPracticeClass {
             if (currCount > 2) {
                 currCount--;
                 count++;
+                tempLen--;
                 shift(nums, i, len);
+
                 i--;
+            }
+
+            if(tempLen == i){
+                break;
             }
         }
 
-        return len - count;
+            return tempLen;
     }
 
     public static void shift(int[] nums, int index, int len) {
