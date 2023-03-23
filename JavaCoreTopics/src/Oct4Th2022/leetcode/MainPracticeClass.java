@@ -14,9 +14,11 @@ public class MainPracticeClass {
         //System.out.println(convertTime("02:30", "04:35"));
         //System.out.println(getRow(3));
         //System.out.println(removeDigit("551", '5'));
-        System.out.println(removeDuplicates(new int[]{ 1,2,2,2}));
+        //System.out.println(removeDuplicates(new int[]{ 1,2,2,2}));
         //System.out.println(findPairs(new int[]{3, 1, 4, 1, 5}, 2));
         //System.out.println(Math.log(8) / Math.log(2));
+        WordFilter wf = new WordFilter(new String[]{"apple"});
+        System.out.println(wf.f("a", "e"));
     }
 
     public boolean find132pattern(int[] nums) {
@@ -688,5 +690,34 @@ class MyQueue {
 
     public boolean empty() {
         return stack2.isEmpty();
+    }
+}
+
+class WordFilter {
+
+    List<String> dict;
+    int len;
+
+    public WordFilter(String[] words) {
+        dict = Arrays.stream(words).collect(Collectors.toList());
+        len = words.length;
+    }
+
+    public int f(String pref, String suff) {
+        int prefLen = pref.length();
+        int suffLen = suff.length();
+
+        for(int i = 0; i < len; i++){
+            if(dict.get(i).length() >= prefLen && dict.get(i).length() >= suffLen) {
+                int sLen = dict.get(i).length();
+
+                if(dict.get(i).substring(0, prefLen).equals(pref) &&
+                dict.get(i).substring(sLen - suffLen).equals(suff)){
+                    return i;
+                }
+            }
+        }
+
+        return -1;
     }
 }
