@@ -16,7 +16,6 @@ public class MainPracticeClass {
         //System.out.println(removeDigit("551", '5'));
         //System.out.println(removeDuplicates(new int[]{0, 0, 1, 1, 1, 1, 2, 3, 3}));
         //System.out.println(findPairs(new int[]{3, 1, 4, 1, 5}, 2));
-
         System.out.println(Math.log(8) / Math.log(2));
     }
 
