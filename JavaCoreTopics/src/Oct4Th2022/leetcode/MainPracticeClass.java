@@ -717,7 +717,6 @@ class WordFilter {
                 }
             }
         }
-
         return -1;
     }
 }
