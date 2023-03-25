@@ -24,6 +24,33 @@ public class MainPracticeClass {
 
     }
 
+    public int findMinDifference(List<String> timePoints) {
+
+        List<Integer> mins = new ArrayList<>();
+        for (String time : timePoints) {
+            if (time.equals("00:00")) {
+                mins.add(1440);
+            } else {
+                String[] timeArr = time.split(":");
+                int totalMin = Integer.parseInt(timeArr[0]) * 60 + Integer.parseInt(timeArr[1]);
+                mins.add(totalMin);
+            }
+        }
+        List<Integer> mis = new ArrayList<>();
+        int len = mins.size();
+
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j < len; j++) {
+                if (i != j) {
+                    mis.add(Math.abs(mins.get(i) - mins.get(j)));
+                }
+            }
+        }
+
+
+        return mis.stream().sorted().findFirst().get();
+    }
+
     public int minSteps(String s, String t) {
 
         Map<String, Integer> mapS = new HashMap<>();
