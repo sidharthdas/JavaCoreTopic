@@ -743,6 +743,27 @@ class WordFilter {
         len = words.length;
     }
 
+    public List<String> removeComments(String[] source) {
+        List<String> list = new ArrayList<>();
+
+        for (String s : source) {
+            if (!s.contains("/*") || !s.contains("*/") || !s.contains("//")) {
+                list.add(s);
+            } else {
+                if (s.contains("//")) {
+                    int in = s.indexOf("//");
+                    if(in != 0){
+                        s = s.substring(0, in);
+                        list.add(s);
+                    }
+                }
+
+            }
+        }
+
+        return null;
+    }
+
     public int f(String pref, String suff) {
         int prefLen = pref.length();
         int suffLen = suff.length();
