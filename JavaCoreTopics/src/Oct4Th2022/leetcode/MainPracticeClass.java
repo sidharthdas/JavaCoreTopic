@@ -17,15 +17,55 @@ public class MainPracticeClass {
         //System.out.println(removeDuplicates(new int[]{ 1,2,2,2}));
         //System.out.println(findPairs(new int[]{3, 1, 4, 1, 5}, 2));
         //System.out.println(Math.log(8) / Math.log(2));
-        WordFilter wf = new WordFilter(new String[]{"apple"});
-        System.out.println(wf.f("a", "e"));
+        //WordFilter wf = new WordFilter(new String[]{"apple"});
+        //System.out.println(wf.f("a", "e"));
+        //System.out.println(getFolderNames(new String[]{"gta", "gta(1)", "gta", "avalon"}));
+        System.out.println(countPairs(new int[]{2160, 1936, 3, 29, 27, 5, 2503, 1593, 2, 0, 16, 0, 3860, 28908, 6, 2, 15, 49, 6246, 1946, 23, 105, 7996, 196, 0, 2, 55, 457, 5, 3, 924, 7268, 16, 48, 4, 0, 12, 116, 2628, 1468}));
+
+    }
+
+    public boolean makesquare(int[] matchsticks) {
+        if (Arrays.stream(matchsticks).boxed().reduce(Integer::sum).get() % 4 == 0) {
+            return true;
+        }
+        return false;
+
+    }
+
+    public static String[] getFolderNames(String[] names) {
+
+        int len = names.length;
+        String[] finalStringArr = new String[len];
+        Map<String, Integer> map = new HashMap<>();
+        for (int i = 0; i < len; i++) {
+            String s = "";
+            int num = 0;
+            if (names[i].contains("(")) {
+                int index = names[i].indexOf('(');
+                s = names[i].substring(0, index);
+                num = Integer.parseInt(names[i].substring(index + 1, names[i].length() - 1));
+                map.put(s, num);
+                finalStringArr[i] = names[i];
+
+            } else {
+                s = names[i];
+                if (!map.containsKey(s)) {
+                    map.put(s, 0);
+                    finalStringArr[i] = s;
+                } else {
+                    map.put(s, map.get(s) + 1);
+                    finalStringArr[i] = s + "(" + map.get(s) + ")";
+                }
+            }
+        }
+        return finalStringArr;
     }
 
     public boolean find132pattern(int[] nums) {
         int len = nums.length;
 
         for (int i = 0; i < len - 2; i++) {
-            if (nums[i] < nums[i + 2] && nums[i+ 2] < nums[i + 1]) {
+            if (nums[i] < nums[i + 2] && nums[i + 2] < nums[i + 1]) {
                 return true;
             }
         }
@@ -36,15 +76,15 @@ public class MainPracticeClass {
 
     //x * log2(2) = log2(4)
 
-    public int countPairs(int[] deliciousness) {
+    public static int countPairs(int[] deliciousness) {
         int len = deliciousness.length;
         int count = 0;
 
         for (int i = 0; i < len; i++) {
-            for (int j = 0; j < len; j++) {
+            for (int j = i + 1; j < len; j++) {
                 if (i != j) {
                     Double d = Math.log(deliciousness[i] + deliciousness[j]) / Math.log(2);
-                    if (String.valueOf(d).split("\\.")[1].equals("0")) {
+                    if (String.valueOf(d).split("\\.").length == 2 && String.valueOf(d).split("\\.")[1].equals("0")) {
                         count++;
                     }
 
@@ -210,7 +250,7 @@ public class MainPracticeClass {
     }
 
     public static int removeDuplicates(int[] nums) {
-        if(Arrays.stream(nums).boxed().collect(Collectors.toSet()).size() == 1){
+        if (Arrays.stream(nums).boxed().collect(Collectors.toSet()).size() == 1) {
             return 2;
         }
         int count = 0;
@@ -235,12 +275,12 @@ public class MainPracticeClass {
                 i--;
             }
 
-            if(tempLen == i){
+            if (tempLen == i) {
                 break;
             }
         }
 
-            return tempLen;
+        return tempLen;
     }
 
     public static void shift(int[] nums, int index, int len) {
@@ -706,17 +746,21 @@ class WordFilter {
     public int f(String pref, String suff) {
         int prefLen = pref.length();
         int suffLen = suff.length();
-
-        for(int i = 0; i < len; i++){
-            if(dict.get(i).length() >= prefLen && dict.get(i).length() >= suffLen) {
+        Map<String, Integer> map = new HashMap<>();
+        for (int i = 0; i < len; i++) {
+            if (dict.get(i).length() >= prefLen && dict.get(i).length() >= suffLen) {
                 int sLen = dict.get(i).length();
 
-                if(dict.get(i).substring(0, prefLen).equals(pref) &&
-                dict.get(i).substring(sLen - suffLen).equals(suff)){
-                    return i;
+                if (dict.get(i).substring(0, prefLen).equals(pref) &&
+                        dict.get(i).substring(sLen - suffLen).equals(suff)) {
+                    map.put(dict.get(i), i);
                 }
             }
         }
+        if (map.size() > 0) {
+            return map.entrySet().stream().sorted(Map.Entry.comparingByKey((e1, e2) -> e2.length() - e1.length())).findFirst().get().getValue();
+        }
+
         return -1;
     }
 }
