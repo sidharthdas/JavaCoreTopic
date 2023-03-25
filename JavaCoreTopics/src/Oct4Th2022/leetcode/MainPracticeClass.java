@@ -24,6 +24,33 @@ public class MainPracticeClass {
 
     }
 
+    public int minSteps(String s, String t) {
+
+        Map<String, Integer> mapS = new HashMap<>();
+        Map<String, Integer> mapT = new HashMap<>();
+        String[] srr = s.split("");
+        String[] trr = t.split("");
+        Set<String> set = new HashSet<>();
+        int freq = 0;
+        for (String s1 : srr) {
+            mapS.put(s1, mapS.getOrDefault(s1, 0) + 1);
+            set.add(s1);
+        }
+
+        for (String t1 : trr) {
+            mapT.put(t1, mapT.getOrDefault(t1, 0) + 1);
+            set.add(t1);
+        }
+
+        for (String set1 : set) {
+            if (mapT.getOrDefault(set1, 0) < mapS.getOrDefault(set1, 0)) {
+                freq += Math.abs(mapT.getOrDefault(set1, 0) - mapS.getOrDefault(set1, 0));
+            }
+        }
+
+        return freq;
+    }
+
     public boolean makesquare(int[] matchsticks) {
         if (Arrays.stream(matchsticks).boxed().reduce(Integer::sum).get() % 4 == 0) {
             return true;
@@ -752,7 +779,7 @@ class WordFilter {
             } else {
                 if (s.contains("//")) {
                     int in = s.indexOf("//");
-                    if(in != 0){
+                    if (in != 0) {
                         s = s.substring(0, in);
                         list.add(s);
                     }
