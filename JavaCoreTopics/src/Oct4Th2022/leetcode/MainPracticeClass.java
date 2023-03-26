@@ -35,6 +35,7 @@ public class MainPracticeClass {
                 int totalMin = Integer.parseInt(timeArr[0]) * 60 + Integer.parseInt(timeArr[1]);
                 mins.add(totalMin);
             }
+
         }
         List<Integer> mis = new ArrayList<>();
         int len = mins.size();
