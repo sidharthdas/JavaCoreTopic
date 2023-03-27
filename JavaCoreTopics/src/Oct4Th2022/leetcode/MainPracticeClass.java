@@ -21,16 +21,36 @@ public class MainPracticeClass {
         //System.out.println(wf.f("a", "e"));
         //System.out.println(getFolderNames(new String[]{"gta", "gta(1)", "gta", "avalon"}));
         //System.out.println(countPairs(new int[]{2160, 1936, 3, 29, 27, 5, 2503, 1593, 2, 0, 16, 0, 3860, 28908, 6, 2, 15, 49, 6246, 1946, 23, 105, 7996, 196, 0, 2, 55, 457, 5, 3, 924, 7268, 16, 48, 4, 0, 12, 116, 2628, 1468}));
-        System.out.println(findMinDifference(Arrays.asList("05:31", "22:08", "00:35")));
+        //System.out.println(findMinDifference(Arrays.asList("05:31", "22:08", "00:35")));
+        System.out.println(findLHS(new int[]{1, 3, 2, 2, 5, 2, 3, 7}));
     }
 
-    public int findLHS(int[] nums) {
+    public int lengthOfLongestSubstring(String s) {
+        String[] srr = s.split("");
+        int len = srr.length;
+        int countMax = Integer.MIN_VALUE;
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < len; i++) {
+            if (!sb.toString().contains(srr[i])) {
+                sb.append(srr[i]);
+            } else {
+                countMax = Math.max(countMax, sb.length());
+                sb  = new StringBuffer();
+                sb.append(srr[i]);
+            }
+        }
+
+        return Math.max(countMax, sb.length());
+
+    }
+
+    public static int findLHS(int[] nums) {
         List<Integer> countList = new ArrayList<>();
         int len = nums.length;
         int count = 0;
 
         int max = Integer.MIN_VALUE;
-        int min = Integer.MIN_VALUE;
+        int min = Integer.MAX_VALUE;
 
         List<Integer> temp = new ArrayList<>();
 
@@ -41,16 +61,20 @@ public class MainPracticeClass {
             if (nums[i] < min) {
                 min = nums[i];
             }
-
-            if (max - min == 1) {
+            temp.add(nums[i]);
+            if (temp.size() > 1 && max - min == 1) {
                 temp.add(nums[i]);
 
             } else {
-
+                countList.add(temp.size());
+                temp = new ArrayList<>();
+                temp.add(nums[i]);
+                max = Integer.MIN_VALUE;
+                min = Integer.MAX_VALUE;
             }
         }
 
-        return 0;
+        return countList.stream().sorted(Comparator.reverseOrder()).findFirst().get();
 
     }
 
