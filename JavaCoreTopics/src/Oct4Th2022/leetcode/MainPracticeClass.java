@@ -24,6 +24,36 @@ public class MainPracticeClass {
         System.out.println(findMinDifference(Arrays.asList("05:31", "22:08", "00:35")));
     }
 
+    public int findLHS(int[] nums) {
+        List<Integer> countList = new ArrayList<>();
+        int len = nums.length;
+        int count = 0;
+
+        int max = Integer.MIN_VALUE;
+        int min = Integer.MIN_VALUE;
+
+        List<Integer> temp = new ArrayList<>();
+
+        for (int i = 0; i < len; i++) {
+            if (nums[i] > max) {
+                max = nums[i];
+            }
+            if (nums[i] < min) {
+                min = nums[i];
+            }
+
+            if (max - min == 1) {
+                temp.add(nums[i]);
+
+            } else {
+
+            }
+        }
+
+        return 0;
+
+    }
+
     public static int findMinDifference(List<String> timePoints) {
         int len = timePoints.size();
         int[] mins = new int[len];
@@ -823,7 +853,7 @@ class WordFilter {
         int suffLen = suff.length();
         Map<String, Integer> map = new HashMap<>();
         int currIndex = 0;
-        for(String s : dict){
+        for (String s : dict) {
             if (s.length() >= prefLen && s.length() >= suffLen) {
                 int sLen = s.length();
 
