@@ -20,36 +20,33 @@ public class MainPracticeClass {
         //WordFilter wf = new WordFilter(new String[]{"apple"});
         //System.out.println(wf.f("a", "e"));
         //System.out.println(getFolderNames(new String[]{"gta", "gta(1)", "gta", "avalon"}));
-        System.out.println(countPairs(new int[]{2160, 1936, 3, 29, 27, 5, 2503, 1593, 2, 0, 16, 0, 3860, 28908, 6, 2, 15, 49, 6246, 1946, 23, 105, 7996, 196, 0, 2, 55, 457, 5, 3, 924, 7268, 16, 48, 4, 0, 12, 116, 2628, 1468}));
-
+        //System.out.println(countPairs(new int[]{2160, 1936, 3, 29, 27, 5, 2503, 1593, 2, 0, 16, 0, 3860, 28908, 6, 2, 15, 49, 6246, 1946, 23, 105, 7996, 196, 0, 2, 55, 457, 5, 3, 924, 7268, 16, 48, 4, 0, 12, 116, 2628, 1468}));
+        System.out.println(findMinDifference(Arrays.asList("05:31", "22:08", "00:35")));
     }
 
-    public int findMinDifference(List<String> timePoints) {
-
-        List<Integer> mins = new ArrayList<>();
+    public static int findMinDifference(List<String> timePoints) {
+        int len = timePoints.size();
+        int[] mins = new int[len];
+        int currIndex = 0;
         for (String time : timePoints) {
-            if (time.equals("00:00")) {
-                mins.add(1440);
-            } else {
-                String[] timeArr = time.split(":");
-                int totalMin = Integer.parseInt(timeArr[0]) * 60 + Integer.parseInt(timeArr[1]);
-                mins.add(totalMin);
-            }
-
+            String[] timeArr = time.split(":");
+            int totalMin = Integer.parseInt(timeArr[0]) * 60 + Integer.parseInt(timeArr[1]);
+            mins[currIndex] = totalMin;
+            currIndex++;
         }
-        List<Integer> mis = new ArrayList<>();
-        int len = mins.size();
+        Arrays.sort(mins);
+
+        int minTime = Integer.MAX_VALUE;
 
         for (int i = 0; i < len; i++) {
             for (int j = 0; j < len; j++) {
                 if (i != j) {
-                    mis.add(Math.abs(mins.get(i) - mins.get(j)));
+                    minTime = Math.min(minTime, Math.abs(mins[i] + 1440 - mins[j]));
+                    minTime = Math.min(minTime, Math.abs(mins[j] - mins[i]));
                 }
             }
         }
-
-
-        return mis.stream().sorted().findFirst().get();
+        return minTime;
     }
 
     public int minSteps(String s, String t) {
@@ -790,11 +787,13 @@ class MyQueue {
 
 class WordFilter {
 
-    List<String> dict;
+
+    Set<String> dict;
     int len;
 
     public WordFilter(String[] words) {
-        dict = Arrays.stream(words).collect(Collectors.toList());
+        dict = new TreeSet<>();
+        dict.addAll(Arrays.stream(words).collect(Collectors.toSet()));
         len = words.length;
     }
 
@@ -823,13 +822,15 @@ class WordFilter {
         int prefLen = pref.length();
         int suffLen = suff.length();
         Map<String, Integer> map = new HashMap<>();
-        for (int i = 0; i < len; i++) {
-            if (dict.get(i).length() >= prefLen && dict.get(i).length() >= suffLen) {
-                int sLen = dict.get(i).length();
+        int currIndex = 0;
+        for(String s : dict){
+            if (s.length() >= prefLen && s.length() >= suffLen) {
+                int sLen = s.length();
 
-                if (dict.get(i).substring(0, prefLen).equals(pref) &&
-                        dict.get(i).substring(sLen - suffLen).equals(suff)) {
-                    map.put(dict.get(i), i);
+                if (s.substring(0, prefLen).equals(pref) &&
+                        s.substring(sLen - suffLen).equals(suff)) {
+                    map.put(s, currIndex);
+                    currIndex++;
                 }
             }
         }
