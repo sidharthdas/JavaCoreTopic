@@ -25,9 +25,34 @@ public class MainPracticeClass {
         System.out.println(findLHS(new int[]{1, 3, 2, 2, 5, 2, 3, 7}));
     }
 
+    public int[][] largestLocal(int[][] grid) {
+        int len = grid.length;
+        int finArray[][] = new int[len - 2][len - 2];
+
+        for (int i = 0; i < len - 2; i++) {
+            for (int j = 0; j < len - 2; j++) {
+                finArray[i][j] = maxFromGrid(grid, i, j);
+            }
+        }
+
+        return finArray;
+    }
+
+    private int maxFromGrid(int[][] grid, int i, int j) {
+        int max = Integer.MIN_VALUE;
+
+        for (int k = i; k < i + 3; k++) {
+            for (int l = j; l < j + 3; l++) {
+
+                max = Math.max(grid[k][l], max);
+            }
+        }
+        return max;
+    }
+
     public int splitNum(int num) {
         List<Integer> l = new ArrayList<>();
-        while(num != 0){
+        while (num != 0) {
             l.add(num % 10);
             num = num / 10;
         }
@@ -38,11 +63,11 @@ public class MainPracticeClass {
         String num1 = "";
         String num2 = "";
 
-        for(int i : l){
-            if(flag){
+        for (int i : l) {
+            if (flag) {
                 num1 += i;
                 flag = false;
-            }else{
+            } else {
                 num2 += i;
                 flag = true;
             }
@@ -61,7 +86,7 @@ public class MainPracticeClass {
 
                 crr[j] = (char) (crr[j] + temp);
                 if (crr[j] > 'z') {
-                        crr[j] = (char) ('a' + crr[j] - 'z' + 1);
+                    crr[j] = (char) ('a' + crr[j] - 'z' + 1);
                 }
             }
 
