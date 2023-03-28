@@ -25,6 +25,51 @@ public class MainPracticeClass {
         System.out.println(findLHS(new int[]{1, 3, 2, 2, 5, 2, 3, 7}));
     }
 
+    public int splitNum(int num) {
+        List<Integer> l = new ArrayList<>();
+        while(num != 0){
+            l.add(num % 10);
+            num = num / 10;
+        }
+
+        Collections.sort(l);
+
+        boolean flag = true;
+        String num1 = "";
+        String num2 = "";
+
+        for(int i : l){
+            if(flag){
+                num1 += i;
+                flag = false;
+            }else{
+                num2 += i;
+                flag = true;
+            }
+        }
+
+        return Integer.parseInt(num1) + Integer.parseInt(num2);
+    }
+
+    public String shiftingLetters(String s, int[] shifts) {
+        char[] crr = s.toCharArray();
+        int len = shifts.length;
+
+        for (int i = 0; i < len; i++) {
+            int temp = shifts[i] % 26;
+            for (int j = 0; j < i + 1; j++) {
+
+                crr[j] = (char) (crr[j] + temp);
+                if (crr[j] > 'z') {
+                        crr[j] = (char) ('a' + crr[j] - 'z' + 1);
+                }
+            }
+
+        }
+
+        return String.valueOf(crr);
+    }
+
     public int lengthOfLongestSubstring(String s) {
         String[] srr = s.split("");
         int len = srr.length;
@@ -35,7 +80,7 @@ public class MainPracticeClass {
                 sb.append(srr[i]);
             } else {
                 countMax = Math.max(countMax, sb.length());
-                sb  = new StringBuffer();
+                sb = new StringBuffer();
                 sb.append(srr[i]);
             }
         }
