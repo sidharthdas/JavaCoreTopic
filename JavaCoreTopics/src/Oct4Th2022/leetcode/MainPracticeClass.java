@@ -57,6 +57,7 @@ public class MainPracticeClass {
             num = num / 10;
         }
 
+
         Collections.sort(l);
 
         boolean flag = true;
