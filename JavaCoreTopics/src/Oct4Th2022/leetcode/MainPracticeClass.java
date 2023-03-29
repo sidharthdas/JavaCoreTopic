@@ -25,6 +25,11 @@ public class MainPracticeClass {
         System.out.println(findLHS(new int[]{1, 3, 2, 2, 5, 2, 3, 7}));
     }
 
+    public int timeRequiredToBuy(int[] tickets, int k) {
+        return 0;
+
+    }
+
     public int[][] largestLocal(int[][] grid) {
         int len = grid.length;
         int finArray[][] = new int[len - 2][len - 2];
