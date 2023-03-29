@@ -25,6 +25,20 @@ public class MainPracticeClass {
         System.out.println(findLHS(new int[]{1, 3, 2, 2, 5, 2, 3, 7}));
     }
 
+    public int largestSumAfterKNegations(int[] nums, int k) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        for (int i : nums) {
+            pq.add(i);
+        }
+
+        while (k != 0) {
+                pq.add(-pq.poll());
+                k--;
+        }
+
+        return pq.stream().reduce(Integer::sum).get();
+    }
+
     public int timeRequiredToBuy(int[] tickets, int k) {
         return 0;
 
