@@ -22,8 +22,56 @@ public class MainPracticeClass {
         //System.out.println(getFolderNames(new String[]{"gta", "gta(1)", "gta", "avalon"}));
         //System.out.println(countPairs(new int[]{2160, 1936, 3, 29, 27, 5, 2503, 1593, 2, 0, 16, 0, 3860, 28908, 6, 2, 15, 49, 6246, 1946, 23, 105, 7996, 196, 0, 2, 55, 457, 5, 3, 924, 7268, 16, 48, 4, 0, 12, 116, 2628, 1468}));
         //System.out.println(findMinDifference(Arrays.asList("05:31", "22:08", "00:35")));
-        System.out.println(findLHS(new int[]{1, 3, 2, 2, 5, 2, 3, 7}));
+        //System.out.println(findLHS(new int[]{1, 3, 2, 2, 5, 2, 3, 7}));
+        System.out.println(countVowelSubstrings("cuaieuouac"));
+        System.out.println(findSubarrays(new int[]{1,2,3,4,5}));
 
+    }
+
+    public static boolean findSubarrays(int[] nums) {
+
+        Set<Integer> set = new HashSet<>();
+
+        int len = nums.length;
+
+        for (int i = 0; i < len; i++) {
+
+            for(int j = i+1; j < len; j++){
+                if(!set.add(nums[i] + nums[j])){
+                    return true;
+                }
+            }
+        }
+
+        return false;
+
+    }
+
+    public static int countVowelSubstrings(String word) {
+        if (word.length() < 5) return 0;
+        Set<String> set = new TreeSet<>();
+        StringBuilder sb = new StringBuilder();
+        char[] crr = word.toCharArray();
+        int size = word.length();
+        for (int len = 1; len <= size; len++) {
+            // Pick ending point
+            for (int i = 0; i <= size - len; i++) {
+                //  Print characters from current
+                // starting point to current ending
+                // point.
+                int j = i + len - 1;
+                for (int k = i; k <= j; k++) {
+                    sb.append(crr[k]);
+                }
+                String s1 = sb.toString();
+                sb = new StringBuilder();
+                if (s1.length() >= 5 && s1.contains("a") && s1.contains("e") && s1.contains("i") && s1.contains("o") && s1.contains("u") && s1.replaceAll("[aeiou]", "").length() == 0) {
+                    set.add(s1);
+                }
+            }
+        }
+        System.out.println(set);
+        return set.size();
     }
 
     public int largestSumAfterKNegations(int[] nums, int k) {
@@ -33,8 +81,8 @@ public class MainPracticeClass {
         }
 
         while (k != 0) {
-                pq.add(-pq.poll());
-                k--;
+            pq.add(-pq.poll());
+            k--;
         }
 
         return pq.stream().reduce(Integer::sum).get();
