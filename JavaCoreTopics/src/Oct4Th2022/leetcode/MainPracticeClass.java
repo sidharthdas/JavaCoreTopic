@@ -31,7 +31,6 @@ public class MainPracticeClass {
     public static boolean findSubarrays(int[] nums) {
 
         Set<Integer> set = new HashSet<>();
-
         int len = nums.length;
 
         for (int i = 0; i < len; i++) {
