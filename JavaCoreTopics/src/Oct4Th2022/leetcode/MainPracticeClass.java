@@ -24,8 +24,24 @@ public class MainPracticeClass {
         //System.out.println(findMinDifference(Arrays.asList("05:31", "22:08", "00:35")));
         //System.out.println(findLHS(new int[]{1, 3, 2, 2, 5, 2, 3, 7}));
         System.out.println(countVowelSubstrings("cuaieuouac"));
-        System.out.println(findSubarrays(new int[]{1,2,3,4,5}));
+        System.out.println(findSubarrays(new int[]{1, 2, 3, 4, 5}));
 
+    }
+
+    public int minimumMoves(String s) {
+        if (!s.contains("X")) {
+            return 0;
+        }
+        int count = 0;
+        int len = s.length();
+        for (int i = 0; i < len; i++) {
+            if(s.charAt(i) == 'X'){
+                count++;
+                i += 2;
+            }
+        }
+
+        return count;
     }
 
     public static boolean findSubarrays(int[] nums) {
@@ -35,8 +51,8 @@ public class MainPracticeClass {
 
         for (int i = 0; i < len; i++) {
 
-            for(int j = i+1; j < len; j++){
-                if(!set.add(nums[i] + nums[j])){
+            for (int j = i + 1; j < len; j++) {
+                if (!set.add(nums[i] + nums[j])) {
                     return true;
                 }
             }
