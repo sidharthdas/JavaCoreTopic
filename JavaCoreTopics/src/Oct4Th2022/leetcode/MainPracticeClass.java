@@ -32,6 +32,7 @@ public class MainPracticeClass {
         if (!s.contains("X")) {
             return 0;
         }
+
         int count = 0;
         int len = s.length();
         for (int i = 0; i < len; i++) {
