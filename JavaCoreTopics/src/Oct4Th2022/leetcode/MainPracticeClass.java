@@ -23,8 +23,81 @@ public class MainPracticeClass {
         //System.out.println(countPairs(new int[]{2160, 1936, 3, 29, 27, 5, 2503, 1593, 2, 0, 16, 0, 3860, 28908, 6, 2, 15, 49, 6246, 1946, 23, 105, 7996, 196, 0, 2, 55, 457, 5, 3, 924, 7268, 16, 48, 4, 0, 12, 116, 2628, 1468}));
         //System.out.println(findMinDifference(Arrays.asList("05:31", "22:08", "00:35")));
         //System.out.println(findLHS(new int[]{1, 3, 2, 2, 5, 2, 3, 7}));
-        System.out.println(countVowelSubstrings("cuaieuouac"));
-        System.out.println(findSubarrays(new int[]{1, 2, 3, 4, 5}));
+        //System.out.println(countVowelSubstrings("cuaieuouac"));
+        //System.out.println(findSubarrays(new int[]{1, 2, 3, 4, 5}));
+        System.out.println(maxScore("00111"));
+
+    }
+
+    public int findLUSlength(String a, String b) {
+        if (a.equals(b)) {
+            return -1;
+        }
+
+        return Math.max(a.length(), b.length());
+    }
+
+    public static int maxScore(String s) {
+        int len = s.length();
+        List<Integer> l = new ArrayList<>();
+        for (int i = 1; i < len - 2; i++) {
+            l.add(count(0, i, s, 0) + count(i, len, s, 1));
+        }
+
+        return l.stream().sorted(Comparator.reverseOrder()).findFirst().get();
+    }
+
+    private static int count(int start, int end, String s, int flag) {
+        int count = 0;
+        if (flag == 0) {
+            for (int i = start; i < end; i++) {
+                if (s.charAt(i) == '0') {
+                    count++;
+                }
+            }
+        }
+        if (flag == 1) {
+            for (int i = start; i < end; i++) {
+                if (s.charAt(i) == '1') {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+
+    public static int romanToInt1(String s) {
+        Map<String, Integer> map = Map.ofEntries(
+                Map.entry("I", 1),
+                Map.entry("V", 5),
+                Map.entry("X", 10),
+                Map.entry("L", 50),
+                Map.entry("C", 100),
+                Map.entry("D", 500),
+                Map.entry("M", 1000)
+        );
+
+        int count = 0;
+        String[] srr = s.split("");
+        int len = srr.length;
+        int ans = 0;
+        for (int i = len - 1; i >= 0; i--) {
+            count = map.get(srr[i]);
+            if (4 * count < ans) {
+                ans = ans - count;
+            } else {
+                ans = ans + count;
+            }
+        }
+        return count;
+    }
+
+    public String fractionAddition(String expression) {
+        String first = expression.substring(0, expression.indexOf("/") + 2);
+        String second = expression.substring(expression.indexOf("/") + 2);
+
+        return null;
 
     }
 
@@ -36,7 +109,7 @@ public class MainPracticeClass {
         int count = 0;
         int len = s.length();
         for (int i = 0; i < len; i++) {
-            if(s.charAt(i) == 'X'){
+            if (s.charAt(i) == 'X') {
                 count++;
                 i += 2;
             }
