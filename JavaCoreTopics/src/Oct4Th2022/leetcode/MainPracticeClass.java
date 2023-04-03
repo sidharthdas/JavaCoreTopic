@@ -43,7 +43,6 @@ public class MainPracticeClass {
         for (int i = 1; i < len - 2; i++) {
             l.add(count(0, i, s, 0) + count(i, len, s, 1));
         }
-
         return l.stream().sorted(Comparator.reverseOrder()).findFirst().get();
     }
 
