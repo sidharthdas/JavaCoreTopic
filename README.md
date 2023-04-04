@@ -35,9 +35,10 @@ public int maxSubArray(int[] nums) {
 Stream API nested null check:
 ```
 Optional.ofNullable(model1)
-        .map(X -> X.getStudentList())
-        .map(x -> x.stream().findFirst())
-        .ifPresent(x -> s.setName(x.get().getName()));
+        .map(MainModel::getStudentList)
+        .map(studentList -> studentList.stream().findFirst())
+        .flatMap(student -> student.stream().findFirst())
+        .ifPresent(z -> s.setName(z.getName()));
 ```
 -> PriorityQueue Implementation
 ```
