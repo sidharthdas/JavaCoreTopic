@@ -32,7 +32,13 @@ public int maxSubArray(int[] nums) {
 ```
  Arrays.sort(score, (score1, score2) -> score2[k] - score1[k]);
 ```
-
+Stream API nested null check:
+```
+Optional.ofNullable(model1)
+        .map(X -> X.getStudentList())
+        .map(x -> x.stream().findFirst())
+        .ifPresent(x -> s.setName(x.get().getName()));
+```
 -> PriorityQueue Implementation
 ```
 PriorityQueue<Integer> pq = new PriorityQueue<>((a1, a2) -> a2 - a1); 
