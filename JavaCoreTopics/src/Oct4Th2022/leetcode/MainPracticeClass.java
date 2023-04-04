@@ -25,7 +25,29 @@ public class MainPracticeClass {
         //System.out.println(findLHS(new int[]{1, 3, 2, 2, 5, 2, 3, 7}));
         //System.out.println(countVowelSubstrings("cuaieuouac"));
         //System.out.println(findSubarrays(new int[]{1, 2, 3, 4, 5}));
-        System.out.println(maxScore("00111"));
+        System.out.println(maxScore("010"));
+
+    }
+
+    public int longestConsecutive(int[] nums) {
+        int len = nums.length;
+        Arrays.sort(nums);
+
+        int current = 1;
+        int max = 1;
+
+        for (int i = 0; i < len - 1; i++) {
+            if (nums[i] + 1 == nums[i + 1]) {
+                current += 1;
+                if (current > max) {
+                    max = current;
+                }
+            } else {
+                current = 1;
+            }
+        }
+
+        return max;
 
     }
 
@@ -40,7 +62,7 @@ public class MainPracticeClass {
     public static int maxScore(String s) {
         int len = s.length();
         List<Integer> l = new ArrayList<>();
-        for (int i = 1; i < len - 2; i++) {
+        for (int i = 1; i < len; i++) {
             l.add(count(0, i, s, 0) + count(i, len, s, 1));
         }
         return l.stream().sorted(Comparator.reverseOrder()).findFirst().get();
