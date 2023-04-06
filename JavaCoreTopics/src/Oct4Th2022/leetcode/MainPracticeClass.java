@@ -52,6 +52,25 @@ public class MainPracticeClass {
 
     }
 
+
+    public int partitionDisjoint(int[] nums) {
+        int left = 0;
+        int len = nums.length;
+
+        for (int i = 0; i < len; i++) {
+            boolean flag = false;
+            for (int j = i + 1; j < len; j++) {
+                if (nums[j] < nums[i]) {
+                    return left;
+                }
+            }
+
+            left++;
+        }
+
+        return left;
+    }
+
     public int findLUSlength(String a, String b) {
         if (a.equals(b)) {
             return -1;
