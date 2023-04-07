@@ -25,6 +25,7 @@ public class MainPracticeClass {
         //System.out.println(findLHS(new int[]{1, 3, 2, 2, 5, 2, 3, 7}));
         //System.out.println(countVowelSubstrings("cuaieuouac"));
         //System.out.println(findSubarrays(new int[]{1, 2, 3, 4, 5}));
+
         System.out.println(maxScore("010"));
 
     }
