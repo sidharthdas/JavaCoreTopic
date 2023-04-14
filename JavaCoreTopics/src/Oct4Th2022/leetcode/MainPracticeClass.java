@@ -30,6 +30,44 @@ public class MainPracticeClass {
 
     }
 
+    public int minOperations1(String[] logs) {
+        int depth = 0;
+        for (String log : logs) {
+            if (log.equals("./")) {
+                continue;
+            } else if (log.equals("../")) {
+                depth--;
+                if (depth < 0) {
+                    depth = 0;
+                }
+
+            } else
+                depth++;
+        }
+        return depth;
+
+    }
+
+    public int minOperations(String[] logs) {
+
+        int count = 0;
+        for (String s : logs) {
+            if (s.equals("./")) {
+
+            } else if (s.equals("../")) {
+                count--;
+                if (count < 0) {
+                    count = 0;
+                }
+            } else {
+                count++;
+            }
+        }
+
+        return count;
+
+    }
+
     public int longestConsecutive(int[] nums) {
         int len = nums.length;
         Arrays.sort(nums);
