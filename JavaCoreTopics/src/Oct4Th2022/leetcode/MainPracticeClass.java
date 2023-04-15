@@ -41,6 +41,7 @@ public class MainPracticeClass {
                     depth = 0;
                 }
 
+
             } else
                 depth++;
         }
