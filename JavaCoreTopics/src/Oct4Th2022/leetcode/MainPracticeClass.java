@@ -40,8 +40,6 @@ public class MainPracticeClass {
                 if (depth < 0) {
                     depth = 0;
                 }
-
-
             } else
                 depth++;
         }
