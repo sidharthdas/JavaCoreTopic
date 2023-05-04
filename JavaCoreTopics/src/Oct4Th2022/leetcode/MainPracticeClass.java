@@ -1,7 +1,9 @@
 package Oct4Th2022.leetcode;
 
+import java.sql.SQLOutput;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * @author Sidharth Das
@@ -28,6 +30,37 @@ public class MainPracticeClass {
 
         System.out.println(maxScore("010"));
 
+    }
+
+    public int sumOfMultiples(int n) {
+        return (int) IntStream.range(1, n).filter(x -> x % 3 == 0 || x % 5 == 0 || x % 7 == 0).count();
+    }
+
+    public int[] rowAndMaximumOnes(int[][] mat) {
+        int row = mat.length;
+        int col = mat[0].length;
+
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for(int i = 0; i < row;i++){
+            int count = 0;
+            for(int j = 0; j< col; j++){
+                if(mat[i][j] == 1){
+                    count++;
+                }
+            }
+            map.put(i, count);
+        }
+
+        int max = map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed()).findFirst().get().getValue();
+        Map.Entry<Integer, Integer> e =  map.entrySet()
+                .stream()
+                .filter(x -> x.getValue() == max)
+                .sorted(Map.Entry.<Integer, Integer>comparingByKey())
+                .findFirst()
+                .get();
+
+        return new int[]{e.getKey(), e.getValue()};
     }
 
     public int minOperations1(String[] logs) {
@@ -1201,4 +1234,20 @@ class WordFilter {
 
         return -1;
     }
+}
+
+
+
+class A{
+    int i = 10;
+
+    public static void main(String[] args) {
+        A a = new BB();
+        System.out.println(a.i);
+    }
+
+}
+
+class BB extends A {
+    int i = 20;
 }
