@@ -33,7 +33,8 @@ public class MainPracticeClass {
     }
 
     public int sumOfMultiples(int n) {
-        return (int) IntStream.range(1, n).filter(x -> x % 3 == 0 || x % 5 == 0 || x % 7 == 0).count();
+        OptionalInt a = IntStream.range(1, n + 1).filter(x -> (x % 3 == 0) || (x % 5 == 0) || (x % 7 == 0)).reduce(Integer::sum);
+        return a.isPresent() ? a.getAsInt() : 0;
     }
 
     public int[] rowAndMaximumOnes(int[][] mat) {
