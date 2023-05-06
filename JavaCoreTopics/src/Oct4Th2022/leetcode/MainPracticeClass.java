@@ -32,6 +32,10 @@ public class MainPracticeClass {
 
     }
 
+    public int findDelayedArrivalTime(int arrivalTime, int delayedTime) {
+        return 0;
+    }
+
     public int sumOfMultiples(int n) {
         OptionalInt a = IntStream.range(1, n + 1).filter(x -> (x % 3 == 0) || (x % 5 == 0) || (x % 7 == 0)).reduce(Integer::sum);
         return a.isPresent() ? a.getAsInt() : 0;
