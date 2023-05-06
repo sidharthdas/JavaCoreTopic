@@ -33,7 +33,13 @@ public class MainPracticeClass {
     }
 
     public int findDelayedArrivalTime(int arrivalTime, int delayedTime) {
-        return arrivalTime + delayedTime == 24 ? 0 : arrivalTime + delayedTime;
+        int time = arrivalTime + delayedTime;
+        if(time == 24){
+            return 0;
+        } else if(time > 24){
+            return time - 24;
+        }
+        return time;
     }
 
     public int sumOfMultiples(int n) {
