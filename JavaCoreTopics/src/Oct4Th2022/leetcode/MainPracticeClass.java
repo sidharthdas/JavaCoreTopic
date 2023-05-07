@@ -32,11 +32,22 @@ public class MainPracticeClass {
 
     }
 
+    public int maximizeSum(int[] nums, int k) {
+        int a = Arrays.stream(nums).boxed().sorted(Comparator.reverseOrder()).findFirst().get();
+        int sum = a;
+
+        for (int i = 0; i < k - 1; i++) {
+            sum = sum + a + 1;
+            a = a+1;
+        }
+        return sum;
+    }
+
     public int findDelayedArrivalTime(int arrivalTime, int delayedTime) {
         int time = arrivalTime + delayedTime;
-        if(time == 24){
+        if (time == 24) {
             return 0;
-        } else if(time > 24){
+        } else if (time > 24) {
             return time - 24;
         }
         return time;
@@ -53,10 +64,10 @@ public class MainPracticeClass {
 
         Map<Integer, Integer> map = new HashMap<>();
 
-        for(int i = 0; i < row;i++){
+        for (int i = 0; i < row; i++) {
             int count = 0;
-            for(int j = 0; j< col; j++){
-                if(mat[i][j] == 1){
+            for (int j = 0; j < col; j++) {
+                if (mat[i][j] == 1) {
                     count++;
                 }
             }
@@ -64,7 +75,7 @@ public class MainPracticeClass {
         }
 
         int max = map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed()).findFirst().get().getValue();
-        Map.Entry<Integer, Integer> e =  map.entrySet()
+        Map.Entry<Integer, Integer> e = map.entrySet()
                 .stream()
                 .filter(x -> x.getValue() == max)
                 .sorted(Map.Entry.<Integer, Integer>comparingByKey())
@@ -1248,8 +1259,7 @@ class WordFilter {
 }
 
 
-
-class A{
+class A {
     int i = 10;
 
     public static void main(String[] args) {
