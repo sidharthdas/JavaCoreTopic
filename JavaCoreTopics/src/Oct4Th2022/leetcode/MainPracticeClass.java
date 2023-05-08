@@ -39,7 +39,9 @@ public class MainPracticeClass {
 
         for (int i = 0; i < r; i++) {
             for (int j = 0; j < c; j++) {
-                l.add(nums[i][j]);
+                if((i == j) || nums[i][r - i - 1] == nums[i][j]){
+                    l.add(nums[i][j]);
+                }
             }
         }
 
