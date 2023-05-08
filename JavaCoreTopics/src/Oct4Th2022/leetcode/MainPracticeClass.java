@@ -32,13 +32,50 @@ public class MainPracticeClass {
 
     }
 
+    public int diagonalPrime(int[][] nums) {
+        List<Integer> l = new ArrayList<>();
+        int r = nums.length;
+        int c = nums[0].length;
+
+        for (int i = 0; i < r; i++) {
+            for (int j = 0; j < c; j++) {
+                l.add(nums[i][j]);
+            }
+        }
+
+        l = l.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+
+        for (int i : l) {
+            if(isPrime(i)){
+                return i;
+            }
+        }
+
+        return 0;
+    }
+
+    private  boolean isPrime(int num)
+    {
+        if(num<=1)
+        {
+            return false;
+        }
+        for(int i=2;i<=num/2;i++)
+        {
+            if((num%i)==0)
+                return  false;
+        }
+        return true;
+    }
+
+
     public int maximizeSum(int[] nums, int k) {
         int a = Arrays.stream(nums).boxed().sorted(Comparator.reverseOrder()).findFirst().get();
         int sum = a;
 
         for (int i = 0; i < k - 1; i++) {
             sum = sum + a + 1;
-            a = a+1;
+            a = a + 1;
         }
         return sum;
     }
