@@ -60,7 +60,6 @@ public class MainPracticeClass {
             }
             list.add(l);
         }
-        System.out.println(list);
         return list;
     }
 
