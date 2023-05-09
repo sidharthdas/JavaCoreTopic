@@ -32,6 +32,37 @@ public class MainPracticeClass {
 
     }
 
+    public List<List<Integer>> findMatrix(int[] nums) {
+
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int i : nums) {
+            map.put(i, map.getOrDefault(i, 0) + 1);
+        }
+
+        map = map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+
+        int size = map.size();
+        int zero = 0;
+
+        List<List<Integer>> list = new ArrayList<>();
+        while (map.entrySet().stream().filter(x -> x.getValue() == 0).count() != size) {
+            List<Integer> l = new ArrayList<>();
+
+            for (Map.Entry<Integer, Integer> m : map.entrySet()) {
+                if (m.getValue() > 0) {
+                    l.add(m.getKey());
+                    map.put(m.getKey(), m.getValue() - 1);
+                } else{
+                    zero ++;
+                }
+            }
+            list.add(l);
+        }
+        return list;
+    }
+
     public int diagonalPrime(int[][] nums) {
         List<Integer> l = new ArrayList<>();
         int r = nums.length;
@@ -39,7 +70,7 @@ public class MainPracticeClass {
 
         for (int i = 0; i < r; i++) {
             for (int j = 0; j < c; j++) {
-                if((i == j) || nums[i][r - i - 1] == nums[i][j]){
+                if ((i == j) || nums[i][r - i - 1] == nums[i][j]) {
                     l.add(nums[i][j]);
                 }
             }
@@ -48,7 +79,7 @@ public class MainPracticeClass {
         l = l.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
 
         for (int i : l) {
-            if(isPrime(i)){
+            if (isPrime(i)) {
                 return i;
             }
         }
@@ -56,16 +87,13 @@ public class MainPracticeClass {
         return 0;
     }
 
-    private  boolean isPrime(int num)
-    {
-        if(num<=1)
-        {
+    private boolean isPrime(int num) {
+        if (num <= 1) {
             return false;
         }
-        for(int i=2;i<=num/2;i++)
-        {
-            if((num%i)==0)
-                return  false;
+        for (int i = 2; i <= num / 2; i++) {
+            if ((num % i) == 0)
+                return false;
         }
         return true;
     }
