@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 public class Leetcode21MainClass {
 
     public static void main(String[] args) {
+
        /* ["Bank","deposit","transfer","transfer"]
 [[[0]],[1,2],[1,1,1],[1,1,3]]*//*
         Bank bank = new Bank(new long[]{0});
