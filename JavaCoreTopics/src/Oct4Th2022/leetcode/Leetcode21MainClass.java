@@ -80,6 +80,37 @@ public class Leetcode21MainClass {
 
     }
 
+    public List<List<Integer>> findMatrix(int[] nums) {
+
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int i : nums) {
+            map.put(i, map.getOrDefault(i, 0) + 1);
+        }
+
+        map = map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+
+        int size = map.size();
+        int zero = 0;
+
+        List<List<Integer>> list = new ArrayList<>();
+        while (map.entrySet().stream().filter(x -> x.getValue() == 0).count() != size) {
+            List<Integer> l = new ArrayList<>();
+
+            for (Map.Entry<Integer, Integer> m : map.entrySet()) {
+                if (m.getValue() > 0) {
+                    l.add(m.getKey());
+                    map.put(m.getKey(), m.getValue() - 1);
+                } else{
+                    zero ++;
+                }
+            }
+            list.add(l);
+        }
+        return list;
+    }
+
 
     public static boolean isBoomerang(int[][] points) {
         int[] a = points[0];
@@ -973,8 +1004,8 @@ public class Leetcode21MainClass {
             list = list.stream().sorted().collect(Collectors.toList());
             int max = list.get(list.size() - 1);
             int min = list.get(0);
-            list.remove(new Integer(max));
-            list.remove(new Integer(min));
+            list.remove(Integer.parseInt(String.valueOf(max)));
+            list.remove(Integer.parseInt(String.valueOf(max)));
 
             double d = (double) (max + min) / 2;
             set.add(d);
@@ -1280,269 +1311,4 @@ public class Leetcode21MainClass {
         }
         return true;
     }
-
-    public ListNode mergeNodes(ListNode head) {
-        LinkedList1 ll = new LinkedList1();
-        int sum = 0;
-        int zeroCount = 0;
-        while (head.next != null) {
-            if (zeroCount == 2) {
-                ll = ll.insertAtEnd(ll, sum);
-                zeroCount = 1;
-                sum = 0 + head.val;
-            } else if (head.val == 0) {
-                zeroCount++;
-            } else {
-                sum += head.val;
-            }
-
-            head = head.next;
-        }
-        return ll.head;
-
-    }
-
-    public List<Boolean> camelMatch1(String[] queries, String pattern) {
-        List<String> alpha = List.of("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O",
-                "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
-
-        String[] arr = pattern.split("");
-        int len = pattern.length();
-        List<String> l = new ArrayList<>();
-        StringBuilder sb = new StringBuilder(arr[0]);
-        for (int i = 1; i < len; i++) {
-            if (alpha.contains(arr[i])) {
-                l.add(sb.toString());
-                sb = new StringBuilder(arr[i]);
-            } else {
-                sb.append(arr[i]);
-            }
-        }
-        l.add(sb.toString());
-        List<Boolean> finalList = new ArrayList<>();
-
-        for (String s : queries) {
-            boolean flag = true;
-            for (String s1 : l) {
-                if (!s.contains(s1)) {
-                    flag = false;
-                    break;
-                }
-            }
-
-            if (flag) {
-                finalList.add(true);
-            } else {
-                finalList.add(false);
-            }
-        }
-
-        return finalList;
-    }
-
-    public int specialArray(int[] nums) {
-        int len = nums.length;
-
-        for (int x = len; x >= 0; x--) {
-            int count = 0;
-            for (int num : nums) {
-                if (num >= x) {
-                    count++;
-                }
-            }
-            if (count == x) {
-                return x;
-            }
-        }
-        System.out.println();
-        return -1;
-    }
-
-    public List<Boolean> camelMatch(String[] queries, String pattern) {
-        List<Boolean> l = new ArrayList<>();
-        for (String query : queries) {
-            query = query.replaceAll("[^a-z]", "");
-            if (pattern.equals(query)) {
-                l.add(true);
-            } else {
-                l.add(false);
-            }
-        }
-
-        return l;
-    }
-
-
-    public int maxProduct(String[] words) {
-        Arrays.sort(words, (x1, x2) -> x1.length() - x2.length());
-        int len = words.length;
-
-        return words[len - 1].length() * words[len - 2].length();
-
-    }
-}
-
-class Bank {
-
-    Map<Integer, Long> map;
-
-    public Bank(long[] balance) {
-        map = new HashMap<>();
-        int len = balance.length;
-        for (int i = 0; i < len; i++) {
-            map.put(i + 1, balance[i]);
-        }
-    }
-
-    public boolean transfer(int account1, int account2, long money) {
-
-        if (map.containsKey(account1) && map.containsKey(account2)) {
-            if (account2 == account1) return true;
-            long bal1 = map.get(account1);
-            long bal2 = map.get(account2);
-            if (bal1 >= money) {
-                map.put(account1, bal1 - money);
-                map.put(account2, bal2 + money);
-                return true;
-            }
-        }
-
-        return false;
-
-    }
-
-    public boolean deposit(int account, long money) {
-        if (map.containsKey(account)) {
-            map.put(account, map.get(account) + money);
-            return true;
-        }
-        return false;
-    }
-
-    public boolean withdraw(int account, long money) {
-        if (map.containsKey(account)) {
-            long mon = map.get(account);
-            if (money <= mon) {
-                map.put(account, mon - money);
-                return true;
-            }
-        }
-
-        return false;
-    }
-}
-
-
-class LinkedList1 {
-
-    ListNode head = null;
-
-    public LinkedList1 insertAtEnd(LinkedList1 l, int data) {
-        ListNode node = new ListNode();
-        node.val = data;
-
-        if (l.head == null) {
-            l.head = node;
-        } else {
-            ListNode currNode = l.head;
-
-            while (currNode.next != null) {
-                currNode = currNode.next;
-            }
-
-            currNode.next = node;
-        }
-
-        return l;
-    }
-
-
-}
-
-class WordDictionary {
-    Map<String, Boolean> map;
-
-    public WordDictionary() {
-        map = new HashMap<>();
-    }
-
-    public void addWord(String word) {
-        map.put(word, true);
-    }
-
-    public boolean search(String word) {
-
-        String[] w = word.split("");
-        int len = w.length;
-        List<String> list = map.keySet().stream().filter(x -> x.length() == len).toList();
-        for (String w1 : list) {
-            boolean flag = true;
-            if (w1.length() == w.length) {
-
-
-                String[] w1Arr = w1.split("");
-                for (int i = 0; i < len; i++) {
-                    if (!w[i].equals(".")) {
-                        if (!w[i].equals(w1Arr[i])) {
-                            flag = false;
-                            break;
-                        }
-                    }
-                }
-            } else {
-                flag = false;
-            }
-
-            if (flag) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-}
-
-class Trie {
-
-    Map<String, Boolean> map;
-
-    public Trie() {
-        map = new HashMap<>();
-    }
-
-    public void insert(String word) {
-        map.put(word, true);
-    }
-
-    public boolean search(String word) {
-        return map.containsKey(word);
-    }
-
-    public boolean startsWith(String prefix) {
-        int len = prefix.length();
-        List<String> l = map.keySet().stream().filter(x -> x.length() >= len).toList();
-
-        for (String s : l) {
-            if (prefix.equals(s.substring(0, len))) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-}
-
-class Hosting {
-
-    private int Id;
-    private String name;
-    private long websites;
-
-    public Hosting(int id, String name, long websites) {
-        Id = id;
-        this.name = name;
-        this.websites = websites;
-    }
-
-    //getters, setters and toString()
 }
