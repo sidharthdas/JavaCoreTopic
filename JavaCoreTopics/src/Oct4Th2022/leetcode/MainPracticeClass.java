@@ -32,6 +32,26 @@ public class MainPracticeClass {
 
     }
 
+    public int[] findColumnWidth(int[][] grid) {
+
+        int row = grid.length;
+        int col = grid[0].length;
+        int[] len = new int[col];
+        int temp = 0;
+
+        for (int j = 0; j < col; j++) {
+            int max = Integer.MIN_VALUE;
+            for (int i = 0; i < row; i++) {
+                if(String.valueOf(grid[i][j]).length() > max){
+                    max = String.valueOf(grid[i][j]).length();
+                }
+            }
+            len[temp] = max;
+            temp++;
+        }
+        return len;
+    }
+
     public List<List<Integer>> findMatrix(int[] nums) {
 
         Map<Integer, Integer> map = new HashMap<>();
@@ -54,8 +74,8 @@ public class MainPracticeClass {
                 if (m.getValue() > 0) {
                     l.add(m.getKey());
                     map.put(m.getKey(), m.getValue() - 1);
-                } else{
-                    zero ++;
+                } else {
+                    zero++;
                 }
             }
             list.add(l);
