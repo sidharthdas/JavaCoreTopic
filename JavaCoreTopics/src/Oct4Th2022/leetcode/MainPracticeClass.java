@@ -32,6 +32,53 @@ public class MainPracticeClass {
 
     }
 
+    public int[][] matrixBlockSum(int[][] mat, int k) {
+        int row = mat.length;
+        int col = mat[0].length;
+
+        int[][] result = new int[row][col];
+
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                int rs = i - k;
+                int re = i + k;
+                int cs = j - k;
+                int ce = j + k;
+
+                if (rs < 0) {
+                    rs = 0;
+                }
+
+                if (re >= row) {
+                    re = row - 1;
+                }
+
+                if (cs < 0) {
+                    cs = 0;
+                }
+
+                if (ce >= col) {
+                    ce = col - 1;
+                }
+
+                result[i][j] = sum(mat, rs, re, cs, ce);
+            }
+        }
+
+        return result;
+    }
+
+    private int sum (int[][] arr, int rs, int re, int cs, int ce){
+        int temp = 0;
+
+        for(int i = rs; i <= re; i++){
+            for(int j = cs; j <= ce; j++){
+                temp += arr[i][j];
+            }
+        }
+
+        return temp;
+    }
     public int[] findColumnWidth(int[][] grid) {
 
         int row = grid.length;
@@ -42,7 +89,7 @@ public class MainPracticeClass {
         for (int j = 0; j < col; j++) {
             int max = Integer.MIN_VALUE;
             for (int i = 0; i < row; i++) {
-                if(String.valueOf(grid[i][j]).length() > max){
+                if (String.valueOf(grid[i][j]).length() > max) {
                     max = String.valueOf(grid[i][j]).length();
                 }
             }
