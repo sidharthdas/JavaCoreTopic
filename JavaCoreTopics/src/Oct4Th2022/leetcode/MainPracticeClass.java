@@ -32,6 +32,32 @@ public class MainPracticeClass {
 
     }
 
+    public List<List<Integer>> queensAttacktheKing(int[][] queens, int[] king) {
+
+        int kingX = king[0];
+        int kingY = king[1];
+
+        int minX = Integer.MAX_VALUE;
+        int minY = Integer.MAX_VALUE;
+
+        int min = Integer.MAX_VALUE;
+
+        for (int[] queen : queens) {
+            if (queen[0] == kingX) {
+
+
+
+            } else if (queen[1] == kingY) {
+
+            } else {
+
+            }
+        }
+
+        return null;
+
+    }
+
     public int[][] matrixBlockSum(int[][] mat, int k) {
         int row = mat.length;
         int col = mat[0].length;
@@ -68,17 +94,18 @@ public class MainPracticeClass {
         return result;
     }
 
-    private int sum (int[][] arr, int rs, int re, int cs, int ce){
+    private int sum(int[][] arr, int rs, int re, int cs, int ce) {
         int temp = 0;
 
-        for(int i = rs; i <= re; i++){
-            for(int j = cs; j <= ce; j++){
+        for (int i = rs; i <= re; i++) {
+            for (int j = cs; j <= ce; j++) {
                 temp += arr[i][j];
             }
         }
 
         return temp;
     }
+
     public int[] findColumnWidth(int[][] grid) {
 
         int row = grid.length;
