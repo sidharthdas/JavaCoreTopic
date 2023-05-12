@@ -32,6 +32,21 @@ public class MainPracticeClass {
 
     }
 
+    //Distinct
+    public int[] distinctDifferenceArray(int[] nums) {
+        int len = nums.length;
+        int[] result = new int[len];
+
+        int prefix = 1;
+
+        for (int i = 0; i < len; i++) {
+            result[i] = prefix - (len - prefix);
+            prefix++;
+        }
+
+        return result;
+    }
+
 
     public int maxDivScore(int[] nums, int[] divisors) {
 
@@ -41,7 +56,7 @@ public class MainPracticeClass {
         for (int divisor : divisors) {
             long count = Arrays.stream(nums).boxed().filter(x -> x % divisor == 0).count();
             map.put(divisor, count);
-            if(count > max){
+            if (count > max) {
                 max = count;
             }
         }
@@ -50,7 +65,6 @@ public class MainPracticeClass {
         long finalMax = max;
         return map.entrySet().stream().filter(x -> x.getValue() == finalMax).map(x -> x.getKey()).sorted(Comparator.reverseOrder())
                 .findFirst().get();
-
 
 
     }
