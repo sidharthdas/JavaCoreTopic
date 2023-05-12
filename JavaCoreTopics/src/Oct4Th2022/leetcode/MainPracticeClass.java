@@ -28,20 +28,37 @@ public class MainPracticeClass {
         //System.out.println(countVowelSubstrings("cuaieuouac"));
         //System.out.println(findSubarrays(new int[]{1, 2, 3, 4, 5}));
 
-        System.out.println(maxScore("010"));
+        //System.out.println(maxScore("010"));
+        distinctDifferenceArray(new int[]{1,2,3,4,5});
 
     }
 
     //Distinct
-    public int[] distinctDifferenceArray(int[] nums) {
+    public static int[] distinctDifferenceArray(int[] nums) {
         int len = nums.length;
+        Set<Integer> set = null;
         int[] result = new int[len];
 
-        int prefix = 1;
+        int prefix = 0;
+        int suffic = 0;
 
         for (int i = 0; i < len; i++) {
-            result[i] = prefix - (len - prefix);
-            prefix++;
+            set = new HashSet<>();
+            for(int j = 0; j <= i; j++){
+                if(set.add(nums[j])) {
+                    prefix++;
+                }
+            }
+            set = new HashSet<>();
+            for(int j = i +1; j <len; j++){
+                if(set.add(nums[j])) {
+                    suffic++;
+                }
+            }
+
+            result[i] = prefix - suffic;
+            prefix = 0;
+            suffic = 0;
         }
 
         return result;
