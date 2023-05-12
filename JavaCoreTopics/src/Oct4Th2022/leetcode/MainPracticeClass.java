@@ -32,6 +32,29 @@ public class MainPracticeClass {
 
     }
 
+
+    public int maxDivScore(int[] nums, int[] divisors) {
+
+        Map<Integer, Long> map = new HashMap<>();
+        long max = Integer.MIN_VALUE;
+
+        for (int divisor : divisors) {
+            long count = Arrays.stream(nums).boxed().filter(x -> x % divisor == 0).count();
+            map.put(divisor, count);
+            if(count > max){
+                max = count;
+            }
+        }
+
+
+        long finalMax = max;
+        return map.entrySet().stream().filter(x -> x.getValue() == finalMax).map(x -> x.getKey()).sorted(Comparator.reverseOrder())
+                .findFirst().get();
+
+
+
+    }
+
     public List<List<Integer>> queensAttacktheKing(int[][] queens, int[] king) {
 
         int kingX = king[0];
@@ -44,7 +67,6 @@ public class MainPracticeClass {
 
         for (int[] queen : queens) {
             if (queen[0] == kingX) {
-
 
 
             } else if (queen[1] == kingY) {
