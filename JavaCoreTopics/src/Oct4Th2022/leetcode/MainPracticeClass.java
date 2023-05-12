@@ -29,8 +29,34 @@ public class MainPracticeClass {
         //System.out.println(findSubarrays(new int[]{1, 2, 3, 4, 5}));
 
         //System.out.println(maxScore("010"));
-        distinctDifferenceArray(new int[]{1,2,3,4,5});
+        //distinctDifferenceArray(new int[]{1, 2, 3, 4, 5});
+        System.out.println(removeOuterParentheses("(()())(())(()(()))"));
 
+    }
+
+    public static String removeOuterParentheses(String s) {
+        int len = s.length();
+        int currentIndex = 0;
+        String finalString = "";
+        while (true) {
+            s = s.substring(currentIndex);
+            int startIndex = s.indexOf("((");
+            int endIndex = s.indexOf("))");
+
+            if (startIndex == -1) {
+                if (s.length() < 2) {
+                    finalString += s;
+                }
+                break;
+            }
+
+            finalString += s.substring(startIndex + 1, endIndex + 1);
+            currentIndex = endIndex + 2 >= len ? len - 1 : endIndex + 2;
+
+
+        }
+
+        return finalString;
     }
 
     //Distinct
@@ -44,14 +70,14 @@ public class MainPracticeClass {
 
         for (int i = 0; i < len; i++) {
             set = new HashSet<>();
-            for(int j = 0; j <= i; j++){
-                if(set.add(nums[j])) {
+            for (int j = 0; j <= i; j++) {
+                if (set.add(nums[j])) {
                     prefix++;
                 }
             }
             set = new HashSet<>();
-            for(int j = i +1; j <len; j++){
-                if(set.add(nums[j])) {
+            for (int j = i + 1; j < len; j++) {
+                if (set.add(nums[j])) {
                     suffic++;
                 }
             }
