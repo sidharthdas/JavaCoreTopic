@@ -35,6 +35,7 @@ public class MainPracticeClass {
     }
 
     public static String removeOuterParentheses(String s) {
+
         int len = s.length();
         int currentIndex = 0;
         String finalString = "";
