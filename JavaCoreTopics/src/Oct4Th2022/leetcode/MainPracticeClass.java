@@ -30,8 +30,70 @@ public class MainPracticeClass {
 
         //System.out.println(maxScore("010"));
         //distinctDifferenceArray(new int[]{1, 2, 3, 4, 5});
-        System.out.println(removeOuterParentheses("(()())(())(()(()))"));
+        //System.out.println(removeOuterParentheses("(()())(())(()(()))"));
+        //System.out.println(smallestEquivalentString("leetcode", "programs", "sourcecode"));
+        rotate(new int[][]{new int[]{1,2,3},new int[]{4,5,6},new int[]{7,8,9}});
 
+    }
+
+    public static void rotate(int[][] matrix) {
+        int n = matrix.length;
+        int[][] newMat = new int[n][n];
+        int tempX = 0;
+        int tempY = 0;
+
+        for (int j = n - 1; j >= 0; j--) {
+            for (int i = 0; i < n; i++) {
+                newMat[i][j] = matrix[tempX][tempY];
+                tempY++;
+            }
+            tempX++;
+            tempY = 0;
+        }
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                matrix[i][j] = newMat[i][j];
+            }
+        }
+    }
+
+    public static String smallestEquivalentString(String s1, String s2, String baseStr) {
+
+        List<TreeSet<String>> list = new ArrayList<>();
+        int len = s1.length();
+
+        for (int i = 0; i < len; i++) {
+            int finalI = i;
+            Optional<TreeSet<String>> set = list
+                    .stream()
+                    .filter(x -> x.contains(String.valueOf(s1.charAt(finalI))) || x.contains(String.valueOf(s2.charAt(finalI))))
+                    .findFirst();
+            if (set.isPresent()) {
+                set.get().add(String.valueOf(s1.charAt(finalI)));
+                set.get().add(String.valueOf(s2.charAt(finalI)));
+            } else {
+                TreeSet<String> set1 = new TreeSet<>();
+                set1.add(String.valueOf(s1.charAt(finalI)));
+                set1.add(String.valueOf(s2.charAt(finalI)));
+                list.add(set1);
+            }
+        }
+
+        String finalResult = "";
+
+        String[] srr = baseStr.split("");
+
+        for (String s : srr) {
+            Optional<TreeSet<String>> tree = list.stream().filter(x -> x.contains(s)).findFirst();
+            if (tree.isPresent()) {
+                finalResult += list.stream().filter(x -> x.contains(s)).findFirst().get().stream().findFirst().get();
+            } else {
+                finalResult += s;
+            }
+        }
+
+        return finalResult;
     }
 
     public static String removeOuterParentheses(String s) {
@@ -107,8 +169,7 @@ public class MainPracticeClass {
 
 
         long finalMax = max;
-        return map.entrySet().stream().filter(x -> x.getValue() == finalMax).map(x -> x.getKey()).sorted(Comparator.reverseOrder())
-                .findFirst().get();
+        return map.entrySet().stream().filter(x -> x.getValue() == finalMax).map(x -> x.getKey()).sorted(Comparator.reverseOrder()).findFirst().get();
 
 
     }
@@ -214,8 +275,7 @@ public class MainPracticeClass {
             map.put(i, map.getOrDefault(i, 0) + 1);
         }
 
-        map = map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed())
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+        map = map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed()).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
 
         int size = map.size();
         int zero = 0;
@@ -266,8 +326,7 @@ public class MainPracticeClass {
             return false;
         }
         for (int i = 2; i <= num / 2; i++) {
-            if ((num % i) == 0)
-                return false;
+            if ((num % i) == 0) return false;
         }
         return true;
     }
@@ -316,12 +375,7 @@ public class MainPracticeClass {
         }
 
         int max = map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed()).findFirst().get().getValue();
-        Map.Entry<Integer, Integer> e = map.entrySet()
-                .stream()
-                .filter(x -> x.getValue() == max)
-                .sorted(Map.Entry.<Integer, Integer>comparingByKey())
-                .findFirst()
-                .get();
+        Map.Entry<Integer, Integer> e = map.entrySet().stream().filter(x -> x.getValue() == max).sorted(Map.Entry.<Integer, Integer>comparingByKey()).findFirst().get();
 
         return new int[]{e.getKey(), e.getValue()};
     }
@@ -336,8 +390,7 @@ public class MainPracticeClass {
                 if (depth < 0) {
                     depth = 0;
                 }
-            } else
-                depth++;
+            } else depth++;
         }
         return depth;
 
@@ -443,15 +496,7 @@ public class MainPracticeClass {
     }
 
     public static int romanToInt1(String s) {
-        Map<String, Integer> map = Map.ofEntries(
-                Map.entry("I", 1),
-                Map.entry("V", 5),
-                Map.entry("X", 10),
-                Map.entry("L", 50),
-                Map.entry("C", 100),
-                Map.entry("D", 500),
-                Map.entry("M", 1000)
-        );
+        Map<String, Integer> map = Map.ofEntries(Map.entry("I", 1), Map.entry("V", 5), Map.entry("X", 10), Map.entry("L", 50), Map.entry("C", 100), Map.entry("D", 500), Map.entry("M", 1000));
 
         int count = 0;
         String[] srr = s.split("");
@@ -920,15 +965,7 @@ public class MainPracticeClass {
     }
 
     public int romanToInt(String s) {
-        Map<String, Integer> map = Map.ofEntries(
-                Map.entry("I", 1),
-                Map.entry("V", 5),
-                Map.entry("X", 10),
-                Map.entry("L", 50),
-                Map.entry("C", 100),
-                Map.entry("D", 500),
-                Map.entry("M", 1000)
-        );
+        Map<String, Integer> map = Map.ofEntries(Map.entry("I", 1), Map.entry("V", 5), Map.entry("X", 10), Map.entry("L", 50), Map.entry("C", 100), Map.entry("D", 500), Map.entry("M", 1000));
 
         int count = 0;
         String[] srr = s.split("");
@@ -1067,19 +1104,7 @@ public class MainPracticeClass {
     public int countDaysTogether(String arriveAlice, String leaveAlice, String arriveBob, String leaveBob) {
         Map<Integer, Integer> map = Map.ofEntries(
                 //31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
-                Map.entry(1, 31),
-                Map.entry(2, 28),
-                Map.entry(3, 31),
-                Map.entry(4, 30),
-                Map.entry(5, 31),
-                Map.entry(6, 30),
-                Map.entry(7, 31),
-                Map.entry(8, 31),
-                Map.entry(9, 30),
-                Map.entry(10, 31),
-                Map.entry(11, 30),
-                Map.entry(12, 31)
-        );
+                Map.entry(1, 31), Map.entry(2, 28), Map.entry(3, 31), Map.entry(4, 30), Map.entry(5, 31), Map.entry(6, 30), Map.entry(7, 31), Map.entry(8, 31), Map.entry(9, 30), Map.entry(10, 31), Map.entry(11, 30), Map.entry(12, 31));
         String[] arriveAliceArr = arriveAlice.split("");
         int aliceMonthArrival = Integer.parseInt(arriveAliceArr[0]);
         int aliceDayArrival = Integer.parseInt(arriveAliceArr[1]);
@@ -1110,9 +1135,7 @@ public class MainPracticeClass {
             map.put(i[0], map.getOrDefault(i[0], 0) + i[1]);
         }
 
-        map = map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByKey()).collect(Collectors.toMap(
-                Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new
-        ));
+        map = map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByKey()).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
 
         int size = map.size();
         int[][] finalAns = new int[size][2];
@@ -1484,8 +1507,7 @@ class WordFilter {
             if (s.length() >= prefLen && s.length() >= suffLen) {
                 int sLen = s.length();
 
-                if (s.substring(0, prefLen).equals(pref) &&
-                        s.substring(sLen - suffLen).equals(suff)) {
+                if (s.substring(0, prefLen).equals(pref) && s.substring(sLen - suffLen).equals(suff)) {
                     map.put(s, currIndex);
                     currIndex++;
                 }
