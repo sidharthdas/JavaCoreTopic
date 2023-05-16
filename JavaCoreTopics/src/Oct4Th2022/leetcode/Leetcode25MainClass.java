@@ -67,6 +67,17 @@ public class Leetcode25MainClass {
 
     }
 
+    public long coloredCells(int n) {
+        /*
+        * 1 + 4*1 + 4*2 + . . .
+        * 1 + 4 * (1 + 2 + . . . + n-1)
+        * 1 + 4 * (n * (n + 1) / 2)
+        * 1 + (2 * n * (n - 1))
+        * */
+
+        return 1 + ((long)(2 * n) * (n - 1));
+    }
+
     public static boolean validTicTacToe(String[] board) {
         int[][] mat = new int[3][3];
 
