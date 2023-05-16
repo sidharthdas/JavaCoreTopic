@@ -28,8 +28,273 @@ public class MainPracticeClass {
         //System.out.println(countVowelSubstrings("cuaieuouac"));
         //System.out.println(findSubarrays(new int[]{1, 2, 3, 4, 5}));
 
-        System.out.println(maxScore("010"));
+        //System.out.println(maxScore("010"));
+        //distinctDifferenceArray(new int[]{1, 2, 3, 4, 5});
+        //System.out.println(removeOuterParentheses("(()())(())(()(()))"));
+        //System.out.println(smallestEquivalentString("leetcode", "programs", "sourcecode"));
+        //rotate(new int[][]{new int[]{1, 2, 3}, new int[]{4, 5, 6}, new int[]{7, 8, 9}});
+        System.out.println(shortestPalindrome("aacecaaa"));
 
+    }
+
+    public static String shortestPalindrome(String s) {
+        int startIndex = 0;
+        int lastIndex = s.length() - 1;
+
+        while (startIndex < lastIndex) {
+            if (s.charAt(startIndex) != s.charAt(lastIndex)) {
+                s = s.substring(0, startIndex) + s.charAt(lastIndex) + s.substring(startIndex);
+                lastIndex++;
+            }
+            startIndex++;
+            lastIndex--;
+        }
+
+        return s;
+    }
+
+    public static List<Integer> countSmaller(int[] nums) {
+        List<Integer> l = Arrays.stream(nums).boxed().sorted().collect(Collectors.toList());
+        int size = nums.length;
+        List<Integer> finalResult = new ArrayList<>();
+
+        for (int i : nums) {
+            int t = l.indexOf(i);
+            finalResult.add(t);
+        }
+
+        return finalResult;
+    }
+
+    public static void rotate(int[][] matrix) {
+        int n = matrix.length;
+        int[][] newMat = new int[n][n];
+        int tempX = 0;
+        int tempY = 0;
+
+        for (int j = n - 1; j >= 0; j--) {
+            for (int i = 0; i < n; i++) {
+                newMat[i][j] = matrix[tempX][tempY];
+                tempY++;
+            }
+            tempX++;
+            tempY = 0;
+        }
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                matrix[i][j] = newMat[i][j];
+            }
+        }
+    }
+
+    public static String smallestEquivalentString(String s1, String s2, String baseStr) {
+
+        List<TreeSet<String>> list = new ArrayList<>();
+        int len = s1.length();
+
+        for (int i = 0; i < len; i++) {
+            int finalI = i;
+            Optional<TreeSet<String>> set = list
+                    .stream()
+                    .filter(x -> x.contains(String.valueOf(s1.charAt(finalI))) || x.contains(String.valueOf(s2.charAt(finalI))))
+                    .findFirst();
+            if (set.isPresent()) {
+                set.get().add(String.valueOf(s1.charAt(finalI)));
+                set.get().add(String.valueOf(s2.charAt(finalI)));
+            } else {
+                TreeSet<String> set1 = new TreeSet<>();
+                set1.add(String.valueOf(s1.charAt(finalI)));
+                set1.add(String.valueOf(s2.charAt(finalI)));
+                list.add(set1);
+            }
+        }
+
+        String finalResult = "";
+
+        String[] srr = baseStr.split("");
+
+        for (String s : srr) {
+            Optional<TreeSet<String>> tree = list.stream().filter(x -> x.contains(s)).findFirst();
+            if (tree.isPresent()) {
+                finalResult += list.stream().filter(x -> x.contains(s)).findFirst().get().stream().findFirst().get();
+            } else {
+                finalResult += s;
+            }
+        }
+
+        return finalResult;
+    }
+
+    public static String removeOuterParentheses(String s) {
+
+        int len = s.length();
+        int currentIndex = 0;
+        String finalString = "";
+        while (true) {
+            s = s.substring(currentIndex);
+            int startIndex = s.indexOf("((");
+            int endIndex = s.indexOf("))");
+
+            if (startIndex == -1) {
+                if (s.length() < 2) {
+                    finalString += s;
+                }
+                break;
+            }
+
+            finalString += s.substring(startIndex + 1, endIndex + 1);
+            currentIndex = endIndex + 2 >= len ? len - 1 : endIndex + 2;
+
+
+        }
+
+        return finalString;
+    }
+
+    //Distinct
+    public static int[] distinctDifferenceArray(int[] nums) {
+        int len = nums.length;
+        Set<Integer> set = null;
+        int[] result = new int[len];
+
+        int prefix = 0;
+        int suffic = 0;
+
+        for (int i = 0; i < len; i++) {
+            set = new HashSet<>();
+            for (int j = 0; j <= i; j++) {
+                if (set.add(nums[j])) {
+                    prefix++;
+                }
+            }
+            set = new HashSet<>();
+            for (int j = i + 1; j < len; j++) {
+                if (set.add(nums[j])) {
+                    suffic++;
+                }
+            }
+
+            result[i] = prefix - suffic;
+            prefix = 0;
+            suffic = 0;
+        }
+
+        return result;
+    }
+
+
+    public int maxDivScore(int[] nums, int[] divisors) {
+
+        Map<Integer, Long> map = new HashMap<>();
+        long max = Integer.MIN_VALUE;
+
+        for (int divisor : divisors) {
+            long count = Arrays.stream(nums).boxed().filter(x -> x % divisor == 0).count();
+            map.put(divisor, count);
+            if (count > max) {
+                max = count;
+            }
+        }
+
+
+        long finalMax = max;
+        return map.entrySet().stream().filter(x -> x.getValue() == finalMax).map(x -> x.getKey()).sorted(Comparator.reverseOrder()).findFirst().get();
+
+
+    }
+
+    public List<List<Integer>> queensAttacktheKing(int[][] queens, int[] king) {
+
+        int kingX = king[0];
+        int kingY = king[1];
+
+        int minX = Integer.MAX_VALUE;
+        int minY = Integer.MAX_VALUE;
+
+        int min = Integer.MAX_VALUE;
+
+        for (int[] queen : queens) {
+            if (queen[0] == kingX) {
+
+
+            } else if (queen[1] == kingY) {
+
+            } else {
+
+            }
+        }
+
+        return null;
+
+    }
+
+    public int[][] matrixBlockSum(int[][] mat, int k) {
+        int row = mat.length;
+        int col = mat[0].length;
+
+        int[][] result = new int[row][col];
+
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                int rs = i - k;
+                int re = i + k;
+                int cs = j - k;
+                int ce = j + k;
+
+                if (rs < 0) {
+                    rs = 0;
+                }
+
+                if (re >= row) {
+                    re = row - 1;
+                }
+
+                if (cs < 0) {
+                    cs = 0;
+                }
+
+                if (ce >= col) {
+                    ce = col - 1;
+                }
+
+                result[i][j] = sum(mat, rs, re, cs, ce);
+            }
+        }
+
+        return result;
+    }
+
+    private int sum(int[][] arr, int rs, int re, int cs, int ce) {
+        int temp = 0;
+
+        for (int i = rs; i <= re; i++) {
+            for (int j = cs; j <= ce; j++) {
+                temp += arr[i][j];
+            }
+        }
+
+        return temp;
+    }
+
+    public int[] findColumnWidth(int[][] grid) {
+
+        int row = grid.length;
+        int col = grid[0].length;
+        int[] len = new int[col];
+        int temp = 0;
+
+        for (int j = 0; j < col; j++) {
+            int max = Integer.MIN_VALUE;
+            for (int i = 0; i < row; i++) {
+                if (String.valueOf(grid[i][j]).length() > max) {
+                    max = String.valueOf(grid[i][j]).length();
+                }
+            }
+            len[temp] = max;
+            temp++;
+        }
+        return len;
     }
 
     public List<List<Integer>> findMatrix(int[] nums) {
@@ -40,8 +305,7 @@ public class MainPracticeClass {
             map.put(i, map.getOrDefault(i, 0) + 1);
         }
 
-        map = map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed())
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+        map = map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed()).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
 
         int size = map.size();
         int zero = 0;
@@ -54,13 +318,12 @@ public class MainPracticeClass {
                 if (m.getValue() > 0) {
                     l.add(m.getKey());
                     map.put(m.getKey(), m.getValue() - 1);
-                } else{
-                    zero ++;
+                } else {
+                    zero++;
                 }
             }
             list.add(l);
         }
-        System.out.println(list);
         return list;
     }
 
@@ -93,8 +356,7 @@ public class MainPracticeClass {
             return false;
         }
         for (int i = 2; i <= num / 2; i++) {
-            if ((num % i) == 0)
-                return false;
+            if ((num % i) == 0) return false;
         }
         return true;
     }
@@ -143,12 +405,7 @@ public class MainPracticeClass {
         }
 
         int max = map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed()).findFirst().get().getValue();
-        Map.Entry<Integer, Integer> e = map.entrySet()
-                .stream()
-                .filter(x -> x.getValue() == max)
-                .sorted(Map.Entry.<Integer, Integer>comparingByKey())
-                .findFirst()
-                .get();
+        Map.Entry<Integer, Integer> e = map.entrySet().stream().filter(x -> x.getValue() == max).sorted(Map.Entry.<Integer, Integer>comparingByKey()).findFirst().get();
 
         return new int[]{e.getKey(), e.getValue()};
     }
@@ -163,8 +420,7 @@ public class MainPracticeClass {
                 if (depth < 0) {
                     depth = 0;
                 }
-            } else
-                depth++;
+            } else depth++;
         }
         return depth;
 
@@ -270,15 +526,7 @@ public class MainPracticeClass {
     }
 
     public static int romanToInt1(String s) {
-        Map<String, Integer> map = Map.ofEntries(
-                Map.entry("I", 1),
-                Map.entry("V", 5),
-                Map.entry("X", 10),
-                Map.entry("L", 50),
-                Map.entry("C", 100),
-                Map.entry("D", 500),
-                Map.entry("M", 1000)
-        );
+        Map<String, Integer> map = Map.ofEntries(Map.entry("I", 1), Map.entry("V", 5), Map.entry("X", 10), Map.entry("L", 50), Map.entry("C", 100), Map.entry("D", 500), Map.entry("M", 1000));
 
         int count = 0;
         String[] srr = s.split("");
@@ -747,15 +995,7 @@ public class MainPracticeClass {
     }
 
     public int romanToInt(String s) {
-        Map<String, Integer> map = Map.ofEntries(
-                Map.entry("I", 1),
-                Map.entry("V", 5),
-                Map.entry("X", 10),
-                Map.entry("L", 50),
-                Map.entry("C", 100),
-                Map.entry("D", 500),
-                Map.entry("M", 1000)
-        );
+        Map<String, Integer> map = Map.ofEntries(Map.entry("I", 1), Map.entry("V", 5), Map.entry("X", 10), Map.entry("L", 50), Map.entry("C", 100), Map.entry("D", 500), Map.entry("M", 1000));
 
         int count = 0;
         String[] srr = s.split("");
@@ -894,19 +1134,7 @@ public class MainPracticeClass {
     public int countDaysTogether(String arriveAlice, String leaveAlice, String arriveBob, String leaveBob) {
         Map<Integer, Integer> map = Map.ofEntries(
                 //31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
-                Map.entry(1, 31),
-                Map.entry(2, 28),
-                Map.entry(3, 31),
-                Map.entry(4, 30),
-                Map.entry(5, 31),
-                Map.entry(6, 30),
-                Map.entry(7, 31),
-                Map.entry(8, 31),
-                Map.entry(9, 30),
-                Map.entry(10, 31),
-                Map.entry(11, 30),
-                Map.entry(12, 31)
-        );
+                Map.entry(1, 31), Map.entry(2, 28), Map.entry(3, 31), Map.entry(4, 30), Map.entry(5, 31), Map.entry(6, 30), Map.entry(7, 31), Map.entry(8, 31), Map.entry(9, 30), Map.entry(10, 31), Map.entry(11, 30), Map.entry(12, 31));
         String[] arriveAliceArr = arriveAlice.split("");
         int aliceMonthArrival = Integer.parseInt(arriveAliceArr[0]);
         int aliceDayArrival = Integer.parseInt(arriveAliceArr[1]);
@@ -937,9 +1165,7 @@ public class MainPracticeClass {
             map.put(i[0], map.getOrDefault(i[0], 0) + i[1]);
         }
 
-        map = map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByKey()).collect(Collectors.toMap(
-                Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new
-        ));
+        map = map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByKey()).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
 
         int size = map.size();
         int[][] finalAns = new int[size][2];
@@ -1311,8 +1537,7 @@ class WordFilter {
             if (s.length() >= prefLen && s.length() >= suffLen) {
                 int sLen = s.length();
 
-                if (s.substring(0, prefLen).equals(pref) &&
-                        s.substring(sLen - suffLen).equals(suff)) {
+                if (s.substring(0, prefLen).equals(pref) && s.substring(sLen - suffLen).equals(suff)) {
                     map.put(s, currIndex);
                     currIndex++;
                 }
