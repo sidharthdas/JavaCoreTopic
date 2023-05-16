@@ -62,7 +62,93 @@ public class Leetcode25MainClass {
         //str1 = "ABCABC", str2 = "ABC"
         //s = "ab#c", t = "ad#c"
         //s = "ab##", t = "c#d#"
-        System.out.println(backspaceCompare("ab##","c#d#"));
+        //System.out.println(backspaceCompare("ab##", "c#d#"));
+        System.out.println(validTicTacToe(new String[]{"XOX", "O O", "XOX"}));
+
+    }
+
+    public static boolean validTicTacToe(String[] board) {
+        int[][] mat = new int[3][3];
+
+        int xCount = 0;
+        int yCount = 0;
+
+        int row = 0;
+        int col = 0;
+
+        for (String s : board) {
+            String[] str = s.split("");
+            for (String t : str) {
+                if (t.equals(" ")) {
+                    mat[row][col] = -1;
+                    col++;
+                } else if (t.equals("X")) {
+                    mat[row][col] = 1;
+                    xCount++;
+                    col++;
+                } else if (t.equals("O")) {
+                    mat[row][col] = 0;
+                    col++;
+                    yCount++;
+                }
+            }
+            col = 0;
+            row++;
+        }
+
+        if (xCount == 0 && yCount == 0) {
+            return true;
+        }
+
+        if ((xCount == 0 && yCount != 0)) {
+            return false;
+        }
+
+        if (!(xCount - 1 == yCount || yCount - 1 == xCount) && (xCount != yCount)) {
+            return false;
+        }
+
+        if (yCount > xCount) {
+            return false;
+        }
+
+        if (xCount >= 3 && yCount >= 3) {
+            boolean xCheck = check(mat, 1, board);
+            boolean yCheck = check(mat, 0, board);
+            if (xCheck == true && yCheck == true) {
+                return false;
+            } else if (xCheck == false && yCheck == true) {
+                return false;
+            } else if (xCheck == true && yCheck == false) {
+                return false;
+            }
+
+            return true;
+        }
+
+        return false;
+
+    }
+
+    private static boolean check(int[][] mat, int i, String[] str) {
+        long count = Arrays.stream(str).filter(x -> x.equals(i == 1 ? "XXX" : "OOO")).count();
+        if (count == 0) {
+            if (mat[0][0] == i && mat[1][1] == i && mat[2][2] == i) {
+                return true;
+            } else if (mat[0][2] == i && mat[1][1] == i && mat[2][0] == i) {
+                return true;
+            } else if (mat[0][0] == i && mat[1][0] == i && mat[2][0] == i) {
+                return true;
+            } else if (mat[0][1] == i && mat[1][1] == i && mat[2][1] == i) {
+                return true;
+            } else if (mat[0][2] == i && mat[1][2] == i && mat[2][2] == i) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        return true;
 
     }
 
@@ -90,10 +176,10 @@ public class Leetcode25MainClass {
             if (!trr[i].equals("#")) {
                 i = i - count;
                 count = 0;
-                if(i >=0 && !trr[i].equals("#")) {
+                if (i >= 0 && !trr[i].equals("#")) {
                     tb.append(trr[i]);
-                } else{
-                    count ++;
+                } else {
+                    count++;
                 }
             } else {
                 count++;
@@ -106,7 +192,7 @@ public class Leetcode25MainClass {
 
 
     public String reverseStr(String s, int k) {
-        if(s.length() == k){
+        if (s.length() == k) {
             return new StringBuffer(s).reverse().toString();
         }
         StringBuffer sb = new StringBuffer();
