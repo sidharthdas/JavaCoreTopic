@@ -36,6 +36,10 @@ public class MainPracticeClass {
 
     }
 
+    public List<Integer> spiralOrder(int[][] matrix) {
+        return null;
+    }
+
     public static void rotate(int[][] matrix) {
         int n = matrix.length;
         int[][] newMat = new int[n][n];
