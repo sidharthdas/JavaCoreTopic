@@ -32,12 +32,38 @@ public class MainPracticeClass {
         //distinctDifferenceArray(new int[]{1, 2, 3, 4, 5});
         //System.out.println(removeOuterParentheses("(()())(())(()(()))"));
         //System.out.println(smallestEquivalentString("leetcode", "programs", "sourcecode"));
-        rotate(new int[][]{new int[]{1,2,3},new int[]{4,5,6},new int[]{7,8,9}});
+        //rotate(new int[][]{new int[]{1, 2, 3}, new int[]{4, 5, 6}, new int[]{7, 8, 9}});
+        System.out.println(shortestPalindrome("aacecaaa"));
 
     }
 
-    public List<Integer> spiralOrder(int[][] matrix) {
-        return null;
+    public static String shortestPalindrome(String s) {
+        int startIndex = 0;
+        int lastIndex = s.length() - 1;
+
+        while (startIndex < lastIndex) {
+            if (s.charAt(startIndex) != s.charAt(lastIndex)) {
+                s = s.substring(0, startIndex) + s.charAt(lastIndex) + s.substring(startIndex);
+                lastIndex++;
+            }
+            startIndex++;
+            lastIndex--;
+        }
+
+        return s;
+    }
+
+    public static List<Integer> countSmaller(int[] nums) {
+        List<Integer> l = Arrays.stream(nums).boxed().sorted().collect(Collectors.toList());
+        int size = nums.length;
+        List<Integer> finalResult = new ArrayList<>();
+
+        for (int i : nums) {
+            int t = l.indexOf(i);
+            finalResult.add(t);
+        }
+
+        return finalResult;
     }
 
     public static void rotate(int[][] matrix) {
