@@ -140,7 +140,6 @@ public class Leetcode25MainClass {
         return false;
 
     }
-
     private static boolean check(int[][] mat, int i, String[] str) {
         long count = Arrays.stream(str).filter(x -> x.equals(i == 1 ? "XXX" : "OOO")).count();
         if (count == 0) {
