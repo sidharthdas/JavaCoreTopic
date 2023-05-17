@@ -63,19 +63,98 @@ public class Leetcode25MainClass {
         //s = "ab#c", t = "ad#c"
         //s = "ab##", t = "c#d#"
         //System.out.println(backspaceCompare("ab##", "c#d#"));
-        System.out.println(validTicTacToe(new String[]{"XOX", "O O", "XOX"}));
+        //System.out.println(validTicTacToe(new String[]{"XOX", "O O", "XOX"}));
+        System.out.println(onesMinusZeros(new int[][]{{0,1,1},{1,0,1},{0,0,1}}));
 
+    }
+
+    public static int[][] onesMinusZeros(int[][] grid) {
+        Map<String, Integer> map = new HashMap<>();
+        //oneRow-
+        //zeroRow-
+        //oneCol-
+        //zeroCol-
+        int row = grid.length;
+        int col = grid[0].length;
+        int[][] newGrid = new int[row][col];
+
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                int oneRow = 0;
+                int oneCol = 0;
+                int zeroRow = 0;
+                int zeroCol = 0;
+
+                if (map.containsKey("oneRow-" + i)) {
+                    oneRow = map.get("oneRow-" + i);
+                } else {
+                    int countOne = 0;
+                    for (int k = 0; k < col; k++) {
+                        if (grid[i][k] == 1) {
+                            countOne++;
+                        }
+                    }
+                    oneRow = countOne;
+                    map.put("oneRow-" + i, countOne);
+                }
+
+                if (map.containsKey("oneCol-" + j)) {
+                    oneCol = map.get("oneCol-" + j);
+                } else {
+                    int countOne = 0;
+                    for (int k = 0; k < row; k++) {
+                        if (grid[k][j] == 1) {
+                            countOne++;
+                        }
+                    }
+                    oneCol = countOne;
+                    map.put("oneCol-" + j, countOne);
+
+                }
+
+                if (map.containsKey("zeroRow-" + i)) {
+                    zeroRow = map.get("zeroRow-" + i);
+                } else {
+                    int countZero = 0;
+                    for (int k = 0; k < col; k++) {
+                        if (grid[i][k] == 0) {
+                            countZero++;
+                        }
+                    }
+                    zeroRow = countZero;
+                    map.put("zeroRow-" + i, countZero);
+                }
+
+                if (map.containsKey("zeroCol-" + j)) {
+                    zeroCol = map.get("zeroCol-" + j);
+                } else {
+                    int countZero = 0;
+                    for (int k = 0; k < row; k++) {
+                        if (grid[k][j] == 0) {
+                            countZero++;
+                        }
+                    }
+                    zeroCol = countZero;
+                    map.put("zeroCol-" + j, countZero);
+
+                }
+
+                newGrid[i][j] = oneRow + oneCol - zeroRow - zeroCol;
+            }
+        }
+
+        return newGrid;
     }
 
     public long coloredCells(int n) {
         /*
-        * 1 + 4*1 + 4*2 + . . .
-        * 1 + 4 * (1 + 2 + . . . + n-1)
-        * 1 + 4 * (n * (n + 1) / 2)
-        * 1 + (2 * n * (n - 1))
-        * */
+         * 1 + 4*1 + 4*2 + . . .
+         * 1 + 4 * (1 + 2 + . . . + n-1)
+         * 1 + 4 * (n * (n + 1) / 2)
+         * 1 + (2 * n * (n - 1))
+         * */
 
-        return 1 + ((long)(2 * n) * (n - 1));
+        return 1 + ((long) (2 * n) * (n - 1));
     }
 
     public static boolean validTicTacToe(String[] board) {
@@ -140,6 +219,7 @@ public class Leetcode25MainClass {
         return false;
 
     }
+
     private static boolean check(int[][] mat, int i, String[] str) {
         long count = Arrays.stream(str).filter(x -> x.equals(i == 1 ? "XXX" : "OOO")).count();
         if (count == 0) {
