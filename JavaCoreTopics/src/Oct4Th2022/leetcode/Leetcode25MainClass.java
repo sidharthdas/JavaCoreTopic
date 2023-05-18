@@ -64,8 +64,43 @@ public class Leetcode25MainClass {
         //s = "ab##", t = "c#d#"
         //System.out.println(backspaceCompare("ab##", "c#d#"));
         //System.out.println(validTicTacToe(new String[]{"XOX", "O O", "XOX"}));
-        System.out.println(onesMinusZeros(new int[][]{{0,1,1},{1,0,1},{0,0,1}}));
+        //System.out.println(onesMinusZeros(new int[][]{{0, 1, 1}, {1, 0, 1}, {0, 0, 1}}));
+        System.out.println(equalPairs(new int[][]{{3, 2, 1}, {1, 7, 6}, {2, 7, 7}}));
 
+    }
+
+    public static int equalPairs(int[][] grid) {
+        int count = 0;
+        int row = grid.length;
+
+        int currentCol = 0;
+        int currentRow = 0;
+
+        for (int[] g : grid) {
+            boolean flag = true;
+
+            for (int i = 0; i < row; i++) {
+                if (g[i] != grid[currentRow][currentCol]) {
+                    if (currentCol == row - 1) {
+                        break;
+                    } else {
+                        i = -1;
+                        currentCol++;
+                        currentRow = 0;
+                    }
+                } else {
+                    if (i == row - 1) {
+                        count++;
+                    } else {
+                        currentRow++;
+                    }
+                }
+
+            }
+            currentRow = 0;
+            currentCol = 0;
+        }
+        return count;
     }
 
     public static int[][] onesMinusZeros(int[][] grid) {
