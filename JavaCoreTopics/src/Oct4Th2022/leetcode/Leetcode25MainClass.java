@@ -72,7 +72,6 @@ public class Leetcode25MainClass {
     public static int equalPairs(int[][] grid) {
         int count = 0;
         int row = grid.length;
-
         int currentCol = 0;
         int currentRow = 0;
 
