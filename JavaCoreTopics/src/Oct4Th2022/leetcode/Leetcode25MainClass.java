@@ -74,7 +74,6 @@ public class Leetcode25MainClass {
         int row = grid.length;
         int currentCol = 0;
         int currentRow = 0;
-
         for (int[] g : grid) {
             boolean flag = true;
 
