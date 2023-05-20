@@ -69,6 +69,21 @@ public class Leetcode25MainClass {
 
     }
 
+    public int minNumber(int[] nums1, int[] nums2) {
+        return 0;
+    }
+
+    public int countSeniors(String[] details) {
+        int count = 0;
+
+        for (String detail : details) {
+            if(Integer.parseInt(detail.substring(11,13)) > 60){
+                count++;
+            }
+        }
+        return count;
+    }
+
     public static int equalPairs(int[][] grid) {
         int count = 0;
         int row = grid.length;
