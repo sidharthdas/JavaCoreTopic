@@ -70,14 +70,35 @@ public class Leetcode25MainClass {
     }
 
     public int minNumber(int[] nums1, int[] nums2) {
-        return 0;
+
+        List<Integer> l = new ArrayList<>();
+        Set<Integer> set = new HashSet<>();
+
+        for (int i : nums1) {
+            set.add(i);
+        }
+
+        for (int i : nums2) {
+            if (!set.add(i)) {
+                l.add(i);
+            }
+        }
+        if (!l.isEmpty()) {
+            return l.stream().sorted().findFirst().get();
+        }
+
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        return nums1[0] > nums2[0] ? Integer.parseInt(nums2[0] + "" + nums1[0]) :
+                Integer.parseInt(nums1[0] + "" + nums2[0]);
+
     }
 
     public int countSeniors(String[] details) {
         int count = 0;
 
         for (String detail : details) {
-            if(Integer.parseInt(detail.substring(11,13)) > 60){
+            if (Integer.parseInt(detail.substring(11, 13)) > 60) {
                 count++;
             }
         }
