@@ -94,6 +94,27 @@ public class Leetcode25MainClass {
 
     }
 
+    public int[] findThePrefixCommonArray(int[] A, int[] B) {
+        int len = A.length;
+        int[] c = new int[len];
+
+        for (int i = 0; i < len; i++) {
+            int count = 0;
+            List<Integer> l = Arrays.stream(Arrays.copyOfRange(B, 0, i + 1))
+                    .boxed()
+                    .collect(Collectors.toList());
+            for (int j = 0; j <= i; j++) {
+                if (l.contains(A[j])) {
+                    count++;
+                }
+            }
+
+            c[i] = count;
+        }
+
+        return c;
+    }
+
     public int countSeniors(String[] details) {
         int count = 0;
 
