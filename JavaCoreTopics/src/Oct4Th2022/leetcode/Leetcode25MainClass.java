@@ -102,7 +102,9 @@ public class Leetcode25MainClass {
                 count++;
             }
         }
+
         return count;
+        //return (int) Arrays.stream(details).filter(x -> Integer.parseInt(x.substring(11, 13)) > 60).count();
     }
 
     public static int equalPairs(int[][] grid) {
