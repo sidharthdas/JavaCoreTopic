@@ -69,6 +69,27 @@ public class Leetcode25MainClass {
 
     }
 
+    public int[][] transpose(int[][] matrix) {
+        int row = matrix.length;
+        int col = matrix[0].length;
+        int max = row > col ? row : col;
+        int[][] transpose = new int[col][row];
+
+        int k = 0;
+        int l = 0;
+
+        for (int j = 0; j < col; j++) {
+            for (int i = 0; i < row; i++) {
+                transpose[k][l] = matrix[i][j];
+                l++;
+            }
+            l = 0;
+            k++;
+        }
+
+        return Arrays.copyOfRange(transpose, 0, col);
+    }
+
     public int minNumber(int[] nums1, int[] nums2) {
 
         List<Integer> l = new ArrayList<>();
