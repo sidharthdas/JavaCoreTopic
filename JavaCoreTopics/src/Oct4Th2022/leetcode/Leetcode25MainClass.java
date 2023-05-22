@@ -108,7 +108,6 @@ public class Leetcode25MainClass {
                     count++;
                 }
             }
-
             c[i] = count;
         }
 
