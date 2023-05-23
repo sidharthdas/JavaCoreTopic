@@ -68,6 +68,43 @@ public class Leetcode25MainClass {
         System.out.println(equalPairs(new int[][]{{3, 2, 1}, {1, 7, 6}, {2, 7, 7}}));
 
     }
+
+    public int numSpecial(int[][] mat) {
+
+        int count = 0;
+        int row = mat.length;
+        int col = mat[0].length;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                boolean rowFlag = true;
+                boolean colFlag = true;
+
+                for (int k = 0; k < row; k++) {
+                    if ((k != i) && mat[k][j] == 1) {
+                        rowFlag = false;
+                        break;
+                    }
+                }
+
+                if (rowFlag) {
+                    for (int k = 0; k < col; k++) {
+                        if ((k != j) && mat[i][k] == 1) {
+                            colFlag = false;
+                            break;
+                        }
+                    }
+                }
+
+                if (colFlag && rowFlag) {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+
+    }
+
     public int[][] transpose(int[][] matrix) {
         int row = matrix.length;
         int col = matrix[0].length;
