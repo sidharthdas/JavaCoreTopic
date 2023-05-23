@@ -68,7 +68,6 @@ public class Leetcode25MainClass {
         System.out.println(equalPairs(new int[][]{{3, 2, 1}, {1, 7, 6}, {2, 7, 7}}));
 
     }
-
     public int[][] transpose(int[][] matrix) {
         int row = matrix.length;
         int col = matrix[0].length;
