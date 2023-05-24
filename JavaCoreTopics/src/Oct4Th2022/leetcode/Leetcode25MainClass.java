@@ -66,7 +66,6 @@ public class Leetcode25MainClass {
         //System.out.println(validTicTacToe(new String[]{"XOX", "O O", "XOX"}));
         //System.out.println(onesMinusZeros(new int[][]{{0, 1, 1}, {1, 0, 1}, {0, 0, 1}}));
         System.out.println(equalPairs(new int[][]{{3, 2, 1}, {1, 7, 6}, {2, 7, 7}}));
-
     }
 
     public int numSpecial(int[][] mat) {
