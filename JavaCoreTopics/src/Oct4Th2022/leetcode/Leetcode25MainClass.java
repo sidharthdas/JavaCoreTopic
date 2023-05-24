@@ -65,7 +65,64 @@ public class Leetcode25MainClass {
         //System.out.println(backspaceCompare("ab##", "c#d#"));
         //System.out.println(validTicTacToe(new String[]{"XOX", "O O", "XOX"}));
         //System.out.println(onesMinusZeros(new int[][]{{0, 1, 1}, {1, 0, 1}, {0, 0, 1}}));
-        System.out.println(equalPairs(new int[][]{{3, 2, 1}, {1, 7, 6}, {2, 7, 7}}));
+        //System.out.println(equalPairs(new int[][]{{3, 2, 1}, {1, 7, 6}, {2, 7, 7}}));
+        System.out.println(diagonalSort(new int[][]{{3,3,1,1},{2,2,1,2},{1,1,1,2}}));
+    }
+
+    public static int[][] diagonalSort(int[][] mat) {
+
+        int row = mat.length;
+        int col = mat[0].length;
+        int[][] newMat = new int[row][col];
+        int r = 0;
+        for (int i = 0; i < col; i++) {
+            List<Integer> l = new ArrayList<>();
+            int tempI = i;
+            while (r < row && tempI < col) {
+                l.add(mat[r][tempI]);
+                r++;
+                tempI++;
+            }
+
+            r = 0;
+            Collections.sort(l);
+            tempI = i;
+            int curr = 0;
+            while (r < row && tempI < col) {
+                newMat[r][tempI] = l.get(curr);
+                curr++;
+                r++;
+                tempI++;
+            }
+            r = 0;
+            tempI = i;
+        }
+
+        int c = 0;
+        for (int i = 1; i < row ; i++) {
+            List<Integer> l = new ArrayList<>();
+            int tempI = i;
+            while (tempI < row && c < col) {
+                l.add(mat[tempI][c]);
+                c++;
+                tempI++;
+            }
+
+            c = 0;
+            Collections.sort(l);
+            tempI = i;
+            int curr = 0;
+            while (tempI < row && c < col) {
+                newMat[tempI][c] = l.get(curr);
+                curr++;
+                c++;
+                tempI++;
+            }
+
+            c = 0;
+            tempI = i;
+        }
+        return newMat;
     }
 
     public int numSpecial(int[][] mat) {
