@@ -66,7 +66,18 @@ public class Leetcode25MainClass {
         //System.out.println(validTicTacToe(new String[]{"XOX", "O O", "XOX"}));
         //System.out.println(onesMinusZeros(new int[][]{{0, 1, 1}, {1, 0, 1}, {0, 0, 1}}));
         //System.out.println(equalPairs(new int[][]{{3, 2, 1}, {1, 7, 6}, {2, 7, 7}}));
-        System.out.println(diagonalSort(new int[][]{{3,3,1,1},{2,2,1,2},{1,1,1,2}}));
+        System.out.println(diagonalSort(new int[][]{{3, 3, 1, 1}, {2, 2, 1, 2}, {1, 1, 1, 2}}));
+    }
+
+    public int[][] generateMatrix(int n) {
+        int[][] mat = new int[n][n];
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                mat[i][j] = -1;
+            }
+        }
+        return null;
     }
 
     public static int[][] diagonalSort(int[][] mat) {
@@ -99,7 +110,7 @@ public class Leetcode25MainClass {
         }
 
         int c = 0;
-        for (int i = 1; i < row ; i++) {
+        for (int i = 1; i < row; i++) {
             List<Integer> l = new ArrayList<>();
             int tempI = i;
             while (tempI < row && c < col) {
