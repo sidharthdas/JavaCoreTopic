@@ -66,7 +66,35 @@ public class Leetcode25MainClass {
         //System.out.println(validTicTacToe(new String[]{"XOX", "O O", "XOX"}));
         //System.out.println(onesMinusZeros(new int[][]{{0, 1, 1}, {1, 0, 1}, {0, 0, 1}}));
         //System.out.println(equalPairs(new int[][]{{3, 2, 1}, {1, 7, 6}, {2, 7, 7}}));
-        System.out.println(diagonalSort(new int[][]{{3, 3, 1, 1}, {2, 2, 1, 2}, {1, 1, 1, 2}}));
+        //System.out.println(diagonalSort(new int[][]{{3, 3, 1, 1}, {2, 2, 1, 2}, {1, 1, 1, 2}}));
+        System.out.println(findScore(new int[]{2,1,3,4,5,2}));
+    }
+
+    public static long findScore(int[] nums) {
+
+        int len = nums.length;
+        List<Integer> l = Arrays.stream(nums).boxed().collect(Collectors.toList());
+        Set<Integer> indexes = new HashSet<>();
+        long lValue = 0;
+
+        while (l.stream().filter(x -> x == Integer.MAX_VALUE).count() != len) {
+            List<Integer> tempList = new ArrayList<>(l);
+            int shortest = tempList.stream().sorted().findFirst().get();
+            lValue += shortest;
+            int curr = l.indexOf(shortest);
+            l.remove(curr);
+            l.add(curr, Integer.MAX_VALUE);
+            if(curr+1 < len){
+                l.remove(curr+1);
+                l.add(curr+1, Integer.MAX_VALUE);
+            }
+            if(curr-1 >= 0){
+                l.remove(curr-1);
+                l.add(curr-1, Integer.MAX_VALUE);
+            }
+        }
+
+        return lValue;
     }
 
     public int[][] generateMatrix(int n) {
