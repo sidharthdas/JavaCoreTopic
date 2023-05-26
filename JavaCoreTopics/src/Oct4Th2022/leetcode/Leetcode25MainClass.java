@@ -67,7 +67,66 @@ public class Leetcode25MainClass {
         //System.out.println(onesMinusZeros(new int[][]{{0, 1, 1}, {1, 0, 1}, {0, 0, 1}}));
         //System.out.println(equalPairs(new int[][]{{3, 2, 1}, {1, 7, 6}, {2, 7, 7}}));
         //System.out.println(diagonalSort(new int[][]{{3, 3, 1, 1}, {2, 2, 1, 2}, {1, 1, 1, 2}}));
-        System.out.println(findScore(new int[]{2,1,3,4,5,2}));
+        System.out.println(findDiagonalOrder(new int[][]{{1,2,3},{4,5,6},{7,8,9}}));
+    }
+
+    public static  int[] findDiagonalOrder(int[][] mat) {
+        List<List<Integer>> list = new ArrayList<>();
+        int row = mat.length;
+        int col = mat[0].length;
+        int len = row * col;
+        int[] finalArr = new int[len];
+
+
+        list.add(List.of(mat[0][0]));
+
+        for (int i = 1; i < row; i++) {
+            int tempCol = 0;
+            List<Integer> l = new ArrayList<>();
+            int tempRow = i;
+            while (tempRow >= 0) {
+                l.add(mat[tempRow][tempCol]);
+                tempRow--;
+                tempCol++;
+            }
+
+            list.add(l);
+        }
+
+        for (int i = 1; i < col; i++) {
+            int tempCol = i;
+            int tempRow = row - 1;
+            List<Integer> l = new ArrayList<>();
+            while (tempRow < row && tempCol < col) {
+                l.add(mat[tempRow][tempCol]);
+                tempRow--;
+                tempCol++;
+            }
+
+            list.add(l);
+        }
+
+        boolean flag = true;
+        int currIndex = 0;
+
+        for (List<Integer> l1 : list) {
+            if (flag) {
+                for (int i : l1) {
+                    finalArr[currIndex] = i;
+                    currIndex++;
+                }
+                flag = false;
+            } else {
+                int l1Len = l1.size();
+                for(int i = l1Len -1; i >=0; i--){
+                    finalArr[currIndex] = l1.get(i);
+                    currIndex++;
+                }
+                flag = true;
+            }
+        }
+
+        return finalArr;
     }
 
     public static long findScore(int[] nums) {
@@ -84,13 +143,13 @@ public class Leetcode25MainClass {
             int curr = l.indexOf(shortest);
             l.remove(curr);
             l.add(curr, Integer.MAX_VALUE);
-            if(curr+1 < len){
-                l.remove(curr+1);
-                l.add(curr+1, Integer.MAX_VALUE);
+            if (curr + 1 < len) {
+                l.remove(curr + 1);
+                l.add(curr + 1, Integer.MAX_VALUE);
             }
-            if(curr-1 >= 0){
-                l.remove(curr-1);
-                l.add(curr-1, Integer.MAX_VALUE);
+            if (curr - 1 >= 0) {
+                l.remove(curr - 1);
+                l.add(curr - 1, Integer.MAX_VALUE);
             }
         }
 
