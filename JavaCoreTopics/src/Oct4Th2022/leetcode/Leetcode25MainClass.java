@@ -70,6 +70,10 @@ public class Leetcode25MainClass {
         System.out.println(findDiagonalOrder(new int[][]{{1,2,3},{4,5,6},{7,8,9}}));
     }
 
+    public int minimumTotal(List<List<Integer>> triangle) {
+        return 0;
+    }
+
     public static  int[] findDiagonalOrder(int[][] mat) {
         List<List<Integer>> list = new ArrayList<>();
         int row = mat.length;
