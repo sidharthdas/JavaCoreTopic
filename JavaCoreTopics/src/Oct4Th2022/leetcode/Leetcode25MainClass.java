@@ -67,14 +67,32 @@ public class Leetcode25MainClass {
         //System.out.println(onesMinusZeros(new int[][]{{0, 1, 1}, {1, 0, 1}, {0, 0, 1}}));
         //System.out.println(equalPairs(new int[][]{{3, 2, 1}, {1, 7, 6}, {2, 7, 7}}));
         //System.out.println(diagonalSort(new int[][]{{3, 3, 1, 1}, {2, 2, 1, 2}, {1, 1, 1, 2}}));
-        System.out.println(findDiagonalOrder(new int[][]{{1,2,3},{4,5,6},{7,8,9}}));
+        System.out.println(findDiagonalOrder(new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}));
     }
 
     public int minimumTotal(List<List<Integer>> triangle) {
-        return 0;
+        int sum = 0;
+        int index = 0;
+        boolean flag = true;
+
+        for (List<Integer> l : triangle) {
+            if (flag) {
+                sum += l.get(0);
+                flag = false;
+            } else {
+                if (l.get(index) < l.get(index + 1)) {
+                    sum += l.get(index);
+                } else {
+                    sum += l.get(index + 1);
+                    index++;
+                }
+            }
+
+        }
+        return sum;
     }
 
-    public static  int[] findDiagonalOrder(int[][] mat) {
+    public static int[] findDiagonalOrder(int[][] mat) {
         List<List<Integer>> list = new ArrayList<>();
         int row = mat.length;
         int col = mat[0].length;
@@ -122,7 +140,7 @@ public class Leetcode25MainClass {
                 flag = false;
             } else {
                 int l1Len = l1.size();
-                for(int i = l1Len -1; i >=0; i--){
+                for (int i = l1Len - 1; i >= 0; i--) {
                     finalArr[currIndex] = l1.get(i);
                     currIndex++;
                 }
