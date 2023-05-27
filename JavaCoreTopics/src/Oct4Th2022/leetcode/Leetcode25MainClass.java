@@ -135,21 +135,26 @@ public class Leetcode25MainClass {
         List<Integer> l = Arrays.stream(nums).boxed().collect(Collectors.toList());
         Set<Integer> indexes = new HashSet<>();
         long lValue = 0;
+        int count = 0;
 
-        while (l.stream().filter(x -> x == Integer.MAX_VALUE).count() != len) {
+
+        while (count != len) {
             List<Integer> tempList = new ArrayList<>(l);
             int shortest = tempList.stream().sorted().findFirst().get();
             lValue += shortest;
             int curr = l.indexOf(shortest);
             l.remove(curr);
             l.add(curr, Integer.MAX_VALUE);
+            count++;
             if (curr + 1 < len) {
                 l.remove(curr + 1);
                 l.add(curr + 1, Integer.MAX_VALUE);
+                count++;
             }
             if (curr - 1 >= 0) {
                 l.remove(curr - 1);
                 l.add(curr - 1, Integer.MAX_VALUE);
+                count++;
             }
         }
 
