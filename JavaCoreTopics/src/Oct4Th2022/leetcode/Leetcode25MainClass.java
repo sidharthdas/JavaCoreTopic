@@ -96,6 +96,15 @@ public class Leetcode25MainClass {
         List<List<Integer>> list = new ArrayList<>();
         int row = mat.length;
         int col = mat[0].length;
+
+        if(row == 1 && col == 1){
+            List<Integer> l = new ArrayList<>();
+            for(int[] i : mat){
+                l.add(i[0]);
+            }
+
+            return l.stream().mapToInt(x -> x).toArray();
+        }
         int len = row * col;
         int[] finalArr = new int[len];
 
