@@ -68,7 +68,37 @@ public class Leetcode25MainClass {
         //System.out.println(equalPairs(new int[][]{{3, 2, 1}, {1, 7, 6}, {2, 7, 7}}));
         //System.out.println(diagonalSort(new int[][]{{3, 3, 1, 1}, {2, 2, 1, 2}, {1, 1, 1, 2}}));
         //System.out.println(searchMatrix(new int[][]{{-9, -9, -9, -8, -8, -7, -6, -4, -4, -3}, {0, 1, 2, 2, 4, 5, 5, 5, 7, 9}, {12, 12, 14, 14, 15, 17, 19, 19, 19, 21}, {22, 23, 23, 25, 25, 26, 26, 28, 28, 29}, {31, 31, 31, 33, 34, 36, 37, 38, 38, 39}, {40, 42, 43, 44, 46, 46, 46, 47, 49, 50}, {52, 54, 55, 57, 59, 60, 60, 62, 64, 66}, {68, 68, 70, 71, 71, 72, 74, 76, 78, 80}, {82, 83, 85, 85, 85, 87, 88, 88, 89, 89}, {90, 90, 90, 91, 93, 94, 94, 95, 95, 97}, {98, 98, 99, 99, 101, 103, 105, 106, 108, 109}, {112, 112, 112, 113, 113, 113, 114, 116, 118, 118}, {119, 121, 122, 124, 125, 125, 125, 126, 127, 128}, {131, 133, 134, 134, 134, 135, 135, 137, 137, 139}, {141, 143, 145, 147, 148, 150, 150, 150, 150, 152}, {153, 153, 154, 155, 157, 157, 157, 159, 161, 162}, {164, 166, 167, 167, 167, 169, 170, 170, 171, 173}, {176, 176, 178, 179, 181, 182, 183, 183, 184, 186}}, 135));
-        System.out.println(findDiagonalOrder(new int[][]{{2,5},{8,4},{0,-1}}));
+        System.out.println(findDiagonalOrder(new int[][]{{2, 5}, {8, 4}, {0, -1}}));
+    }
+
+    public String bit(String prev) {
+
+        String temp = "";
+
+        char[] crr = prev.toCharArray();
+
+        for(char c : crr){
+            if(c == '0'){
+                temp += "1";
+            }else {
+                temp += 0;
+            }
+        }
+
+        StringBuffer sb = new StringBuffer(temp);
+        return prev + "1" + sb.reverse();
+
+    }
+
+    public char findKthBit(int n, int k) {
+
+        List<String> l = new ArrayList<>();
+        l.add("0");
+        for(int i = 1; i <=3; i++){
+            l.add(bit(l.get(i-1)));
+        }
+        int len = l.size();
+        return l.get(len - 1).charAt(k-1);
     }
 
     public static boolean searchMatrix(int[][] matrix, int target) {
