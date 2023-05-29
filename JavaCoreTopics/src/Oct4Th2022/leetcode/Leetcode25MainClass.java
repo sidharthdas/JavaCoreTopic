@@ -72,33 +72,27 @@ public class Leetcode25MainClass {
     }
 
     public String bit(String prev) {
-
         String temp = "";
-
         char[] crr = prev.toCharArray();
-
-        for(char c : crr){
-            if(c == '0'){
+        for (char c : crr) {
+            if (c == '0') {
                 temp += "1";
-            }else {
+            } else {
                 temp += 0;
             }
         }
-
         StringBuffer sb = new StringBuffer(temp);
         return prev + "1" + sb.reverse();
-
     }
 
     public char findKthBit(int n, int k) {
-
         List<String> l = new ArrayList<>();
         l.add("0");
-        for(int i = 1; i <=3; i++){
-            l.add(bit(l.get(i-1)));
+        for (int i = 1; i <= 3; i++) {
+            l.add(bit(l.get(i - 1)));
         }
         int len = l.size();
-        return l.get(len - 1).charAt(k-1);
+        return l.get(len - 1).charAt(k - 1);
     }
 
     public static boolean searchMatrix(int[][] matrix, int target) {
@@ -391,8 +385,7 @@ public class Leetcode25MainClass {
 
         Arrays.sort(nums1);
         Arrays.sort(nums2);
-        return nums1[0] > nums2[0] ? Integer.parseInt(nums2[0] + "" + nums1[0]) :
-                Integer.parseInt(nums1[0] + "" + nums2[0]);
+        return nums1[0] > nums2[0] ? Integer.parseInt(nums2[0] + "" + nums1[0]) : Integer.parseInt(nums1[0] + "" + nums2[0]);
 
     }
 
@@ -402,9 +395,7 @@ public class Leetcode25MainClass {
 
         for (int i = 0; i < len; i++) {
             int count = 0;
-            List<Integer> l = Arrays.stream(Arrays.copyOfRange(B, 0, i + 1))
-                    .boxed()
-                    .collect(Collectors.toList());
+            List<Integer> l = Arrays.stream(Arrays.copyOfRange(B, 0, i + 1)).boxed().collect(Collectors.toList());
             for (int j = 0; j <= i; j++) {
                 if (l.contains(A[j])) {
                     count++;
