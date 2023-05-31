@@ -72,7 +72,6 @@ public class Leetcode25MainClass {
         //System.out.println( findKthBit(5, 16));
     }
     public int minIncrementForUnique(int[] nums) {
-
         Arrays.sort(nums);
         int len = nums.length;
         int prevVal = nums[0];
