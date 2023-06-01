@@ -72,6 +72,31 @@ public class Leetcode25MainClass {
         //System.out.println( findKthBit(5, 16));
     }
 
+    public int[] maximumBeauty1(int[][] items, int[] queries) {
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int[] item : items) {
+            map.put(item[0], map.getOrDefault(item[0], 0)
+                    > item[1] ? map.getOrDefault(item[0], 0) : item[1]);
+        }
+        int len = queries.length;
+        int[] finalResult = new int[len];
+        for (int i = 0; i < len; i++) {
+            int finalI = i;
+            map.entrySet()
+                    .stream()
+                    .filter(x -> x.getKey() <= queries[finalI])
+                    .sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed())
+                    .findFirst().ifPresentOrElse(m -> {
+                        finalResult[finalI] = m.getValue();
+                    }, () -> {
+                        finalResult[finalI] = 0;
+                    });
+        }
+
+        return finalResult;
+    }
+
     public int[] maximumBeauty(int[][] items, int[] queries) {
         Map<Integer, Integer> map = new HashMap<>();
 
