@@ -70,7 +70,7 @@ public class Leetcode25MainClass {
         //System.out.println(searchMatrix(new int[][]{{-9, -9, -9, -8, -8, -7, -6, -4, -4, -3}, {0, 1, 2, 2, 4, 5, 5, 5, 7, 9}, {12, 12, 14, 14, 15, 17, 19, 19, 19, 21}, {22, 23, 23, 25, 25, 26, 26, 28, 28, 29}, {31, 31, 31, 33, 34, 36, 37, 38, 38, 39}, {40, 42, 43, 44, 46, 46, 46, 47, 49, 50}, {52, 54, 55, 57, 59, 60, 60, 62, 64, 66}, {68, 68, 70, 71, 71, 72, 74, 76, 78, 80}, {82, 83, 85, 85, 85, 87, 88, 88, 89, 89}, {90, 90, 90, 91, 93, 94, 94, 95, 95, 97}, {98, 98, 99, 99, 101, 103, 105, 106, 108, 109}, {112, 112, 112, 113, 113, 113, 114, 116, 118, 118}, {119, 121, 122, 124, 125, 125, 125, 126, 127, 128}, {131, 133, 134, 134, 134, 135, 135, 137, 137, 139}, {141, 143, 145, 147, 148, 150, 150, 150, 150, 152}, {153, 153, 154, 155, 157, 157, 157, 159, 161, 162}, {164, 166, 167, 167, 167, 169, 170, 170, 171, 173}, {176, 176, 178, 179, 181, 182, 183, 183, 184, 186}}, 135));
         //System.out.println(findDiagonalOrder(new int[][]{{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, {11, 12, 13, 14, 15, 16, 17, 18, 19, 20}}));
         //System.out.println( findKthBit(5, 16));
-        System.out.println(findLongestWord("abpcplea", List.of("ale", "apple", "monkey", "plea", "abpcplaaa", "abpcllllll", "abccclllpppeeaaaa").stream().collect(Collectors.toList())));
+        System.out.println(findLongestWord("abpcplea", List.of("ale","apple","monkey","plea", "abpcplaaa","abpcllllll","abccclllpppeeaaaa").stream().collect(Collectors.toList())));
     }
 
     public int numFriendRequests(int[] ages) {
@@ -106,38 +106,56 @@ public class Leetcode25MainClass {
     }
 
     public static String findLongestWord(String s, List<String> dictionary) {
-
+        Map<String, Integer> map = new HashMap<>();
         int len = s.length();
         int highestLen = Integer.MIN_VALUE;
+        int lowDeletion = Integer.MAX_VALUE;
         Collections.sort(dictionary, (s1, s2) -> s2.length() - s1.length());
         List<String> l = new ArrayList<>();
         String finalString = "";
+        int charCount = 0;
         for (String word : dictionary) {
             String tempWord = s;
             String[] srr = word.split("");
             boolean flag = true;
-            if (word.length() >= len) {
-                for (String s1 : srr) {
-                    if (tempWord.contains(s1)) {
-                        tempWord.replaceFirst(s1, "#");
-                    } else {
-                        flag = false;
-                        break;
-                    }
+            for (String s1 : srr) {
+                if (tempWord.contains(s1)) {
+                    tempWord = tempWord.replaceFirst(s1, "#");
+                    charCount++;
+                } else {
+                    flag = false;
+                    charCount = 0;
+                    break;
                 }
-
-                if (flag) {
-                    if (word.length() > highestLen) {
-                        highestLen = word.length();
-                    }
-                    l.add(word);
-                }
-            } else {
-                break;
             }
+
+            if (flag) {
+                if (word.length() > highestLen) {
+                    highestLen = word.length();
+                }
+                map.put(word, s.length() - word.length());
+                l.add(word);
+                charCount = 0;
+                if (lowDeletion > s.length() - word.length()) {
+                    lowDeletion = s.length() - word.length();
+                }
+            }
+
         }
         int finalHighestLen = highestLen;
-        return l.size() == 0 ? "" : (l.size() == 1 ? l.get(0) : l.stream().filter(x -> x.length() == finalHighestLen).sorted().findFirst().get());
+        int finalLowDeletion = lowDeletion;
+        return l.size() == 0 ? "" : (l.size() == 1 ? l.get(0) :
+                map.entrySet()
+                        .stream()
+                        .filter(x -> x.getValue() == finalLowDeletion)
+                        .map(x -> x.getKey())
+                        .sorted(Comparator
+                                .comparingInt(String::length)
+                                .reversed()
+                                .thenComparing(Comparator.naturalOrder()))
+                        .findFirst()
+                        .get()
+        );
     }
 
     public int[] maximumBeauty1(int[][] items, int[] queries) {
