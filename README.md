@@ -45,6 +45,20 @@ Optional.ofNullable(model1)
 PriorityQueue<Integer> pq = new PriorityQueue<>((a1, a2) -> a2 - a1); 
 //Here, in the argument, we need to pass the Comparator (Added lamda exp for sorting)
 ```
+-> Sort the list of String by length in reverse order and then if length are equal then sort by natural order
+```
+			map.entrySet()
+                        .stream()
+                        .filter(x -> x.getValue() == finalLowDeletion)
+                        .map(x -> x.getKey()) // converting map to list
+                        .sorted(Comparator
+                                .comparingInt(String::length)
+                                .reversed()
+                                .thenComparing(Comparator.naturalOrder()))
+                        .findFirst()
+                        .get()
+        );
+```
 
 -> For Java core topics, refer package JavaCoreTopicsImplementation17thJul2021
 
