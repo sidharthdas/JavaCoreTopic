@@ -7,9 +7,25 @@ import java.util.stream.Collectors;
  * @author Sidharth Das
  * created on  10/02/23
  */
+
+record Alien(String alienId, String alienName) {
+
+    //This has a capalibity that it automatically implemented equals and hascode
+    //It doesnt have setter, as it is just use to send and access the data
+    public Alien(String alienId) { //constructor with one argument
+        this(alienId, null);
+    }
+}
+
 public class Leetcode25MainClass {
 
     public static void main(String[] args) {
+
+        Alien a1 = new Alien("1", "Sid");
+        Alien a2 = new Alien("2");
+        System.out.println(a1);
+        System.out.println(a2);
+
         /*Cashier cashier = new Cashier(3, 50, new int[]{1, 2, 3, 4, 5, 6, 7}, new int[]{100, 200, 300, 400, 300, 200, 100});
 
         cashier.getBill(new int[]{1, 2}, new int[]{1, 2});                        // return 500.0. 1st customer, no discount.
@@ -70,7 +86,7 @@ public class Leetcode25MainClass {
         //System.out.println(searchMatrix(new int[][]{{-9, -9, -9, -8, -8, -7, -6, -4, -4, -3}, {0, 1, 2, 2, 4, 5, 5, 5, 7, 9}, {12, 12, 14, 14, 15, 17, 19, 19, 19, 21}, {22, 23, 23, 25, 25, 26, 26, 28, 28, 29}, {31, 31, 31, 33, 34, 36, 37, 38, 38, 39}, {40, 42, 43, 44, 46, 46, 46, 47, 49, 50}, {52, 54, 55, 57, 59, 60, 60, 62, 64, 66}, {68, 68, 70, 71, 71, 72, 74, 76, 78, 80}, {82, 83, 85, 85, 85, 87, 88, 88, 89, 89}, {90, 90, 90, 91, 93, 94, 94, 95, 95, 97}, {98, 98, 99, 99, 101, 103, 105, 106, 108, 109}, {112, 112, 112, 113, 113, 113, 114, 116, 118, 118}, {119, 121, 122, 124, 125, 125, 125, 126, 127, 128}, {131, 133, 134, 134, 134, 135, 135, 137, 137, 139}, {141, 143, 145, 147, 148, 150, 150, 150, 150, 152}, {153, 153, 154, 155, 157, 157, 157, 159, 161, 162}, {164, 166, 167, 167, 167, 169, 170, 170, 171, 173}, {176, 176, 178, 179, 181, 182, 183, 183, 184, 186}}, 135));
         //System.out.println(findDiagonalOrder(new int[][]{{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, {11, 12, 13, 14, 15, 16, 17, 18, 19, 20}}));
         //System.out.println( findKthBit(5, 16));
-        System.out.println(findLongestWord("abpcplea", List.of("ale","apple","monkey","plea", "abpcplaaa","abpcllllll","abccclllpppeeaaaa").stream().collect(Collectors.toList())));
+        System.out.println(findLongestWord("abpcplea", List.of("ale", "apple", "monkey", "plea", "abpcplaaa", "abpcllllll", "abccclllpppeeaaaa").stream().collect(Collectors.toList())));
     }
 
     public int numFriendRequests(int[] ages) {
