@@ -221,3 +221,32 @@ public ListNode deleteMiddle(ListNode head) {
         return n;
     }
 ```
+
+
+# Java17 Best Feature
+
+Record:
+
+it is use to transfer the data and access the data, no need of creating DTO/POJO classes
+
+```
+record Alien(String alienId, String alienName) {
+
+    //This has a capalibity that it automatically implemented equals and hascode
+    //It doesnt have setter, as it is just use to send and access the data
+    public Alien(String alienId) { //constructor with one argument
+        this(alienId, null);
+    }
+}
+
+public class Test {
+    public static void main(String[] args) {
+
+        Alien a1 = new Alien("1", "Sid");
+        Alien a2 = new Alien("2");
+        System.out.println(a1);
+        System.out.println(a2);
+	}
+
+}
+```
