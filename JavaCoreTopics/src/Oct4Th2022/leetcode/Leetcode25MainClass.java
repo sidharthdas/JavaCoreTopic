@@ -1519,7 +1519,6 @@ public class Leetcode25MainClass {
                 l1.add(citations[i]);
             }
         }
-
         return l1.stream().sorted(Comparator.reverseOrder()).findFirst().get();
 
     }
