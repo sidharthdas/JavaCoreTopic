@@ -1,11 +1,35 @@
 package Oct4Th2022.leetcode;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Leetcode26Main {
 
     public static void main(String[] args) {
         Bitset b = new Bitset(5);
+    }
+    public int kItemsWithMaximumSum(int numOnes, int numZeros, int numNegOnes, int k) {
+
+        List<Integer> l= new ArrayList<>();
+        for(int i = 0; i < numOnes; i++){
+            l.add(1);
+        }
+
+        for(int i = 0; i < numZeros; i++){
+            l.add(0);
+        }
+
+        for(int i = 0; i < numNegOnes; i++){
+            l.add(-1);
+        }
+
+        int totalCount = 0;
+        for(int i = 0; i <k; i++){
+            totalCount += l.get(i);
+        }
+
+        return totalCount;
     }
 }
 
