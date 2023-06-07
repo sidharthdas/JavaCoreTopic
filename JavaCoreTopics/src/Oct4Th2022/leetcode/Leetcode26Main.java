@@ -7,7 +7,29 @@ import java.util.List;
 public class Leetcode26Main {
 
     public static void main(String[] args) {
-        Bitset b = new Bitset(5);
+        //Bitset b = new Bitset(5);
+        waysToBuyPensPencils(20, 10, 5);
+    }
+
+    public static long waysToBuyPensPencils(int total, int cost1, int cost2) {
+        int highest = cost1 > cost2 ? cost1 : cost2;
+        int lowest = cost1 < cost2 ? cost1 : cost2;
+
+        if (highest > total && lowest > total) {
+            return 0;
+        }
+
+        int totalWays = 0;
+
+        int high = 0;
+        int temp = total;
+        while (high * highest <= temp) {
+            temp = temp - (highest * high);
+            totalWays += temp / lowest;
+            totalWays += 1;
+            high++;
+        }
+        return totalWays + 1;
     }
 
     public int minMaxDifference(int num) {
@@ -15,53 +37,64 @@ public class Leetcode26Main {
         String[] s = String.valueOf(num).split("");
         String max = "";
         String min = "";
+        String temp = "";
         boolean flag = true;
-        for(String s1 : s) {
-            if(flag){
-                if(!s1.equals("0")){
+        for (String s1 : s) {
+            if (flag) {
+                if (!s1.equals("0")) {
                     max += "9";
+                    temp = s1;
                     flag = false;
                 } else {
                     max += s1;
                 }
-            }else {
-                max += s1;
+            } else {
+                if (!temp.equals("") && s1.equals(temp)) {
+                    max += "9";
+                } else {
+                    max += s1;
+                }
             }
         }
 
-        for(String s1 : s) {
-            if(flag){
-                if(!s1.equals("9")){
+        for (String s1 : s) {
+            if (flag) {
+                if (!s1.equals("9")) {
                     min += "0";
                     flag = false;
                 } else {
                     min += s1;
                 }
-            }else {
-                min += s1;
+            } else {
+                if (!temp.equals("") && s1.equals(temp)) {
+                    min += "0";
+                } else {
+                    min += s1;
+                }
             }
         }
 
         return Integer.parseInt(max) - Integer.parseInt(min);
 
     }
+
     public int kItemsWithMaximumSum(int numOnes, int numZeros, int numNegOnes, int k) {
 
-        List<Integer> l= new ArrayList<>();
-        for(int i = 0; i < numOnes; i++){
+        List<Integer> l = new ArrayList<>();
+        for (int i = 0; i < numOnes; i++) {
             l.add(1);
         }
 
-        for(int i = 0; i < numZeros; i++){
+        for (int i = 0; i < numZeros; i++) {
             l.add(0);
         }
 
-        for(int i = 0; i < numNegOnes; i++){
+        for (int i = 0; i < numNegOnes; i++) {
             l.add(-1);
         }
 
         int totalCount = 0;
-        for(int i = 0; i <k; i++){
+        for (int i = 0; i < k; i++) {
             totalCount += l.get(i);
         }
 
