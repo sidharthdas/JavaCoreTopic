@@ -9,6 +9,42 @@ public class Leetcode26Main {
     public static void main(String[] args) {
         Bitset b = new Bitset(5);
     }
+
+    public int minMaxDifference(int num) {
+
+        String[] s = String.valueOf(num).split("");
+        String max = "";
+        String min = "";
+        boolean flag = true;
+        for(String s1 : s) {
+            if(flag){
+                if(!s1.equals("0")){
+                    max += "9";
+                    flag = false;
+                } else {
+                    max += s1;
+                }
+            }else {
+                max += s1;
+            }
+        }
+
+        for(String s1 : s) {
+            if(flag){
+                if(!s1.equals("9")){
+                    min += "0";
+                    flag = false;
+                } else {
+                    min += s1;
+                }
+            }else {
+                min += s1;
+            }
+        }
+
+        return Integer.parseInt(max) - Integer.parseInt(min);
+
+    }
     public int kItemsWithMaximumSum(int numOnes, int numZeros, int numNegOnes, int k) {
 
         List<Integer> l= new ArrayList<>();
