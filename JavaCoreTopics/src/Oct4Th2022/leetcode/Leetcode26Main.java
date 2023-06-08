@@ -11,6 +11,23 @@ public class Leetcode26Main {
         waysToBuyPensPencils(20, 10, 5);
     }
 
+    public int numberOfWeakCharacters(int[][] properties) {
+        int len = properties.length;
+        int count = 0;
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j < len; j++) {
+                if (i != j) {
+                    if(properties[j][0] > properties[i][0] && properties[j][1] > properties[i][1]){
+                        count ++;
+                        break;
+                    }
+                }
+            }
+        }
+
+        return count;
+    }
+
     public static long waysToBuyPensPencils(int total, int cost1, int cost2) {
         int highest = cost1 > cost2 ? cost1 : cost2;
         int lowest = cost1 < cost2 ? cost1 : cost2;
