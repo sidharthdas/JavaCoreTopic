@@ -24,7 +24,6 @@ public class Leetcode26Main {
                 }
             }
         }
-
         return count;
     }
 
