@@ -11,6 +11,17 @@ public class Leetcode26Main {
         waysToBuyPensPencils(20, 10, 5);
     }
 
+    public int buyChoco(int[] prices, int money) {
+        Arrays.sort(prices);
+        if(prices[0] + prices[1] > money){
+            return money;
+        }else if(prices[0] + prices[1] == money){
+            return 0;
+        } else {
+            return money - (prices[0] + prices[1]);
+        }
+    }
+
     public int numberOfWeakCharacters(int[][] properties) {
         int len = properties.length;
         int count = 0;
