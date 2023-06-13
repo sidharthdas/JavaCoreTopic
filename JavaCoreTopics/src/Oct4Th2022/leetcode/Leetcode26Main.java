@@ -1,21 +1,67 @@
 package Oct4Th2022.leetcode;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Leetcode26Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws AWTException, InterruptedException {
         //Bitset b = new Bitset(5);
-        waysToBuyPensPencils(20, 10, 5);
+        //waysToBuyPensPencils(20, 10, 5);
+        /*Robot robot = new Robot();
+        System.out.println("started");
+        int x = 0;
+        while
+        (true) {
+            Thread.sleep(30000);
+            System.out.println("Sleeping-" + x);
+            x++;
+            robot.mouseMove(1000, 1000);
+        }*/
+
+        //calculateTax(new int[][]{{3, 50}, {7, 10}, {12, 25}}, 10);
+        makeSmallestPalindrome("egcfe");
+    }
+
+    public static String makeSmallestPalindrome(String s) {
+        int start = 0;
+        int end = s.length() - 1;
+        while (start < end) {
+            if (Character.valueOf(s.charAt(start)).compareTo(Character.valueOf(s.charAt(end))) < 0) {
+
+                s = s.substring(0, end) + s.charAt(start) + s.substring(end + 1);
+
+            } else if (Character.valueOf(s.charAt(start)).compareTo(Character.valueOf(s.charAt(end))) > 0) {
+                s = s.substring(0, start) + s.charAt(end) + s.substring(start + 1);
+            }
+
+            start++;
+            end--;
+        }
+
+        return s;
+    }
+
+    public static double calculateTax(int[][] brackets, int income) {
+        //income, tax %
+        double totalTax = 0;
+        int prev = 0;
+        for (int[] bracket : brackets) {
+            int i = Math.min(income, bracket[0]) - prev;
+            totalTax = totalTax += ((double) ((double) bracket[1] / 100)) * i;
+            prev = i;
+
+        }
+        return totalTax;
     }
 
     public int buyChoco(int[] prices, int money) {
         Arrays.sort(prices);
-        if(prices[0] + prices[1] > money){
+        if (prices[0] + prices[1] > money) {
             return money;
-        }else if(prices[0] + prices[1] == money){
+        } else if (prices[0] + prices[1] == money) {
             return 0;
         } else {
             return money - (prices[0] + prices[1]);
@@ -28,8 +74,8 @@ public class Leetcode26Main {
         for (int i = 0; i < len; i++) {
             for (int j = 0; j < len; j++) {
                 if (i != j) {
-                    if(properties[j][0] > properties[i][0] && properties[j][1] > properties[i][1]){
-                        count ++;
+                    if (properties[j][0] > properties[i][0] && properties[j][1] > properties[i][1]) {
+                        count++;
                         break;
                     }
                 }
