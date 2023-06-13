@@ -25,6 +25,28 @@ public class Leetcode26Main {
         makeSmallestPalindrome("egcfe");
     }
 
+    public String removeTrailingZeros(String num) {
+        int len = num.length();
+        int c = -1;
+        String[] srr = num.split("");
+        for (int i = len - 1; i >= 0; i--) {
+            if (!srr[i].equals("0")) {
+                c = i;
+                break;
+            }
+        }
+        if(c == -1){
+            return "";
+        }
+
+        String temp = "";
+
+        for(int i = 0; i <= c; i++){
+            temp += srr[i];
+        }
+        return temp;
+    }
+
     public static String makeSmallestPalindrome(String s) {
         int start = 0;
         int end = s.length() - 1;
