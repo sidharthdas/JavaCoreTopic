@@ -24,6 +24,21 @@ public class Leetcode26Main {
         //calculateTax(new int[][]{{3, 50}, {7, 10}, {12, 25}}, 10);
         makeSmallestPalindrome("egcfe");
     }
+
+    public int minLength(String s) {
+
+        while (s.contains("AB") || s.contains("CD")) {
+            if (s.contains("AB")) {
+                s = s.replaceFirst("AB", "");
+            }
+            if (s.contains("CD")) {
+                s = s.replaceFirst("CD", "");
+            }
+        }
+
+        return s.length();
+    }
+
     public String removeTrailingZeros(String num) {
         int len = num.length();
         int c = -1;
@@ -34,13 +49,13 @@ public class Leetcode26Main {
                 break;
             }
         }
-        if(c == -1){
+        if (c == -1) {
             return "";
         }
 
         String temp = "";
 
-        for(int i = 0; i <= c; i++){
+        for (int i = 0; i <= c; i++) {
             temp += srr[i];
         }
         return temp;
