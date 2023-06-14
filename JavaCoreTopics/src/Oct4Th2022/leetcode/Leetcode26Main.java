@@ -24,7 +24,6 @@ public class Leetcode26Main {
         //calculateTax(new int[][]{{3, 50}, {7, 10}, {12, 25}}, 10);
         makeSmallestPalindrome("egcfe");
     }
-
     public String removeTrailingZeros(String num) {
         int len = num.length();
         int c = -1;
