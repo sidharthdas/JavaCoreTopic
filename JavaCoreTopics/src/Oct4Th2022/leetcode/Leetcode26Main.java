@@ -1,8 +1,7 @@
 package Oct4Th2022.leetcode;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 import java.util.List;
 
 public class Leetcode26Main {
@@ -23,6 +22,18 @@ public class Leetcode26Main {
 
         //calculateTax(new int[][]{{3, 50}, {7, 10}, {12, 25}}, 10);
         makeSmallestPalindrome("egcfe");
+    }
+
+    public int minimizedStringLength(String s) {
+        String[] srr = s.split("");
+
+        Set<String> set = new HashSet<>();
+
+        for(String s1 : srr){
+            set.add(s1);
+        }
+
+        return set.size();
     }
 
     public int minLength(String s) {
