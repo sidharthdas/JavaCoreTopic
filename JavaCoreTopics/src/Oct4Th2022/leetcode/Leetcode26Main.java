@@ -23,12 +23,31 @@ public class Leetcode26Main {
         //calculateTax(new int[][]{{3, 50}, {7, 10}, {12, 25}}, 10);
         makeSmallestPalindrome("egcfe");
     }
+
+    public boolean isFascinating(int n) {
+        if (String.valueOf(n).charAt(2) == '0') {
+            return false;
+        }
+
+        String s = String.valueOf(n) + String.valueOf(n * 2) + String.valueOf(n * 3);
+        if(s.contains("0")){
+            return false;
+        }
+
+        if(s.contains("1") && s.contains("2") && s.contains("3") && s.contains("4") && s.contains("5") &&
+                s.contains("6") && s.contains("7") && s.contains("8") && s.contains("9") ){
+            return true;
+        }
+
+        return false;
+    }
+
     public int minimizedStringLength(String s) {
         String[] srr = s.split("");
 
         Set<String> set = new HashSet<>();
 
-        for(String s1 : srr){
+        for (String s1 : srr) {
             set.add(s1);
         }
 
