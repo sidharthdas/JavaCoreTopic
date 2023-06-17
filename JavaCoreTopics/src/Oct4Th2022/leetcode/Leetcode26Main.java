@@ -32,9 +32,9 @@ public class Leetcode26Main {
 
         for (int i = 0; i < lenCircles; i++) {
             int count = 0;
-            int x1 = queries[0][0];
-            int y1 = queries[0][1];
-            double radius = (double)queries[0][2];
+            int x1 = queries[i][0];
+            int y1 = queries[i][1];
+            double radius = (double)queries[i][2];
 
             for (int j = 0; j < lenPoints; j++) {
                 int x2 = points[j][0];
