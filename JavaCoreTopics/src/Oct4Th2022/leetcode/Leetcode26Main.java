@@ -34,12 +34,13 @@ public class Leetcode26Main {
             return false;
         }
 
-        if(s.contains("1") && s.contains("2") && s.contains("3") && s.contains("4") && s.contains("5") &&
-                s.contains("6") && s.contains("7") && s.contains("8") && s.contains("9") ){
-            return true;
+        Map<String, Integer> map = new HashMap<>();
+        String[] srr = s.split("");
+        for(String s1 : srr){
+            map.put(s1, map.getOrDefault(s1, 0) + 1);
         }
 
-        return false;
+        return map.entrySet().stream().filter(x -> x.getValue() > 1).count() == 0 ? true : false;
     }
 
     public int minimizedStringLength(String s) {
