@@ -24,19 +24,46 @@ public class Leetcode26Main {
         makeSmallestPalindrome("egcfe");
     }
 
+    public int[] countPoints(int[][] points, int[][] queries) {
+
+        int lenCircles = queries.length;
+        int lenPoints = points.length;
+        int[] finalArr = new int[lenCircles];
+
+        for (int i = 0; i < lenCircles; i++) {
+            int count = 0;
+            int x1 = queries[0][0];
+            int y1 = queries[0][1];
+            double radius = (double)queries[0][2];
+
+            for (int j = 0; j < lenPoints; j++) {
+                int x2 = points[j][0];
+                int y2 = points[j][1];
+
+                double len = Math.sqrt((double)((x2-x1)*(x2-x1)) + ((y2-y1)*(y2-y1)));
+                if(len <= radius){
+                    count++;
+                }
+            }
+
+            finalArr[i] = count;
+        }
+        return finalArr;
+    }
+
     public boolean isFascinating(int n) {
         if (String.valueOf(n).charAt(2) == '0') {
             return false;
         }
 
         String s = String.valueOf(n) + String.valueOf(n * 2) + String.valueOf(n * 3);
-        if(s.contains("0")){
+        if (s.contains("0")) {
             return false;
         }
 
         Map<String, Integer> map = new HashMap<>();
         String[] srr = s.split("");
-        for(String s1 : srr){
+        for (String s1 : srr) {
             map.put(s1, map.getOrDefault(s1, 0) + 1);
         }
 
