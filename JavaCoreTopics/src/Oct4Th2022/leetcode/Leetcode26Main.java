@@ -25,7 +25,6 @@ public class Leetcode26Main {
     }
 
     public int[] countPoints(int[][] points, int[][] queries) {
-
         int lenCircles = queries.length;
         int lenPoints = points.length;
         int[] finalArr = new int[lenCircles];
