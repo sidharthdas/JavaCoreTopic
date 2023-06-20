@@ -23,7 +23,6 @@ public class Leetcode26Main {
         //calculateTax(new int[][]{{3, 50}, {7, 10}, {12, 25}}, 10);
         makeSmallestPalindrome("egcfe");
     }
-
     public int[] countPoints(int[][] points, int[][] queries) {
         int lenCircles = queries.length;
         int lenPoints = points.length;
