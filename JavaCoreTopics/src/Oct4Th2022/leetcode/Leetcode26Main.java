@@ -21,8 +21,41 @@ public class Leetcode26Main {
         }*/
 
         //calculateTax(new int[][]{{3, 50}, {7, 10}, {12, 25}}, 10);
-        makeSmallestPalindrome("egcfe");
+        //makeSmallestPalindrome("egcfe");
+        checkStraightLine(new int[][]{new int[]{1, 1},
+                new int[]{2, 2}, new int[]{3, 4}, new int[]{4, 5}, new int[]{5, 6}, new int[]{7, 7}});
     }
+
+    public static boolean checkStraightLine(int[][] coordinates) {
+
+        int[] first = coordinates[0];
+        int x1 = first[0];
+        int y1 = first[1];
+
+        int len = coordinates.length;
+
+        if (len < 2) {
+            return true;
+        }
+
+        int[] sec = coordinates[1];
+        int x2 = sec[0];
+        int y2 = sec[1];
+
+        double slope = (double) (y2 - y1) / (x2 - x1);
+        boolean flag = true;
+        for (int i = 1; i < len; i++) {
+            double tempSlope = (double) (coordinates[i][1] - y1) / (coordinates[i][0] - x1);
+            if (tempSlope != slope) {
+                flag = false;
+                break;
+            }
+
+        }
+        return flag;
+    }
+
+
     public int[] countPoints(int[][] points, int[][] queries) {
         int lenCircles = queries.length;
         int lenPoints = points.length;
@@ -32,14 +65,14 @@ public class Leetcode26Main {
             int count = 0;
             int x1 = queries[i][0];
             int y1 = queries[i][1];
-            double radius = (double)queries[i][2];
+            double radius = (double) queries[i][2];
 
             for (int j = 0; j < lenPoints; j++) {
                 int x2 = points[j][0];
                 int y2 = points[j][1];
 
-                double len = Math.sqrt((double)((x2-x1)*(x2-x1)) + ((y2-y1)*(y2-y1)));
-                if(len <= radius){
+                double len = Math.sqrt((double) ((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)));
+                if (len <= radius) {
                     count++;
                 }
             }
