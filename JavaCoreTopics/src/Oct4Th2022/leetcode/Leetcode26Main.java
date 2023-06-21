@@ -22,8 +22,27 @@ public class Leetcode26Main {
 
         //calculateTax(new int[][]{{3, 50}, {7, 10}, {12, 25}}, 10);
         //makeSmallestPalindrome("egcfe");
-        checkStraightLine(new int[][]{
-                new int[]{0, 0}, new int[]{0, 1}, new int[]{0, -1}});
+        //checkStraightLine(new int[][]{new int[]{0, 0}, new int[]{0, 1}, new int[]{0, -1}});
+        System.out.println(totalMoney(10));
+    }
+
+    public static int totalMoney(int n) {
+        int previousMonday = 0;
+
+        int totalMoney = 0;
+        int previousDay = 0;
+        for (int i = 0; i < n; i++) {
+            if(i % 7 == 0){
+                previousMonday += 1;
+                totalMoney += previousMonday;
+                previousDay = previousMonday;
+            } else {
+                previousDay += 1;
+                totalMoney += previousDay;
+            }
+        }
+
+        return totalMoney;
     }
 
     public static boolean checkStraightLine(int[][] coordinates) {
@@ -44,14 +63,14 @@ public class Leetcode26Main {
         int x3 = coordinates[2][0];
         int y3 = coordinates[2][1];
 
-        if(x1 == 0 && y1 == 0 && x2 == 0 && y2 == 1 && x3 == 0 && y3 == -1){
+        if (x1 == 0 && y1 == 0 && x2 == 0 && y2 == 1 && x3 == 0 && y3 == -1) {
             return true;
         }
 
-        double slope = (double) (y2 - y1) / (double)(x2 - x1);
+        double slope = (double) (y2 - y1) / (double) (x2 - x1);
         boolean flag = true;
         for (int i = 1; i < len; i++) {
-            double tempSlope = (double) (coordinates[i][1] - y1) / (double)(coordinates[i][0] - x1);
+            double tempSlope = (double) (coordinates[i][1] - y1) / (double) (coordinates[i][0] - x1);
             if (tempSlope != slope) {
                 flag = false;
                 break;
