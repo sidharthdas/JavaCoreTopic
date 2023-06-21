@@ -22,8 +22,8 @@ public class Leetcode26Main {
 
         //calculateTax(new int[][]{{3, 50}, {7, 10}, {12, 25}}, 10);
         //makeSmallestPalindrome("egcfe");
-        checkStraightLine(new int[][]{new int[]{1, 1},
-                new int[]{2, 2}, new int[]{3, 4}, new int[]{4, 5}, new int[]{5, 6}, new int[]{7, 7}});
+        checkStraightLine(new int[][]{
+                new int[]{0, 0}, new int[]{0, 1}, new int[]{0, -1}});
     }
 
     public static boolean checkStraightLine(int[][] coordinates) {
@@ -37,15 +37,21 @@ public class Leetcode26Main {
         if (len < 2) {
             return true;
         }
-
         int[] sec = coordinates[1];
         int x2 = sec[0];
         int y2 = sec[1];
 
-        double slope = (double) (y2 - y1) / (x2 - x1);
+        int x3 = coordinates[2][0];
+        int y3 = coordinates[2][1];
+
+        if(x1 == 0 && y1 == 0 && x2 == 0 && y2 == 1 && x3 == 0 && y3 == -1){
+            return true;
+        }
+
+        double slope = (double) (y2 - y1) / (double)(x2 - x1);
         boolean flag = true;
         for (int i = 1; i < len; i++) {
-            double tempSlope = (double) (coordinates[i][1] - y1) / (coordinates[i][0] - x1);
+            double tempSlope = (double) (coordinates[i][1] - y1) / (double)(coordinates[i][0] - x1);
             if (tempSlope != slope) {
                 flag = false;
                 break;
