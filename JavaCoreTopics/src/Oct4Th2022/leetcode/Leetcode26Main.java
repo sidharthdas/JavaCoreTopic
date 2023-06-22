@@ -41,7 +41,6 @@ public class Leetcode26Main {
                 totalMoney += previousDay;
             }
         }
-
         return totalMoney;
     }
 
