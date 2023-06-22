@@ -26,6 +26,19 @@ public class Leetcode26Main {
         System.out.println(totalMoney(10));
     }
 
+    public int distanceTraveled(int mainTank, int additionalTank) {
+        int additionalFuel = mainTank / 5;
+        int remaining = mainTank % 5;
+         int totalDis = (mainTank * 10);
+         if(additionalFuel <= additionalTank){
+             totalDis += additionalFuel * 10;
+         } else {
+             totalDis += additionalTank * 10;
+         }
+
+         return totalDis;
+    }
+
     public int removeCoveredIntervals(int[][] intervals) {
 
         int len = intervals.length;
