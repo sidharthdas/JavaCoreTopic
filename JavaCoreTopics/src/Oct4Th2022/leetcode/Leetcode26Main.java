@@ -26,13 +26,33 @@ public class Leetcode26Main {
         System.out.println(totalMoney(10));
     }
 
+    public int removeCoveredIntervals(int[][] intervals) {
+
+        int len = intervals.length;
+        int count = 0;
+
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j < len; j++) {
+                if (i != j) {
+                    if ((intervals[j][0] > intervals[i][0] && intervals[j][0] < intervals[i][1])
+                            && ((intervals[j][1] < intervals[i][1] && intervals[j][0] > intervals[i][0]))
+                    ) {
+
+                        count++;
+                    }
+                }
+            }
+        }
+        return len - count;
+    }
+
     public static int totalMoney(int n) {
         int previousMonday = 0;
 
         int totalMoney = 0;
         int previousDay = 0;
         for (int i = 0; i < n; i++) {
-            if(i % 7 == 0){
+            if (i % 7 == 0) {
                 previousMonday += 1;
                 totalMoney += previousMonday;
                 previousDay = previousMonday;
