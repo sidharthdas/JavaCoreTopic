@@ -447,7 +447,6 @@ class Solution111{
     public void Solution1111(int[] w) {
         this.len = w.length;
     }
-
     public int pickIndex() {
         Random random = new Random();
         return random.nextInt(len) + 1;
