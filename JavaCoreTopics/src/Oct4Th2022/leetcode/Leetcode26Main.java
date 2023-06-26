@@ -3,6 +3,7 @@ package Oct4Th2022.leetcode;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Leetcode26Main {
 
@@ -23,20 +24,50 @@ public class Leetcode26Main {
         //calculateTax(new int[][]{{3, 50}, {7, 10}, {12, 25}}, 10);
         //makeSmallestPalindrome("egcfe");
         //checkStraightLine(new int[][]{new int[]{0, 0}, new int[]{0, 1}, new int[]{0, -1}});
-        System.out.println(totalMoney(10));
+        //System.out.println(totalMoney(10));
+        maxSubsequence(new int[]{2,1,3,3}, 2);
+    }
+
+    public static int[] maxSubsequence(int[] nums, int k) {
+        List<Integer> l1 = Arrays.stream(nums).boxed().sorted().collect(Collectors.toList());
+        int[] arr = new int[k];
+        int len = nums.length;
+        int sum = 0;
+        List<Integer> l = new ArrayList<>();
+        for (int i = len - 1; i >= 0; i--) {
+            if (k != 0) {
+                l.add(l1.get(i));
+                k--;
+            } else {
+                break;
+            }
+        }
+
+
+        int index = 0;
+
+        for(int i = 0; i < len; i++){
+            if(l.contains(nums[i])){
+                l.remove(new Integer(nums[i]));
+                arr[index] = nums[i];
+                index++;
+            }
+        }
+
+        return arr;
     }
 
     public int distanceTraveled(int mainTank, int additionalTank) {
         int additionalFuel = mainTank / 5;
         int remaining = mainTank % 5;
-         int totalDis = (mainTank * 10);
-         if(additionalFuel <= additionalTank){
-             totalDis += additionalFuel * 10;
-         } else {
-             totalDis += additionalTank * 10;
-         }
+        int totalDis = (mainTank * 10);
+        if (additionalFuel <= additionalTank) {
+            totalDis += additionalFuel * 10;
+        } else {
+            totalDis += additionalTank * 10;
+        }
 
-         return totalDis;
+        return totalDis;
     }
 
     public int removeCoveredIntervals(int[][] intervals) {
@@ -441,12 +472,14 @@ class Bitset {
     }
 }
 
-class Solution111{
+class Solution111 {
 
     int len;
+
     public void Solution1111(int[] w) {
         this.len = w.length;
     }
+
     public int pickIndex() {
         Random random = new Random();
         return random.nextInt(len) + 1;
