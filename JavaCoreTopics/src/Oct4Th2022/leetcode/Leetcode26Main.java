@@ -25,7 +25,7 @@ public class Leetcode26Main {
         //makeSmallestPalindrome("egcfe");
         //checkStraightLine(new int[][]{new int[]{0, 0}, new int[]{0, 1}, new int[]{0, -1}});
         //System.out.println(totalMoney(10));
-        maxSubsequence(new int[]{2,1,3,3}, 2);
+        maxSubsequence(new int[]{2, 1, 3, 3}, 2);
     }
 
     public static int[] maxSubsequence(int[] nums, int k) {
@@ -42,12 +42,10 @@ public class Leetcode26Main {
                 break;
             }
         }
-
-
         int index = 0;
 
-        for(int i = 0; i < len; i++){
-            if(l.contains(nums[i])){
+        for (int i = 0; i < len; i++) {
+            if (l.contains(nums[i])) {
                 l.remove(new Integer(nums[i]));
                 arr[index] = nums[i];
                 index++;
