@@ -89,6 +89,23 @@ public class Leetcode25MainClass {
         System.out.println(findLongestWord("abpcplea", List.of("ale", "apple", "monkey", "plea", "abpcplaaa", "abpcllllll", "abccclllpppeeaaaa").stream().collect(Collectors.toList())));
     }
 
+    public int maximumNumberOfStringPairs(String[] words) {
+        int len = words.length;
+        int count = 0;
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j < len; j++) {
+                if (i != j) {
+                    StringBuffer sb = new StringBuffer(words[j]);
+                    if(words[i].equals(sb.reverse().toString())){
+                        count++;
+                    }
+                }
+            }
+        }
+
+        return count/2;
+    }
+
 
     public int numFriendRequests(int[] ages) {
         //List<Integer> l = Arrays.stream(ages).boxed().sorted(Collections.reverseOrder()).collect(Collectors.toList());
