@@ -89,6 +89,33 @@ public class Leetcode25MainClass {
         System.out.println(findLongestWord("abpcplea", List.of("ale", "apple", "monkey", "plea", "abpcplaaa", "abpcllllll", "abccclllpppeeaaaa").stream().collect(Collectors.toList())));
     }
 
+    public List<Integer> peopleIndexes(List<List<String>> favoriteCompanies) {
+        int size = favoriteCompanies.size();
+        List<Integer> l = new ArrayList<>();
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (i != j) {
+                    if (favoriteCompanies.get(i).size() <= favoriteCompanies.get(j).size()) {
+                        boolean flag = true;
+                        for(String s : favoriteCompanies.get(i)){
+                            if (!favoriteCompanies.get(j).contains(s)){
+                                flag = false;
+                                break;
+                            }
+                        }
+
+                        if(flag){
+                            l.add(j);
+                        }
+                    }
+                }
+            }
+        }
+
+        return l;
+    }
+
 
     public int maximumNumberOfStringPairs(String[] words) {
         int len = words.length;
@@ -97,14 +124,14 @@ public class Leetcode25MainClass {
             for (int j = 0; j < len; j++) {
                 if (i != j) {
                     StringBuffer sb = new StringBuffer(words[j]);
-                    if(words[i].equals(sb.reverse().toString())){
+                    if (words[i].equals(sb.reverse().toString())) {
                         count++;
                     }
                 }
             }
         }
 
-        return count/2;
+        return count / 2;
     }
 
 
