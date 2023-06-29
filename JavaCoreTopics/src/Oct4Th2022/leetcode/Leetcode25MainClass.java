@@ -86,10 +86,11 @@ public class Leetcode25MainClass {
         //System.out.println(searchMatrix(new int[][]{{-9, -9, -9, -8, -8, -7, -6, -4, -4, -3}, {0, 1, 2, 2, 4, 5, 5, 5, 7, 9}, {12, 12, 14, 14, 15, 17, 19, 19, 19, 21}, {22, 23, 23, 25, 25, 26, 26, 28, 28, 29}, {31, 31, 31, 33, 34, 36, 37, 38, 38, 39}, {40, 42, 43, 44, 46, 46, 46, 47, 49, 50}, {52, 54, 55, 57, 59, 60, 60, 62, 64, 66}, {68, 68, 70, 71, 71, 72, 74, 76, 78, 80}, {82, 83, 85, 85, 85, 87, 88, 88, 89, 89}, {90, 90, 90, 91, 93, 94, 94, 95, 95, 97}, {98, 98, 99, 99, 101, 103, 105, 106, 108, 109}, {112, 112, 112, 113, 113, 113, 114, 116, 118, 118}, {119, 121, 122, 124, 125, 125, 125, 126, 127, 128}, {131, 133, 134, 134, 134, 135, 135, 137, 137, 139}, {141, 143, 145, 147, 148, 150, 150, 150, 150, 152}, {153, 153, 154, 155, 157, 157, 157, 159, 161, 162}, {164, 166, 167, 167, 167, 169, 170, 170, 171, 173}, {176, 176, 178, 179, 181, 182, 183, 183, 184, 186}}, 135));
         //System.out.println(findDiagonalOrder(new int[][]{{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, {11, 12, 13, 14, 15, 16, 17, 18, 19, 20}}));
         //System.out.println( findKthBit(5, 16));
-        System.out.println(findLongestWord("abpcplea", List.of("ale", "apple", "monkey", "plea", "abpcplaaa", "abpcllllll", "abccclllpppeeaaaa").stream().collect(Collectors.toList())));
+        //System.out.println(findLongestWord("abpcplea", List.of("ale", "apple", "monkey", "plea", "abpcplaaa", "abpcllllll", "abccclllpppeeaaaa").stream().collect(Collectors.toList())));
+        System.out.println(maskPII("1(234)567-890"));
     }
 
-    public String maskPII(String s) {
+    public static String maskPII(String s) {
 
         if (s.contains("@")) {
             s = s.toLowerCase();
@@ -98,19 +99,44 @@ public class Leetcode25MainClass {
             int len = sub.length();
             String star = "";
             int count = 0;
-            while(count < 5){
+            while (count < 5) {
                 star += "*";
                 count++;
             }
 
             s = s.charAt(0) + star + s.charAt(s.indexOf("@") - 1) + s.substring(s.indexOf("@"));
         } else {
-        //TODO: Masking logic for phone number
+            List<String> l = List.of("0", "1", "2", "3", "4", "5", "6", "7", "8", "9");
+            String onlyDigits = "";
+            String last4 = "";
+            int len = s.length();
+            int count = 0;
+            for (int i = len - 1; i >= 0; i--) {
+                if (l.contains(String.valueOf(s.charAt(i)))) {
+                    onlyDigits = s.charAt(i) + onlyDigits;
+                    if(count < 4){
+                        last4 = s.charAt(i) + last4;
+                        count++;
+                    }
+                }
+            }
 
+            int size = onlyDigits.length();
+            if (size == 10) {
+                s = "***-***-" + last4;
+
+            } else if (size == 11) {
+                s = "+*-***-***-" + last4;
+
+            } else if (size == 12) {
+                s = "+**-***-***-" + last4;
+
+            } else if (size == 13) {
+                s = "+***-***-***-" + last4;
+
+            }
         }
-
         return s;
-
     }
 
     public List<Integer> peopleIndexes(List<List<String>> favoriteCompanies) {
