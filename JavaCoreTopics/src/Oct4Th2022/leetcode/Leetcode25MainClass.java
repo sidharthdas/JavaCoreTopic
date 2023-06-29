@@ -89,6 +89,30 @@ public class Leetcode25MainClass {
         System.out.println(findLongestWord("abpcplea", List.of("ale", "apple", "monkey", "plea", "abpcplaaa", "abpcllllll", "abccclllpppeeaaaa").stream().collect(Collectors.toList())));
     }
 
+    public String maskPII(String s) {
+
+        if (s.contains("@")) {
+            s = s.toLowerCase();
+            String[] srr = s.split("@");
+            String sub = s.substring(0, s.indexOf("@"));
+            int len = sub.length();
+            String star = "";
+            int count = 0;
+            while(count < 5){
+                star += "*";
+                count++;
+            }
+
+            s = s.charAt(0) + star + s.charAt(s.indexOf("@") - 1) + s.substring(s.indexOf("@"));
+        } else {
+        //TODO: Masking logic for phone number
+
+        }
+
+        return s;
+
+    }
+
     public List<Integer> peopleIndexes(List<List<String>> favoriteCompanies) {
         int size = favoriteCompanies.size();
         List<Integer> l = new ArrayList<>();
@@ -98,14 +122,14 @@ public class Leetcode25MainClass {
                 if (i != j) {
                     if (favoriteCompanies.get(i).size() <= favoriteCompanies.get(j).size()) {
                         boolean flag = true;
-                        for(String s : favoriteCompanies.get(i)){
-                            if (!favoriteCompanies.get(j).contains(s)){
+                        for (String s : favoriteCompanies.get(i)) {
+                            if (!favoriteCompanies.get(j).contains(s)) {
                                 flag = false;
                                 break;
                             }
                         }
 
-                        if(flag){
+                        if (!flag) {
                             l.add(j);
                         }
                     }
