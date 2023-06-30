@@ -29,6 +29,30 @@ public class Leetcode26Main {
         findOriginalArray(new int[]{1, 3, 4, 2, 6, 8});
     }
 
+    public int countBeautifulPairs(int[] nums) {
+
+        int len = nums.length;
+        int count = 0;
+
+        for (int i = 0; i < len; i++) {
+            for (int j = i + 1; j < len; j++) {
+                if (gcd(nums[i], nums[j]) == 1) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    private int gcd(int x, int y) {
+        int gcd = 1;
+        for (int i = 1; i <= x && i <= y; i++) {
+            if (x % i == 0 && y % i == 0)
+                gcd = i;
+        }
+        return gcd;
+    }
+
     public static int[] findOriginalArray(int[] changed) {
         int len = changed.length;
         List<Integer> l = new ArrayList<>();
