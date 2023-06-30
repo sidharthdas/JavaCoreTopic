@@ -114,7 +114,7 @@ public class Leetcode25MainClass {
             for (int i = len - 1; i >= 0; i--) {
                 if (l.contains(String.valueOf(s.charAt(i)))) {
                     onlyDigits = s.charAt(i) + onlyDigits;
-                    if(count < 4){
+                    if (count < 4) {
                         last4 = s.charAt(i) + last4;
                         count++;
                     }
