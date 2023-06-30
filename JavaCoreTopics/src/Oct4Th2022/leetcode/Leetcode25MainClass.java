@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
  */
 
 record Alien(String alienId, String alienName) {
-
     //This has a capalibity that it automatically implemented equals and hascode
     //It doesnt have setter, as it is just use to send and access the data
     public Alien(String alienId) { //constructor with one argument
