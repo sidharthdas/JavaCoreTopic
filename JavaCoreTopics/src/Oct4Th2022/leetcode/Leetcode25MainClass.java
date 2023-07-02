@@ -24,7 +24,6 @@ public class Leetcode25MainClass {
         Alien a2 = new Alien("2");
         System.out.println(a1);
         System.out.println(a2);
-
         /*Cashier cashier = new Cashier(3, 50, new int[]{1, 2, 3, 4, 5, 6, 7}, new int[]{100, 200, 300, 400, 300, 200, 100});
 
         cashier.getBill(new int[]{1, 2}, new int[]{1, 2});                        // return 500.0. 1st customer, no discount.
