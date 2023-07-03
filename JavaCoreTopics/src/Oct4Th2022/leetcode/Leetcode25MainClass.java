@@ -86,31 +86,29 @@ public class Leetcode25MainClass {
         //System.out.println( findKthBit(5, 16));
         //System.out.println(findLongestWord("abpcplea", List.of("ale", "apple", "monkey", "plea", "abpcplaaa", "abpcllllll", "abccclllpppeeaaaa").stream().collect(Collectors.toList())));
         //System.out.println(maskPII("1(234)567-890"));
-        System.out.println(numRescueBoats(new int[]{1,2}, 3));
+        System.out.println(numRescueBoats(new int[]{1, 2}, 3));
     }
 
-    public static   int numRescueBoats(int[] people, int limit) {
+    public static int numRescueBoats(int[] people, int limit) {
         Arrays.sort(people);
         int boatCount = 0;
         int currentWeight = people[0];
-
-
         int len = people.length;
 
         for (int i = 1; i < len; i++) {
-           if(currentWeight == limit){
-               boatCount++;
-               currentWeight = people[i];
-           } else if (currentWeight < limit){
-               currentWeight += people[i];
-           } else if(currentWeight > limit) {
-               boatCount++;
-               currentWeight = people[i - 1] + people[i];
-           }
+            if (currentWeight == limit) {
+                boatCount++;
+                currentWeight = people[i];
+            } else if (currentWeight < limit) {
+                currentWeight += people[i];
+            } else if (currentWeight > limit) {
+                boatCount++;
+                currentWeight = people[i - 1] + people[i];
+            }
         }
 
-        if(currentWeight == limit){
-            return boatCount+1;
+        if (currentWeight == limit) {
+            return boatCount + 1;
         }
 
         return boatCount + 2;
