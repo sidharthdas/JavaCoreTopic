@@ -86,7 +86,26 @@ public class Leetcode25MainClass {
         //System.out.println( findKthBit(5, 16));
         //System.out.println(findLongestWord("abpcplea", List.of("ale", "apple", "monkey", "plea", "abpcplaaa", "abpcllllll", "abccclllpppeeaaaa").stream().collect(Collectors.toList())));
         //System.out.println(maskPII("1(234)567-890"));
-        System.out.println(numRescueBoats(new int[]{5,1,4,2}, 6));
+        System.out.println(numRescueBoats(new int[]{5, 1, 4, 2}, 6));
+    }
+
+    public int smallestRepunitDivByK(int k) {
+        int smallest = 1;
+        if (k == 1) return smallest;
+        if (k % 2 == 0) return -1;
+        int count = 0;
+        while (smallest % k != 0) {
+            smallest = smallest * 10 + 1;
+            count ++;
+            if(count == 9){
+                break;
+            }
+
+        }
+
+        if(smallest % k == 0) return smallest;
+
+        return -1;
     }
 
     public static int numRescueBoats(int[] people, int limit) {
