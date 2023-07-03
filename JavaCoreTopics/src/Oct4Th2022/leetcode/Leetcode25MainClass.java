@@ -103,7 +103,7 @@ public class Leetcode25MainClass {
 
         }
 
-        if(smallest % k == 0) return smallest;
+        if(smallest % k == 0) return String.valueOf(smallest).split("").length;
 
         return -1;
     }
