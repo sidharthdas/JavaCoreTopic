@@ -107,7 +107,7 @@ public class Leetcode25MainClass {
             }
         }
 
-        if (currentWeight == limit) {
+        if (currentWeight =< limit) {
             return boatCount + 1;
         }
 
