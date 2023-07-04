@@ -112,7 +112,10 @@ public class Leetcode25MainClass {
             }
         }
 
+
+
         map.forEach((k, v) -> {
+            List<Integer> lOf = v.stream().map(x -> Integer.parseInt(x.split(":")[0])).collect(Collectors.toList());
             if (v.size() > 2) {
                 Collections.sort(v);
                 Map<Integer, Long> temp = v.stream().map(x -> Integer.parseInt(x.split(":")[0]))
@@ -134,7 +137,7 @@ public class Leetcode25MainClass {
                             .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
 
                     for (int i : temp1.keySet()) {
-                        if (v.contains(i + 1)) {
+                        if (lOf.contains(i + 1)) {
                             fList.add(k);
                             break;
                         }
