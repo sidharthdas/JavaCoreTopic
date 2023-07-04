@@ -1,5 +1,6 @@
 package Oct4Th2022.leetcode;
 
+import java.math.BigInteger;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -86,24 +87,90 @@ public class Leetcode25MainClass {
         //System.out.println( findKthBit(5, 16));
         //System.out.println(findLongestWord("abpcplea", List.of("ale", "apple", "monkey", "plea", "abpcplaaa", "abpcllllll", "abccclllpppeeaaaa").stream().collect(Collectors.toList())));
         //System.out.println(maskPII("1(234)567-890"));
-        System.out.println(numRescueBoats(new int[]{5, 1, 4, 2}, 6));
+        //System.out.println(numRescueBoats(new int[]{5, 1, 4, 2}, 6));
+        System.out.println(smallestRepunitDivByK(23));
     }
 
-    public int smallestRepunitDivByK(int k) {
-        int smallest = 1;
-        if (k == 1) return smallest;
-        if (k % 2 == 0) return -1;
+    public List<String> alertNames(String[] keyName, String[] keyTime) {
+
+        Map<String, List<String>> map = new HashMap<>();
+        List<String> fList = new ArrayList<>();
+
+        int len = keyName.length;
+
+        for (int i = 0; i < len; i++) {
+            if (map.containsKey(keyName[i])) {
+                List<String> l = map.get(keyName[i]);
+                l.add(keyTime[i]);
+                map.put(keyName[i], l);
+            } else {
+                List<String> l = new ArrayList<>();
+                l.add(keyTime[i]);
+                map.put(keyName[i], l);
+            }
+        }
+
+        map.forEach((k, v) -> {
+            if (v.size() > 2) {
+                Collections.sort(v);
+                Map<Integer, Long> temp = v.stream().map(x -> Integer.parseInt(x.split(":")[0]))
+                        .collect(Collectors.groupingBy(n -> n, Collectors.counting()))
+                        .entrySet()
+                        .stream()
+                        .filter(x -> x.getValue() >= 2)
+                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+
+                if (temp.entrySet().stream().filter(x -> x.getValue() >= 3).count() > 0) {
+                    fList.add(k);
+                } else {
+
+                    Map<Integer, Long> temp1 = v.stream().map(x -> Integer.parseInt(x.split(":")[0]))
+                            .collect(Collectors.groupingBy(n -> n, Collectors.counting()))
+                            .entrySet()
+                            .stream()
+                            .filter(x -> x.getValue() == 2)
+                            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+
+                    for (int i : temp1.keySet()) {
+                        if (temp1.containsKey(i + 1)) {
+                            fList.add(k);
+                            break;
+                        }
+                    }
+                }
+            }
+        });
+        return fList;
+    }
+
+    public int minimumBuckets(String hamsters) {
+        int first = hamsters.indexOf("H");
+        int last = hamsters.lastIndexOf("H");
+
+        hamsters = hamsters.substring(first, last);
+        return (int) Arrays.stream(hamsters.split("")).filter(x -> x.equals(".")).count() == 0 ? -1 :
+                (int) Arrays.stream(hamsters.split("")).filter(x -> x.equals(".")).count();
+    }
+
+    public static int smallestRepunitDivByK(int k) {
+        BigInteger smallest = new BigInteger(String.valueOf(1));
+        if (k == 1) return 1;
+        if (k % 2 == 0 || k % 5 == 0) return -1;
         int count = 0;
-        while (smallest % k != 0) {
-            smallest = smallest * 10 + 1;
-            count ++;
-            if(count == 9){
+        BigInteger ten = new BigInteger(String.valueOf(10));
+        BigInteger one = new BigInteger(String.valueOf(1));
+        BigInteger kBig = new BigInteger(String.valueOf(k));
+        while (!smallest.mod(kBig).equals(0)) {
+            smallest = smallest.multiply(ten);
+            smallest = smallest.add(one);
+            count++;
+            if (count == 20) {
                 break;
             }
 
         }
-
-        if(smallest % k == 0) return String.valueOf(smallest).split("").length;
+        System.out.println(smallest);
+        if (smallest.mod(kBig).equals(0)) return String.valueOf(smallest).split("").length;
 
         return -1;
     }
