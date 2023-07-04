@@ -88,10 +88,12 @@ public class Leetcode25MainClass {
         //System.out.println(findLongestWord("abpcplea", List.of("ale", "apple", "monkey", "plea", "abpcplaaa", "abpcllllll", "abccclllpppeeaaaa").stream().collect(Collectors.toList())));
         //System.out.println(maskPII("1(234)567-890"));
         //System.out.println(numRescueBoats(new int[]{5, 1, 4, 2}, 6));
-        System.out.println(smallestRepunitDivByK(23));
+        //System.out.println(smallestRepunitDivByK(23));
+        System.out.println(alertNames(new String[]{"daniel","daniel","daniel","luis","luis","luis","luis"},
+                new String[] {"10:00","10:40","11:00","09:00","11:00","13:00","15:00"}));
     }
 
-    public List<String> alertNames(String[] keyName, String[] keyTime) {
+    public static List<String> alertNames(String[] keyName, String[] keyTime) {
 
         Map<String, List<String>> map = new HashMap<>();
         List<String> fList = new ArrayList<>();
@@ -132,7 +134,7 @@ public class Leetcode25MainClass {
                             .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
 
                     for (int i : temp1.keySet()) {
-                        if (temp1.containsKey(i + 1)) {
+                        if (v.contains(i + 1)) {
                             fList.add(k);
                             break;
                         }
