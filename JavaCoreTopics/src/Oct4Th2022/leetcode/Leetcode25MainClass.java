@@ -145,6 +145,8 @@ public class Leetcode25MainClass {
                 }
             }
         });
+
+        Collections.sort(fList);
         return fList;
     }
 
