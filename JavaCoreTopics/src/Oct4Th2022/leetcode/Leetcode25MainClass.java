@@ -89,8 +89,31 @@ public class Leetcode25MainClass {
         //System.out.println(maskPII("1(234)567-890"));
         //System.out.println(numRescueBoats(new int[]{5, 1, 4, 2}, 6));
         //System.out.println(smallestRepunitDivByK(23));
-        System.out.println(alertNames(new String[]{"daniel","daniel","daniel","luis","luis","luis","luis"},
-                new String[] {"10:00","10:40","11:00","09:00","11:00","13:00","15:00"}));
+        //System.out.println(alertNames(new String[]{"daniel", "daniel", "daniel", "luis", "luis", "luis", "luis" },
+        //      new String[]{"10:00", "10:40", "11:00", "09:00", "11:00", "13:00", "15:00" }));
+        System.out.println(evaluate("(name)is(age)yearsold", List.of(List.of("name", "bob"), List.of("age", "two"))));
+    }
+
+    public int compareVersion(String version1, String version2) {
+
+        List<Integer> l1 = Arrays.stream(version1.split("\\.")).map(x -> Integer.parseInt(x)).collect(Collectors.toList());
+        List<Integer> l2 = Arrays.stream(version2.split("\\.")).map(x -> Integer.parseInt(x)).collect(Collectors.toList());
+
+        return 0;
+    }
+
+    public static String evaluate(String s, List<List<String>> knowledge) {
+
+        for (List<String> l : knowledge) {
+            if (s.contains(l.get(0))) {
+                s = s.replace(l.get(0), l.get(1));
+            }
+        }
+
+        s = s.replaceAll("\\(", "");
+        s = s.replaceAll("\\)", "");
+
+        return s;
     }
 
     public static List<String> alertNames(String[] keyName, String[] keyTime) {
@@ -111,7 +134,6 @@ public class Leetcode25MainClass {
                 map.put(keyName[i], l);
             }
         }
-
 
 
         map.forEach((k, v) -> {
