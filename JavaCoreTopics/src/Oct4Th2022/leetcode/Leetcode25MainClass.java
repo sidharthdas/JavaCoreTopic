@@ -94,6 +94,54 @@ public class Leetcode25MainClass {
         System.out.println(evaluate("(name)is(age)yearsold", List.of(List.of("name", "bob"), List.of("age", "two"))));
     }
 
+    public int[] fullBloomFlowers(int[][] flowers, int[] people) {
+
+        List<List<Integer>> list = new ArrayList<>();
+        for (int[] x : flowers) {
+            List<Integer> tmp = new ArrayList<>();
+            for (int i = x[0]; i <= x[1]; i++) {
+                tmp.add(i);
+            }
+            list.add(tmp);
+        }
+        int size = people.length;
+        int[] f = new int[size];
+
+        for (int i = 0; i < size; i++) {
+            final int ii = i;
+            f[i] = (int) list.stream().filter(x -> x.contains(people[ii])).count();
+        }
+        return f;
+    }
+
+    public int uniqueLetterString(String s) {
+        List<String> substrings = generateSubstrings(s);
+        int count = 0;
+
+        for (String x : substrings) {
+            if (x.length() == 1) {
+                count++;
+            } else {
+                count += Arrays.stream(x.split("")).collect(Collectors.groupingBy(y -> y, Collectors.counting()))
+                        .entrySet().stream().filter(z -> z.getValue() == 1).count();
+            }
+        }
+
+        return count;
+    }
+
+    public static List<String> generateSubstrings(String input) {
+        List<String> substrings = new ArrayList<>();
+
+        for (int i = 0; i < input.length(); i++) {
+            for (int j = i + 1; j <= input.length(); j++) {
+                substrings.add(input.substring(i, j));
+            }
+        }
+
+        return substrings;
+    }
+
     public int compareVersion(String version1, String version2) {
 
         List<Integer> l1 = Arrays.stream(version1.split("\\.")).map(x -> Integer.parseInt(x)).collect(Collectors.toList());
