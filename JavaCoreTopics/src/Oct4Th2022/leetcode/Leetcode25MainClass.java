@@ -95,6 +95,53 @@ public class Leetcode25MainClass {
         System.out.println(canPlaceFlowers(new int[]{1, 0, 0, 0, 0, 1}, 2));
     }
 
+    public int nearestValidPoint(int x, int y, int[][] points) {
+        Map<int[], Integer> map = new HashMap<>();
+        for (int[] point : points) {
+            map.put(point, Math.abs(x - point[0]) + Math.abs(y - point[1]));
+        }
+
+        int lowest = map.entrySet().stream().sorted(Map.Entry.comparingByValue()).findFirst().get().getValue();
+        if (lowest == 0) {
+            return 0;
+        }
+
+        map = map.entrySet().stream().filter(i -> i.getValue() == lowest)
+                .filter(z -> z.getKey()[0] == x || z.getKey()[1] == y)
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+        if(map.isEmpty()){
+            return -1;
+        }
+        int lowIndex = Integer.MAX_VALUE;
+        for (int[] i : map.keySet()) {
+            if (i[0] < lowIndex) {
+                lowIndex = i[0];
+            }
+        }
+
+        return lowIndex;
+    }
+
+    public int tupleSameProduct(int[] nums) {
+        int len = nums.length;
+        int count = 0;
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j < len; j++) {
+                for (int k = 0; k < len; k++) {
+                    for (int l = 0; l < len; l++) {
+                        if (nums[i] != nums[j] && nums[j] != nums[k] && nums[k] != nums[l] && nums[l] != nums[i]) {
+                            if (nums[i] * nums[j] == nums[k] * nums[l]) {
+                                count++;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return count;
+    }
+
     public double findMaxAverage(int[] nums, int k) {
 
         List<List<Integer>> sub = generateSubarrays(nums);
@@ -123,7 +170,8 @@ public class Leetcode25MainClass {
     }
 
     public static boolean canPlaceFlowers(int[] flowerbed, int n) {
-        if(Arrays.stream(flowerbed).boxed().filter(x -> x == 0).count() == Arrays.stream(flowerbed).boxed().filter(x -> x == 1).count()) return false;
+        if (Arrays.stream(flowerbed).boxed().filter(x -> x == 0).count() == Arrays.stream(flowerbed).boxed().filter(x -> x == 1).count())
+            return false;
         if (n % 2 == 0) {
             return Arrays.stream(flowerbed).boxed().filter(x -> x == 0).count() % 2 != 0 &&
                     Arrays.stream(flowerbed).boxed().filter(x -> x == 0).count() / 2 >= n;
