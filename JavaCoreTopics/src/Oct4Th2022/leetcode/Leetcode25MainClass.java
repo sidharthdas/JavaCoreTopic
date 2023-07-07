@@ -91,7 +91,44 @@ public class Leetcode25MainClass {
         //System.out.println(smallestRepunitDivByK(23));
         //System.out.println(alertNames(new String[]{"daniel", "daniel", "daniel", "luis", "luis", "luis", "luis" },
         //      new String[]{"10:00", "10:40", "11:00", "09:00", "11:00", "13:00", "15:00" }));
-        System.out.println(evaluate("(name)is(age)yearsold", List.of(List.of("name", "bob"), List.of("age", "two"))));
+        //System.out.println(evaluate("(name)is(age)yearsold", List.of(List.of("name", "bob"), List.of("age", "two"))));
+        System.out.println(canPlaceFlowers(new int[]{1, 0, 0, 0, 0, 1}, 2));
+    }
+
+    public double findMaxAverage(int[] nums, int k) {
+
+        List<List<Integer>> sub = generateSubarrays(nums);
+
+        return sub.stream().filter(x -> x.size() == k)
+                .map(x -> (double) x.stream().reduce(0, Integer::sum) / k)
+                .sorted(Collections.reverseOrder()).findFirst().get();
+
+
+    }
+
+    public static List<List<Integer>> generateSubarrays(int[] array) {
+        List<List<Integer>> subarrays = new ArrayList<>();
+
+        for (int i = 0; i < array.length; i++) {
+            for (int j = i; j < array.length; j++) {
+                List<Integer> subarray = new ArrayList<>();
+                for (int k = i; k <= j; k++) {
+                    subarray.add(array[k]);
+                }
+                subarrays.add(subarray);
+            }
+        }
+
+        return subarrays;
+    }
+
+    public static boolean canPlaceFlowers(int[] flowerbed, int n) {
+        if(Arrays.stream(flowerbed).boxed().filter(x -> x == 0).count() == Arrays.stream(flowerbed).boxed().filter(x -> x == 1).count()) return false;
+        if (n % 2 == 0) {
+            return Arrays.stream(flowerbed).boxed().filter(x -> x == 0).count() % 2 != 0 &&
+                    Arrays.stream(flowerbed).boxed().filter(x -> x == 0).count() / 2 >= n;
+        }
+        return Arrays.stream(flowerbed).boxed().filter(x -> x == 0).count() / 2 >= n;
     }
 
     public int[] fullBloomFlowers(int[][] flowers, int[] people) {
