@@ -109,7 +109,7 @@ public class Leetcode25MainClass {
         map = map.entrySet().stream().filter(i -> i.getValue() == lowest)
                 .filter(z -> z.getKey()[0] == x || z.getKey()[1] == y)
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
-        if(map.isEmpty()){
+        if (map.isEmpty()) {
             return -1;
         }
         int lowIndex = Integer.MAX_VALUE;
