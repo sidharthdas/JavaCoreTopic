@@ -95,6 +95,33 @@ public class Leetcode25MainClass {
         System.out.println(canPlaceFlowers(new int[]{1, 0, 0, 0, 0, 1}, 2));
     }
 
+    public double largestTriangleArea(int[][] points) {
+        int len = points.length;
+        double maxLen = Double.MIN_VALUE;
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j < len; j++) {
+                for (int k = 0; k < len; k++) {
+                    if (i != j && j != k && i != k) {
+                        double area = calculateArea(points[i], points[j], points[k]);
+                        if(area > maxLen){
+                            maxLen = area;
+                        }
+                    }
+                }
+            }
+        }
+        return maxLen;
+    }
+
+    public static double calculateArea(int[] a, int[] b, int[] c) {
+        if (a.length != 2 || b.length != 2 || c.length != 2) {
+            throw new IllegalArgumentException("Invalid number of coordinates");
+        }
+
+        double area = 0.5 * Math.abs((a[0] * (b[1] - c[1])) + (b[0] * (c[1] - a[1])) + (c[0] * (a[1] - b[1])));
+        return area;
+    }
+
     public int nearestValidPoint(int x, int y, int[][] points) {
         Map<int[], Integer> map = new HashMap<>();
         for (int[] point : points) {
