@@ -2,6 +2,7 @@ package Oct4Th2022.leetcode;
 
 import java.math.BigInteger;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 /**
@@ -94,6 +95,34 @@ public class Leetcode25MainClass {
         //System.out.println(evaluate("(name)is(age)yearsold", List.of(List.of("name", "bob"), List.of("age", "two"))));
         System.out.println(canPlaceFlowers(new int[]{1, 0, 0, 0, 0, 1}, 2));
     }
+
+    public int maxVowels(String s, int k) {
+        List<String> l = substrings(s);
+        AtomicInteger maxVCount = new AtomicInteger(Integer.MIN_VALUE);
+        List<String> vowels = List.of("a", "e", "i", "o", "u");
+        l.stream().filter(x -> x.length() == k)
+                .forEach(x -> {
+                    int i = (int) Arrays.stream(x.split("")).filter(v -> vowels.contains(v)).count();
+                    if(i > maxVCount.get()){
+                        maxVCount.set(i);
+                    }
+                });
+
+        return maxVCount.get();
+    }
+
+    public static List<String> substrings(String input) {
+        List<String> substrings = new ArrayList<>();
+
+        for (int i = 0; i < input.length(); i++) {
+            for (int j = i + 1; j <= input.length(); j++) {
+                substrings.add(input.substring(i, j));
+            }
+        }
+
+        return substrings;
+    }
+
 
     public double largestTriangleArea(int[][] points) {
         int len = points.length;
