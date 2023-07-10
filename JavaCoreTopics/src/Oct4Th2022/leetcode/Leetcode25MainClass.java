@@ -103,7 +103,7 @@ public class Leetcode25MainClass {
                 for (int k = 0; k < len; k++) {
                     if (i != j && j != k && i != k) {
                         double area = calculateArea(points[i], points[j], points[k]);
-                        if(area > maxLen){
+                        if (area > maxLen) {
                             maxLen = area;
                         }
                     }
@@ -133,9 +133,7 @@ public class Leetcode25MainClass {
             return 0;
         }
 
-        map = map.entrySet().stream().filter(i -> i.getValue() == lowest)
-                .filter(z -> z.getKey()[0] == x || z.getKey()[1] == y)
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+        map = map.entrySet().stream().filter(i -> i.getValue() == lowest).filter(z -> z.getKey()[0] == x || z.getKey()[1] == y).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
         if (map.isEmpty()) {
             return -1;
         }
@@ -173,9 +171,7 @@ public class Leetcode25MainClass {
 
         List<List<Integer>> sub = generateSubarrays(nums);
 
-        return sub.stream().filter(x -> x.size() == k)
-                .map(x -> (double) x.stream().reduce(0, Integer::sum) / k)
-                .sorted(Collections.reverseOrder()).findFirst().get();
+        return sub.stream().filter(x -> x.size() == k).map(x -> (double) x.stream().reduce(0, Integer::sum) / k).sorted(Collections.reverseOrder()).findFirst().get();
 
 
     }
@@ -200,8 +196,7 @@ public class Leetcode25MainClass {
         if (Arrays.stream(flowerbed).boxed().filter(x -> x == 0).count() == Arrays.stream(flowerbed).boxed().filter(x -> x == 1).count())
             return false;
         if (n % 2 == 0) {
-            return Arrays.stream(flowerbed).boxed().filter(x -> x == 0).count() % 2 != 0 &&
-                    Arrays.stream(flowerbed).boxed().filter(x -> x == 0).count() / 2 >= n;
+            return Arrays.stream(flowerbed).boxed().filter(x -> x == 0).count() % 2 != 0 && Arrays.stream(flowerbed).boxed().filter(x -> x == 0).count() / 2 >= n;
         }
         return Arrays.stream(flowerbed).boxed().filter(x -> x == 0).count() / 2 >= n;
     }
@@ -234,8 +229,7 @@ public class Leetcode25MainClass {
             if (x.length() == 1) {
                 count++;
             } else {
-                count += Arrays.stream(x.split("")).collect(Collectors.groupingBy(y -> y, Collectors.counting()))
-                        .entrySet().stream().filter(z -> z.getValue() == 1).count();
+                count += Arrays.stream(x.split("")).collect(Collectors.groupingBy(y -> y, Collectors.counting())).entrySet().stream().filter(z -> z.getValue() == 1).count();
             }
         }
 
@@ -300,23 +294,13 @@ public class Leetcode25MainClass {
             List<Integer> lOf = v.stream().map(x -> Integer.parseInt(x.split(":")[0])).collect(Collectors.toList());
             if (v.size() > 2) {
                 Collections.sort(v);
-                Map<Integer, Long> temp = v.stream().map(x -> Integer.parseInt(x.split(":")[0]))
-                        .collect(Collectors.groupingBy(n -> n, Collectors.counting()))
-                        .entrySet()
-                        .stream()
-                        .filter(x -> x.getValue() >= 2)
-                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+                Map<Integer, Long> temp = v.stream().map(x -> Integer.parseInt(x.split(":")[0])).collect(Collectors.groupingBy(n -> n, Collectors.counting())).entrySet().stream().filter(x -> x.getValue() >= 2).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
 
                 if (temp.entrySet().stream().filter(x -> x.getValue() >= 3).count() > 0) {
                     fList.add(k);
                 } else {
 
-                    Map<Integer, Long> temp1 = v.stream().map(x -> Integer.parseInt(x.split(":")[0]))
-                            .collect(Collectors.groupingBy(n -> n, Collectors.counting()))
-                            .entrySet()
-                            .stream()
-                            .filter(x -> x.getValue() == 2)
-                            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+                    Map<Integer, Long> temp1 = v.stream().map(x -> Integer.parseInt(x.split(":")[0])).collect(Collectors.groupingBy(n -> n, Collectors.counting())).entrySet().stream().filter(x -> x.getValue() == 2).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
 
                     for (int i : temp1.keySet()) {
                         if (lOf.contains(i + 1)) {
@@ -337,8 +321,7 @@ public class Leetcode25MainClass {
         int last = hamsters.lastIndexOf("H");
 
         hamsters = hamsters.substring(first, last);
-        return (int) Arrays.stream(hamsters.split("")).filter(x -> x.equals(".")).count() == 0 ? -1 :
-                (int) Arrays.stream(hamsters.split("")).filter(x -> x.equals(".")).count();
+        return (int) Arrays.stream(hamsters.split("")).filter(x -> x.equals(".")).count() == 0 ? -1 : (int) Arrays.stream(hamsters.split("")).filter(x -> x.equals(".")).count();
     }
 
     public static int smallestRepunitDivByK(int k) {
@@ -555,40 +538,24 @@ public class Leetcode25MainClass {
         }
         int finalHighestLen = highestLen;
         int finalLowDeletion = lowDeletion;
-        return l.size() == 0 ? "" : (l.size() == 1 ? l.get(0) :
-                map.entrySet()
-                        .stream()
-                        .filter(x -> x.getValue() == finalLowDeletion)
-                        .map(x -> x.getKey())
-                        .sorted(Comparator
-                                .comparingInt(String::length)
-                                .reversed()
-                                .thenComparing(Comparator.naturalOrder()))
-                        .findFirst()
-                        .get()
-        );
+        return l.size() == 0 ? "" : (l.size() == 1 ? l.get(0) : map.entrySet().stream().filter(x -> x.getValue() == finalLowDeletion).map(x -> x.getKey()).sorted(Comparator.comparingInt(String::length).reversed().thenComparing(Comparator.naturalOrder())).findFirst().get());
     }
 
     public int[] maximumBeauty1(int[][] items, int[] queries) {
         Map<Integer, Integer> map = new HashMap<>();
 
         for (int[] item : items) {
-            map.put(item[0], map.getOrDefault(item[0], 0)
-                    > item[1] ? map.getOrDefault(item[0], 0) : item[1]);
+            map.put(item[0], map.getOrDefault(item[0], 0) > item[1] ? map.getOrDefault(item[0], 0) : item[1]);
         }
         int len = queries.length;
         int[] finalResult = new int[len];
         for (int i = 0; i < len; i++) {
             int finalI = i;
-            map.entrySet()
-                    .stream()
-                    .filter(x -> x.getKey() <= queries[finalI])
-                    .sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed())
-                    .findFirst().ifPresentOrElse(m -> {
-                        finalResult[finalI] = m.getValue();
-                    }, () -> {
-                        finalResult[finalI] = 0;
-                    });
+            map.entrySet().stream().filter(x -> x.getKey() <= queries[finalI]).sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed()).findFirst().ifPresentOrElse(m -> {
+                finalResult[finalI] = m.getValue();
+            }, () -> {
+                finalResult[finalI] = 0;
+            });
         }
 
         return finalResult;
@@ -598,22 +565,17 @@ public class Leetcode25MainClass {
         Map<Integer, Integer> map = new HashMap<>();
 
         for (int[] item : items) {
-            map.put(item[0], map.getOrDefault(item[0], 0)
-                    > item[1] ? map.getOrDefault(item[0], 0) : item[1]);
+            map.put(item[0], map.getOrDefault(item[0], 0) > item[1] ? map.getOrDefault(item[0], 0) : item[1]);
         }
         int len = queries.length;
         int[] finalResult = new int[len];
         for (int i = 0; i < len; i++) {
             int finalI = i;
-            map.entrySet()
-                    .stream()
-                    .filter(x -> x.getKey() <= queries[finalI])
-                    .sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed())
-                    .findFirst().ifPresentOrElse(m -> {
-                        finalResult[finalI] = m.getValue();
-                    }, () -> {
-                        finalResult[finalI] = 0;
-                    });
+            map.entrySet().stream().filter(x -> x.getKey() <= queries[finalI]).sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed()).findFirst().ifPresentOrElse(m -> {
+                finalResult[finalI] = m.getValue();
+            }, () -> {
+                finalResult[finalI] = 0;
+            });
         }
 
         return finalResult;
