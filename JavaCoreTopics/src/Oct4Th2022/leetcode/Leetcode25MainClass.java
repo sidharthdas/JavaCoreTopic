@@ -110,7 +110,7 @@ public class Leetcode25MainClass {
 
     public static int gen(int[] array, int temp) {
         List<List<Integer>> subarrays = new ArrayList<>();
-        int startIndexValue = 0;
+        int startIndexValue = Integer.MIN_VALUE;
         int sum = 0;
         int prevSum = 0;
         boolean flag = true;
