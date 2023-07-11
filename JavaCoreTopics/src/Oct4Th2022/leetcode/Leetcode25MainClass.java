@@ -96,6 +96,10 @@ public class Leetcode25MainClass {
         System.out.println(canPlaceFlowers(new int[]{1, 0, 0, 0, 0, 1}, 2));
     }
 
+    public int theMaximumAchievableX(int num, int t) {
+        return (t * 2) + num;
+    }
+
     public int maxVowels(String s, int k) {
         List<String> l = substrings(s);
         AtomicInteger maxVCount = new AtomicInteger(Integer.MIN_VALUE);
@@ -103,7 +107,7 @@ public class Leetcode25MainClass {
         l.stream().filter(x -> x.length() == k)
                 .forEach(x -> {
                     int i = (int) Arrays.stream(x.split("")).filter(v -> vowels.contains(v)).count();
-                    if(i > maxVCount.get()){
+                    if (i > maxVCount.get()) {
                         maxVCount.set(i);
                     }
                 });
