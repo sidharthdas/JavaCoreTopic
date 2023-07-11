@@ -93,7 +93,63 @@ public class Leetcode25MainClass {
         //System.out.println(alertNames(new String[]{"daniel", "daniel", "daniel", "luis", "luis", "luis", "luis" },
         //      new String[]{"10:00", "10:40", "11:00", "09:00", "11:00", "13:00", "15:00" }));
         //System.out.println(evaluate("(name)is(age)yearsold", List.of(List.of("name", "bob"), List.of("age", "two"))));
-        System.out.println(canPlaceFlowers(new int[]{1, 0, 0, 0, 0, 1}, 2));
+        //System.out.println(canPlaceFlowers(new int[]{1, 0, 0, 0, 0, 1}, 2));
+        System.out.println(answerQueries(new int[]{4,5,2,1}, new int[]{3,10,21}));
+    }
+
+    public static int[] answerQueries(int[] nums, int[] queries) {
+
+        int len = queries.length;
+        int[] fi = new int[len];
+        for (int i = 0; i < len; i++) {
+            fi[i] = gen(nums, queries[i]);
+        }
+
+        return fi;
+    }
+
+    public static int gen(int[] array, int temp) {
+        List<List<Integer>> subarrays = new ArrayList<>();
+        int startIndexValue = 0;
+        int sum = 0;
+        int prevSum = 0;
+        boolean flag = true;
+        List<Integer> sub;
+        for (int i = 0; i < array.length; i++) {
+            for (int j = i; j < array.length; j++) {
+                sum = 0;
+                sub = new ArrayList<>();
+                for (int k = i; k <= j; k++) {
+                    sum += array[k];
+                    sub.add(array[k]);
+                }
+                subarrays.add(sub);
+                if(flag){
+                    prevSum = sum;
+                    startIndexValue = sub.size();
+                    flag = false;
+                } else {
+                    if(sum <= temp){
+                        if(prevSum > temp){
+                            prevSum = sum;
+                        } else {
+                            //prevSum = prevSum > sum ? prevSum : sum;
+                            if(prevSum < sum){
+                                prevSum = sum;
+                                startIndexValue = startIndexValue < sub.size() ? sub.size() : startIndexValue;
+                            }
+
+                        }
+
+                    }
+                }
+                //subarrays.add(subarray);
+
+            }
+        }
+
+        System.out.println(subarrays);
+        return prevSum > temp ? 0 : startIndexValue;
     }
 
     public int theMaximumAchievableX(int num, int t) {
