@@ -97,6 +97,34 @@ public class Leetcode25MainClass {
         System.out.println(answerQueries(new int[]{4,5,2,1}, new int[]{3,10,21}));
     }
 
+    public int isWinner(int[] player1, int[] player2) {
+        int sc1 = totalScore(player1);
+        int sc2 = totalScore(player2);
+        return sc1 > sc2 ? 1 : (sc2 > sc1 ? 2 : 0);
+
+
+    }
+
+    private int totalScore(int player[]){
+        int totalForPlayer= 0;
+        int len = player.length;
+        if( len < 3) {
+           return  Arrays.stream(player).boxed().reduce(0, Integer::sum);
+        }
+
+
+        totalForPlayer += player[0] + player[1];
+        for(int i = 2; i < len; i++){
+            if(player[i - 1] == 10 || player[i - 2] == 10){
+                totalForPlayer += 2 * player[i];
+            } else {
+                totalForPlayer += player[i];
+            }
+        }
+
+        return totalForPlayer;
+    }
+
     public static int[] answerQueries(int[] nums, int[] queries) {
 
         int len = queries.length;
