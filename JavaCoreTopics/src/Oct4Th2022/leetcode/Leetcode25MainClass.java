@@ -94,7 +94,7 @@ public class Leetcode25MainClass {
         //      new String[]{"10:00", "10:40", "11:00", "09:00", "11:00", "13:00", "15:00" }));
         //System.out.println(evaluate("(name)is(age)yearsold", List.of(List.of("name", "bob"), List.of("age", "two"))));
         //System.out.println(canPlaceFlowers(new int[]{1, 0, 0, 0, 0, 1}, 2));
-        System.out.println(answerQueries(new int[]{4,5,2,1}, new int[]{3,10,21}));
+        System.out.println(answerQueries(new int[]{4, 5, 2, 1}, new int[]{3, 10, 21}));
     }
 
     public int isWinner(int[] player1, int[] player2) {
@@ -105,17 +105,17 @@ public class Leetcode25MainClass {
 
     }
 
-    private int totalScore(int player[]){
-        int totalForPlayer= 0;
+    private int totalScore(int player[]) {
+        int totalForPlayer = 0;
         int len = player.length;
-        if( len < 3) {
-           return  Arrays.stream(player).boxed().reduce(0, Integer::sum);
+        if (len < 3) {
+            return Arrays.stream(player).boxed().reduce(0, Integer::sum);
         }
 
 
         totalForPlayer += player[0] + player[1];
-        for(int i = 2; i < len; i++){
-            if(player[i - 1] == 10 || player[i - 2] == 10){
+        for (int i = 2; i < len; i++) {
+            if (player[i - 1] == 10 || player[i - 2] == 10) {
                 totalForPlayer += 2 * player[i];
             } else {
                 totalForPlayer += player[i];
@@ -152,17 +152,17 @@ public class Leetcode25MainClass {
                     sub.add(array[k]);
                 }
                 subarrays.add(sub);
-                if(flag){
+                if (flag) {
                     prevSum = sum;
                     startIndexValue = sub.size();
                     flag = false;
                 } else {
-                    if(sum <= temp){
-                        if(prevSum > temp){
+                    if (sum <= temp) {
+                        if (prevSum > temp) {
                             prevSum = sum;
                         } else {
                             //prevSum = prevSum > sum ? prevSum : sum;
-                            if(prevSum < sum){
+                            if (prevSum < sum) {
                                 prevSum = sum;
                                 startIndexValue = startIndexValue < sub.size() ? sub.size() : startIndexValue;
                             }
@@ -188,13 +188,12 @@ public class Leetcode25MainClass {
         List<String> l = substrings(s);
         AtomicInteger maxVCount = new AtomicInteger(Integer.MIN_VALUE);
         List<String> vowels = List.of("a", "e", "i", "o", "u");
-        l.stream().filter(x -> x.length() == k)
-                .forEach(x -> {
-                    int i = (int) Arrays.stream(x.split("")).filter(v -> vowels.contains(v)).count();
-                    if (i > maxVCount.get()) {
-                        maxVCount.set(i);
-                    }
-                });
+        l.stream().filter(x -> x.length() == k).forEach(x -> {
+            int i = (int) Arrays.stream(x.split("")).filter(v -> vowels.contains(v)).count();
+            if (i > maxVCount.get()) {
+                maxVCount.set(i);
+            }
+        });
 
         return maxVCount.get();
     }
