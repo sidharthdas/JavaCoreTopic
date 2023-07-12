@@ -97,6 +97,38 @@ public class Leetcode25MainClass {
         System.out.println(answerQueries(new int[]{4, 5, 2, 1}, new int[]{3, 10, 21}));
     }
 
+    public int findMinFibonacciNumbers(int k) {
+
+        List<Integer> fibo = new ArrayList<>();
+        for (int i = 0; i < k; i++) {
+            fibo.add(fib(i));
+        }
+        int count = 0;
+        while (k != 0) {
+            final int kk = k;
+            int temp = fibo.stream().filter(x -> x >= kk).findFirst().get();
+            if (temp == k) {
+                count++;
+                k -= temp;
+            } else {
+                int index = fibo.indexOf(temp);
+                k -= fibo.get(index - 1);
+                count++;
+            }
+        }
+        return count;
+    }
+
+    static int fib(int n) {
+        // Base Case
+        if (n <= 1)
+            return n;
+
+        // Recursive call
+        return fib(n - 1)
+                + fib(n - 2);
+    }
+
     public int isWinner(int[] player1, int[] player2) {
         int sc1 = totalScore(player1);
         int sc2 = totalScore(player2);
