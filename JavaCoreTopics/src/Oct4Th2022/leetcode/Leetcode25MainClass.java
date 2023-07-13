@@ -94,7 +94,8 @@ public class Leetcode25MainClass {
         //      new String[]{"10:00", "10:40", "11:00", "09:00", "11:00", "13:00", "15:00" }));
         //System.out.println(evaluate("(name)is(age)yearsold", List.of(List.of("name", "bob"), List.of("age", "two"))));
         //System.out.println(canPlaceFlowers(new int[]{1, 0, 0, 0, 0, 1}, 2));
-        System.out.println(answerQueries(new int[]{4, 5, 2, 1}, new int[]{3, 10, 21}));
+        //System.out.println(answerQueries(new int[]{4, 5, 2, 1}, new int[]{3, 10, 21}));
+        System.out.println(isWinner(new int[]{10, 2, 2, 3}, new int[]{3, 8, 4, 5}));
     }
 
     public int findMinFibonacciNumbers(int k) {
@@ -129,7 +130,7 @@ public class Leetcode25MainClass {
                 + fib(n - 2);
     }
 
-    public int isWinner(int[] player1, int[] player2) {
+    public static int isWinner(int[] player1, int[] player2) {
         int sc1 = totalScore(player1);
         int sc2 = totalScore(player2);
         return sc1 > sc2 ? 1 : (sc2 > sc1 ? 2 : 0);
@@ -137,20 +138,26 @@ public class Leetcode25MainClass {
 
     }
 
-    private int totalScore(int player[]) {
+    private static int totalScore(int player[]) {
         int totalForPlayer = 0;
         int len = player.length;
-        if (len < 3) {
-            return Arrays.stream(player).boxed().reduce(0, Integer::sum);
-        }
 
 
-        totalForPlayer += player[0] + player[1];
-        for (int i = 2; i < len; i++) {
-            if (player[i - 1] == 10 || player[i - 2] == 10) {
-                totalForPlayer += 2 * player[i];
+        for (int i = 0; i < len; i++) {
+            if (i == 0) {
+                totalForPlayer += player[0];
+            } else if (i == 1) {
+                if (player[i - 1] == 10) {
+                    totalForPlayer += player[i] * 2;
+                } else {
+                    totalForPlayer += player[i];
+                }
             } else {
-                totalForPlayer += player[i];
+                if (player[i - 1] == 10 || player[i - 2] == 10) {
+                    totalForPlayer += 2 * player[i];
+                } else {
+                    totalForPlayer += player[i];
+                }
             }
         }
 
