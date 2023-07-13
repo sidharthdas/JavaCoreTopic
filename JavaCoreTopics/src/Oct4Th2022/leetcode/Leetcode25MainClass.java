@@ -95,7 +95,40 @@ public class Leetcode25MainClass {
         //System.out.println(evaluate("(name)is(age)yearsold", List.of(List.of("name", "bob"), List.of("age", "two"))));
         //System.out.println(canPlaceFlowers(new int[]{1, 0, 0, 0, 0, 1}, 2));
         //System.out.println(answerQueries(new int[]{4, 5, 2, 1}, new int[]{3, 10, 21}));
-        System.out.println(isWinner(new int[]{10, 2, 2, 3}, new int[]{3, 8, 4, 5}));
+        //System.out.println(isWinner(new int[]{10, 2, 2, 3}, new int[]{3, 8, 4, 5}));
+        System.out.println(fillCups(new int[]{5, 4, 4}));
+    }
+
+    public static int fillCups(int[] amount) {
+        int secCount = 0;
+
+        while (Arrays.stream(amount).boxed().filter(x -> x > 0).count() != 0) {
+            int highIndex = highIndex(amount, 1);
+            int sec = highIndex(amount, 2);
+            amount[highIndex] = amount[highIndex] - 1;
+            amount[sec] = amount[sec] - 1;
+            secCount++;
+        }
+        return secCount;
+    }
+
+    private static int highIndex(int[] arr, int num) {
+        int high = arr[0] > arr[1] ? arr[0] : arr[1];
+        int highIndex = arr[0] > arr[1] ? 0 : 1;
+        int sec = arr[0] < arr[1] ? arr[0] : arr[1];
+        int secIndex = arr[0] < arr[1] ? 0 : 1;
+
+        if (arr[2] > high) {
+            high = arr[2];
+            highIndex = 2;
+            sec = arr[0];
+            secIndex = 0;
+        } else if (arr[2] <= high && arr[2] > sec) {
+            sec = arr[2];
+            secIndex = 2;
+        }
+
+        return num == 1 ? highIndex : secIndex;
     }
 
     public int findMinFibonacciNumbers(int k) {
