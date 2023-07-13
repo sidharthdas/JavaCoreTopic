@@ -117,7 +117,6 @@ public class Leetcode25MainClass {
         int highIndex = arr[0] > arr[1] ? 0 : 1;
         int sec = arr[0] < arr[1] ? arr[0] : arr[1];
         int secIndex = arr[0] < arr[1] ? 0 : 1;
-
         if (arr[2] > high) {
             high = arr[2];
             highIndex = 2;
