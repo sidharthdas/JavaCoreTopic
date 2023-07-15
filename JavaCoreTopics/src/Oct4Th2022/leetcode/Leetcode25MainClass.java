@@ -96,7 +96,22 @@ public class Leetcode25MainClass {
         //System.out.println(canPlaceFlowers(new int[]{1, 0, 0, 0, 0, 1}, 2));
         //System.out.println(answerQueries(new int[]{4, 5, 2, 1}, new int[]{3, 10, 21}));
         //System.out.println(isWinner(new int[]{10, 2, 2, 3}, new int[]{3, 8, 4, 5}));
-        System.out.println(fillCups(new int[]{5, 4, 4}));
+        //System.out.println(fillCups(new int[]{5, 4, 4}));
+        System.out.println(findReplaceString("abcd", new int[]{0,2}, new String[]{"a", "cd"}, new String[]{"eee", "ffff"}));
+    }
+
+    public static String findReplaceString(String s, int[] indices, String[] sources, String[] targets) {
+        int k = indices.length;
+        String temp = s;
+        for (int i = 0; i < k; i++) {
+            int index = indices[i];
+            int lenSource = sources[i].length();
+            if (s.substring(index, index + lenSource).equals(sources[i])) {
+                temp = temp.substring(0,index) + targets[i] + temp.substring(index + lenSource);
+
+            }
+        }
+        return temp;
     }
 
     public int rotatedDigits(int n) {
@@ -154,7 +169,8 @@ public class Leetcode25MainClass {
         int count = 0;
         while (k != 0) {
             final int kk = k;
-            int temp = fibo.stream().filter(x -> x >= kk).findFirst().get();
+            Optional<Integer> temp1 = fibo.stream().filter(x -> x >= kk).findFirst();
+            int temp = temp1.isEmpty() ? 0 : temp1.get();
             if (temp == k) {
                 count++;
                 k -= temp;
