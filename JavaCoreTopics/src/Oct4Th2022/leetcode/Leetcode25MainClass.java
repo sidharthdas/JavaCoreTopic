@@ -100,7 +100,6 @@ public class Leetcode25MainClass {
         System.out.println(findReplaceString("abcd", new int[]{0,2}, new String[]{"a", "cd"}, new String[]{"eee", "ffff"}));
     }
 
-
     public int[] advantageCount(int[] nums1, int[] nums2) {
         Map<Integer, Integer> map = new LinkedHashMap<>();
         List<Integer> l = new ArrayList<>();
