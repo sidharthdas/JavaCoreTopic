@@ -96,14 +96,29 @@ public class Leetcode25MainClass {
         //System.out.println(canPlaceFlowers(new int[]{1, 0, 0, 0, 0, 1}, 2));
         //System.out.println(answerQueries(new int[]{4, 5, 2, 1}, new int[]{3, 10, 21}));
         //System.out.println(isWinner(new int[]{10, 2, 2, 3}, new int[]{3, 8, 4, 5}));
-        //System.out.println(fillCups(new int[]{5, 4, 4}));
-        System.out.println(findReplaceString("abcd", new int[]{0,2}, new String[]{"a", "cd"}, new String[]{"eee", "ffff"}));
+        System.out.println(fillCups(new int[]{2, 2, 0}));
+        //System.out.println(findReplaceString("abcd", new int[]{0,2}, new String[]{"a", "cd"}, new String[]{"eee", "ffff"}));
+    }
+
+    public int maxScoreSightseeingPair(int[] values) {
+        int len = values.length;
+        int temp = Integer.MIN_VALUE;
+        for (int i = 0; i < len; i++) {
+            for (int j = i + 1; j < len; j++) {
+                int c = values[i] +values[j] + i-j;
+                if(c > temp){
+                    temp = c;
+                }
+            }
+        }
+
+        return temp;
     }
 
     public int[] advantageCount(int[] nums1, int[] nums2) {
         Map<Integer, Integer> map = new LinkedHashMap<>();
         List<Integer> l = new ArrayList<>();
-        for(int i : nums2){
+        for (int i : nums2) {
 
         }
         return null;
@@ -116,7 +131,7 @@ public class Leetcode25MainClass {
             int index = indices[i];
             int lenSource = sources[i].length();
             if (s.substring(index, index + lenSource).equals(sources[i])) {
-                temp = temp.substring(0,index) + targets[i] + temp.substring(index + lenSource);
+                temp = temp.substring(0, index) + targets[i] + temp.substring(index + lenSource);
 
             }
         }
