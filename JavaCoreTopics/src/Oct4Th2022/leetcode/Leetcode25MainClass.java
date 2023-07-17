@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author Sidharth Das
@@ -100,13 +101,65 @@ public class Leetcode25MainClass {
         //System.out.println(findReplaceString("abcd", new int[]{0,2}, new String[]{"a", "cd"}, new String[]{"eee", "ffff"}));
     }
 
+    public int minimumDeletions(int[] nums) {
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+
+        for (int i : nums) {
+            if (i > max) {
+                max = i;
+            }
+
+            if (i < min) {
+                min = i;
+            }
+        }
+        if(min == max){
+            return 1;
+        }
+        int forwardMin = -1;
+        int forwardMax = -1;
+        int backwardMin = -1;
+        int backwardMax = -1;
+        int count = 0;
+        for (int i : nums) {
+            if (i == min) {
+                count++;
+                forwardMin = count;
+                break;
+            }
+            count++;
+        }
+
+        count = 0;
+        for (int i : nums) {
+            if (i == max) {
+                count++;
+                forwardMax = count;
+                break;
+            }
+            count++;
+        }
+        int len = nums.length;
+        backwardMin = len + 1 - forwardMin;
+        backwardMax = len + 1 - forwardMax;
+
+        int a = forwardMin > forwardMax ? forwardMin : forwardMax;
+        int b = forwardMin + backwardMax;
+        int c = backwardMin + forwardMax;
+        int d = backwardMin > backwardMax ? backwardMin : backwardMax;
+
+        return Stream.of(a,b,c,d).sorted().findFirst().get();
+
+    }
+
     public int maxScoreSightseeingPair(int[] values) {
         int len = values.length;
         int temp = Integer.MIN_VALUE;
         for (int i = 0; i < len; i++) {
             for (int j = i + 1; j < len; j++) {
-                int c = values[i] +values[j] + i-j;
-                if(c > temp){
+                int c = values[i] + values[j] + i - j;
+                if (c > temp) {
                     temp = c;
                 }
             }
