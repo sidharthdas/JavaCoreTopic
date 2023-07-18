@@ -101,6 +101,19 @@ public class Leetcode25MainClass {
         //System.out.println(findReplaceString("abcd", new int[]{0,2}, new String[]{"a", "cd"}, new String[]{"eee", "ffff"}));
     }
 
+    public int sumOfSquares(int[] nums) {
+
+        int len = nums.length;
+        int count = 0;
+
+        for(int i = 0; i < len; i++){
+            if(len % (i+1) == 0){
+                count = count + (nums[i] * nums[i]);
+            }
+        }
+        return count;
+    }
+
     public int minimumDeletions(int[] nums) {
         int min = Integer.MAX_VALUE;
         int max = Integer.MIN_VALUE;
