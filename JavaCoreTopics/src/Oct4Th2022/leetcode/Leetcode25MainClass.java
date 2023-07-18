@@ -101,6 +101,28 @@ public class Leetcode25MainClass {
         //System.out.println(findReplaceString("abcd", new int[]{0,2}, new String[]{"a", "cd"}, new String[]{"eee", "ffff"}));
     }
 
+    public int maxUniqueSplit(String s) {
+        Set<String> set = new HashSet<>();
+
+        String[] ss = s.split("");
+        String temp = "";
+        int len = ss.length;
+
+
+
+        for(int i = 0; i < len; i++){
+            temp += ss[i];
+            if(!set.contains(temp)){
+                set.add(temp);
+                temp = "";
+            } else {
+                temp+= ss[i];
+            }
+        }
+
+        return set.size();
+    }
+
     public int sumOfSquares(int[] nums) {
 
         int len = nums.length;
