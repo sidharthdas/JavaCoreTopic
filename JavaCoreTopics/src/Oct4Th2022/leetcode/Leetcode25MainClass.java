@@ -97,8 +97,47 @@ public class Leetcode25MainClass {
         //System.out.println(canPlaceFlowers(new int[]{1, 0, 0, 0, 0, 1}, 2));
         //System.out.println(answerQueries(new int[]{4, 5, 2, 1}, new int[]{3, 10, 21}));
         //System.out.println(isWinner(new int[]{10, 2, 2, 3}, new int[]{3, 8, 4, 5}));
-        System.out.println(fillCups(new int[]{2, 2, 0}));
+        //System.out.println(fillCups(new int[]{2, 2, 0}));
         //System.out.println(findReplaceString("abcd", new int[]{0,2}, new String[]{"a", "cd"}, new String[]{"eee", "ffff"}));
+        System.out.println(matrixSum(new int[][]{new int[]{7,2,1},new int[]{6,4,2},new int[]{6,5,3},new int[]{3,2,1}}));
+    }
+
+    public static int matrixSum(int[][] nums) {
+        int row = nums.length;
+        int col = nums[0].length;
+        List<List<Integer>> l = new ArrayList<>();
+        int count = 0;
+        int max = Integer.MIN_VALUE;
+        int maxIndexX = -1;
+        int maxIndexY = -1;
+        int iteration = 0;
+        while (iteration < col) {
+            List<Integer> l1 = new ArrayList<>();
+            for (int i = 0; i < row; i++) {
+
+                for (int j = 0; j < col; j++) {
+                    if (nums[i][j] > max) {
+                        maxIndexX = i;
+                        maxIndexY = j;
+                        max = nums[i][j];
+                    }
+                }
+                l1.add(max);
+                nums[maxIndexX][maxIndexY] = Integer.MIN_VALUE;
+                max = Integer.MIN_VALUE;
+                maxIndexX = -1;
+                maxIndexY = -1;
+            }
+
+            l.add(l1);
+            iteration++;
+        }
+
+        for (List<Integer> l1 : l) {
+            count += l1.stream().sorted(Collections.reverseOrder()).findFirst().get();
+        }
+
+        return count;
     }
 
     public int maxUniqueSplit(String s) {
@@ -109,14 +148,13 @@ public class Leetcode25MainClass {
         int len = ss.length;
 
 
-
-        for(int i = 0; i < len; i++){
+        for (int i = 0; i < len; i++) {
             temp += ss[i];
-            if(!set.contains(temp)){
+            if (!set.contains(temp)) {
                 set.add(temp);
                 temp = "";
             } else {
-                temp+= ss[i];
+                temp += ss[i];
             }
         }
 
@@ -128,8 +166,8 @@ public class Leetcode25MainClass {
         int len = nums.length;
         int count = 0;
 
-        for(int i = 0; i < len; i++){
-            if(len % (i+1) == 0){
+        for (int i = 0; i < len; i++) {
+            if (len % (i + 1) == 0) {
                 count = count + (nums[i] * nums[i]);
             }
         }
@@ -149,7 +187,7 @@ public class Leetcode25MainClass {
                 min = i;
             }
         }
-        if(min == max){
+        if (min == max) {
             return 1;
         }
         int forwardMin = -1;
@@ -184,7 +222,7 @@ public class Leetcode25MainClass {
         int c = backwardMin + forwardMax;
         int d = backwardMin > backwardMax ? backwardMin : backwardMax;
 
-        return Stream.of(a,b,c,d).sorted().findFirst().get();
+        return Stream.of(a, b, c, d).sorted().findFirst().get();
 
     }
 
