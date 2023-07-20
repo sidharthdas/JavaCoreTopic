@@ -99,7 +99,7 @@ public class Leetcode25MainClass {
         //System.out.println(isWinner(new int[]{10, 2, 2, 3}, new int[]{3, 8, 4, 5}));
         //System.out.println(fillCups(new int[]{2, 2, 0}));
         //System.out.println(findReplaceString("abcd", new int[]{0,2}, new String[]{"a", "cd"}, new String[]{"eee", "ffff"}));
-        System.out.println(matrixSum(new int[][]{new int[]{7,2,1},new int[]{6,4,2},new int[]{6,5,3},new int[]{3,2,1}}));
+        System.out.println(matrixSum(new int[][]{new int[]{7, 2, 1}, new int[]{6, 4, 2}, new int[]{6, 5, 3}, new int[]{3, 2, 1}}));
     }
 
     public static int matrixSum(int[][] nums) {
