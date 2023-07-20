@@ -102,6 +102,27 @@ public class Leetcode25MainClass {
         System.out.println(matrixSum(new int[][]{new int[]{7, 2, 1}, new int[]{6, 4, 2}, new int[]{6, 5, 3}, new int[]{3, 2, 1}}));
     }
 
+    public int xorBeauty(int[] nums) {
+        int len = nums.length;
+        List<Integer> l = new ArrayList<>();
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j < len; j++) {
+                for (int k = 0; k < len; k++) {
+                    l.add((nums[i] | nums[j]) & nums[k]);
+                }
+            }
+        }
+
+        int f = l.get(0);
+        int size = l.size();
+
+        for(int i = 1; i < size; i++){
+            f = f ^ l.get(i);
+        }
+
+        return f;
+    }
+
     public static int matrixSum(int[][] nums) {
         int row = nums.length;
         int col = nums[0].length;
