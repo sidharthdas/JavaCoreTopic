@@ -102,6 +102,36 @@ public class Leetcode25MainClass {
         System.out.println(matrixSum(new int[][]{new int[]{7, 2, 1}, new int[]{6, 4, 2}, new int[]{6, 5, 3}, new int[]{3, 2, 1}}));
     }
 
+
+    public int distinctPrimeFactors(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        for(int i : nums) {
+            primeFactors(i, set);
+        }
+
+        return set.size();
+    }
+
+    public static int isprime(int n){
+        for(int i = 2; i<=Math.sqrt(n); i++){
+            if(n%i==0)
+                return 0;
+        }
+        return 1;
+    }
+    public static void primeFactors(int n, Set<Integer> set)
+    {
+        for(int i = 2; i<= n; i++){
+            if(isprime(i)==1){
+                int x = n;
+                while(x%i==0){
+                    set.add(i);
+                    x /= i;
+                }
+            }
+        }
+    }
+
     public int xorBeauty(int[] nums) {
         int len = nums.length;
         List<Integer> l = new ArrayList<>();
