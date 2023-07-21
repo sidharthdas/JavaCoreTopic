@@ -116,7 +116,7 @@ public class Leetcode25MainClass {
         int f = l.get(0);
         int size = l.size();
 
-        for(int i = 1; i < size; i++){
+        for (int i = 1; i < size; i++) {
             f = f ^ l.get(i);
         }
 
@@ -356,12 +356,10 @@ public class Leetcode25MainClass {
 
     static int fib(int n) {
         // Base Case
-        if (n <= 1)
-            return n;
+        if (n <= 1) return n;
 
         // Recursive call
-        return fib(n - 1)
-                + fib(n - 2);
+        return fib(n - 1) + fib(n - 2);
     }
 
     public static int isWinner(int[] player1, int[] player2) {
