@@ -103,6 +103,55 @@ public class Leetcode25MainClass {
     }
 
 
+    public long getDescentPeriods(int[] prices) {
+
+        List<List<Integer>> l = getAllSubarrays(prices);
+
+        long count = 0;
+
+        for (List<Integer> l1 : l) {
+
+            if (l1.size() == 1) {
+                count++;
+            } else {
+                int size = l1.size();
+                boolean flag = true;
+                for(int i = 0; i < size - 1; i++){
+                    if(l1.get(i) - l1.get(i + 1) != 1){
+                        flag = false;
+                        break;
+                    }
+                }
+
+                if(flag){
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+
+    public static List<List<Integer>> getAllSubarrays(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+
+        if (nums == null || nums.length == 0) {
+            return result;
+        }
+
+        for (int start = 0; start < nums.length; start++) {
+            for (int end = start; end < nums.length; end++) {
+                List<Integer> subarray = new ArrayList<>();
+                for (int i = start; i <= end; i++) {
+                    subarray.add(nums[i]);
+                }
+                result.add(subarray);
+            }
+        }
+
+        return result;
+    }
+
     public int distinctPrimeFactors(int[] nums) {
         Set<Integer> set = new HashSet<>();
         for (int i : nums) {
