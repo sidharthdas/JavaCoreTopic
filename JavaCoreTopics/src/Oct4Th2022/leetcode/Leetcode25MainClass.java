@@ -105,26 +105,26 @@ public class Leetcode25MainClass {
 
     public int distinctPrimeFactors(int[] nums) {
         Set<Integer> set = new HashSet<>();
-        for(int i : nums) {
+        for (int i : nums) {
             primeFactors(i, set);
         }
 
         return set.size();
     }
 
-    public static int isprime(int n){
-        for(int i = 2; i<=Math.sqrt(n); i++){
-            if(n%i==0)
+    public static int isprime(int n) {
+        for (int i = 2; i <= Math.sqrt(n); i++) {
+            if (n % i == 0)
                 return 0;
         }
         return 1;
     }
-    public static void primeFactors(int n, Set<Integer> set)
-    {
-        for(int i = 2; i<= n; i++){
-            if(isprime(i)==1){
+
+    public static void primeFactors(int n, Set<Integer> set) {
+        for (int i = 2; i <= n; i++) {
+            if (isprime(i) == 1) {
                 int x = n;
-                while(x%i==0){
+                while (x % i == 0) {
                     set.add(i);
                     x /= i;
                 }
