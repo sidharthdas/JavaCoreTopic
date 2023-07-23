@@ -102,7 +102,6 @@ public class Leetcode25MainClass {
         System.out.println(matrixSum(new int[][]{new int[]{7, 2, 1}, new int[]{6, 4, 2}, new int[]{6, 5, 3}, new int[]{3, 2, 1}}));
     }
 
-
     public long getDescentPeriods(int[] prices) {
 
         List<List<Integer>> l = getAllSubarrays(prices);
@@ -116,14 +115,14 @@ public class Leetcode25MainClass {
             } else {
                 int size = l1.size();
                 boolean flag = true;
-                for(int i = 0; i < size - 1; i++){
-                    if(l1.get(i) - l1.get(i + 1) != 1){
+                for (int i = 0; i < size - 1; i++) {
+                    if (l1.get(i) - l1.get(i + 1) != 1) {
                         flag = false;
                         break;
                     }
                 }
 
-                if(flag){
+                if (flag) {
                     count++;
                 }
             }
