@@ -108,17 +108,10 @@ public class Leetcode25MainClass {
         for(String s1 : dictionary) {
             if(s.contains(s1)){
                 s = s.replace(s1, "");
-                count++;
             }
 
-            if(s.equals("")){
-                break;
-            }
         }
-
-        if(!s.equals("")) count++;
-
-        return count;
+        return s.length();
     }
 
     public String strWithout3a3b(int a, int b) {
