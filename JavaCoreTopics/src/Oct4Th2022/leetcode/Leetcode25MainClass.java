@@ -102,13 +102,25 @@ public class Leetcode25MainClass {
         System.out.println(matrixSum(new int[][]{new int[]{7, 2, 1}, new int[]{6, 4, 2}, new int[]{6, 5, 3}, new int[]{3, 2, 1}}));
     }
 
+    public int movesToMakeZigzag(int[] nums) {
+        int len = nums.length;
+        int even = 0;
+        int odd = 0;
+
+        //even index is greater
+        for (int i = 0; i < len - 1; i++) {
+
+        }
+        return 0;
+    }
+
     public int findValueOfPartition(int[] nums) {
         Arrays.sort(nums);
         int min = Integer.MAX_VALUE;
         int len = nums.length;
         for (int i = 0; i < len - 1; i++) {
             int temp = Math.abs(nums[i] - nums[i + 1]);
-            if(temp < min){
+            if (temp < min) {
                 min = temp;
             }
         }
