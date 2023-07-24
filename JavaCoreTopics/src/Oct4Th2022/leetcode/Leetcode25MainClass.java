@@ -102,6 +102,73 @@ public class Leetcode25MainClass {
         System.out.println(matrixSum(new int[][]{new int[]{7, 2, 1}, new int[]{6, 4, 2}, new int[]{6, 5, 3}, new int[]{3, 2, 1}}));
     }
 
+    public int minExtraChar(String s, String[] dictionary) {
+        Arrays.sort(dictionary, (a1, a2) -> a2.length() - a1.length());
+        int count = 0;
+        for(String s1 : dictionary) {
+            if(s.contains(s1)){
+                s = s.replace(s1, "");
+                count++;
+            }
+
+            if(s.equals("")){
+                break;
+            }
+        }
+
+        if(!s.equals("")) count++;
+
+        return count;
+    }
+
+    public String strWithout3a3b(int a, int b) {
+        String s = "";
+        while (a != b) {
+            if (a > b) {
+                s += "aa";
+                s += "b";
+                a -= 2;
+                b--;
+
+                if (a == b) {
+                    break;
+                }
+            } else if (b > a) {
+                s += "bb";
+                s += "a";
+                b -= 2;
+                a--;
+                if (a == b) {
+                    break;
+                }
+            } else {
+                break;
+            }
+        }
+
+        if (a == 0 && b != 0) {
+            while (b != 0) {
+                s += "b";
+                b--;
+            }
+        }
+        if (b == 0 && a != 0) {
+            while (a != 0) {
+                s += "a";
+                a--;
+            }
+        }
+
+        while (a == b && a != 0) {
+            s += "a";
+            s += "b";
+            a--;
+            b--;
+        }
+
+        return s;
+    }
+
     public int movesToMakeZigzag(int[] nums) {
         int len = nums.length;
         int even = 0;
