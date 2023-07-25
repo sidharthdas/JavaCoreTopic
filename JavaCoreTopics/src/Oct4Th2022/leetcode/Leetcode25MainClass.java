@@ -102,11 +102,33 @@ public class Leetcode25MainClass {
         System.out.println(matrixSum(new int[][]{new int[]{7, 2, 1}, new int[]{6, 4, 2}, new int[]{6, 5, 3}, new int[]{3, 2, 1}}));
     }
 
+    public int minCost(String colors, int[] neededTime) {
+        int len = neededTime.length;
+        String[] srr = colors.split("");
+
+        int totalTime = 0;
+
+        for (int i = 0; i < len - 1; i++) {
+            if(srr[i].equals( srr[i+1])){
+                if(neededTime[i] < neededTime[i+1]){
+                    totalTime += neededTime[i];
+                    neededTime[i] = Integer.MAX_VALUE;
+                } else {
+                    totalTime += neededTime[i+1];
+                    neededTime[i+1] = Integer.MAX_VALUE;
+                }
+
+            }
+        }
+
+        return totalTime;
+    }
+
     public int minExtraChar(String s, String[] dictionary) {
         Arrays.sort(dictionary, (a1, a2) -> a2.length() - a1.length());
         int count = 0;
-        for(String s1 : dictionary) {
-            if(s.contains(s1)){
+        for (String s1 : dictionary) {
+            if (s.contains(s1)) {
                 s = s.replace(s1, "");
             }
 
