@@ -102,6 +102,52 @@ public class Leetcode25MainClass {
         System.out.println(matrixSum(new int[][]{new int[]{7, 2, 1}, new int[]{6, 4, 2}, new int[]{6, 5, 3}, new int[]{3, 2, 1}}));
     }
 
+    public int countHomogenous(String s) {
+        int count = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            for (int j = i + 1; j <= s.length(); j++) {
+                count += count(s.substring(i, j));
+
+            }
+        }
+
+        return count;
+    }
+
+    private static int count(String s){
+        int len = s.length();
+        char c = s.charAt(0);
+        boolean flag = true;
+        for(char c1 : s.toCharArray()){
+            if(c1 != c){
+                flag = false;
+                break;
+            }
+        }
+
+
+        return flag ? len : 0;
+    }
+
+    /*public static List<String> substrings1(String input) {
+        List<String> substrings = new ArrayList<>();
+
+        int count = 0;
+
+        for (int i = 0; i < input.length(); i++) {
+            for (int j = i + 1; j <= input.length(); j++) {
+                substrings.add(input.substring(i, j));
+                count += count(input.substring(i, j));
+
+            }
+        }
+
+        return count;
+    }*/
+
+
+
     public int minCost(String colors, int[] neededTime) {
         int len = neededTime.length;
         String[] srr = colors.split("");
