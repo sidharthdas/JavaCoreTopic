@@ -99,16 +99,19 @@ public class Leetcode25MainClass {
         //System.out.println(isWinner(new int[]{10, 2, 2, 3}, new int[]{3, 8, 4, 5}));
         //System.out.println(fillCups(new int[]{2, 2, 0}));
         //System.out.println(findReplaceString("abcd", new int[]{0,2}, new String[]{"a", "cd"}, new String[]{"eee", "ffff"}));
-        System.out.println(matrixSum(new int[][]{new int[]{7, 2, 1}, new int[]{6, 4, 2}, new int[]{6, 5, 3}, new int[]{3, 2, 1}}));
+        //System.out.println(matrixSum(new int[][]{new int[]{7, 2, 1}, new int[]{6, 4, 2}, new int[]{6, 5, 3}, new int[]{3, 2, 1}}));
+        System.out.println(countHomogenous("abbcccaa"));
     }
 
-    public int countHomogenous(String s) {
+    public static  int countHomogenous(String s) {
         int count = 0;
 
-        for (int i = 0; i < s.length(); i++) {
-            for (int j = i + 1; j <= s.length(); j++) {
-                count += count(s.substring(i, j));
+        Map<String, Long> map = substrings1(s).stream().collect(Collectors.groupingBy(x -> x, Collectors.counting()));
 
+        for(Map.Entry<String, Long> m : map.entrySet()){
+
+            if(count(m.getKey()) > 0){
+                count += m.getValue();
             }
         }
 
@@ -117,10 +120,11 @@ public class Leetcode25MainClass {
 
     private static int count(String s){
         int len = s.length();
-        char c = s.charAt(0);
+        String[] srr = s.split("");
+        String c = srr[0];
         boolean flag = true;
-        for(char c1 : s.toCharArray()){
-            if(c1 != c){
+        for(String s1 : srr){
+            if(!s1.equals(c)){
                 flag = false;
                 break;
             }
@@ -130,21 +134,16 @@ public class Leetcode25MainClass {
         return flag ? len : 0;
     }
 
-    /*public static List<String> substrings1(String input) {
+    public static List<String> substrings1(String input) {
         List<String> substrings = new ArrayList<>();
-
-        int count = 0;
 
         for (int i = 0; i < input.length(); i++) {
             for (int j = i + 1; j <= input.length(); j++) {
                 substrings.add(input.substring(i, j));
-                count += count(input.substring(i, j));
-
             }
         }
-
-        return count;
-    }*/
+        return substrings;
+    }
 
 
 
