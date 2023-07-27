@@ -3,6 +3,8 @@ package Oct4Th2022.leetcode;
 import java.math.BigInteger;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -101,10 +103,13 @@ public class Leetcode25MainClass {
         //System.out.println(findReplaceString("abcd", new int[]{0,2}, new String[]{"a", "cd"}, new String[]{"eee", "ffff"}));
         //System.out.println(matrixSum(new int[][]{new int[]{7, 2, 1}, new int[]{6, 4, 2}, new int[]{6, 5, 3}, new int[]{3, 2, 1}}));
         //System.out.println(countHomogenous("abbcccaa"));
+        System.out.println(decodeAtIndex("ha22", 5));
     }
 
-    public String decodeAtIndex(String s, int k) {
-        while(s.contains("[0-9]+")) {
+    public static String decodeAtIndex(String s, int k) {
+        Pattern pattern = Pattern.compile("\\d");
+        Matcher matcher = pattern.matcher(s);
+        while(matcher.find()) {
             String temp = "";
 
             int len = s.length();
@@ -127,6 +132,8 @@ public class Leetcode25MainClass {
             }
 
             s = temp2 + s.substring(firstIndexNumber+1);
+
+            matcher = pattern.matcher(s);
         }
 
         return String.valueOf(s.charAt(k-1));
