@@ -106,6 +106,10 @@ public class Leetcode25MainClass {
         System.out.println(decodeAtIndex("ha22", 5));
     }
 
+    public String discountPrices(String sentence, int discount) {
+        return null;
+    }
+
     public static String decodeAtIndex(String s, int k) {
         Pattern pattern = Pattern.compile("\\d");
         Matcher matcher = pattern.matcher(s);
