@@ -100,7 +100,36 @@ public class Leetcode25MainClass {
         //System.out.println(fillCups(new int[]{2, 2, 0}));
         //System.out.println(findReplaceString("abcd", new int[]{0,2}, new String[]{"a", "cd"}, new String[]{"eee", "ffff"}));
         //System.out.println(matrixSum(new int[][]{new int[]{7, 2, 1}, new int[]{6, 4, 2}, new int[]{6, 5, 3}, new int[]{3, 2, 1}}));
-        System.out.println(countHomogenous("abbcccaa"));
+        //System.out.println(countHomogenous("abbcccaa"));
+    }
+
+    public String decodeAtIndex(String s, int k) {
+        while(s.contains("[0-9]+")) {
+            String temp = "";
+
+            int len = s.length();
+            String[] srr = s.split("");
+            int num = 0;
+            int firstIndexNumber = -1;
+            for(int i = 0; i < len; i++){
+                if(List.of("0","1","2","3","4","5","6","7","8","9").contains(srr[i])){
+                    firstIndexNumber = i;
+                    temp = s.substring(0, i);
+                    num = Integer.parseInt(srr[i]);
+                    break;
+                }
+            }
+
+            String temp2 = "";
+            while(num != 0){
+                temp2 += temp;
+                num--;
+            }
+
+            s = temp2 + s.substring(firstIndexNumber+1);
+        }
+
+        return String.valueOf(s.charAt(k-1));
     }
 
     public static  int countHomogenous(String s) {
