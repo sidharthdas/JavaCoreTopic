@@ -104,18 +104,7 @@ public class Leetcode25MainClass {
     }
 
     public static  int countHomogenous(String s) {
-        int count = 0;
-
-        Map<String, Long> map = substrings1(s).stream().collect(Collectors.groupingBy(x -> x, Collectors.counting()));
-
-        for(Map.Entry<String, Long> m : map.entrySet()){
-
-            if(count(m.getKey()) > 0){
-                count += m.getValue();
-            }
-        }
-
-        return count;
+        return substrings1(s);
     }
 
     private static int count(String s){
@@ -134,15 +123,20 @@ public class Leetcode25MainClass {
         return flag ? len : 0;
     }
 
-    public static List<String> substrings1(String input) {
+    public static int substrings1(String input) {
         List<String> substrings = new ArrayList<>();
+
+        Map<String, Integer> map = new HashMap<>();
 
         for (int i = 0; i < input.length(); i++) {
             for (int j = i + 1; j <= input.length(); j++) {
                 substrings.add(input.substring(i, j));
+                if(count(input.substring(i, j)) > 0){
+                    map.put(input.substring(i, j), map.getOrDefault(input.substring(i, j),0) + 1);
+                }
             }
         }
-        return substrings;
+        return map.values().stream().reduce(Integer::sum).get();
     }
 
 
