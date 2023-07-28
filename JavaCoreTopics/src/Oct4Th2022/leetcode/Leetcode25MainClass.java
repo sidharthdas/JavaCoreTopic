@@ -103,25 +103,49 @@ public class Leetcode25MainClass {
         //System.out.println(findReplaceString("abcd", new int[]{0,2}, new String[]{"a", "cd"}, new String[]{"eee", "ffff"}));
         //System.out.println(matrixSum(new int[][]{new int[]{7, 2, 1}, new int[]{6, 4, 2}, new int[]{6, 5, 3}, new int[]{3, 2, 1}}));
         //System.out.println(countHomogenous("abbcccaa"));
-        System.out.println(decodeAtIndex("ha22", 5));
+        //System.out.println(decodeAtIndex("ha22", 5));
+        System.out.println(discountPrices("there are $1 $2 and 5$ candies in the shop", 50));
+
     }
 
-    public String discountPrices(String sentence, int discount) {
-        return null;
+    public static String discountPrices(String sentence, int discount) {
+        String regex = "[0-9]+";
+        Pattern p = Pattern.compile(regex);
+
+        String[] senArr = sentence.split(" ");
+        int len = senArr.length;
+        for (int i = 0; i < len ; i++) {
+            if (senArr[i].charAt(0) == '$') {
+                Matcher m = p.matcher(senArr[i].substring(1));
+                if (m.matches()) {
+                    int temp = Integer.valueOf(senArr[i].substring(1));
+                    double d = ((double)(temp * discount)/100);
+                    double fd = temp - d;
+                    Formatter formatter = new Formatter();
+                    formatter.format("%.2f", fd);
+                    senArr[i] = "$" + formatter.toString();
+                }
+            }
+        }
+        String fi = "";
+        for(String word : senArr){
+            fi += word + " ";
+        }
+        return fi.trim();
     }
 
     public static String decodeAtIndex(String s, int k) {
         Pattern pattern = Pattern.compile("\\d");
         Matcher matcher = pattern.matcher(s);
-        while(matcher.find()) {
+        while (matcher.find()) {
             String temp = "";
 
             int len = s.length();
             String[] srr = s.split("");
             int num = 0;
             int firstIndexNumber = -1;
-            for(int i = 0; i < len; i++){
-                if(List.of("0","1","2","3","4","5","6","7","8","9").contains(srr[i])){
+            for (int i = 0; i < len; i++) {
+                if (List.of("0", "1", "2", "3", "4", "5", "6", "7", "8", "9").contains(srr[i])) {
                     firstIndexNumber = i;
                     temp = s.substring(0, i);
                     num = Integer.parseInt(srr[i]);
@@ -130,30 +154,30 @@ public class Leetcode25MainClass {
             }
 
             String temp2 = "";
-            while(num != 0){
+            while (num != 0) {
                 temp2 += temp;
                 num--;
             }
 
-            s = temp2 + s.substring(firstIndexNumber+1);
+            s = temp2 + s.substring(firstIndexNumber + 1);
 
             matcher = pattern.matcher(s);
         }
 
-        return String.valueOf(s.charAt(k-1));
+        return String.valueOf(s.charAt(k - 1));
     }
 
-    public static  int countHomogenous(String s) {
+    public static int countHomogenous(String s) {
         return substrings1(s);
     }
 
-    private static int count(String s){
+    private static int count(String s) {
         int len = s.length();
         String[] srr = s.split("");
         String c = srr[0];
         boolean flag = true;
-        for(String s1 : srr){
-            if(!s1.equals(c)){
+        for (String s1 : srr) {
+            if (!s1.equals(c)) {
                 flag = false;
                 break;
             }
@@ -171,14 +195,13 @@ public class Leetcode25MainClass {
         for (int i = 0; i < input.length(); i++) {
             for (int j = i + 1; j <= input.length(); j++) {
                 substrings.add(input.substring(i, j));
-                if(count(input.substring(i, j)) > 0){
-                    map.put(input.substring(i, j), map.getOrDefault(input.substring(i, j),0) + 1);
+                if (count(input.substring(i, j)) > 0) {
+                    map.put(input.substring(i, j), map.getOrDefault(input.substring(i, j), 0) + 1);
                 }
             }
         }
         return map.values().stream().reduce(Integer::sum).get();
     }
-
 
 
     public int minCost(String colors, int[] neededTime) {
@@ -188,13 +211,13 @@ public class Leetcode25MainClass {
         int totalTime = 0;
 
         for (int i = 0; i < len - 1; i++) {
-            if(srr[i].equals( srr[i+1])){
-                if(neededTime[i] < neededTime[i+1]){
+            if (srr[i].equals(srr[i + 1])) {
+                if (neededTime[i] < neededTime[i + 1]) {
                     totalTime += neededTime[i];
                     neededTime[i] = Integer.MAX_VALUE;
                 } else {
-                    totalTime += neededTime[i+1];
-                    neededTime[i+1] = Integer.MAX_VALUE;
+                    totalTime += neededTime[i + 1];
+                    neededTime[i + 1] = Integer.MAX_VALUE;
                 }
 
             }
