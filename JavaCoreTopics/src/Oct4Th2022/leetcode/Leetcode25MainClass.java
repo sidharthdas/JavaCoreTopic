@@ -114,12 +114,12 @@ public class Leetcode25MainClass {
 
         String[] senArr = sentence.split(" ");
         int len = senArr.length;
-        for (int i = 0; i < len ; i++) {
+        for (int i = 0; i < len; i++) {
             if (senArr[i].charAt(0) == '$') {
                 Matcher m = p.matcher(senArr[i].substring(1));
                 if (m.matches()) {
                     int temp = Integer.valueOf(senArr[i].substring(1));
-                    double d = ((double)(temp * discount)/100);
+                    double d = ((double) (temp * discount) / 100);
                     double fd = temp - d;
                     Formatter formatter = new Formatter();
                     formatter.format("%.2f", fd);
@@ -128,7 +128,7 @@ public class Leetcode25MainClass {
             }
         }
         String fi = "";
-        for(String word : senArr){
+        for (String word : senArr) {
             fi += word + " ";
         }
         return fi.trim();
