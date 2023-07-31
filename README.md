@@ -253,7 +253,7 @@ public class Test {
 
 # CompletableFuture Example
 
-Please refer package : JavaCoreTopics/src/completablefuture
+Please refer package: JavaCoreTopics/src/completablefuture
 
 ```
 package completablefuture;
