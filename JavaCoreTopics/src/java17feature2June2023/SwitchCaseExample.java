@@ -2,11 +2,11 @@ package java17feature2June2023;
 
 public class SwitchCaseExample {
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         System.out.println(formatVal("sidh"));
-    }
+    }*/
 
-    public static String formatVal(Object obj) {
+    /*public static String formatVal(Object obj) {
         return switch (obj){
 
             case Double d -> String.format("Double value is " + d);
@@ -16,5 +16,5 @@ public class SwitchCaseExample {
 
             default -> obj.toString();
         };
-    }
+    }*/
 }

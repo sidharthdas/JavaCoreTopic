@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 public class Leetcode26MainClass {
 
     public static void main(String[] args) {
+
+        System.out.println("Hellow world");
     }
 
     public int numSub(String s) {
