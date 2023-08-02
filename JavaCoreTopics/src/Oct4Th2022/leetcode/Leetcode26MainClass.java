@@ -101,6 +101,7 @@ public class Leetcode26MainClass {
                 }
             }
         }
+        if (map.isEmpty()) return 0;
         return map.values().stream().reduce(Integer::sum).get();
     }
 
