@@ -11,6 +11,35 @@ public class Leetcode26MainClass {
         System.out.println(numberOfRounds("09:31", "10:14"));
     }
 
+    public boolean isGood(int[] nums) {
+        Arrays.sort(nums);
+        int len = nums.length;
+        if (len == 0) {
+            return true;
+        }
+
+        if (len == 1) {
+            return false;
+        }
+
+        boolean flag = false;
+
+        if (nums[len - 1] == len-1 && nums[len - 2] == len-1) {
+            flag = true;
+        }
+
+        if (flag) {
+            for(int i = 0; i < len - 1; i++) {
+                if(nums[i] != i + 1 ){
+                    flag = false;
+                    break;
+                }
+            }
+        }
+
+        return flag;
+    }
+
     public static int numberOfRounds(String loginTime, String logoutTime) {
         String[] loginTimeArr = loginTime.split(":");
         int hourLogin = Integer.parseInt(loginTimeArr[0]);
@@ -22,56 +51,56 @@ public class Leetcode26MainClass {
         int totalHour = 0;
         int tempHourLogin = hourLogin;
 
-        while(tempHourLogin != hourLogout) {
-            if(tempHourLogin + 1 == 24) {
+        while (tempHourLogin != hourLogout) {
+            if (tempHourLogin + 1 == 24) {
                 tempHourLogin = 0;
             } else {
                 tempHourLogin++;
             }
 
-            totalHour ++;
-            if(tempHourLogin == hourLogout) {
+            totalHour++;
+            if (tempHourLogin == hourLogout) {
                 break;
             }
         }
 
-        if(minLogout == 0 && minLogin == 0){
+        if (minLogout == 0 && minLogin == 0) {
             return totalHour * 4;
         }
 
         int chance = 0;
 
-        if(minLogin > 0 && minLogin <=15) {
+        if (minLogin > 0 && minLogin <= 15) {
             chance = 3;
         }
 
-        if(minLogin > 15 && minLogin <=30) {
+        if (minLogin > 15 && minLogin <= 30) {
             chance = 2;
         }
 
-        if(minLogin > 30 && minLogin <=45) {
+        if (minLogin > 30 && minLogin <= 45) {
             chance = 1;
         }
 
-        if(minLogin > 45 && minLogin <=59) {
+        if (minLogin > 45 && minLogin <= 59) {
             chance = 0;
         }
 
         int chanceLogout = 0;
 
-        if(minLogout > 0 && minLogout <=15) {
+        if (minLogout > 0 && minLogout <= 15) {
             chanceLogout = 0;
         }
 
-        if(minLogout > 15 && minLogout <=30) {
+        if (minLogout > 15 && minLogout <= 30) {
             chanceLogout = 1;
         }
 
-        if(minLogout > 30 && minLogout <=45) {
+        if (minLogout > 30 && minLogout <= 45) {
             chanceLogout = 2;
         }
 
-        if(minLogout > 45 && minLogout <=59) {
+        if (minLogout > 45 && minLogout <= 59) {
             chanceLogout = 3;
         }
 
@@ -83,7 +112,7 @@ public class Leetcode26MainClass {
         return substrings1(s);
     }
 
-    public static int count (String sub){
+    public static int count(String sub) {
         String[] subArr = sub.split("");
         return Arrays.stream(subArr).collect(Collectors.toSet()).size() == 1 ? 1 : 0;
     }
@@ -105,59 +134,59 @@ public class Leetcode26MainClass {
         return map.values().stream().reduce(Integer::sum).get();
     }
 
-        public String sortVowels (String s){
-            String[] srr = s.split("");
+    public String sortVowels(String s) {
+        String[] srr = s.split("");
 
-            int len = srr.length;
+        int len = srr.length;
 
-            List<String> caps = new ArrayList<>();
-            List<String> small = new ArrayList<>();
+        List<String> caps = new ArrayList<>();
+        List<String> small = new ArrayList<>();
 
-            for (int i = 0; i < len; i++) {
-                if (List.of("a", "e", "i", "o", "u").contains(srr[i])) {
-                    small.add(srr[i]);
-                    srr[i] = "#00#";
-                } else if (List.of("A", "E", "I", "O", "U").contains(srr[i])) {
-                    caps.add(srr[i]);
-                    srr[i] = "#00#";
-                }
+        for (int i = 0; i < len; i++) {
+            if (List.of("a", "e", "i", "o", "u").contains(srr[i])) {
+                small.add(srr[i]);
+                srr[i] = "#00#";
+            } else if (List.of("A", "E", "I", "O", "U").contains(srr[i])) {
+                caps.add(srr[i]);
+                srr[i] = "#00#";
             }
-
-            Collections.sort(caps);
-            Collections.sort(small);
-            caps.addAll(small);
-
-            int index = 0;
-            for (int i = 0; i < len; i++) {
-                if (srr[i].equals("#00#")) {
-                    srr[i] = caps.get(index);
-                    index++;
-                }
-            }
-
-            String temp = "";
-
-            for (String s1 : srr) {
-                temp += s1;
-            }
-
-            return temp;
         }
 
-        public int maxCount ( int[] banned, int n, int maxSum){
-            List<Integer> l = Arrays.stream(banned).boxed().toList();
-            int count = 0;
-            int sum = 0;
-            for (int i = 1; i <= n; i++) {
-                if (!l.contains(i)) {
-                    if (sum + i <= maxSum) {
-                        sum += i;
-                        count++;
-                    } else {
-                        break;
-                    }
-                }
+        Collections.sort(caps);
+        Collections.sort(small);
+        caps.addAll(small);
+
+        int index = 0;
+        for (int i = 0; i < len; i++) {
+            if (srr[i].equals("#00#")) {
+                srr[i] = caps.get(index);
+                index++;
             }
-            return count;
         }
+
+        String temp = "";
+
+        for (String s1 : srr) {
+            temp += s1;
+        }
+
+        return temp;
     }
+
+    public int maxCount(int[] banned, int n, int maxSum) {
+        List<Integer> l = Arrays.stream(banned).boxed().toList();
+        int count = 0;
+        int sum = 0;
+        for (int i = 1; i <= n; i++) {
+            if (!l.contains(i)) {
+                if (sum + i <= maxSum) {
+                    sum += i;
+                    count++;
+                } else {
+                    break;
+                }
+            }
+        }
+        return count;
+    }
+}
