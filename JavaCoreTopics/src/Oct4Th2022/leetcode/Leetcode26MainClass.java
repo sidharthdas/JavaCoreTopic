@@ -21,7 +21,7 @@ public class Leetcode26MainClass {
             String s1rr[] = s.split("");
             int len = s1rr.length;
             for (int i = 0; i < len; i++) {
-                if(!s1rr[i].equals(String.valueOf(separator))) {
+                if (!s1rr[i].equals(String.valueOf(separator))) {
                     temp += s1rr[i];
                 } else {
                     finalList.add(temp);
@@ -29,7 +29,7 @@ public class Leetcode26MainClass {
                 }
             }
 
-            if(!temp.equals("")) {
+            if (!temp.equals("")) {
                 finalList.add(temp);
             }
         }
