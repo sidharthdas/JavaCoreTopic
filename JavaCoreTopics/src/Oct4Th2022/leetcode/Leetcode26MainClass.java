@@ -11,6 +11,17 @@ public class Leetcode26MainClass {
         System.out.println(numberOfRounds("09:31", "10:14"));
     }
 
+    public List<String> splitWordsBySeparator(List<String> words, char separator) {
+        List<String> finalList = new ArrayList<>();
+
+        for(String s : words){
+            String[] srr = s.split(String.valueOf(separator));
+            finalList.addAll(Arrays.stream(srr).filter(x -> x.length() > 0).toList());
+        }
+
+        return finalList;
+    }
+
     public int numberOfEmployeesWhoMetTarget(int[] hours, int target) {
         return (int) Arrays.stream(hours).boxed().filter(x ->x >= target).count();
     }
