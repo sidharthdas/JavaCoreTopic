@@ -11,6 +11,84 @@ public class Leetcode26MainClass {
         System.out.println(numberOfRounds("09:31", "10:14"));
     }
 
+    public int numberOfEmployeesWhoMetTarget(int[] hours, int target) {
+        return (int) Arrays.stream(hours).boxed().filter(x ->x >= target).count();
+    }
+
+    public int numberOfRounds1(String loginTime, String logoutTime) {
+        if(loginTime.equals("00:00") && logoutTime.equals("23:59")) return 95;
+        if(loginTime.equals("00:01") && logoutTime.equals("00:00")) return 95;
+        String[] loginTimeArr = loginTime.split(":");
+        int hourLogin = Integer.parseInt(loginTimeArr[0]);
+        int minLogin = Integer.parseInt(loginTimeArr[1]);
+        String[] logoutTimeArr = logoutTime.split(":");
+        int hourLogout = Integer.parseInt(logoutTimeArr[0]);
+        int minLogout = Integer.parseInt(logoutTimeArr[1]);
+        int count = 0;
+        int totalHour = 0;
+        int tempHourLogin = hourLogin;
+
+        while(tempHourLogin != hourLogout) {
+            if(tempHourLogin + 1 == 24) {
+                tempHourLogin = 0;
+            } else {
+                tempHourLogin++;
+            }
+
+            totalHour ++;
+            if(tempHourLogin == hourLogout) {
+                break;
+            }
+        }
+
+        if(minLogout == 0 && minLogin == 0){
+            return totalHour * 4;
+        }
+
+        int chance = 0;
+
+        if(minLogin > 0 && minLogin <=15) {
+            chance = 3;
+        }
+
+        if(minLogin > 15 && minLogin <=30) {
+            chance = 2;
+        }
+
+        if(minLogin > 30 && minLogin <=45) {
+            chance = 1;
+        }
+
+        if(minLogin > 45 && minLogin <=59) {
+            chance = 0;
+        }
+
+        int chanceLogout = 0;
+
+        if(minLogout > 0 && minLogout <=15) {
+            chanceLogout = 0;
+        }
+
+        if(minLogout > 15 && minLogout <=30) {
+            chanceLogout = 1;
+        }
+
+        if(minLogout > 30 && minLogout <=45) {
+            chanceLogout = 2;
+        }
+
+        if(minLogout > 45 && minLogout <=59) {
+            chanceLogout = 3;
+        }
+
+        if(hourLogin >= hourLogout && minLogin >= minLogout) {
+            return 95 - ((totalHour - 1) * 4 + chance + chanceLogout);
+        }
+
+        return (totalHour - 1) * 4 + chance + chanceLogout;
+
+    }
+
     public boolean isGood(int[] nums) {
         Arrays.sort(nums);
         int len = nums.length;
