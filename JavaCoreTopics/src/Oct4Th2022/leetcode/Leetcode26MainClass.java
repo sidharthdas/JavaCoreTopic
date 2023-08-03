@@ -14,21 +14,36 @@ public class Leetcode26MainClass {
     public List<String> splitWordsBySeparator(List<String> words, char separator) {
         List<String> finalList = new ArrayList<>();
 
-        for(String s : words){
-            String[] srr = s.split(String.valueOf(separator));
-            finalList.addAll(Arrays.stream(srr).filter(x -> x.length() > 0).toList());
+        for (String s : words) {
+            int currentIndex = 0;
+            String temp = "";
+
+            String s1rr[] = s.split("");
+            int len = s1rr.length;
+            for (int i = 0; i < len; i++) {
+                if(!s1rr[i].equals(String.valueOf(separator))) {
+                    temp += s1rr[i];
+                } else {
+                    finalList.add(temp);
+                    temp = "";
+                }
+            }
+
+            if(!temp.equals("")) {
+                finalList.add(temp);
+            }
         }
 
-        return finalList;
+        return finalList.stream().filter(x -> x.length() > 0).toList();
     }
 
     public int numberOfEmployeesWhoMetTarget(int[] hours, int target) {
-        return (int) Arrays.stream(hours).boxed().filter(x ->x >= target).count();
+        return (int) Arrays.stream(hours).boxed().filter(x -> x >= target).count();
     }
 
     public int numberOfRounds1(String loginTime, String logoutTime) {
-        if(loginTime.equals("00:00") && logoutTime.equals("23:59")) return 95;
-        if(loginTime.equals("00:01") && logoutTime.equals("00:00")) return 95;
+        if (loginTime.equals("00:00") && logoutTime.equals("23:59")) return 95;
+        if (loginTime.equals("00:01") && logoutTime.equals("00:00")) return 95;
         String[] loginTimeArr = loginTime.split(":");
         int hourLogin = Integer.parseInt(loginTimeArr[0]);
         int minLogin = Integer.parseInt(loginTimeArr[1]);
@@ -39,60 +54,60 @@ public class Leetcode26MainClass {
         int totalHour = 0;
         int tempHourLogin = hourLogin;
 
-        while(tempHourLogin != hourLogout) {
-            if(tempHourLogin + 1 == 24) {
+        while (tempHourLogin != hourLogout) {
+            if (tempHourLogin + 1 == 24) {
                 tempHourLogin = 0;
             } else {
                 tempHourLogin++;
             }
 
-            totalHour ++;
-            if(tempHourLogin == hourLogout) {
+            totalHour++;
+            if (tempHourLogin == hourLogout) {
                 break;
             }
         }
 
-        if(minLogout == 0 && minLogin == 0){
+        if (minLogout == 0 && minLogin == 0) {
             return totalHour * 4;
         }
 
         int chance = 0;
 
-        if(minLogin > 0 && minLogin <=15) {
+        if (minLogin > 0 && minLogin <= 15) {
             chance = 3;
         }
 
-        if(minLogin > 15 && minLogin <=30) {
+        if (minLogin > 15 && minLogin <= 30) {
             chance = 2;
         }
 
-        if(minLogin > 30 && minLogin <=45) {
+        if (minLogin > 30 && minLogin <= 45) {
             chance = 1;
         }
 
-        if(minLogin > 45 && minLogin <=59) {
+        if (minLogin > 45 && minLogin <= 59) {
             chance = 0;
         }
 
         int chanceLogout = 0;
 
-        if(minLogout > 0 && minLogout <=15) {
+        if (minLogout > 0 && minLogout <= 15) {
             chanceLogout = 0;
         }
 
-        if(minLogout > 15 && minLogout <=30) {
+        if (minLogout > 15 && minLogout <= 30) {
             chanceLogout = 1;
         }
 
-        if(minLogout > 30 && minLogout <=45) {
+        if (minLogout > 30 && minLogout <= 45) {
             chanceLogout = 2;
         }
 
-        if(minLogout > 45 && minLogout <=59) {
+        if (minLogout > 45 && minLogout <= 59) {
             chanceLogout = 3;
         }
 
-        if(hourLogin >= hourLogout && minLogin >= minLogout) {
+        if (hourLogin >= hourLogout && minLogin >= minLogout) {
             return 95 - ((totalHour - 1) * 4 + chance + chanceLogout);
         }
 
@@ -113,13 +128,13 @@ public class Leetcode26MainClass {
 
         boolean flag = false;
 
-        if (nums[len - 1] == len-1 && nums[len - 2] == len-1) {
+        if (nums[len - 1] == len - 1 && nums[len - 2] == len - 1) {
             flag = true;
         }
 
         if (flag) {
-            for(int i = 0; i < len - 1; i++) {
-                if(nums[i] != i + 1 ){
+            for (int i = 0; i < len - 1; i++) {
+                if (nums[i] != i + 1) {
                     flag = false;
                     break;
                 }
