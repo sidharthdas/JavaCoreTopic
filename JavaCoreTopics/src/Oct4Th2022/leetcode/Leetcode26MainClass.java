@@ -13,9 +13,45 @@ public class Leetcode26MainClass {
         String acc = "abscde-T1AKOOQ01";
         String referenceNumber = "T1AKOOQ01";
 
-        if(referenceNumber.trim().equalsIgnoreCase(acc.split("-")[1])){
+        if (referenceNumber.trim().equalsIgnoreCase(acc.split("-")[1])) {
             System.out.println("test");
         }
+
+        System.out.println(areSentencesSimilar("My name is Haley", "My Haley"));
+    }
+
+    public static boolean areSentencesSimilar(String sentence1, String sentence2) {
+        boolean start = false;
+        boolean end = false;
+
+        String longest = sentence1.length() > sentence2.length() ? sentence1 : sentence2;
+        String shortest = sentence1.length() > sentence2.length() ? sentence2 : sentence1;
+
+        //for starting
+        String[] small = shortest.split(" ");
+        String[] lon = longest.split(" ");
+
+        for (int i = 0; i < small.length; i++) {
+            if (small[i].equals(lon[i])) {
+                start = true;
+            } else {
+                break;
+            }
+        }
+        int lonLen = lon.length - 1;
+        for (int i = small.length - 1; i >= 0; i--) {
+            if (small[i].equals(lonLen)) {
+                end = true;
+            } else {
+                break;
+            }
+
+            lonLen--;
+        }
+
+
+        return start || end;
+
     }
 
     public List<String> splitWordsBySeparator(List<String> words, char separator) {
