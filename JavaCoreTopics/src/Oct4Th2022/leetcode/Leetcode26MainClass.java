@@ -9,6 +9,13 @@ public class Leetcode26MainClass {
 
         System.out.println("Hellow world");
         System.out.println(numberOfRounds("09:31", "10:14"));
+
+        String acc = "abscde-T1AKOOQ01";
+        String referenceNumber = "T1AKOOQ01";
+
+        if(referenceNumber.trim().equalsIgnoreCase(acc.split("-")[1])){
+            System.out.println("test");
+        }
     }
 
     public List<String> splitWordsBySeparator(List<String> words, char separator) {
