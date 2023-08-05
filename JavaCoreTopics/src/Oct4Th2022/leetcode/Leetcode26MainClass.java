@@ -19,6 +19,46 @@ public class Leetcode26MainClass {
         System.out.println(areSentencesSimilar("My name is Haley", "My Haley"));
     }
 
+    public String maxValue(String n, int x) {
+        String srr[] = n.split("");
+        if (n.charAt(0) == '-') {
+            n = n.substring(1);
+            srr = n.split("");
+            int len = n.length();
+            boolean flag = true;
+            for (int i = 0; i < len; i++) {
+                if (x <= Integer.parseInt(srr[i])) {
+                    flag = false;
+                    n = n.substring(0, i) + x + n.substring(i);
+                    break;
+                }
+            }
+
+            if (flag) {
+                return "-" + x + n;
+            }
+
+            return "-" + n;
+
+        }
+        int len = n.length();
+        boolean flag = true;
+        for (int i = 0; i < len; i++) {
+            if (x >= Integer.parseInt(srr[i])) {
+                flag = false;
+                n = n.substring(0, i) + x + n.substring(i);
+                break;
+            }
+        }
+
+        if (flag) {
+            return n + x;
+        }
+
+        return n;
+
+    }
+
     public static boolean areSentencesSimilar(String sentence1, String sentence2) {
         boolean start = false;
         boolean end = false;
