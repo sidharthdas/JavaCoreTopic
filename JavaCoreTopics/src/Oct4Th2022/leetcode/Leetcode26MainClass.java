@@ -16,7 +16,6 @@ public class Leetcode26MainClass {
         if (referenceNumber.trim().equalsIgnoreCase(acc.split("-")[1])) {
             System.out.println("test");
         }
-
         System.out.println(areSentencesSimilar("My name is Haley", "My Haley"));
     }
 
