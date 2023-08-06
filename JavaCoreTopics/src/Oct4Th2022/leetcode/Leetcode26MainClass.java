@@ -19,10 +19,80 @@ public class Leetcode26MainClass {
         System.out.println(areSentencesSimilar("My name is Haley", "My Haley"));
     }
 
+    public String largestTimeFromDigits(int[] arr) {
+
+        Arrays.sort(arr);
+        int first = -1;
+        int sec = -1;
+        int third = -1;
+        int fourth = -1;
+
+        for (int i : arr) {
+            if (i <= 2) {
+                first = i;
+            }
+        }
+
+        for(int i = 0; i < 4; i++){
+            if(arr[i] == first){
+                arr[i] = -1;
+                break;
+            }
+        }
+
+        Arrays.sort(arr);
+        for (int i : arr) {
+            if (i <= 3) {
+                sec = i;
+            }
+        }
+
+        for(int i = 0; i < 4; i++){
+            if(arr[i] == sec){
+                arr[i] = -1;
+                break;
+            }
+        }
+
+        Arrays.sort(arr);
+        for (int i : arr) {
+            if (i <= 5) {
+                third = i;
+            }
+        }
+
+        for(int i = 0; i < 4; i++){
+            if(arr[i] == third){
+                arr[i] = -1;
+                break;
+            }
+        }
+
+        Arrays.sort(arr);
+        for (int i : arr) {
+            if (i <= 9) {
+                fourth = i;
+            }
+        }
+
+        for(int i = 0; i < 4; i++){
+            if(arr[i] == fourth){
+                arr[i] = -1;
+                break;
+            }
+        }
+
+        if (first == -1 || sec == -1 || third == -1 || fourth == -1) {
+            return "";
+        }
+
+        return first + "" + sec + ":" + third + "" + fourth;
+    }
+
     public boolean equationsPossible(String[] equations) {
         List<Boolean> l = new ArrayList<>();
 
-        for(String s : equations) {
+        for (String s : equations) {
             String srr[] = s.split("");
 
         }
