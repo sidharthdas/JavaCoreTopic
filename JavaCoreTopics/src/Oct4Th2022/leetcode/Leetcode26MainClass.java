@@ -19,6 +19,17 @@ public class Leetcode26MainClass {
         System.out.println(areSentencesSimilar("My name is Haley", "My Haley"));
     }
 
+    public boolean equationsPossible(String[] equations) {
+        List<Boolean> l = new ArrayList<>();
+
+        for(String s : equations) {
+            String srr[] = s.split("");
+
+        }
+
+        return false;
+    }
+
     public String maxValue(String n, int x) {
         String srr[] = n.split("");
         if (n.charAt(0) == '-') {
