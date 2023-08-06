@@ -33,13 +33,11 @@ public class Leetcode26MainClass {
                     break;
                 }
             }
-
             if (flag) {
                 return "-" + x + n;
             }
 
             return "-" + n;
-
         }
         int len = n.length();
         boolean flag = true;
