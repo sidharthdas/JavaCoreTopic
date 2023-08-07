@@ -7,7 +7,7 @@ public class Leetcode26MainClass {
 
     public static void main(String[] args) {
 
-        System.out.println("Hellow world");
+        /*System.out.println("Hellow world");
         System.out.println(numberOfRounds("09:31", "10:14"));
 
         String acc = "abscde-T1AKOOQ01";
@@ -16,7 +16,50 @@ public class Leetcode26MainClass {
         if (referenceNumber.trim().equalsIgnoreCase(acc.split("-")[1])) {
             System.out.println("test");
         }
-        System.out.println(areSentencesSimilar("My name is Haley", "My Haley"));
+        System.out.println(areSentencesSimilar("My name is Haley", "My Haley"));*/
+
+        System.out.println(closestPrimes(4, 6));
+    }
+
+    public static int[] closestPrimes(int left, int right) {
+        List<Integer> l = new ArrayList<>();
+
+        for (int i = left; i <= right; i++) {
+            if (isPrime(i)) {
+                l.add(i);
+            }
+        }
+
+        if (l.size() < 2) {
+            return new int[]{-1, -1};
+        }
+
+        Map<List<Integer>, Integer> map = new HashMap<>();
+        int min = Integer.MAX_VALUE;
+        int size = l.size();
+        for (int i = 0; i < size - 1; i++) {
+            map.put(List.of(l.get(i), l.get(i + 1)), Math.abs(l.get(i) - l.get(i + 1)));
+        }
+
+        List<Integer> f = map.entrySet().stream().sorted(Map.Entry.<List<Integer>, Integer>comparingByValue().thenComparing(x -> x.getKey().get(0)))
+                .findFirst().get().getKey();
+
+        return new int[]{f.get(0), f.get(1)};
+    }
+
+    public static boolean isPrime(int i) {
+        int num = i / 2;
+
+        int count = 0;
+        int start = 2;
+        while (start <= num) {
+            if (i % start == 0) {
+                return false;
+            }
+            start++;
+        }
+
+        return true;
     }
 
     public String largestTimeFromDigits(int[] arr) {
@@ -33,8 +76,8 @@ public class Leetcode26MainClass {
             }
         }
 
-        for(int i = 0; i < 4; i++){
-            if(arr[i] == first){
+        for (int i = 0; i < 4; i++) {
+            if (arr[i] == first) {
                 arr[i] = -1;
                 break;
             }
@@ -47,8 +90,8 @@ public class Leetcode26MainClass {
             }
         }
 
-        for(int i = 0; i < 4; i++){
-            if(arr[i] == sec){
+        for (int i = 0; i < 4; i++) {
+            if (arr[i] == sec) {
                 arr[i] = -1;
                 break;
             }
@@ -61,8 +104,8 @@ public class Leetcode26MainClass {
             }
         }
 
-        for(int i = 0; i < 4; i++){
-            if(arr[i] == third){
+        for (int i = 0; i < 4; i++) {
+            if (arr[i] == third) {
                 arr[i] = -1;
                 break;
             }
@@ -75,8 +118,8 @@ public class Leetcode26MainClass {
             }
         }
 
-        for(int i = 0; i < 4; i++){
-            if(arr[i] == fourth){
+        for (int i = 0; i < 4; i++) {
+            if (arr[i] == fourth) {
                 arr[i] = -1;
                 break;
             }
