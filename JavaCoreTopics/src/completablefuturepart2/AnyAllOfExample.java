@@ -27,7 +27,6 @@ public class AnyAllOfExample {
         completableFutureList.add(completableFuture2());
         completableFutureList.add(completableFuture3());
 
-
         CompletableFuture<Void> voidCompletableFuture = CompletableFuture.allOf(completableFutureList.toArray(new CompletableFuture[0]));
 
         List<String> l1 = voidCompletableFuture
@@ -38,7 +37,6 @@ public class AnyAllOfExample {
                 .get()
                 .stream().toList();
         System.out.println(l1);
-
 
         //AnyOf()
         start = System.currentTimeMillis();
