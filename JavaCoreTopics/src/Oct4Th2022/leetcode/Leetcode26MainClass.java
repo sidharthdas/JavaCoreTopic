@@ -18,7 +18,77 @@ public class Leetcode26MainClass {
         }
         System.out.println(areSentencesSimilar("My name is Haley", "My Haley"));*/
 
-        System.out.println(closestPrimes(4, 6));
+        //System.out.println(closestPrimes(4, 6));
+        System.out.println(numberOfArithmeticSlices(new int[]{1, 2, 3, 4}));
+    }
+
+    public static int numberOfArithmeticSlices(int[] nums) {
+
+        if (nums.length < 3) return 0;
+        int count = 0;
+        List<List<Integer>> l = generateSubarrays(nums).stream().filter(x -> x.size() > 2).toList();
+
+        for (List<Integer> l1 : l) {
+            int len = l1.size();
+
+            boolean flag = false;
+            for (int i = 0; i < len - 2; i++) {
+                int a = l1.get(i);
+                int b = l1.get(i + 1);
+                int c = l1.get(i + 2);
+                if (Math.abs(a - b) == Math.abs(b - c) ||
+                        Math.abs(b - c) == Math.abs(c - a) ||
+                        Math.abs(a - c) == Math.abs(b - a)
+                ) {
+                    flag = true;
+                    break;
+                }
+            }
+
+            if(flag) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public static List<List<Integer>> generateSubarrays(int[] nums) {
+        List<List<Integer>> subarrays = new ArrayList<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i; j < nums.length; j++) {
+                List<Integer> subarray = new ArrayList<>();
+                for (int k = i; k <= j; k++) {
+                    subarray.add(nums[k]);
+                }
+                subarrays.add(subarray);
+            }
+        }
+
+        return subarrays;
+    }
+
+
+    public int maxSum(int[][] grid) {
+
+        int row = grid.length;
+        int col = grid[0].length;
+
+        int currentRow = -1;
+        int currentCol = -1;
+        Set<Integer> set = new HashSet<>();
+        while (currentRow + 2 <= row && currentCol + 2 <= col) {
+            currentRow++;
+            currentCol++;
+            int x = 0;
+            set.add(x);
+
+
+        }
+
+
+        return 0;
+
     }
 
     public static int[] closestPrimes(int left, int right) {
