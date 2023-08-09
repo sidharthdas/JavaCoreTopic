@@ -22,6 +22,22 @@ public class Leetcode26MainClass {
         System.out.println(numberOfArithmeticSlices(new int[]{1, 2, 3, 4}));
     }
 
+    public String finalString(String s) {
+        String[] srr = s.split("");
+
+        StringBuffer sb = new StringBuffer();
+
+        for(String s1 : srr) {
+            if(s1.equals("i")) {
+                sb = sb.reverse();
+            } else {
+                sb.append(s1);
+            }
+        }
+
+        return sb.toString();
+    }
+
     public static int numberOfArithmeticSlices(int[] nums) {
 
         if (nums.length < 3) return 0;
