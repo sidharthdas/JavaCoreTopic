@@ -21,7 +21,6 @@ public class AnyAllOfExample {
         System.out.println("time taken - " + (end - start) / 1000);
 
         //AllOf 2nd Way
-
         List<CompletableFuture<String>> completableFutureList = new ArrayList<>();
         completableFutureList.add(completableFuture1());
         completableFutureList.add(completableFuture2());
