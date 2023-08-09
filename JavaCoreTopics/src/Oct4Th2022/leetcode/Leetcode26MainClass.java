@@ -27,8 +27,8 @@ public class Leetcode26MainClass {
 
         StringBuffer sb = new StringBuffer();
 
-        for(String s1 : srr) {
-            if(s1.equals("i")) {
+        for (String s1 : srr) {
+            if (s1.equals("i")) {
                 sb = sb.reverse();
             } else {
                 sb.append(s1);
@@ -61,7 +61,7 @@ public class Leetcode26MainClass {
                 }
             }
 
-            if(flag) {
+            if (flag) {
                 count++;
             }
         }
