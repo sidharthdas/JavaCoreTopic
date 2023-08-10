@@ -19,7 +19,79 @@ public class Leetcode26MainClass {
         System.out.println(areSentencesSimilar("My name is Haley", "My Haley"));*/
 
         //System.out.println(closestPrimes(4, 6));
-        System.out.println(numberOfArithmeticSlices(new int[]{1, 2, 3, 4}));
+        //System.out.println(numberOfArithmeticSlices(new int[]{1, 2, 3, 4}));
+        System.out.println(minOperations(new int[]{1, 5, 2, 4, 1}));
+    }
+
+    public int maximumCostSubstring(String s, String chars, int[] vals) {
+
+        Map<String, Integer> map = new HashMap<>();
+        int index = 0;
+        for (char a = 'a'; a <= 'z'; a++) {
+            index++;
+            if (chars.contains(String.valueOf(a))) {
+                map.put(String.valueOf(a), vals[chars.indexOf(a)]);
+            } else {
+                map.put(String.valueOf(a), index);
+            }
+
+        }
+
+        int max = Integer.MIN_VALUE;
+        List<String> l = getAllSubstrings(s);
+        for (String s1 : l) {
+            String[] srr = s1.split("");
+            int temp = 0;
+            for (String s2 : srr) {
+                temp += map.get(s2);
+            }
+
+            if (temp > max) {
+                max = temp;
+            }
+        }
+
+        return max;
+
+    }
+
+    public static List<String> getAllSubstrings(String input) {
+        List<String> substrings = new ArrayList<>();
+
+        for (int i = 0; i < input.length(); i++) {
+            for (int j = i + 1; j <= input.length(); j++) {
+                substrings.add(input.substring(i, j));
+            }
+        }
+
+        return substrings;
+    }
+
+    public static int minOperations(int[] nums) {
+        if (nums.length == 1) return 0;
+
+        int count = 0;
+        int len = nums.length;
+
+        for (int i = 1; i < len; i++) {
+            if (nums[i] - nums[i - 1] != 1) {
+                if (nums[i - 1] < nums[i]) {
+                    int temp = nums[i] - nums[i - 1];
+                    temp = temp - 1;
+                    nums[i - 1] = nums[i - 1] + temp;
+                    count += temp;
+                } else {
+
+                    int temp = nums[i - 1] - nums[i];
+                    temp = temp + 1;
+                    nums[i] = nums[i] + temp;
+                    count += temp;
+
+                }
+            }
+        }
+
+        return count;
     }
 
     public String finalString(String s) {
@@ -584,3 +656,5 @@ public class Leetcode26MainClass {
         return count;
     }
 }
+
+
