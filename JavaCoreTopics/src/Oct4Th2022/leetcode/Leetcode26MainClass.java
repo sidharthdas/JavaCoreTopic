@@ -27,7 +27,6 @@ public class Leetcode26MainClass {
 
         int len = nums.length;
         int count = 0;
-
         for (int i = 0; i < len; i++) {
             for (int j = i + 1; j < len; j++) {
                 if (j - i != nums[j] - nums[i]) {
