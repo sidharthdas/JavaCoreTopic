@@ -23,6 +23,21 @@ public class Leetcode26MainClass {
         System.out.println(minOperations(new int[]{1, 5, 2, 4, 1}));
     }
 
+    public long countBadPairs(int[] nums) {
+
+        int len = nums.length;
+        int count = 0;
+
+        for (int i = 0; i < len; i++) {
+            for (int j = i + 1; j < len; j++) {
+                if (j - i != nums[j] - nums[i]) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
     public int maximumCostSubstring(String s, String chars, int[] vals) {
 
         Map<String, Integer> map = new HashMap<>();
