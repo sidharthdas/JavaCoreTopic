@@ -20,7 +20,26 @@ public class Leetcode26MainClass {
 
         //System.out.println(closestPrimes(4, 6));
         //System.out.println(numberOfArithmeticSlices(new int[]{1, 2, 3, 4}));
-        System.out.println(minOperations(new int[]{1, 5, 2, 4, 1}));
+        //System.out.println(minOperations(new int[]{1, 5, 2, 4, 1}));
+        System.out.println(chalkReplacer(new int[]{5, 1, 5}, 22));
+    }
+
+    public static int chalkReplacer(int[] chalk, int k) {
+        int len = chalk.length;
+        int temp = -1;
+        for (int i = 0; i < len; i++) {
+
+            if (k < chalk[i]) {
+                temp = i;
+                break;
+            }
+
+            k = k - chalk[i];
+
+            if (i == len - 1) i = -1;
+
+        }
+        return temp;
     }
 
     public long countBadPairs(int[] nums) {
