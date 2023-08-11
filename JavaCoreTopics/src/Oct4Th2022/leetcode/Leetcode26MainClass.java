@@ -35,7 +35,6 @@ public class Leetcode26MainClass {
             }
 
             k = k - chalk[i];
-
             if (i == len - 1) i = -1;
 
         }
