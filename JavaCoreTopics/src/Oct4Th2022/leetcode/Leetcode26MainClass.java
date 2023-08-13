@@ -24,6 +24,30 @@ public class Leetcode26MainClass {
         System.out.println(chalkReplacer(new int[]{5, 1, 5}, 22));
     }
 
+    public int countCompleteSubarrays(int[] nums) {
+
+        int distintCount = Arrays.stream(nums).boxed().collect(Collectors.toSet()).size();
+
+        int len = nums.length;
+        int count = 0;
+
+        for (int i = 0; i < len; i++) {
+            for (int j = i; j < nums.length; j++) {
+                List<Integer> subarray = new ArrayList<>();
+                for (int k = i; k <= j; k++) {
+                    subarray.add(nums[k]);
+                }
+
+                if (subarray.size() >= distintCount) {
+                    if (subarray.stream().collect(Collectors.toSet()).size() == distintCount) {
+                        count++;
+                    }
+                }
+            }
+        }
+        return count;
+    }
+
     public static int chalkReplacer(int[] chalk, int k) {
         int len = chalk.length;
         int temp = -1;
