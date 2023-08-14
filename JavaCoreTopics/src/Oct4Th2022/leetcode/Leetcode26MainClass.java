@@ -49,7 +49,6 @@ public class Leetcode26MainClass {
 
     }
 
-
     public int countCompleteSubarrays(int[] nums) {
 
         int distintCount = Arrays.stream(nums).boxed().collect(Collectors.toSet()).size();
