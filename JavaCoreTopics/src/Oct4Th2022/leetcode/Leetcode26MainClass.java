@@ -24,6 +24,31 @@ public class Leetcode26MainClass {
         System.out.println(chalkReplacer(new int[]{5, 1, 5}, 22));
     }
 
+    public int maxAbsoluteSum(int[] nums) {
+        int len = nums.length;
+        int max = Integer.MIN_VALUE;
+
+        for (int i = 0; i < len; i++) {
+            for (int j = i; j < nums.length; j++) {
+                List<Integer> subarray = new ArrayList<>();
+                for (int k = i; k <= j; k++) {
+                    subarray.add(nums[k]);
+                }
+                int temp = 0;
+                if (subarray.size() > 1) {
+                    temp = Math.abs(subarray.stream().reduce(Integer::sum).get());
+                } else {
+                    temp = subarray.get(0);
+                }
+                if (temp > max) {
+                    max = temp;
+                }
+            }
+        }
+        return max;
+
+    }
+
 
     public int countCompleteSubarrays(int[] nums) {
 
