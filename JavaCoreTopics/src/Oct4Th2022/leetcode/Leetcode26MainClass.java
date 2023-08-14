@@ -24,6 +24,7 @@ public class Leetcode26MainClass {
         System.out.println(chalkReplacer(new int[]{5, 1, 5}, 22));
     }
 
+
     public int countCompleteSubarrays(int[] nums) {
 
         int distintCount = Arrays.stream(nums).boxed().collect(Collectors.toSet()).size();
