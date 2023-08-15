@@ -24,6 +24,35 @@ public class Leetcode26MainClass {
         System.out.println(chalkReplacer(new int[]{5, 1, 5}, 22));
     }
 
+    public int maxSum(int[] nums) {
+        int len = nums.length;
+        int max = -1;
+
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j < len; j++) {
+                if (i != j) {
+                    String s1 = String.valueOf(nums[i]);
+                    String s2 = String.valueOf(nums[j]);
+
+                    char[] s1A = s1.toCharArray();
+                    char[] s2A = s2.toCharArray();
+
+                    Arrays.sort(s1A);
+                    Arrays.sort(s2A);
+
+                    if (String.valueOf(s1A).equals(String.valueOf(s2A))) {
+                        if (nums[i] + nums[j] > max) {
+                            max = nums[i] + nums[j];
+                        }
+                    }
+                }
+
+            }
+        }
+
+        return max;
+    }
+
     public int maxAbsoluteSum(int[] nums) {
         int len = nums.length;
         int max = Integer.MIN_VALUE;
