@@ -24,6 +24,33 @@ public class Leetcode26MainClass {
         System.out.println(chalkReplacer(new int[]{5, 1, 5}, 22));
     }
 
+    public int subarraysDivByK(int[] nums, int k) {
+        int len = nums.length;
+        int count = 0;
+
+        for (int i = 0; i < len; i++) {
+            for (int j = i; j < nums.length; j++) {
+                List<Integer> subarray = new ArrayList<>();
+                for (int l = i; l <= j; l++) {
+                    subarray.add(nums[l]);
+                }
+                int temp = 0;
+                if (subarray.size() > 1) {
+                    temp = subarray.stream().reduce(Integer::sum).get();
+                } else {
+                    temp = subarray.get(0);
+                }
+
+                if (temp % k == 0) {
+                    count++;
+                }
+
+            }
+        }
+
+        return count;
+    }
+
     public int maxSum(int[] nums) {
         int len = nums.length;
         int max = -1;
