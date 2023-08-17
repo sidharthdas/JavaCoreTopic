@@ -24,6 +24,47 @@ public class Leetcode26MainClass {
         System.out.println(chalkReplacer(new int[]{5, 1, 5}, 22));
     }
 
+    public List<List<Integer>> findPrimePairs(int n) {
+        List<Integer> l = new ArrayList<>();
+        for (int i = 2; i <= n; i++) {
+            if (isPrimeNumber(i)) {
+                l.add(i);
+            }
+        }
+
+        List<List<Integer>> fl = new ArrayList<>();
+
+        int len = l.size();
+
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j < len; j++) {
+                if (l.get(i) + l.get(j) == n) {
+                    if (!fl.contains(List.of(l.get(j), l.get(i)))) {
+                        fl.add(List.of(l.get(i), l.get(j)));
+                    }
+                }
+            }
+        }
+        return fl;
+    }
+
+    public boolean isPrimeNumber(int num) {
+        boolean flag = false;
+        for (int i = 2; i <= num / 2; ++i) {
+            // condition for nonprime number
+            if (num % i == 0) {
+                flag = true;
+                break;
+            }
+        }
+
+        return !flag;
+    }
+
+    public boolean checkInclusion(String s1, String s2) {
+        return false;
+    }
+
     public int subarraysDivByK(int[] nums, int k) {
         int len = nums.length;
         int count = 0;
