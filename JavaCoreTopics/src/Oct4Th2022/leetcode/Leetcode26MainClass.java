@@ -24,6 +24,39 @@ public class Leetcode26MainClass {
         System.out.println(chalkReplacer(new int[]{5, 1, 5}, 22));
     }
 
+    public long wonderfulSubstrings(String word) {
+        int count = 0;
+        List<String> l = get1AllSubstrings(word);
+
+        System.out.println(l);
+
+        for(String s : l){
+            if (s.length() == 1) {
+                count++;
+            } else {
+                String[] srr = s.split("");
+                Map<String, Long> map = Arrays.stream(srr).collect(Collectors.groupingBy(x -> x, Collectors.counting()));
+                if (map.entrySet().stream().filter(x -> x.getValue() % 2 != 0).count() < 2) {
+                    count++;
+                }
+            }
+        }
+        return count;
+
+    }
+
+    public static List<String> get1AllSubstrings(String input) {
+        List<String> substrings = new ArrayList<>();
+
+        for (int i = 0; i < input.length(); i++) {
+            for (int j = i + 1; j <= input.length(); j++) {
+                substrings.add(input.substring(i, j));
+            }
+        }
+
+        return substrings;
+    }
+
     public List<List<Integer>> findPrimePairs(int n) {
         List<Integer> l = new ArrayList<>();
         for (int i = 2; i <= n; i++) {
