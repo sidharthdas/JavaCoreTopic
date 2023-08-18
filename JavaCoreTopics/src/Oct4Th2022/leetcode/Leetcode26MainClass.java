@@ -35,7 +35,6 @@ public class Leetcode26MainClass {
         List<List<Integer>> fl = new ArrayList<>();
 
         int len = l.size();
-
         for (int i = 0; i < len; i++) {
             for (int j = 0; j < len; j++) {
                 if (l.get(i) + l.get(j) == n) {
