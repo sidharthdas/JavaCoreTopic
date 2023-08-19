@@ -21,7 +21,54 @@ public class Leetcode26MainClass {
         //System.out.println(closestPrimes(4, 6));
         //System.out.println(numberOfArithmeticSlices(new int[]{1, 2, 3, 4}));
         //System.out.println(minOperations(new int[]{1, 5, 2, 4, 1}));
-        System.out.println(chalkReplacer(new int[]{5, 1, 5}, 22));
+        //System.out.println(chalkReplacer(new int[]{5, 1, 5}, 22));
+        System.out.println(waysToMakeFair(new int[]{2, 1, 6, 4}));
+    }
+
+    public static int waysToMakeFair(int[] nums) {
+
+        int evenSum = 0;
+        int oddSum = 0;
+        int count = 0;
+
+        List<Integer> l = Arrays.stream(nums).boxed().collect(Collectors.toList());
+        int len = nums.length;
+        int currentIndexRemoval = 0;
+
+        while (currentIndexRemoval < len) {
+            List<Integer> l1 = new ArrayList<>(l);
+            l1.remove(currentIndexRemoval);
+            for (int i = 0; i < len - 1; i++) {
+                if (i % 2 == 0) {
+                    evenSum += l1.get(i);
+                } else {
+                    oddSum += l1.get(i);
+                }
+            }
+
+            if (evenSum == oddSum) {
+                count++;
+            }
+
+            evenSum = 0;
+            oddSum = 0;
+
+            currentIndexRemoval++;
+        }
+
+        return count;
+    }
+
+    public int[] constructRectangle(int area) {
+        int width = (int) Math.sqrt(area);
+        while (width >= 1) {
+            if (area % width == 0) {
+                return new int[]{area / width, width};
+            }
+
+            width--;
+        }
+        return new int[]{area, 1};
     }
 
     public long wonderfulSubstrings(String word) {
@@ -30,7 +77,7 @@ public class Leetcode26MainClass {
 
         System.out.println(l);
 
-        for(String s : l){
+        for (String s : l) {
             if (s.length() == 1) {
                 count++;
             } else {
