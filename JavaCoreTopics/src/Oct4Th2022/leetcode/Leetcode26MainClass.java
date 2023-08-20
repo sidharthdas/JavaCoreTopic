@@ -26,6 +26,7 @@ public class Leetcode26MainClass {
     }
 
     public int minSubarray(int[] nums, int p) {
+        if (Arrays.stream(nums).boxed().reduce(Integer::sum).get() % p == 0) return 0;
         List<List<Integer>> l = subArray(nums);
         l = l.stream().sorted((x, y) -> x.size() - y.size()).collect(Collectors.toList());
         int totalSum = Arrays.stream(nums).boxed().reduce(Integer::sum).get();
