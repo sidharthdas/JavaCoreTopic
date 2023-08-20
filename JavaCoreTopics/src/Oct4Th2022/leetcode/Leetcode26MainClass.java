@@ -25,6 +25,45 @@ public class Leetcode26MainClass {
         System.out.println(waysToMakeFair(new int[]{2, 1, 6, 4}));
     }
 
+    public int minSubarray(int[] nums, int p) {
+        List<List<Integer>> l = subArray(nums);
+        l = l.stream().sorted((x, y) -> x.size() - y.size()).collect(Collectors.toList());
+        int totalSum = Arrays.stream(nums).boxed().reduce(Integer::sum).get();
+        int finalValue = -1;
+        for (List<Integer> l1 : l) {
+            if (l1.size() == 1) {
+                if ((totalSum - l1.get(0)) % p == 0) {
+                    return 1;
+                }
+            } else {
+                int temp = l1.stream().reduce(Integer::sum).get();
+                if ((totalSum - temp) % p == 0) {
+                    return l1.size();
+                }
+            }
+        }
+
+        return finalValue;
+    }
+
+    private List<List<Integer>> subArray(int[] nums) {
+        int len = nums.length;
+
+        List<List<Integer>> l = new ArrayList<>();
+
+        for (int i = 0; i < len; i++) {
+            for (int j = i; j < nums.length; j++) {
+                List<Integer> subarray = new ArrayList<>();
+                for (int k = i; k <= j; k++) {
+                    subarray.add(nums[k]);
+                }
+                l.add(subarray);
+            }
+        }
+        return l;
+    }
+
+
     public static int waysToMakeFair(int[] nums) {
 
         int evenSum = 0;
