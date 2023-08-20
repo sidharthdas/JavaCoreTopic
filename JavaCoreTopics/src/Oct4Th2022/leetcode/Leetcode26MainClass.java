@@ -34,7 +34,6 @@ public class Leetcode26MainClass {
         List<Integer> l = Arrays.stream(nums).boxed().collect(Collectors.toList());
         int len = nums.length;
         int currentIndexRemoval = 0;
-
         while (currentIndexRemoval < len) {
             List<Integer> l1 = new ArrayList<>(l);
             l1.remove(currentIndexRemoval);
