@@ -43,7 +43,6 @@ public class Leetcode26MainClass {
                 }
             }
         }
-
         return finalValue;
     }
 
