@@ -25,6 +25,22 @@ public class Leetcode26MainClass {
         System.out.println(waysToMakeFair(new int[]{2, 1, 6, 4}));
     }
 
+    public int countPairs(List<Integer> nums, int target) {
+
+        int len = nums.size();
+        int count = 0;
+
+        for (int i = 0; i < len; i++) {
+            for (int j = i + 1; j < len; j++) {
+                if(nums.get(i) + nums.get(j) < target) {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+
     public int minSubarray(int[] nums, int p) {
         if (Arrays.stream(nums).boxed().reduce(Integer::sum).get() % p == 0) return 0;
         List<List<Integer>> l = subArray(nums);
