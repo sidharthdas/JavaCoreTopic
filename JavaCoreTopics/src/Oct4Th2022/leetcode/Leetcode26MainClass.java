@@ -25,6 +25,17 @@ public class Leetcode26MainClass {
         System.out.println(waysToMakeFair(new int[]{2, 1, 6, 4}));
     }
 
+    public boolean isAcronym(List<String> words, String s) {
+
+        String temp = "";
+        for (String word : words) {
+            if (word.length() > 0) {
+                temp += word.charAt(0);
+            }
+        }
+        return s.equals(temp);
+    }
+
     public int countPairs(List<Integer> nums, int target) {
 
         int len = nums.size();
@@ -32,7 +43,7 @@ public class Leetcode26MainClass {
 
         for (int i = 0; i < len; i++) {
             for (int j = i + 1; j < len; j++) {
-                if(nums.get(i) + nums.get(j) < target) {
+                if (nums.get(i) + nums.get(j) < target) {
                     count++;
                 }
             }
