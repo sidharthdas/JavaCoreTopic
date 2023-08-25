@@ -25,6 +25,36 @@ public class Leetcode26MainClass {
         System.out.println(waysToMakeFair(new int[]{2, 1, 6, 4}));
     }
 
+    public int countBinarySubstrings(String s) {
+        int count = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            for (int j = i + 1; j <= s.length(); j++) {
+                String temp = s.substring(i, j);
+                if (temp.length() % 2 == 0) {
+                    boolean flag = true;
+                    int len = temp.length();
+                    String sub1 = temp.substring(0, len / 2);
+                    String sub2 = temp.substring(len / 2);
+                    if ((temp.charAt(len / 2) + "").equals("1")) {
+                        if (sub2.contains("0") || sub1.contains("1")) {
+                            flag = false;
+                        }
+                    } else {
+                        if (sub2.contains("1") || sub1.contains("0")) {
+                            flag = false;
+                        }
+                    }
+
+                    if (flag) {
+                        count++;
+                    }
+                }
+            }
+        }
+        return count;
+    }
+
     public boolean isAcronym(List<String> words, String s) {
 
         String temp = "";
