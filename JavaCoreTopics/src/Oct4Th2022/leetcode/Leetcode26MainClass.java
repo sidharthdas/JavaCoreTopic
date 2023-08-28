@@ -23,7 +23,6 @@ public class Leetcode26MainClass {
         //System.out.println(minOperations(new int[]{1, 5, 2, 4, 1}));
         //System.out.println(chalkReplacer(new int[]{5, 1, 5}, 22));
         //System.out.println(waysToMakeFair(new int[]{2, 1, 6, 4}));
-
         int count = Runtime.getRuntime().availableProcessors();
         System.out.println(count);
     }
