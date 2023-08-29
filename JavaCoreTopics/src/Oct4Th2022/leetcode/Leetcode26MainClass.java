@@ -27,6 +27,41 @@ public class Leetcode26MainClass {
         System.out.println(count);
     }
 
+    public List<List<Integer>> shiftGrid(int[][] grid, int k) {
+        int row = grid.length;
+        int col = grid[0].length;
+        List<Integer> l = new ArrayList<>();
+
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                l.add(grid[i][j]);
+            }
+        }
+        int len = l.size();
+        while (k > 0) {
+            List<Integer> temp = new ArrayList<>();
+            temp.add(l.get(len - 1));
+
+            for (int i = 1; i < len; i++) {
+                temp.add(i, l.get(i - 1));
+            }
+
+            l = new ArrayList<>(temp);
+            k--;
+        }
+        int index = 0;
+        List<List<Integer>> l1 = new ArrayList<>();
+        for (int i = 0; i < row; i++) {
+            List<Integer> temp = new ArrayList<>();
+            for (int j = 0; j < col; j++) {
+                temp.add(l.get(index));
+                index++;
+            }
+            l1.add(temp);
+        }
+        return l1;
+    }
+
     public int countBinarySubstrings(String s) {
         int count = 0;
 
