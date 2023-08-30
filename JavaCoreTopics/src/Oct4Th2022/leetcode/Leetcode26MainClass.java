@@ -36,9 +36,8 @@ public class Leetcode26MainClass {
                 .collect(Collectors.groupingBy(x -> x, Collectors.counting()))
                 .entrySet()
                 .stream()
-                .map(x -> {
+                .peek(x -> {
                     System.out.println(x);
-                    return x;
                 })
                 .filter(x -> !x.getKey().equals("_"))
                 .sorted(Map.Entry.<String, Long>comparingByValue()
