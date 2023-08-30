@@ -60,7 +60,7 @@ PriorityQueue<Integer> pq = new PriorityQueue<>((a1, a2) -> a2 - a1);
         );
 ```
 
--> For Java core topics, refer package JavaCoreTopicsImplementation17thJul2021
+-> For Java core topics, refer to package JavaCoreTopicsImplementation17thJul2021
 
 -> For BST please follow this package src/binarysearchtree20Feb2023
 
@@ -77,6 +77,8 @@ PriorityQueue<Integer> pq = new PriorityQueue<>((a1, a2) -> a2 - a1);
     Mirror image of BST
 
 -> For java8 functional interface, refer JavaCoreTopicsImplementation17thJul2021.java8FunctionalInterfaces.
+
+-> For logging in Java Stream, use `peek() after stream()`
 
 -> Map java8 functionalities, refer spet2022.MapPractice
 ```
