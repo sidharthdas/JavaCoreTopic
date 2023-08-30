@@ -27,6 +27,54 @@ public class Leetcode26MainClass {
         System.out.println(count);
     }
 
+    public int furthestDistanceFromOrigin(String moves) {
+        String[] srr = moves.split("");
+
+
+        Optional
+                <Map.Entry<String, Long>> m = Arrays.stream(srr)
+                .collect(Collectors.groupingBy(x -> x, Collectors.counting()))
+                .entrySet()
+                .stream()
+                .map(x -> {
+                    System.out.println(x);
+                    return x;
+                })
+                .filter(x -> !x.getKey().equals("_"))
+                .sorted(Map.Entry.<String, Long>comparingByValue()
+                        .reversed())
+                .findFirst();
+
+        if (m.isPresent()) {
+            String key = m.get().getKey();
+            moves = moves.replaceAll("_", key);
+
+            int max = Integer.MIN_VALUE;
+            srr = moves.split("");
+            int len = srr.length;
+            int count = 0;
+            for (int i = 0; i < len; i++) {
+                if (srr[i].equals(key)) {
+                    count++;
+                } else {
+                    if (count > max) {
+                        max = count;
+                        count = 0;
+                    }
+                }
+            }
+
+            if (count > max) {
+                max = count;
+            }
+
+            return count;
+        }
+
+        return moves.length();
+    }
+
+
     public List<List<Integer>> shiftGrid(int[][] grid, int k) {
         int row = grid.length;
         int col = grid[0].length;
