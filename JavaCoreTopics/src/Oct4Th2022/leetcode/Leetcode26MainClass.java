@@ -27,6 +27,32 @@ public class Leetcode26MainClass {
         //System.out.println(count);
     }
 
+    public int accountBalanceAfterPurchase(int purchaseAmount) {
+
+        int min = purchaseAmount;
+        int minCount = 0;
+        int max = purchaseAmount;
+        int maxCount = 0;
+
+        while(min % 10 != 0) {
+            min--;
+            minCount++;
+        }
+
+        while(max % 10 != 0) {
+            max++;
+            maxCount++;
+        }
+
+        if( minCount < maxCount) {
+            return 100 - min;
+        } else if( minCount > maxCount) {
+            return 100 - max;
+        } else {
+            return 100 - max;
+        }
+    }
+
     public int furthestDistanceFromOrigin(String moves) {
         String[] srr = moves.split("");
 
