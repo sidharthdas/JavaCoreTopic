@@ -25,6 +25,36 @@ public class Leetcode26MainClass {
         //System.out.println(waysToMakeFair(new int[]{2, 1, 6, 4}));
         int count = Runtime.getRuntime().availableProcessors();
         //System.out.println(count);
+        System.out.println(smallestValue(15));
+    }
+
+    public static int smallestValue(int n) {
+        List<Integer> pF = primeFactors(n);
+        while (pF.size() != 1) {
+            pF = primeFactors(pF.stream().reduce(Integer::sum).get());
+        }
+
+        return pF.get(0);
+    }
+
+    private static List<Integer> primeFactors(int n) {
+        List<Integer> pf = new ArrayList<>();
+        while (n % 2 == 0) {
+            pf.add(2);
+            n /= 2;
+        }
+        for (int i = 3; i <= Math.sqrt(n); i += 2) {
+            // While i divides n, print i and divide n
+            while (n % i == 0) {
+                pf.add(i);
+                n /= i;
+            }
+        }
+        if (n > 2)
+            pf.add(n);
+
+        return pf;
+
     }
 
     public int accountBalanceAfterPurchase(int purchaseAmount) {
@@ -34,19 +64,19 @@ public class Leetcode26MainClass {
         int max = purchaseAmount;
         int maxCount = 0;
 
-        while(min % 10 != 0) {
+        while (min % 10 != 0) {
             min--;
             minCount++;
         }
 
-        while(max % 10 != 0) {
+        while (max % 10 != 0) {
             max++;
             maxCount++;
         }
 
-        if( minCount < maxCount) {
+        if (minCount < maxCount) {
             return 100 - min;
-        } else if( minCount > maxCount) {
+        } else if (minCount > maxCount) {
             return 100 - max;
         } else {
             return 100 - max;
