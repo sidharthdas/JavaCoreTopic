@@ -25,7 +25,7 @@ public class Leetcode26MainClass {
         //System.out.println(waysToMakeFair(new int[]{2, 1, 6, 4}));
         int count = Runtime.getRuntime().availableProcessors();
         //System.out.println(count);
-        System.out.println(smallestValue(15));
+        //System.out.println(smallestValue(15));
     }
 
     public static int smallestValue(int n) {
