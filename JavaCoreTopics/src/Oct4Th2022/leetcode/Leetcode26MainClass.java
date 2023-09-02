@@ -28,8 +28,29 @@ public class Leetcode26MainClass {
         System.out.println(smallestValue(4));
     }
 
+    public boolean canThreePartsEqualSum(int[] arr) {
+        int totalSum = Arrays.stream(arr).boxed().reduce(Integer::sum).get();
+        if(totalSum % 3 != 0) return false;
+        int sum = totalSum / 3;
+        int currentSum = 0;
+        int totalCount = 0;
+
+        int len = arr.length;
+        for(int i = 0; i < len; i++) {
+            currentSum += arr[i];
+            if(currentSum == sum) {
+                totalCount++;
+                currentSum = 0;
+            }
+        }
+
+        if(totalCount == 3) return true;
+
+        return false;
+    }
+
     public static int smallestValue(int n) {
-        if(n == 4) return 4;
+        if (n == 4) return 4;
         List<Integer> pF = primeFactors(n);
         while (pF.size() != 1) {
             pF = primeFactors(pF.stream().reduce(Integer::sum).get());
