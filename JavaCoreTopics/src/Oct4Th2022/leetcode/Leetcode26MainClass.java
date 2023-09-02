@@ -25,10 +25,11 @@ public class Leetcode26MainClass {
         //System.out.println(waysToMakeFair(new int[]{2, 1, 6, 4}));
         int count = Runtime.getRuntime().availableProcessors();
         //System.out.println(count);
-        //System.out.println(smallestValue(15));
+        System.out.println(smallestValue(4));
     }
 
     public static int smallestValue(int n) {
+        if(n == 4) return 4;
         List<Integer> pF = primeFactors(n);
         while (pF.size() != 1) {
             pF = primeFactors(pF.stream().reduce(Integer::sum).get());
