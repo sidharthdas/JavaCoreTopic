@@ -36,12 +36,13 @@ public class Leetcode26MainClass {
         int totalCount = 0;
 
         int len = arr.length;
-        for(int i = 0; i < len; i++) {
+        for(int i = 0; i < len - 1; i++) {
             currentSum += arr[i];
             if(currentSum == sum) {
                 totalCount++;
                 currentSum = 0;
             }
+            if(totalCount == 2) return true;
         }
 
         if(totalCount == 3) return true;
