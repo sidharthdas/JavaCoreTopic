@@ -28,24 +28,53 @@ public class Leetcode26MainClass {
         System.out.println(smallestValue(4));
     }
 
+    public int[] circularGameLosers(int n, int k) {
+        Map<Integer, Integer> map = new LinkedHashMap<>();
+        for (int i = 1; i <= n; i++) {
+            if (i == 1) map.put(1, 1);
+            else map.put(i, 0);
+        }
+        int temp = 1;
+        int current = 1;
+        while (!map.entrySet().stream().filter(x -> x.getValue() >= 2).findFirst().isPresent()) {
+            current += (temp * k);
+            if (current > n) {
+                while (current > n) {
+                    current -= n;
+                }
+            }
+
+            map.put(current, map.get(current) + 1);
+            temp++;
+        }
+
+        List<Integer> l = map.entrySet().stream().filter(x -> x.getValue() == 0).map(x -> x.getKey()).toList();
+        int[] arr = new int[l.size()];
+        for (int i = 0; i < l.size(); i++) {
+            arr[i] = l.get(i);
+        }
+
+        return arr;
+    }
+
     public boolean canThreePartsEqualSum(int[] arr) {
         int totalSum = Arrays.stream(arr).boxed().reduce(Integer::sum).get();
-        if(totalSum % 3 != 0) return false;
+        if (totalSum % 3 != 0) return false;
         int sum = totalSum / 3;
         int currentSum = 0;
         int totalCount = 0;
 
         int len = arr.length;
-        for(int i = 0; i < len - 1; i++) {
+        for (int i = 0; i < len - 1; i++) {
             currentSum += arr[i];
-            if(currentSum == sum) {
+            if (currentSum == sum) {
                 totalCount++;
                 currentSum = 0;
             }
-            if(totalCount == 2) return true;
+            if (totalCount == 2) return true;
         }
 
-        if(totalCount == 3) return true;
+        if (totalCount == 3) return true;
 
         return false;
     }
