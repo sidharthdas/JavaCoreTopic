@@ -28,6 +28,21 @@ public class Leetcode26MainClass {
         System.out.println(smallestValue(4));
     }
 
+    public int maxRepeating(String sequence, String word) {
+
+        int count = 0;
+        while(sequence.contains(word)) {
+            count ++;
+            sequence = sequence.replaceFirst(word, "");
+        }
+
+        return count;
+    }
+
+    public boolean checkOnesSegment(String s) {
+        return s.contains("11");
+    }
+
     public int[] circularGameLosers(int n, int k) {
         Map<Integer, Integer> map = new LinkedHashMap<>();
         for (int i = 1; i <= n; i++) {
