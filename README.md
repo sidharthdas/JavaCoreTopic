@@ -81,8 +81,8 @@ PriorityQueue<Integer> pq = new PriorityQueue<>((a1, a2) -> a2 - a1);
 -> For logging in Java Stream, use `peek() after stream()`
 -> 2 main methods of stream() i.e.
 ```
-stream().takeWhile(Predicate p) -> It will loop over the array, and pull the data unless the condition matches, once it gets matched, it will stop
-stream().dropWile(Predicate p) -> It will loop over the array and drop the elements will the condition matches, once it gets matched, it will stop dropping the elements
+stream().takeWhile(Predicate p) // -> It will loop over the array, and pull the data unless the condition matches, once it gets matched, it will stop
+stream().dropWile(Predicate p) // -> It will loop over the array and drop the elements will the condition matches, once it gets matched, it will stop dropping the elements
 
 ```
 
