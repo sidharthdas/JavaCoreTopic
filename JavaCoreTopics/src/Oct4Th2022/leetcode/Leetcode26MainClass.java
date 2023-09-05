@@ -28,6 +28,47 @@ public class Leetcode26MainClass {
         System.out.println(smallestValue(4));
     }
 
+    public int beautySum(String s) {
+        Set<String> l = get1AllSubstrings1(s).stream().collect(Collectors.toSet());
+        int count = 0;
+        for (String s1 : l) {
+            if (s1.length() != 1) {
+                String[] srr = s1.split("");
+                Map<String, Long> map = Arrays.stream(srr).collect(Collectors.groupingBy(x -> x, Collectors.counting()));
+                long max = map
+                        .entrySet()
+                        .stream()
+                        .sorted(Map.Entry.<String, Long>comparingByValue().reversed())
+                        .findFirst()
+                        .get()
+                        .getValue();
+
+                long min = map
+                        .entrySet()
+                        .stream()
+                        .sorted(Map.Entry.<String, Long>comparingByValue())
+                        .findFirst()
+                        .get()
+                        .getValue();
+
+                count += (max - min);
+            }
+        }
+        return count;
+    }
+
+    public static List<String> get1AllSubstrings1(String input) {
+        List<String> substrings = new ArrayList<>();
+
+        for (int i = 0; i < input.length(); i++) {
+            for (int j = i + 1; j <= input.length(); j++) {
+                substrings.add(input.substring(i, j));
+            }
+        }
+
+        return substrings;
+    }
+
     public static int shipWithinDays(int[] weights, int days) {
         int sum = Arrays.stream(weights).boxed().reduce(Integer::sum).get();
         System.out.println(sum);
@@ -41,8 +82,8 @@ public class Leetcode26MainClass {
     public int maxRepeating(String sequence, String word) {
 
         int count = 0;
-        while(sequence.contains(word)) {
-            count ++;
+        while (sequence.contains(word)) {
+            count++;
             sequence = sequence.replaceFirst(word, "");
         }
 
