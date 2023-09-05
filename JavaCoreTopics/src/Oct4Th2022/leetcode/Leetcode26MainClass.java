@@ -28,6 +28,16 @@ public class Leetcode26MainClass {
         System.out.println(smallestValue(4));
     }
 
+    public static int shipWithinDays(int[] weights, int days) {
+        int sum = Arrays.stream(weights).boxed().reduce(Integer::sum).get();
+        System.out.println(sum);
+        int mod = Arrays.stream(weights).boxed().reduce(Integer::sum).get() % days;
+        System.out.println(mod);
+        int div = Arrays.stream(weights).boxed().reduce(Integer::sum).get() / days;
+        System.out.println(div);
+        return mod + div;
+    }
+
     public int maxRepeating(String sequence, String word) {
 
         int count = 0;
