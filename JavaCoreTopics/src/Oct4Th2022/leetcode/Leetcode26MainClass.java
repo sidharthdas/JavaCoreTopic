@@ -23,9 +23,27 @@ public class Leetcode26MainClass {
         //System.out.println(minOperations(new int[]{1, 5, 2, 4, 1}));
         //System.out.println(chalkReplacer(new int[]{5, 1, 5}, 22));
         //System.out.println(waysToMakeFair(new int[]{2, 1, 6, 4}));
-        int count = Runtime.getRuntime().availableProcessors();
+        //int count = Runtime.getRuntime().availableProcessors();
         //System.out.println(count);
-        System.out.println(smallestValue(4));
+        //System.out.println(smallestValue(4));
+        System.out.println(maxRepeating("aaabaaaabaaabaaaabaaaabaaaabaaaaba", "aaaba"));
+    }
+
+    public int countGoodRectangles(int[][] rectangles) {
+
+        List<Integer> l = new ArrayList<>();
+
+        for (int[] i : rectangles) {
+            l.add(i[0] > i[1] ? i[1] : i[0]);
+        }
+
+        return Math.toIntExact(l.stream().collect(Collectors.groupingBy(x -> x, Collectors.counting()))
+                .entrySet()
+                .stream()
+                .sorted(Map.Entry.<Integer, Long>comparingByKey().reversed())
+                .findFirst()
+                .get()
+                .getValue());
     }
 
     public int beautySum(String s) {
@@ -79,12 +97,12 @@ public class Leetcode26MainClass {
         return mod + div;
     }
 
-    public int maxRepeating(String sequence, String word) {
-
+    public static int maxRepeating(String sequence, String word) {
+//aaaba aaaba aab aaaaba aaaba aaaba aaaba
         int count = 0;
         while (sequence.contains(word)) {
             count++;
-            sequence = sequence.replaceFirst(word, "");
+            sequence = sequence.replaceFirst(word, "|");
         }
 
         return count;
