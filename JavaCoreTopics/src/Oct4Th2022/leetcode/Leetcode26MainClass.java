@@ -29,6 +29,41 @@ public class Leetcode26MainClass {
         System.out.println(maxRepeating("aaabaaaabaaabaaaabaaaabaaaabaaaaba", "aaaba"));
     }
 
+    public int findMaxLength(int[] nums) {
+        List<List<Integer>> subArray1 = subArray1(nums);
+        int size = 0;
+        for (List<Integer> l : subArray1) {
+            if (l.size() > 1) {
+                Map<Integer, Long> m = l.stream().collect(Collectors.groupingBy(x -> x, Collectors.counting()));
+                if (m.size() == 2) {
+                    if (m.get(1) == m.get(0)) {
+                        if(l.size() > size) {
+                            size = l.size();
+                        }
+                    }
+                }
+            }
+        }
+        return size;
+    }
+
+    private List<List<Integer>> subArray1(int[] nums) {
+        int len = nums.length;
+
+        List<List<Integer>> l = new ArrayList<>();
+
+        for (int i = 0; i < len; i++) {
+            for (int j = i; j < nums.length; j++) {
+                List<Integer> subarray = new ArrayList<>();
+                for (int k = i; k <= j; k++) {
+                    subarray.add(nums[k]);
+                }
+                l.add(subarray);
+            }
+        }
+        return l;
+    }
+
     public int countGoodRectangles(int[][] rectangles) {
 
         List<Integer> l = new ArrayList<>();
