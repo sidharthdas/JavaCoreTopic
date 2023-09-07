@@ -37,7 +37,7 @@ public class Leetcode26MainClass {
                 Map<Integer, Long> m = l.stream().collect(Collectors.groupingBy(x -> x, Collectors.counting()));
                 if (m.size() == 2) {
                     if (m.get(1) == m.get(0)) {
-                        if(l.size() > size) {
+                        if (l.size() > size) {
                             size = l.size();
                         }
                     }
