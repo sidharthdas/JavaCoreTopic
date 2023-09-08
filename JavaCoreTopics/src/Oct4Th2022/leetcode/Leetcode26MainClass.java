@@ -26,7 +26,7 @@ public class Leetcode26MainClass {
         //int count = Runtime.getRuntime().availableProcessors();
         //System.out.println(count);
         //System.out.println(smallestValue(4));
-        System.out.println(maxRepeating("aaabaaaabaaabaaaabaaaabaaaabaaaaba", "aaaba"));
+        //System.out.println(maxRepeating("aaabaaaabaaabaaaabaaaabaaaabaaaaba", "aaaba"));
     }
 
     public int findMaxLength(int[] nums) {
