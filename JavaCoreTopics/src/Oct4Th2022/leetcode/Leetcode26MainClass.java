@@ -27,6 +27,30 @@ public class Leetcode26MainClass {
         //System.out.println(count);
         //System.out.println(smallestValue(4));
         //System.out.println(maxRepeating("aaabaaaabaaabaaaabaaaabaaaabaaaaba", "aaaba"));
+        System.out.println(countSymmetricIntegers(1, 100));
+    }
+
+    public static int countSymmetricIntegers(int low, int high) {
+        int count = 0;
+        for (int i = low; i <= high; i++) {
+            if (String.valueOf(i).length() % 2 == 0) {
+                String temp = String.valueOf(i);
+                int len = temp.length();
+                String first = String.valueOf(i).substring(0, len / 2);
+                String last = temp.substring(len / 2);
+
+                if (
+                        Arrays.stream(first.split("")).map(x -> Integer.valueOf(x))
+                                .reduce(Integer::sum).get()
+                                ==
+                                Arrays.stream(last.split("")).map(x -> Integer.valueOf(x))
+                                        .reduce(Integer::sum).get()
+                ) {
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 
     public int findMaxLength(int[] nums) {
