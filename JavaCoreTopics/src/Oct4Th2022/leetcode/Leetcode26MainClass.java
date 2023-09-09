@@ -30,6 +30,51 @@ public class Leetcode26MainClass {
         //System.out.println(countSymmetricIntegers(1, 100));
     }
 
+    public int longestAlternatingSubarray(int[] nums, int threshold) {
+        List<List<Integer>> l = subArray2(nums).stream().filter(x -> x.size() > 1 && x.get(0) % 2 == 0).collect(Collectors.toList());
+
+        int maxLen = Integer.MIN_VALUE;
+
+        for (List<Integer> l1 : l) {
+            if(l1.size() == l1.stream().filter(x -> x <= threshold).count()) {
+                int len = l1.size();
+                boolean flag = true;
+                for(int i = 0; i < len - 1; i++) {
+                    if(l1.get(i) % 2 == l1.get(i + 1) % 2) {
+                        flag = false;
+                        break;
+                    }
+                }
+
+                if(flag) {
+                    if(l1.size() > maxLen) {
+                        maxLen = l1.size();
+                    }
+                }
+            }
+        }
+
+        return maxLen;
+    }
+
+    private List<List<Integer>> subArray2(int[] nums) {
+        int len = nums.length;
+
+        List<List<Integer>> l = new ArrayList<>();
+
+        for (int i = 0; i < len; i++) {
+            for (int j = i; j < nums.length; j++) {
+                List<Integer> subarray = new ArrayList<>();
+                for (int k = i; k <= j; k++) {
+                    subarray.add(nums[k]);
+                }
+                l.add(subarray);
+            }
+        }
+        return l;
+    }
+
+
     public static int countSymmetricIntegers(int low, int high) {
         int count = 0;
         for (int i = low; i <= high; i++) {
