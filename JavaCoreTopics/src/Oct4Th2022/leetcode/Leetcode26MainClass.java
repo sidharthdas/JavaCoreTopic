@@ -27,7 +27,7 @@ public class Leetcode26MainClass {
         //System.out.println(count);
         //System.out.println(smallestValue(4));
         //System.out.println(maxRepeating("aaabaaaabaaabaaaabaaaabaaaabaaaaba", "aaaba"));
-        System.out.println(countSymmetricIntegers(1, 100));
+        //System.out.println(countSymmetricIntegers(1, 100));
     }
 
     public static int countSymmetricIntegers(int low, int high) {
