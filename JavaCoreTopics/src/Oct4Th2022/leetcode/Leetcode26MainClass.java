@@ -31,7 +31,7 @@ public class Leetcode26MainClass {
     }
 
     public int longestAlternatingSubarray(int[] nums, int threshold) {
-        List<List<Integer>> l = subArray2(nums).stream().filter(x -> x.size() > 1 && x.get(0) % 2 == 0).collect(Collectors.toList());
+        List<List<Integer>> l = subArray2(nums).stream().filter(x -> x.get(0) % 2 == 0).collect(Collectors.toList());
 
         int maxLen = Integer.MIN_VALUE;
 
