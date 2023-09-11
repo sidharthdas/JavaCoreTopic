@@ -28,7 +28,32 @@ public class Leetcode26MainClass {
         //System.out.println(smallestValue(4));
         //System.out.println(maxRepeating("aaabaaaabaaabaaaabaaaabaaaabaaaaba", "aaaba"));
         //System.out.println(countSymmetricIntegers(1, 100));
+        System.out.println(smallestSubsequence("bcabc"));
     }
+
+    public static String smallestSubsequence(String s) {
+
+        Set<String> set = new HashSet<>();
+
+
+        String[] srr = s.split("");
+        int len = srr.length;
+        int distinct = Arrays.stream(srr).collect(Collectors.toSet()).size();
+        for (int i = 0; i < len; i++) {
+            String temp = "";
+
+            for (int j = i; j < len; j++) {
+                if (!temp.contains(srr[j])) {
+                    temp += srr[j];
+                }
+            }
+
+            set.add(temp);
+        }
+
+        return set.stream().filter(x -> x.length() == distinct).sorted().findFirst().get();
+    }
+
 
     public boolean canBeEqual(String s1, String s2) {
 
