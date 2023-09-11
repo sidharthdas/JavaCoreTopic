@@ -30,6 +30,52 @@ public class Leetcode26MainClass {
         //System.out.println(countSymmetricIntegers(1, 100));
     }
 
+    public boolean canBeEqual(String s1, String s2) {
+
+        //Compare String 1 with String 2
+        String tempSt = new String(s1);
+        char[] s1Arr = tempSt.toCharArray();
+        char temp = s1Arr[0];
+        s1Arr[0] = s1Arr[2];
+        s1Arr[2] = temp;
+
+        if(String.valueOf(s1Arr).equals(s2)) {
+            return true;
+        }
+
+        tempSt = new String(s1);
+        s1Arr = tempSt.toCharArray();
+        temp = s1Arr[1];
+        s1Arr[1] = s1Arr[3];
+        s1Arr[3] = temp;
+
+        if(String.valueOf(s1Arr).equals(s2)) {
+            return true;
+        }
+
+        //Compare String 2 with String 1
+        tempSt = new String(s2);
+        char[] s2Arr = tempSt.toCharArray();
+        char temp2 = s2Arr[0];
+        s2Arr[0] = s2Arr[2];
+        s2Arr[2] = temp;
+
+        if(String.valueOf(s2Arr).equals(s1)) {
+            return true;
+        }
+
+        tempSt = new String(s2);
+        s2Arr = tempSt.toCharArray();
+        temp2 = s2Arr[1];
+        s2Arr[1] = s2Arr[3];
+        s2Arr[3] = temp;
+
+        if(String.valueOf(s2Arr).equals(s1)) {
+            return true;
+        }
+
+        return false;
+    }
     public int longestAlternatingSubarray(int[] nums, int threshold) {
         List<List<Integer>> l = subArray2(nums).stream().filter(x -> x.get(0) % 2 == 0).collect(Collectors.toList());
 
