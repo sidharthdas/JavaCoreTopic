@@ -36,18 +36,18 @@ public class Leetcode26MainClass {
         int maxLen = Integer.MIN_VALUE;
 
         for (List<Integer> l1 : l) {
-            if(l1.size() == l1.stream().filter(x -> x <= threshold).count()) {
+            if (l1.size() == l1.stream().filter(x -> x <= threshold).count()) {
                 int len = l1.size();
                 boolean flag = true;
-                for(int i = 0; i < len - 1; i++) {
-                    if(l1.get(i) % 2 == l1.get(i + 1) % 2) {
+                for (int i = 0; i < len - 1; i++) {
+                    if (l1.get(i) % 2 == l1.get(i + 1) % 2) {
                         flag = false;
                         break;
                     }
                 }
 
-                if(flag) {
-                    if(l1.size() > maxLen) {
+                if (flag) {
+                    if (l1.size() > maxLen) {
                         maxLen = l1.size();
                     }
                 }
