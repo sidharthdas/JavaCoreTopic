@@ -118,7 +118,7 @@ l.stream().filter(x -> x.size() == 4)
 
 To sort a map with respect to its value using Stream API.
 
-Sort map with value and if value is same sort by alpha order:
+Sort the map with value and if the value is the same sort by alpha order:
 
 ```
 map = map.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
@@ -126,7 +126,7 @@ map = map.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue
 
 ```
 
-Find highest occurance String from list:
+Find the highest occurance String from the list:
 
 ```
 Optional<Map.Entry<String, Long>> l  = items.stream().
@@ -135,13 +135,38 @@ Optional<Map.Entry<String, Long>> l  = items.stream().
 ```
 
 Generics:
-1. Upper bound generics: Any class extends by Object, this can access
+1. Upper bound generics: Any class extends by an Object, this can access
 ```
 List<? extends Object>
 ```
-2. Lower bound generics: All the super class of the class can be access. i.e. all the super class of animal can be access
+2. Lower bound generics: All the super classes of the class can be accessed. i.e. all the superclass of animals can be access
 ```
 List<? super Aminal>
+```
+Example of upper and lower bound:
+```
+    public static void main(String[] args) {
+        Employee emp = new Employee("", "");
+
+        List<Employee> list = new ArrayList<>();
+        list.add(emp);
+
+        test(list);
+
+        MainEmployee mainEmployee = new MainEmployee("", "");
+        List<MainEmployee> mainEmployees = new ArrayList<>();
+        mainEmployees.add(mainEmployee);
+        test1(mainEmployees);
+
+    }
+//Upper
+    public static void test(List<? extends MainEmployee> list) {
+        System.out.println(list);
+    }
+//lower
+    public static void test1(List<? super Employee> list) {
+        System.out.println(list);
+    }
 ```
 
 ```
