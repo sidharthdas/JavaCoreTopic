@@ -28,7 +28,42 @@ public class Leetcode26MainClass {
         //System.out.println(smallestValue(4));
         //System.out.println(maxRepeating("aaabaaaabaaabaaaabaaaabaaaabaaaaba", "aaaba"));
         //System.out.println(countSymmetricIntegers(1, 100));
-        System.out.println(smallestSubsequence("bcabc"));
+        //System.out.println(smallestSubsequence("bcabc"));
+        System.out.println(findTheLongestBalancedSubstring("01000111"));
+    }
+
+    public static int findTheLongestBalancedSubstring(String s) {
+        List<String> l = get1AllSubstrings2(s).
+                stream()
+                .filter(x -> x.length() % 2 == 0)
+                .sorted((x, y) -> y.length() - x.length())
+                .collect(Collectors.toList());
+        int maxLen = 0;
+
+        for (String s1 : l) {
+            int lenSize = s1.length();
+            String firstPart = s1.substring(0, lenSize/2);
+            String secPart = s1.substring(lenSize/2);
+
+            if(firstPart.contains("1") || secPart.contains("0")) {
+            } else {
+                return s1.length();
+            }
+        }
+
+        return maxLen;
+    }
+
+    public static List<String> get1AllSubstrings2(String input) {
+        List<String> substrings = new ArrayList<>();
+
+        for (int i = 0; i < input.length(); i++) {
+            for (int j = i + 1; j <= input.length(); j++) {
+                substrings.add(input.substring(i, j));
+            }
+        }
+
+        return substrings;
     }
 
     public static String smallestSubsequence(String s) {
@@ -64,7 +99,7 @@ public class Leetcode26MainClass {
         s1Arr[0] = s1Arr[2];
         s1Arr[2] = temp;
 
-        if(String.valueOf(s1Arr).equals(s2)) {
+        if (String.valueOf(s1Arr).equals(s2)) {
             return true;
         }
 
@@ -74,7 +109,7 @@ public class Leetcode26MainClass {
         s1Arr[1] = s1Arr[3];
         s1Arr[3] = temp;
 
-        if(String.valueOf(s1Arr).equals(s2)) {
+        if (String.valueOf(s1Arr).equals(s2)) {
             return true;
         }
 
@@ -85,7 +120,7 @@ public class Leetcode26MainClass {
         s2Arr[0] = s2Arr[2];
         s2Arr[2] = temp;
 
-        if(String.valueOf(s2Arr).equals(s1)) {
+        if (String.valueOf(s2Arr).equals(s1)) {
             return true;
         }
 
@@ -95,12 +130,13 @@ public class Leetcode26MainClass {
         s2Arr[1] = s2Arr[3];
         s2Arr[3] = temp;
 
-        if(String.valueOf(s2Arr).equals(s1)) {
+        if (String.valueOf(s2Arr).equals(s1)) {
             return true;
         }
 
         return false;
     }
+
     public int longestAlternatingSubarray(int[] nums, int threshold) {
         List<List<Integer>> l = subArray2(nums).stream().filter(x -> x.get(0) % 2 == 0).collect(Collectors.toList());
 
