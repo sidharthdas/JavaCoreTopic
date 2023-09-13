@@ -32,6 +32,18 @@ public class Leetcode26MainClass {
         System.out.println(findTheLongestBalancedSubstring("01000111"));
     }
 
+    public int numberOfPoints(List<List<Integer>> nums) {
+       /*nums =  nums.stream().sorted((x, y) -> x.get(0) - y.get(0)).collect(Collectors.toList());*/
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for(List<Integer> l1 : nums) {
+            for(int i = l1.get(0); i <= l1.get(1); i++) {
+                map.put(i, map.getOrDefault(i, 0) + 1);
+            }
+        }
+        return map.size();
+    }
+
     public static int findTheLongestBalancedSubstring(String s) {
         List<String> l = get1AllSubstrings2(s).
                 stream()
