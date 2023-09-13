@@ -42,10 +42,10 @@ public class Leetcode26MainClass {
 
         for (String s1 : l) {
             int lenSize = s1.length();
-            String firstPart = s1.substring(0, lenSize/2);
-            String secPart = s1.substring(lenSize/2);
+            String firstPart = s1.substring(0, lenSize / 2);
+            String secPart = s1.substring(lenSize / 2);
 
-            if(firstPart.contains("1") || secPart.contains("0")) {
+            if (firstPart.contains("1") || secPart.contains("0")) {
             } else {
                 return s1.length();
             }
