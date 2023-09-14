@@ -33,11 +33,11 @@ public class Leetcode26MainClass {
     }
 
     public int numberOfPoints(List<List<Integer>> nums) {
-       /*nums =  nums.stream().sorted((x, y) -> x.get(0) - y.get(0)).collect(Collectors.toList());*/
+        /*nums =  nums.stream().sorted((x, y) -> x.get(0) - y.get(0)).collect(Collectors.toList());*/
         Map<Integer, Integer> map = new HashMap<>();
 
-        for(List<Integer> l1 : nums) {
-            for(int i = l1.get(0); i <= l1.get(1); i++) {
+        for (List<Integer> l1 : nums) {
+            for (int i = l1.get(0); i <= l1.get(1); i++) {
                 map.put(i, map.getOrDefault(i, 0) + 1);
             }
         }
