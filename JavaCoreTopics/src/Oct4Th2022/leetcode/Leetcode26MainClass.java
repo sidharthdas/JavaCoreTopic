@@ -32,6 +32,17 @@ public class Leetcode26MainClass {
         System.out.println(findTheLongestBalancedSubstring("01000111"));
     }
 
+    public int smallestRangeI(int[] nums, int k) {
+        Arrays.sort(nums);
+
+        int a = nums[0] + k;
+        int b = nums[nums.length -1] - k;
+
+        int sol = b - a;
+
+        return sol < 0 ? 0 : sol;
+    }
+
     public int sumIndicesWithKSetBits(List<Integer> nums, int k) {
 
         int len = nums.size();
