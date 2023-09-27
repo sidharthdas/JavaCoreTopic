@@ -36,7 +36,7 @@ public class Leetcode26MainClass {
         Arrays.sort(nums);
 
         int a = nums[0] + k;
-        int b = nums[nums.length -1] - k;
+        int b = nums[nums.length - 1] - k;
 
         int sol = b - a;
 
@@ -47,8 +47,8 @@ public class Leetcode26MainClass {
 
         int len = nums.size();
         int sum = 0;
-        for(int i = 0; i < len; i++) {
-            if(Integer.bitCount(i) == k)
+        for (int i = 0; i < len; i++) {
+            if (Integer.bitCount(i) == k)
                 sum += nums.get(i);
         }
 
