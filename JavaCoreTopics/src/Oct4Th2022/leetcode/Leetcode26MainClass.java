@@ -32,6 +32,23 @@ public class Leetcode26MainClass {
         System.out.println(findTheLongestBalancedSubstring("01000111"));
     }
 
+
+    public int timeRequiredToBuy(int[] tickets, int k) {
+        int count = 0;
+        int len = tickets.length;
+        while (tickets[k] != 0) {
+            for (int i = 0; i < len; i++) {
+                if (tickets[i] != 0) {
+                    count++;
+                    tickets[i] = tickets[i] - 1;
+                }
+            }
+        }
+
+        return count;
+    }
+
+
     public int smallestRangeI(int[] nums, int k) {
         Arrays.sort(nums);
 
@@ -48,8 +65,7 @@ public class Leetcode26MainClass {
         int len = nums.size();
         int sum = 0;
         for (int i = 0; i < len; i++) {
-            if (Integer.bitCount(i) == k)
-                sum += nums.get(i);
+            if (Integer.bitCount(i) == k) sum += nums.get(i);
         }
 
         return sum;
@@ -68,11 +84,7 @@ public class Leetcode26MainClass {
     }
 
     public static int findTheLongestBalancedSubstring(String s) {
-        List<String> l = get1AllSubstrings2(s).
-                stream()
-                .filter(x -> x.length() % 2 == 0)
-                .sorted((x, y) -> y.length() - x.length())
-                .collect(Collectors.toList());
+        List<String> l = get1AllSubstrings2(s).stream().filter(x -> x.length() % 2 == 0).sorted((x, y) -> y.length() - x.length()).collect(Collectors.toList());
         int maxLen = 0;
 
         for (String s1 : l) {
@@ -226,13 +238,7 @@ public class Leetcode26MainClass {
                 String first = String.valueOf(i).substring(0, len / 2);
                 String last = temp.substring(len / 2);
 
-                if (
-                        Arrays.stream(first.split("")).map(x -> Integer.valueOf(x))
-                                .reduce(Integer::sum).get()
-                                ==
-                                Arrays.stream(last.split("")).map(x -> Integer.valueOf(x))
-                                        .reduce(Integer::sum).get()
-                ) {
+                if (Arrays.stream(first.split("")).map(x -> Integer.valueOf(x)).reduce(Integer::sum).get() == Arrays.stream(last.split("")).map(x -> Integer.valueOf(x)).reduce(Integer::sum).get()) {
                     count++;
                 }
             }
@@ -283,13 +289,7 @@ public class Leetcode26MainClass {
             l.add(i[0] > i[1] ? i[1] : i[0]);
         }
 
-        return Math.toIntExact(l.stream().collect(Collectors.groupingBy(x -> x, Collectors.counting()))
-                .entrySet()
-                .stream()
-                .sorted(Map.Entry.<Integer, Long>comparingByKey().reversed())
-                .findFirst()
-                .get()
-                .getValue());
+        return Math.toIntExact(l.stream().collect(Collectors.groupingBy(x -> x, Collectors.counting())).entrySet().stream().sorted(Map.Entry.<Integer, Long>comparingByKey().reversed()).findFirst().get().getValue());
     }
 
     public int beautySum(String s) {
@@ -299,21 +299,9 @@ public class Leetcode26MainClass {
             if (s1.length() != 1) {
                 String[] srr = s1.split("");
                 Map<String, Long> map = Arrays.stream(srr).collect(Collectors.groupingBy(x -> x, Collectors.counting()));
-                long max = map
-                        .entrySet()
-                        .stream()
-                        .sorted(Map.Entry.<String, Long>comparingByValue().reversed())
-                        .findFirst()
-                        .get()
-                        .getValue();
+                long max = map.entrySet().stream().sorted(Map.Entry.<String, Long>comparingByValue().reversed()).findFirst().get().getValue();
 
-                long min = map
-                        .entrySet()
-                        .stream()
-                        .sorted(Map.Entry.<String, Long>comparingByValue())
-                        .findFirst()
-                        .get()
-                        .getValue();
+                long min = map.entrySet().stream().sorted(Map.Entry.<String, Long>comparingByValue()).findFirst().get().getValue();
 
                 count += (max - min);
             }
@@ -432,8 +420,7 @@ public class Leetcode26MainClass {
                 n /= i;
             }
         }
-        if (n > 2)
-            pf.add(n);
+        if (n > 2) pf.add(n);
 
         return pf;
 
@@ -469,18 +456,9 @@ public class Leetcode26MainClass {
         String[] srr = moves.split("");
 
 
-        Optional
-                <Map.Entry<String, Long>> m = Arrays.stream(srr)
-                .collect(Collectors.groupingBy(x -> x, Collectors.counting()))
-                .entrySet()
-                .stream()
-                .peek(x -> {
-                    System.out.println(x);
-                })
-                .filter(x -> !x.getKey().equals("_"))
-                .sorted(Map.Entry.<String, Long>comparingByValue()
-                        .reversed())
-                .findFirst();
+        Optional<Map.Entry<String, Long>> m = Arrays.stream(srr).collect(Collectors.groupingBy(x -> x, Collectors.counting())).entrySet().stream().peek(x -> {
+            System.out.println(x);
+        }).filter(x -> !x.getKey().equals("_")).sorted(Map.Entry.<String, Long>comparingByValue().reversed()).findFirst();
 
         if (m.isPresent()) {
             String key = m.get().getKey();
@@ -997,10 +975,7 @@ public class Leetcode26MainClass {
                 int a = l1.get(i);
                 int b = l1.get(i + 1);
                 int c = l1.get(i + 2);
-                if (Math.abs(a - b) == Math.abs(b - c) ||
-                        Math.abs(b - c) == Math.abs(c - a) ||
-                        Math.abs(a - c) == Math.abs(b - a)
-                ) {
+                if (Math.abs(a - b) == Math.abs(b - c) || Math.abs(b - c) == Math.abs(c - a) || Math.abs(a - c) == Math.abs(b - a)) {
                     flag = true;
                     break;
                 }
@@ -1072,8 +1047,7 @@ public class Leetcode26MainClass {
             map.put(List.of(l.get(i), l.get(i + 1)), Math.abs(l.get(i) - l.get(i + 1)));
         }
 
-        List<Integer> f = map.entrySet().stream().sorted(Map.Entry.<List<Integer>, Integer>comparingByValue().thenComparing(x -> x.getKey().get(0)))
-                .findFirst().get().getKey();
+        List<Integer> f = map.entrySet().stream().sorted(Map.Entry.<List<Integer>, Integer>comparingByValue().thenComparing(x -> x.getKey().get(0))).findFirst().get().getKey();
 
         return new int[]{f.get(0), f.get(1)};
     }
