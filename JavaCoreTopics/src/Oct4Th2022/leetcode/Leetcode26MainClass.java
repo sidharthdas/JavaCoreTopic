@@ -32,7 +32,7 @@ public class Leetcode26MainClass {
         System.out.println(findTheLongestBalancedSubstring("01000111"));
     }
 
-
+    //2073. Time Needed to Buy Tickets
     public int timeRequiredToBuy(int[] tickets, int k) {
         int count = 0;
         int len = tickets.length;
