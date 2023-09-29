@@ -32,6 +32,18 @@ public class Leetcode26MainClass {
         System.out.println(findTheLongestBalancedSubstring("01000111"));
     }
 
+    public int minCostToMoveChips(int[] position) {
+        int len = position.length;
+        int a = 0;
+        int b = 0;
+        for (int i = 0; i < len; i++) {
+            if (position[i] % 2 == 0) a++;
+            else b++;
+        }
+
+        return a > b ? b : a;
+    }
+
     //2073. Time Needed to Buy Tickets
     public int timeRequiredToBuy(int[] tickets, int k) {
         int count = 0;
