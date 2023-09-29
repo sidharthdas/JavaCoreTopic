@@ -48,7 +48,6 @@ public class Leetcode26MainClass {
         return count;
     }
 
-
     public int smallestRangeI(int[] nums, int k) {
         Arrays.sort(nums);
 
