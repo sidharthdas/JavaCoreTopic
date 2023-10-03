@@ -32,6 +32,42 @@ public class Leetcode26MainClass {
         System.out.println(findTheLongestBalancedSubstring("01000111"));
     }
 
+    public String maximumOddBinaryNumber(String s) {
+
+        Map<String, Integer> map = new HashMap<>();
+
+        String[] srr = s.split("");
+        for (String s1 : srr) {
+            map.put(s1, map.getOrDefault(s1, 0) + 1);
+        }
+        String finalRes = "";
+        if (map.get("1") == 1) {
+            for (int i = 0; i < map.get("0"); i++) {
+                finalRes += "0";
+            }
+
+            finalRes += 1;
+        } else {
+            for (int i = 0; i < map.get("1") - 1; i++) {
+                finalRes += "1";
+            }
+
+            for (int i = 0; i < map.get("0"); i++) {
+                finalRes += "0";
+            }
+
+            finalRes += 1;
+        }
+
+        if (finalRes.equals("")) {
+            for (int i = 0; i < map.get("0"); i++) {
+                finalRes += "0";
+            }
+        }
+
+        return finalRes;
+    }
+
     public int minCostToMoveChips(int[] position) {
         int len = position.length;
         int a = 0;
