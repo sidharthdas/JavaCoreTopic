@@ -36,6 +36,14 @@ public int maxSubArray(int[] nums) {
 ```
  Arrays.sort(score, (score1, score2) -> score2[k] - score1[k]);
 ```
+
+-> Sealed class in Java 17:
+
+If we want only some classes that can extend the base class, we can use a sealed class. And the classes that are extending sealed class must be final
+```
+public sealed class A permits B, C {
+```
+
 Stream API nested null check:
 ```
 Optional.ofNullable(model1)
