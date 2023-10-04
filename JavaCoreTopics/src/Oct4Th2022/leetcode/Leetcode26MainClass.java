@@ -45,7 +45,6 @@ public class Leetcode26MainClass {
             for (int i = 0; i < map.get("0"); i++) {
                 finalRes += "0";
             }
-
             finalRes += 1;
         } else {
             for (int i = 0; i < map.get("1") - 1; i++) {
