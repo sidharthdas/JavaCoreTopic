@@ -32,6 +32,23 @@ public class Leetcode26MainClass {
         System.out.println(findTheLongestBalancedSubstring("01000111"));
     }
 
+    public int countHillValley(int[] nums) {
+        int len = nums.length;
+        int right = nums[0];
+        int count = 0;
+
+        for (int i = 1; i < len - 1; i++) {
+            if ((nums[i] > right && nums[i] > nums[i + 1])
+                    || (nums[i] < right && nums[i] < nums[i + 1])) {
+                count++;
+                right = nums[i];
+            }
+        }
+
+        return count;
+
+    }
+
     public String maximumOddBinaryNumber(String s) {
 
         Map<String, Integer> map = new HashMap<>();
