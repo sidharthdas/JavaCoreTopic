@@ -29,7 +29,41 @@ public class Leetcode26MainClass {
         //System.out.println(maxRepeating("aaabaaaabaaabaaaabaaaabaaaabaaaaba", "aaaba"));
         //System.out.println(countSymmetricIntegers(1, 100));
         //System.out.println(smallestSubsequence("bcabc"));
-        System.out.println(findTheLongestBalancedSubstring("01000111"));
+        //System.out.println(findTheLongestBalancedSubstring("01000111"));
+        System.out.println(minStartValue(new int[]{-3, 2, -3, 4, 2}));
+    }
+
+
+    public static int minStartValue(int[] nums) {
+
+        int i = Arrays.stream(nums).boxed().filter(x -> x < 0).sorted().findFirst()
+                .orElse(1);
+
+        int len = nums.length;
+
+        i = i == 1 ? 1 : (-1 * i);
+        int temp = i;
+        int temp2 = temp;
+        while (true) {
+            boolean flag = true;
+            for (int ii = 0; ii < len; ii++) {
+                temp += nums[ii];
+                if (temp < 1) {
+                    flag = false;
+                    break;
+                }
+            }
+
+            if (flag) {
+                return temp2;
+
+            }
+            temp = temp2 + 1;
+            temp2++;
+
+        }
+
+
     }
 
     public int countHillValley(int[] nums) {
