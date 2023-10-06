@@ -2,6 +2,7 @@ package Oct4Th2022.leetcode;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Leetcode26MainClass {
 
@@ -30,7 +31,33 @@ public class Leetcode26MainClass {
         //System.out.println(countSymmetricIntegers(1, 100));
         //System.out.println(smallestSubsequence("bcabc"));
         //System.out.println(findTheLongestBalancedSubstring("01000111"));
-        System.out.println(minStartValue(new int[]{-3, 2, -3, 4, 2}));
+        //System.out.println(minStartValue(new int[]{-3, 2, -3, 4, 2}));
+        System.out.println(minOperations(List.of(3, 1, 5, 4, 2), 2));
+    }
+
+    public static int minOperations(List<Integer> nums, int k) {
+
+        Map<Integer, Boolean> map = new HashMap<>();
+
+        IntStream.range(1, k + 1)
+                .forEach(x -> map.put(x, false));
+
+        int steps = 0;
+        int len = nums.size();
+        for (int i = len - 1; i >= 0; i--) {
+            if (map.entrySet().stream().filter(x -> x.getValue() == false).count() == 0) {
+                break;
+            }
+
+            if (map.containsKey(nums.get(i))) {
+                map.put(nums.get(i), true);
+                steps++;
+            } else {
+                steps++;
+            }
+        }
+
+        return steps;
     }
 
 
