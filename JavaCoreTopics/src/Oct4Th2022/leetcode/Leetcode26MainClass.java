@@ -35,6 +35,23 @@ public class Leetcode26MainClass {
         System.out.println(minOperations(List.of(3, 1, 5, 4, 2), 2));
     }
 
+    public int minimumRecolors(String blocks, int k) {
+
+        int len = blocks.length();
+        int min = Integer.MAX_VALUE;
+
+        for (int i = 0; i < len; i++) {
+            if (i + k < len) {
+                String temp = blocks.substring(i, i + k);
+                int num = (int) Arrays.stream(temp.split("")).filter(x -> x.equals("W")).count();
+                min = min < num ? min : num;
+            }
+        }
+
+        return min;
+
+    }
+
     public static int minOperations(List<Integer> nums, int k) {
 
         Map<Integer, Boolean> map = new HashMap<>();
