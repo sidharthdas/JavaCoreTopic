@@ -32,7 +32,34 @@ public class Leetcode26MainClass {
         //System.out.println(smallestSubsequence("bcabc"));
         //System.out.println(findTheLongestBalancedSubstring("01000111"));
         //System.out.println(minStartValue(new int[]{-3, 2, -3, 4, 2}));
-        System.out.println(minOperations(List.of(3, 1, 5, 4, 2), 2));
+        //System.out.println(minOperations(List.of(3, 1, 5, 4, 2), 2));
+        System.out.println(maxProfit(new int[]{7, 1, 5, 3, 6, 4}));
+    }
+
+    public static int maxProfit(int[] prices) {
+
+        int len = prices.length;
+        List<Integer> l = new ArrayList<>();
+        int max = 0;
+
+        for (int i = 0; i < len; i++) {
+            max = prices[i];
+
+            for (int j = i + 1; j < len; j++) {
+                if (prices[j] > max) {
+                    max = prices[j];
+                }
+            }
+
+            if (max == prices[i]) {
+                l.add(0);
+            } else {
+                l.add(max - prices[i]);
+            }
+        }
+
+        return l.stream().sorted(Comparator.reverseOrder()).findFirst().orElse(0);
+
     }
 
     public int minimumRecolors(String blocks, int k) {
