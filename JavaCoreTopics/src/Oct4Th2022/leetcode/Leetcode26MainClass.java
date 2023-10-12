@@ -33,7 +33,8 @@ public class Leetcode26MainClass {
         //System.out.println(findTheLongestBalancedSubstring("01000111"));
         //System.out.println(minStartValue(new int[]{-3, 2, -3, 4, 2}));
         //System.out.println(minOperations(List.of(3, 1, 5, 4, 2), 2));
-        System.out.println(maxProfit(new int[]{7, 1, 5, 3, 6, 4}));
+        //System.out.println(maxProfit(new int[]{7, 1, 5, 3, 6, 4}));
+        System.out.println(Map.of(1, null));
     }
 
     public int differenceOfSums(int n, int m) {
