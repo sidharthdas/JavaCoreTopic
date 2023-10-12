@@ -36,6 +36,17 @@ public class Leetcode26MainClass {
         System.out.println(maxProfit(new int[]{7, 1, 5, 3, 6, 4}));
     }
 
+    public int differenceOfSums(int n, int m) {
+        int num1 = IntStream.range(0, n + 1).filter(x -> x % m != 0)
+                .reduce(Integer::sum).orElse(0);
+
+        int num2 = IntStream.range(0, n + 1).filter(x -> x % m == 0)
+                .reduce(Integer::sum).orElse(0);
+
+
+        return num1 - num2;
+    }
+
     public static int maxProfit(int[] prices) {
 
         int len = prices.length;
