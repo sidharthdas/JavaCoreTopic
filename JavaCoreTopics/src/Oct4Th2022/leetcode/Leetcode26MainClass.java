@@ -37,6 +37,31 @@ public class Leetcode26MainClass {
         System.out.println(Map.of(1, null));
     }
 
+    public int maxCount(int m, int n, int[][] ops) {
+
+        int[][] arr = new int[m][n];
+
+        for (int[] op : ops) {
+            for (int i = 0; i < op[0]; i++) {
+                for (int j = 0; j < op[1]; j++) {
+                    arr[i][j] = arr[i][j] + 1;
+                }
+            }
+        }
+        int max = Integer.MIN_VALUE;
+        List<Integer> l = new ArrayList<>();
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < m; j++) {
+                if(max < arr[i][j]) {
+                    max = arr[i][j];
+                }
+                l.add(arr[i][j]);
+            }
+        }
+        int finalMax = max;
+        return (int) l.stream().filter(x -> x == finalMax).count();
+    }
+
     public int differenceOfSums(int n, int m) {
         int num1 = IntStream.range(0, n + 1).filter(x -> x % m != 0)
                 .reduce(Integer::sum).orElse(0);

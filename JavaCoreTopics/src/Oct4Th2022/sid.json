@@ -1,0 +1,28 @@
+[
+
+  {
+    "contactTypeCode" :  "LDAR",
+    "ADDRESS1" : "TEST1",
+    "ADDRESS2" : "TEST2"
+  },
+  {
+    "contactTypeCode" :  "MADR",
+    "ADDRESS1" : "TEST11",
+    "ADDRESS2" : "TEST22"
+  },
+  {
+    "contactTypeCode" :  "ADDR",
+    "ADDRESS1" : "TEST13",
+    "ADDRESS2" : "TEST2"
+  },
+  {
+    "contactTypeCode" :  "ADDDR",
+    "ADDRESS1" : "TEST1",
+    "ADDRESS2" : "TEST2"
+  },
+  {
+    "contactTypeCode" :  "ADDDDDR",
+    "ADDRESS1" : "TEST1",
+    "ADDRESS2" : "TEST2"
+  }
+]
