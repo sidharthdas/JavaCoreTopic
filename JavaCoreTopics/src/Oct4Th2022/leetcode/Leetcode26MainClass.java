@@ -34,7 +34,46 @@ public class Leetcode26MainClass {
         //System.out.println(minStartValue(new int[]{-3, 2, -3, 4, 2}));
         //System.out.println(minOperations(List.of(3, 1, 5, 4, 2), 2));
         //System.out.println(maxProfit(new int[]{7, 1, 5, 3, 6, 4}));
-        System.out.println(Map.of(1, null));
+        //System.out.println(Map.of(1, null));
+        System.out.println(zeroFilledSubarray(new int[]{1, 3, 0, 0, 2, 0, 0, 4}));
+    }
+
+    public static long zeroFilledSubarray(int[] nums) {
+
+        int count = (int) Arrays.stream(nums).boxed().filter(x -> x == 0).count();
+        int len = nums.length;
+        //n! / (k! * (n - k)!)
+        if (count > 0) {
+            int totalSubArray = count;
+            int temp = 0;
+
+            for (int i = 0; i < len; i++) {
+                if (nums[i] == 0) {
+                    temp++;
+                }
+                if (nums[i] != 0 && temp > 1) {
+                    int tempFact = fact(temp);
+                    for (int j = 2; j <= temp; j++) {
+                        totalSubArray += tempFact / (fact(j) * (fact(temp - j)));
+                    }
+
+                    temp = 0;
+                }
+            }
+            return totalSubArray;
+        }
+
+
+        return 0;
+    }
+
+    private static int fact(int n) {
+        int fact = 1;
+        for (int i = 2; i <= n; i++) {
+            fact *= i;
+        }
+
+        return fact;
     }
 
     public int maxCount(int m, int n, int[][] ops) {
@@ -52,7 +91,7 @@ public class Leetcode26MainClass {
         List<Integer> l = new ArrayList<>();
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < m; j++) {
-                if(max < arr[i][j]) {
+                if (max < arr[i][j]) {
                     max = arr[i][j];
                 }
                 l.add(arr[i][j]);
