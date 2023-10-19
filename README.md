@@ -97,7 +97,7 @@ stream().takeWhile(Predicate p) // -> It will loop over the array, and pull the 
 stream().dropWile(Predicate p) // -> It will loop over the array and drop the elements will the condition matches, once it gets matched, it will stop dropping the elements
 
 ```
--> Map to process the key and value if its present we can use computeIfPresent method
+-> Map to process the key and value if it is present we can use computeIfPresent method
 ```
 counter.computeIfPresent(key, (k, v) -> {
             v += 1;
@@ -107,6 +107,13 @@ counter.computeIfPresent(key, (k, v) -> {
         });
 
 ```
+-> Map to process the key if it is not present in the map:
+```
+// provide value for new key which is absent
+        // using computeIfAbsent method
+        map.computeIfAbsent("key5", k -> 2000 + 33000);
+        map.computeIfAbsent("key6", k -> 2000 * 34);
+ ```
 -> Map java8 functionalities, refer spet2022.MapPractice
 ```
 Map<String, Employee> mapEmpl = empList.stream().collect(Collectors.groupingBy(x -> x.dept.deptCode, Collectors.collectingAndThen(Collectors.maxBy(Comparator.comparingInt(x -> x.empSalary)),
