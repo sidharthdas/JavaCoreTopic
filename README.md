@@ -5,7 +5,6 @@
 Or you can download ``` JDK Machine control Application ```
 
 -> Kadane Algorithm:
-
 Maximum sum of sub-array:
 Notes:
 ```
