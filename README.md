@@ -2,9 +2,10 @@
 
 -> To check the memory consumption of the application, 
 ``` java -> jdk17 -> bin -> jconsole.exe```
-Or you can download ``` JDK Machine control Application ```
+Or you can download ``` JDK Mission control Application ```
 
 -> Kadane Algorithm:
+
 Maximum sum of sub-array:
 Notes:
 ```
