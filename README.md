@@ -89,7 +89,7 @@ PriorityQueue<Integer> pq = new PriorityQueue<>((a1, a2) -> a2 - a1);
     Height of BST
     Mirror image of BST
 
--> For java8 functional interface, refer JavaCoreTopicsImplementation17thJul2021.java8FunctionalInterfaces.
+-> For java8 functional interface, refer JavaCoreTopicsImplementation17thJul2021.java8FunctionalInterfaces. 
 
 -> For logging in Java Stream, use `peek() after stream()`
 -> 2 main methods of stream() i.e.
