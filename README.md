@@ -391,3 +391,30 @@ public class VolatileAndAtomicNumber {
 ```
 # Threading CountDownLatch, CyclicBarriar and Semaphore
 Please refer package: JavaCoreTopics/src/threadingconcepts/CountDownLatchMainClass.java
+
+# We want to check on which field the particular annotation is present, if yes, then update the value of the field.
+
+```
+public static void main(String[] args) throws IllegalAccessException {
+        Employee emp = new Employee();
+        emp.setName("SidharthDas - ");
+        processAnnotation(emp);
+
+        System.out.println(emp);
+
+    }
+
+    public static void processAnnotation(Object obj) throws IllegalAccessException {
+        Class<?> clazz = obj.getClass();
+        Field[] fields = clazz.getDeclaredFields();
+
+        for (Field f : fields) {
+            if (f.isAnnotationPresent(NameSizeGreaterThan5AndStartWithS.class)) {
+                f.setAccessible(true);
+                String originalValue = (String) f.get(obj);
+                String newVal = originalValue + "Sid";
+                f.set(obj, newVal);
+            }
+        }
+    }
+```
