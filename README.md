@@ -18,7 +18,6 @@ Step 3. if(sum < 0) sum = 0
 Then, return maxi
 ```
 
-
 Kadane Code:
 ```
 public int maxSubArray(int[] nums) {
