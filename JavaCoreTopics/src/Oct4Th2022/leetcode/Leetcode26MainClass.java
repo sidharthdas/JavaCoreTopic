@@ -35,7 +35,58 @@ public class Leetcode26MainClass {
         //System.out.println(minOperations(List.of(3, 1, 5, 4, 2), 2));
         //System.out.println(maxProfit(new int[]{7, 1, 5, 3, 6, 4}));
         //System.out.println(Map.of(1, null));
-        System.out.println(zeroFilledSubarray(new int[]{1, 3, 0, 0, 2, 0, 0, 4}));
+        //System.out.println(zeroFilledSubarray(new int[]{1, 3, 0, 0, 2, 0, 0, 4}));
+        System.out.println(test123("TEST111"));
+
+    }
+
+    /*
+     * abs(i - j) >= indexDifference, and
+     *  abs(nums[i] - nums[j]) >= valueDifference
+     * */
+    public int[] findIndices(int[] nums, int indexDifference, int valueDifference) {
+
+        int[] f = new int[2];
+        int len = nums.length;
+        boolean flag = false;
+
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j < len; j++) {
+                if(Math.abs(i - j) >= indexDifference && Math.abs(nums[i] - nums[j]) >= valueDifference) {
+                    flag = true;
+                    f[0] = i;
+                    f[1] = j;
+                    break;
+                }
+            }
+        }
+
+        return flag ? f : new int[]{-1, -1};
+
+    }
+
+
+    public static String test123(String s1) {
+        switch (s1) {
+            case "TEST":
+                return "Sid";
+
+            case "TEST1":
+                return "Sid1";
+
+            case "TEST2":
+                return "Sid2";
+
+            case "TEST3":
+                return "Sid3";
+
+            case "TEST4":
+                return "Sid4";
+
+            default:
+                return null;
+
+        }
     }
 
     public static long zeroFilledSubarray(int[] nums) {
