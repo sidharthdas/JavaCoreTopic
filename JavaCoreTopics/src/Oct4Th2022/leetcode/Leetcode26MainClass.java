@@ -39,6 +39,7 @@ public class Leetcode26MainClass {
         System.out.println(test123("TEST111"));
     }
 
+
     /*
      * abs(i - j) >= indexDifference, and
      *  abs(nums[i] - nums[j]) >= valueDifference
