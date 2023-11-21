@@ -46,6 +46,7 @@ If we want only some classes that can extend the base class, we can use a sealed
 public sealed class A permits B, C {
 ```
 
+
 Stream API nested null check:
 ```
 Optional.ofNullable(model1)
