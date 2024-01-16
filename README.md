@@ -40,6 +40,30 @@ public int maxSubArray(int[] nums) {
  Arrays.sort(score, (score1, score2) -> score2[k] - score1[k]);
 ```
 
+-> Overriding:
+ - Cant change the access modifier it should be the same.
+   ```
+   public interface C {
+    void c () throws Exception;}
+
+   public class A implements C {
+
+    @Override
+    public  void c() {
+        System.out.println("Sid");
+    }
+
+    public static void main(String[] args) {
+        C c = new A();
+        c.c(); // It will throw compile time exception coz we are doing C c = new A() and we are not throwing exception
+
+        A a = new A();
+        a.c(); // It will not coz we are creating the object of A and c method doesn't throw exception
+    }
+
+
+   
+   ```
 -> Sealed class in Java 17:
 
 If we want only some classes that can extend the base class, we can use a sealed class. And the classes that are extending sealed class must be final
