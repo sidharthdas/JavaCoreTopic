@@ -286,6 +286,28 @@ public Node delete ( Node root, int data ) {
         return minV;
     }
 ```
+Reverse a LinkedList:
+
+```
+public void reverse() {
+        if (root == null) {
+            return;
+        }
+
+        Node prev = null;
+        Node curr = root;
+        Node next = null;
+
+        while (curr != null) {
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+
+        root = prev;
+    }
+```
 
 Delete Middle Element Of LinkedList:
 
