@@ -140,6 +140,13 @@ counter.computeIfPresent(key, (k, v) -> {
         map.computeIfAbsent("key5", k -> 2000 + 33000);
         map.computeIfAbsent("key6", k -> 2000 * 34);
  ```
+
+-> We have a Iterable and we need to convert it to List using java 11
+```
+Iterable<Employee> employeeIterable = Arrays.asList(new Employee(), new Employee());
+        List<Employee> empList = StreamSupport.stream(employeeIterable.spliterator(), false) // false is not to have parallel execution
+                .toList();
+```
 -> Map java8 functionalities, refer spet2022.MapPractice
 ```
 Map<String, Employee> mapEmpl = empList.stream().collect(Collectors.groupingBy(x -> x.dept.deptCode, Collectors.collectingAndThen(Collectors.maxBy(Comparator.comparingInt(x -> x.empSalary)),
