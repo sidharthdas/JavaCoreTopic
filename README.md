@@ -470,4 +470,24 @@ public static void main(String[] args) throws IllegalAccessException {
             }
         }
     }
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+public static Set<String> check(Object obj) throws IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
+        Set<String> s = new HashSet<>();
+        Class<?> clazz = obj.getClass();
+        Field[] fields = clazz.getDeclaredFields();
+
+        for (Field f : fields) {
+            if(f.isAnnotationPresent(CheckAddress.class)) {
+                f.setAccessible(true);
+                String temp = (String) f.get(obj);
+                if(temp.length() < 10 || temp.length() > 30) {
+                    CheckAddress checkAddress = f.getAnnotation(CheckAddress.class);
+                    s.add(f.getName() + ":" + checkAddress.message());
+                }
+            }
+        }
+
+        return s;
+    }
 ```
