@@ -136,7 +136,8 @@ counter.computeIfPresent(key, (k, v) -> {
 -> Convert Map<Integer, Integer> to Map<Integer, List<Integer>> based on value:
 
 ```
-Map<Integer, List<Integer>> temp = map.entrySet().stream().collect(Collectors.groupingBy(Map.Entry::getValue, Collectors.mapping(Map.Entry::getKey, Collectors.toList())));
+Map<Integer, List<Integer>> temp = map.entrySet().stream()
+.collect(Collectors.groupingBy(Map.Entry::getValue, Collectors.mapping(Map.Entry::getKey, Collectors.toList())));
 ```
 -> Map to process the key if it is not present in the map:
 ```
