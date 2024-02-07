@@ -124,6 +124,13 @@ stream().dropWile(Predicate p) // -> It will loop over the array and drop the el
 
 ```
 -> Map to process the key and value if it is present we can use computeIfPresent method
+
+-> Map 
+```
+map = map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (oldVal, newVal) -> newVal, LinkedHashMap::new));
+
+```
 ```
 counter.computeIfPresent(key, (k, v) -> {
             v += 1;
