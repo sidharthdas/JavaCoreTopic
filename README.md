@@ -177,6 +177,37 @@ map = map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValu
 l.stream().filter(x -> x.size() == 4)
                 .flatMap(List::stream).reduce(Integer::sum).get();
 ```
+
+-> MultiMap method of Stream: https://www.youtube.com/watch?v=SqmO0NM0J98
+
+```
+public static void main(String[] args) {
+
+        List<String> l = Arrays.asList("1", "2", "3", " ", "5");
+
+        //Here using flatMap we can avoid that problem, but we are creating stream of nums
+        List<Integer> lInt = l.stream()
+                .flatMap(string -> {
+                    try {
+                        ;
+                        return Stream.of(Integer.parseInt(string));
+
+                    } catch (NumberFormatException nfe) {
+                        return Stream.empty();
+                    }
+                }).collect(Collectors.toList());
+
+        //Here using mapMulti we can avoid creating new Streams.
+        List<Integer> ll = l.stream()
+                //mapMulti take biConsumer, so we are sending string and consumer
+                .<Integer>mapMulti((string, consumer) -> {
+                    try {
+                        consumer.accept(Integer.parseInt(string));
+                    } catch (Exception ee) {
+                    }
+                }).collect(Collectors.toList());
+    }
+```
  
  
 
