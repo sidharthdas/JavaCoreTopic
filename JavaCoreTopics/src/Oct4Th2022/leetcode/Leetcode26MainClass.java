@@ -39,6 +39,62 @@ public class Leetcode26MainClass {
         System.out.println(test123("TEST111"));
     }
 
+    public String triangleType(int[] nums) {
+        if(nums[0] == nums[1] && nums[1] == nums[2]) return "equilateral";
+
+        boolean isTriangle = true;
+
+        if(nums[0] + nums[1] > nums[2] && nums[2] + nums[1] > nums[0] && nums[0] + nums[2] > nums[1]) {
+            Set<Integer> s = new HashSet<>();
+            s.add(nums[0]);
+            s.add(nums[1]);
+            s.add(nums[2]);
+
+            if(s.size() == 2 ){
+                return "isosceles";
+            }
+            else {
+                return "scalene";
+            }
+        }
+
+        return "none";
+    }
+
+    public int minChanges(String s) {
+        int len = s.length();
+        return 0;
+    }
+
+    public boolean isValid(String s) {
+
+        while(s.contains("abc")) {
+            s = s.replace("abc", "");
+        }
+
+        return s.length() == 0;
+
+    }
+
+
+    public int[] findMissingAndRepeatedValues(int[][] grid) {
+        int row = grid.length;
+        int col = grid[0].length;
+
+        int total = row * col;
+        int repeatedNum = -1;
+        Set<Integer> set = new HashSet<>();
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (!set.add(grid[i][j])) {
+                    repeatedNum = grid[i][j];
+                }
+            }
+        }
+
+        return new int[]{repeatedNum, ((total * (total+1)) / 2) - set.stream().reduce(Integer::sum).orElse(0)};
+    }
+
 
     /*
      * abs(i - j) >= indexDifference, and
@@ -52,7 +108,7 @@ public class Leetcode26MainClass {
 
         for (int i = 0; i < len; i++) {
             for (int j = 0; j < len; j++) {
-                if(Math.abs(i - j) >= indexDifference && Math.abs(nums[i] - nums[j]) >= valueDifference) {
+                if (Math.abs(i - j) >= indexDifference && Math.abs(nums[i] - nums[j]) >= valueDifference) {
                     flag = true;
                     f[0] = i;
                     f[1] = j;
