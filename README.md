@@ -4,7 +4,6 @@
 ``` java -> jdk17 -> bin -> jconsole.exe```
 Or you can download ``` JDK Mission control Application ```
 
-
 -> Kadane Algorithm:
 
 Maximum sum of sub-array:
