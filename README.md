@@ -32,7 +32,8 @@ public int maxSubArray(int[] nums) {
         return maxi;
     }
 ```
--> Sort 2D array using Arrays.sort
+
+-> Sort 2D array using Arrays.sort()
 ```
  Arrays.sort(score, (score1, score2) -> score2[k] - score1[k]);
 ```
