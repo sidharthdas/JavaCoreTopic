@@ -124,6 +124,39 @@ stream().takeWhile(Predicate p) // -> It will loop over the array, and pull the 
 stream().dropWile(Predicate p) // -> It will loop over the array and drop the elements will the condition matches, once it gets matched, it will stop dropping the elements
 
 ```
+
+-> Map, group by address then find the one with max salary for particular address:
+```
+public static void main(String[] args) {
+
+        List<EmpSid> list = List.of(
+                new EmpSid(1, "Sidharth", "Odisha", 100),
+                new EmpSid(2, "Ram", "Mumbai", 200),
+                new EmpSid(3, "Shyam", "Odisha", 400),
+                new EmpSid(4, "Ramesh", "Mumbai", 300)
+
+        );
+
+        Map<String, List<EmpSid>> map = list.stream()
+                .collect(Collectors.groupingBy(EmpSid::empAddress));
+
+
+        Map<String, EmpSid> map2 = list.stream()
+                .collect(Collectors.groupingBy(EmpSid::empAddress))
+                .entrySet()
+                .stream()
+                .map(x -> {
+                    EmpSid e = x.getValue().stream().min((emp1, emp2) -> emp2.salary() - emp1.salary()).orElse(null);
+
+                    assert e != null;
+                    return Map.entry(x.getKey(), e);
+                })
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2, LinkedHashMap::new));
+
+
+        System.out.println(map2);
+    }
+```
 -> Map to process the key and value if it is present we can use computeIfPresent method
 
 -> Map 
