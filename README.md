@@ -4,8 +4,20 @@
 ``` java -> jdk17 -> bin -> jconsole.exe```
 Or you can download ``` JDK Mission control Application ```
 
--> Kadane Algorithm:
+-> ClassNotFoundException and NoClassDefFoundError:
 
+ClassNotFoundException:  ClassNotFoundException is thrown when looking up a class that isn't on the classpath or using an invalid name to look up a class that isn't on the runtime classpath.
+NoClassDefFoundError: NoClassDefFoundError occurs when a compiled class references another class that isn't on the runtime classpath.
+
+-> String creation using the new keyword:
+```
+When we create a string object using the new keyword in Java, two objects are created in memory. One object is created in the heap memory, and the other object is created in the string pool.
+The heap memory is a region of memory that is used to store objects. When we create a new object, it is allocated a space in the heap memory. The string pool is a region of memory that is used to store string objects.
+When we create a new string object, it is added to the string pool.
+The string pool is used to store string objects that are used frequently. This is because it is more efficient to store a string object in the string pool than it is to store it in the heap memory. When we create a new string object, the Java Virtual Machine (JVM) checks to see if the string object already exists in the string pool. If the string object already exists in the string pool, the JVM returns a reference to the existing string object. If the string object does not exist in the string pool, the JVM creates a new string object and adds it to the string pool.
+```
+
+-> Kadane Algorithm:
 
 Maximum sum of sub-array:
 Notes:
