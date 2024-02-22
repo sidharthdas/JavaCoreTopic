@@ -6,9 +6,10 @@ Or you can download ``` JDK Mission control Application ```
 
 -> ClassNotFoundException and NoClassDefFoundError:
 
+```
 ClassNotFoundException:  ClassNotFoundException is thrown when looking up a class that isn't on the classpath or using an invalid name to look up a class that isn't on the runtime classpath.
 NoClassDefFoundError: NoClassDefFoundError occurs when a compiled class references another class that isn't on the runtime classpath.
-
+```
 -> String creation using the new keyword:
 ```
 When we create a string object using the new keyword in Java, two objects are created in memory. One object is created in the heap memory, and the other object is created in the string pool.
