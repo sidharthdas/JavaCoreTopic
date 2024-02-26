@@ -4,6 +4,7 @@
 ``` java -> jdk17 -> bin -> jconsole.exe```
 Or you can download ``` JDK Mission control Application ```
 
+
 -> ClassNotFoundException and NoClassDefFoundError:
 
 ```
