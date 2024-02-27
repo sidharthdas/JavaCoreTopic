@@ -2,7 +2,7 @@
 
 -> To check the memory consumption of the application, 
 ``` java -> jdk17 -> bin -> jconsole.exe```
-Or you can download ``` JDK Mission control Application ```
+Or you can download ``` JDK Mission Control Application ```
 
 
 -> ClassNotFoundException and NoClassDefFoundError:
@@ -24,7 +24,7 @@ The string pool is used to store string objects that are used frequently. This i
 Maximum sum of sub-array:
 Notes:
 ```
-Initially keep sum = 0 and maxi = arr[0] (this is coz sub-array can be atleast one element)
+Initially keep sum = 0 and maxi = arr[0] (this is coz the sub-array can be at least one element)
 then, for all elements of the array, follow 3 steps:
 Step 1. sum = sum + arr[i];
 Step 2. maxi = maximumOf(maxi, sum)
@@ -68,10 +68,10 @@ public int maxSubArray(int[] nums) {
 
     public static void main(String[] args) {
         C c = new A();
-        c.c(); // It will throw compile time exception coz we are doing C c = new A() and we are not throwing exception
+        c.c(); // It will throw a compile time exception coz we are doing C c = new A() and we are not throwing the exception
 
         A a = new A();
-        a.c(); // It will not coz we are creating the object of A and c method doesn't throw exception
+        a.c(); // It will not coz we are creating the object of A and the c method doesn't throw an exception
     }
 
 
@@ -96,9 +96,9 @@ Optional.ofNullable(model1)
 -> PriorityQueue Implementation
 ```
 PriorityQueue<Integer> pq = new PriorityQueue<>((a1, a2) -> a2 - a1); 
-//Here, in the argument, we need to pass the Comparator (Added lamda exp for sorting)
+//Here, in the argument, we need to pass the Comparator (Added lambda exp for sorting)
 ```
--> Sort the list of String by length in reverse order and then if length are equal then sort by natural order
+-> Sort the list of String by the length in reverse order and then if lengths are equal then sort by the natural order
 ```
 			map.entrySet()
                         .stream()
