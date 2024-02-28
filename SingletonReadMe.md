@@ -121,8 +121,9 @@ public class EmployeeSingletonClass implements Serializable {
         }
         return employeeSingletonClass;
     }
-    protected Object readResolveMethod() {
-        return employeeSingletonClass
+    @Serial
+    protected Object readResolve() {
+        return employeeSingletonClass;
     }
 }
 
@@ -132,6 +133,7 @@ public class EmployeeSingletonClass implements Serializable {
 # Example of Fully secured Singleton Class:
 
 ```
+import java.io.Serial;
 import java.io.Serializable;
 
 public class EmployeeSingletonClass extends MyCloneClass implements Serializable {
@@ -164,7 +166,8 @@ public class EmployeeSingletonClass extends MyCloneClass implements Serializable
     }
 
     //To fight with Serializable/ De-Serializable
-    protected Object readResolveMethod() {
+    @Serial
+    protected Object readResolve() {
         return employeeSingletonClass;
     }
 }
