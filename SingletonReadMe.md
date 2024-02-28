@@ -132,4 +132,41 @@ public class EmployeeSingletonClass implements Serializable {
 # Example of Fully secured Singleton Class:
 
 ```
+import java.io.Serializable;
+
+public class EmployeeSingletonClass extends MyCloneClass implements Serializable {
+
+    private static EmployeeSingletonClass employeeSingletonClass;
+
+    // To fight with Reflection API
+    private EmployeeSingletonClass() {
+        if (employeeSingletonClass != null) {
+            throw new IllegalStateException("Object already created");
+        }
+    }
+
+    //Thread safe with double checks.
+    public static EmployeeSingletonClass getInstance() {
+        if (employeeSingletonClass == null) {
+            synchronized (EmployeeSingletonClass.class) {
+                if (employeeSingletonClass == null) {
+                    employeeSingletonClass = new EmployeeSingletonClass();
+                }
+            }
+        }
+        return employeeSingletonClass;
+    }
+
+    //To fight with Cloneable
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        throw new CloneNotSupportedException();
+    }
+
+    //To fight with Serializable/ De-Serializable
+    protected Object readResolveMethod() {
+        return employeeSingletonClass;
+    }
+}
+
 ```
