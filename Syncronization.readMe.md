@@ -23,9 +23,9 @@ In this case, the critical section is enclosed within a synchronized block. The 
 ```
 
  3. Now, when it comes to your question about synchronized(Employee.class) vs synchronized(anyObject), let's discuss both:
-```
-synchronized(Employee.class):
 
+synchronized(Employee.class):
+```
 public void someMethod() {
     synchronized (Employee.class) {
         // Critical section
