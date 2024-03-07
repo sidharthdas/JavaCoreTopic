@@ -2,6 +2,9 @@
 
 ![image](https://github.com/sidharthdas/JavaCoreTopic/assets/36167954/bd2a29b9-6c6d-4ec6-b71b-9d25e8acad58)
 
+Memory :
+    1. Eden Space: The Eden space is a memory pool in the Java Virtual Machine (JVM) memory pool that allocates memory for most objects. 
+
 1. Exceptions:
     1. StackOverflowException: StackOverflowException is thrown for execution stack overflow errors, typically in case of a very deep or unbounded recursion.
     2. OutOfMemoryError: OutOfMemoryError is a Java exception that is thrown when the Java Virtual Machine (JVM) is unable to allocate an object because it is out of memory.
