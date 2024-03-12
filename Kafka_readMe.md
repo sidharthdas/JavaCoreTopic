@@ -8,6 +8,8 @@ Replication in Kafka:
 In the above example, we have a Kafka cluster.
 Take an example of 3 Brokers, 1 topic, 1 partition, 2 Replication
 In this scenario, the zookeeper will choose one of the replications as a leader and the other one as a follower. So when the Kafka producer produces the data, the data will be in the leader and will get replicated to followers.
+
+
 So all read and write operations will happen in the leader and then replicated to followers.
 
 ![image](https://github.com/sidharthdas/JavaCoreTopic/assets/36167954/558b2548-4914-4f60-b67c-bb55a288c85d)
