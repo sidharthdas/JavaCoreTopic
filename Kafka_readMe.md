@@ -39,4 +39,6 @@ Leader:
   2. sends new partition assignment to the coordinator
 
 
+# Rebalancing In Kafka:
 
+Kafka rebalancing is the process by which Kafka redistributes partitions across consumers to ensure that each consumer is processing an approximately equal number of partitions. This ensures that data processing is distributed evenly across consumers and that each consumer is processing data as efficiently as possible.
