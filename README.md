@@ -18,7 +18,16 @@ The heap memory is a region of memory that is used to store objects. When we cre
 When we create a new string object, it is added to the string pool.
 The string pool is used to store string objects that are used frequently. This is because it is more efficient to store a string object in the string pool than it is to store it in the heap memory. When we create a new string object, the Java Virtual Machine (JVM) checks to see if the string object already exists in the string pool. If the string object already exists in the string pool, the JVM returns a reference to the existing string object. If the string object does not exist in the string pool, the JVM creates a new string object and adds it to the string pool.
 ```
-
+Rev String:
+```
+String str = "Sidharth";
+        
+        String revStr = str
+                .chars()
+                .mapToObj(x -> String.valueOf((char)x))
+                .reduce((s1, s2) -> s2 + s1)
+                .orElse("");
+```
 
 -> Kadane Algorithm:
 
