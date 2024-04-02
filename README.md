@@ -1,17 +1,17 @@
 # JavaCoreTopic
 
-### -> To check the memory consumption of the application, 
+## -> To check the memory consumption of the application, 
 ``` java -> jdk17 -> bin -> jconsole.exe```
 Or you can download ``` the JDK Mission Control Application ```
 
 
-### -> ClassNotFoundException and NoClassDefFoundError:
+## -> ClassNotFoundException and NoClassDefFoundError:
 
 ```
 ClassNotFoundException:  ClassNotFoundException is thrown when looking up a class that isn't on the classpath or using an invalid name to look up a class that isn't on the runtime classpath.
 NoClassDefFoundError: NoClassDefFoundError occurs when a compiled class references another class that isn't on the runtime classpath.
 ```
--> String creation using the new keyword:
+## -> String creation using the new keyword:
 ```
 When we create a string object using the new keyword in Java, two objects are created in memory. One object is created in the heap memory, and the other object is created in the string pool.
 The heap memory is a region of memory that is used to store objects. When we create a new object, it is allocated a space in the heap memory. The string pool is a region of memory that is used to store string objects.
@@ -29,7 +29,7 @@ String str = "Sidharth";
                 .orElse("");
 ```
 
--> Kadane Algorithm:
+## -> Kadane Algorithm:
 
 Maximum sum of sub-array:
 Notes:
@@ -58,12 +58,12 @@ public int maxSubArray(int[] nums) {
     }
 ```
 
--> Sort 2D array using Arrays.sort()
+## -> Sort 2D array using Arrays.sort()
 ```
  Arrays.sort(score, (score1, score2) -> score2[k] - score1[k]);
 ```
 
--> Overriding:
+## -> Overriding:
  - Cant change the access modifier it should be the same.
    ```
    public interface C {
@@ -87,7 +87,7 @@ public int maxSubArray(int[] nums) {
 
    
    ```
--> Sealed class in Java 17:
+## -> Sealed class in Java 17:
 
 If we want only some classes that can extend the base class, we can use a sealed class. And the classes that are extending sealed class must be final
 ```
@@ -95,7 +95,7 @@ public sealed class A permits B, C {
 ```
 
 
-Stream API nested null check:
+## -> Stream API nested null check:
 ```
 Optional.ofNullable(model1)
         .map(MainModel::getStudentList)
@@ -103,12 +103,12 @@ Optional.ofNullable(model1)
         .flatMap(student -> student.stream().findFirst())
         .ifPresent(z -> s.setName(z.getName()));
 ```
--> PriorityQueue Implementation
+## -> PriorityQueue Implementation
 ```
 PriorityQueue<Integer> pq = new PriorityQueue<>((a1, a2) -> a2 - a1); 
 //Here, in the argument, we need to pass the Comparator (Added lambda exp for sorting)
 ```
--> Sort the list of String by the length in reverse order and then if lengths are equal then sort by the natural order
+## -> Sort the list of String by the length in reverse order and then if lengths are equal then sort by the natural order
 ```
 			map.entrySet()
                         .stream()
@@ -123,9 +123,9 @@ PriorityQueue<Integer> pq = new PriorityQueue<>((a1, a2) -> a2 - a1);
         );
 ```
 
--> For Java core topics, refer to package JavaCoreTopicsImplementation17thJul2021
+## -> For Java core topics, refer to package JavaCoreTopicsImplementation17thJul2021
 
--> For BST please follow this package src/binarysearchtree20Feb2023
+## -> For BST please follow this package src/binarysearchtree20Feb2023
 
     Insert a node
     Remove a node
@@ -139,17 +139,17 @@ PriorityQueue<Integer> pq = new PriorityQueue<>((a1, a2) -> a2 - a1);
     Height of BST
     Mirror image of BST
 
--> For java8 functional interface, refer JavaCoreTopicsImplementation17thJul2021.java8FunctionalInterfaces. 
+## -> For java8 functional interface, refer JavaCoreTopicsImplementation17thJul2021.java8FunctionalInterfaces. 
 
 -> For logging in Java Stream, use `peek() after stream()`
--> 2 main methods of stream() i.e.
+## -> 2 main methods of stream() i.e.
 ```
 stream().takeWhile(Predicate p) // -> It will loop over the array, and pull the data unless the condition matches, once it gets matched, it will stop
 stream().dropWile(Predicate p) // -> It will loop over the array and drop the elements will the condition matches, once it gets matched, it will stop dropping the elements
 
 ```
 
--> Map, group by address then find the one with max salary for particular address:
+## -> Map, group by address then find the one with max salary for a particular address:
 ```
 public static void main(String[] args) {
 
@@ -181,7 +181,7 @@ public static void main(String[] args) {
         System.out.println(map2);
     }
 ```
--> Map to process the key and value if it is present we can use computeIfPresent method
+## -> Map to process the key and value if it is present we can use computeIfPresent method
 
 -> Map 
 ```
@@ -198,13 +198,13 @@ counter.computeIfPresent(key, (k, v) -> {
         });
 
 ```
--> Convert Map<Integer, Integer> to Map<Integer, List<Integer>> based on value:
+## -> Convert Map<Integer, Integer> to Map<Integer, List<Integer>> based on value:
 
 ```
 Map<Integer, List<Integer>> temp = map.entrySet().stream()
 .collect(Collectors.groupingBy(Map.Entry::getValue, Collectors.mapping(Map.Entry::getKey, Collectors.toList())));
 ```
--> Map to process the key if it is not present in the map:
+## -> Map to process the key if it is not present in the map:
 ```
 // provide value for new key which is absent
         // using computeIfAbsent method
@@ -212,31 +212,31 @@ Map<Integer, List<Integer>> temp = map.entrySet().stream()
         map.computeIfAbsent("key6", k -> 2000 * 34);
  ```
 
--> We have a Iterable and we need to convert it to List using java 11
+## -> We have a Iterable and we need to convert it to List using java 11
 ```
 Iterable<Employee> employeeIterable = Arrays.asList(new Employee(), new Employee());
         List<Employee> empList = StreamSupport.stream(employeeIterable.spliterator(), false) // false is not to have parallel execution
                 .toList();
 ```
--> Map java8 functionalities, refer spet2022.MapPractice
+## -> Map java8 functionalities, refer spet2022.MapPractice
 ```
 Map<String, Employee> mapEmpl = empList.stream().collect(Collectors.groupingBy(x -> x.dept.deptCode, Collectors.collectingAndThen(Collectors.maxBy(Comparator.comparingInt(x -> x.empSalary)),
                 Optional::get)));
 ```
 
--> Sort map by value and if values are equal then sort by key
+## -> Sort map by value and if values are equal then sort by key
 ```
 map = map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed()
                 .thenComparing(Map.Entry.comparingByKey()))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
 ```
--> Flatten the List using flatMap method:
+## -> Flatten the List using flatMap method:
 ```
 l.stream().filter(x -> x.size() == 4)
                 .flatMap(List::stream).reduce(Integer::sum).get();
 ```
 
--> MultiMap method of Stream: https://www.youtube.com/watch?v=SqmO0NM0J98
+## -> MultiMap method of Stream: https://www.youtube.com/watch?v=SqmO0NM0J98
 
 ```
 public static void main(String[] args) {
@@ -268,7 +268,7 @@ public static void main(String[] args) {
 ```
  
  
-
+## Indexes:
 -> For Callable, Future Object and ExecutorService Implementation, please refer JUNE.callableImplementation
 
 -> For Singleton, please refer JUNE.practice1.singleton
@@ -285,7 +285,7 @@ map = map.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue
 
 ```
 
-Find the highest occurance String from the list:
+## -> Find the highest occurrence String from the list:
 
 ```
 Optional<Map.Entry<String, Long>> l  = items.stream().
@@ -293,7 +293,7 @@ Optional<Map.Entry<String, Long>> l  = items.stream().
 				.entrySet().stream().sorted(Collections.reverseOrder(Comparator.comparing(p-> p.getValue()))).findFirst();
 ```
 
-Generics:
+## -> Generics:
 1. Upper bound generics: Any class extends by an Object, this can access
 ```
 List<? extends Object>
@@ -335,7 +335,7 @@ final Map< String, Integer > sortedByCount = map.entrySet()
         .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, ( e1, e2 ) -> e1, LinkedHashMap::new));
 ```
 
-Java 1.8 Stream Feature:
+## Java 1.8 Stream Feature:
 
 ```//Flat map impl
 		List<List<List<Integer>>>
@@ -361,7 +361,7 @@ Java 1.8 Stream Feature:
 ```
 
 
-BST - Delete Node : 
+## BST - Delete Node : 
 
 ```
 public Node delete ( Node root, int data ) {
@@ -395,7 +395,7 @@ public Node delete ( Node root, int data ) {
         return minV;
     }
 ```
-Reverse a LinkedList:
+## Reverse a LinkedList:
 
 ```
 public void reverse() {
@@ -418,7 +418,7 @@ public void reverse() {
     }
 ```
 
-Delete Middle Element Of LinkedList:
+## Delete Middle Element Of LinkedList:
 
 ```
 public ListNode deleteMiddle(ListNode head) {
@@ -443,9 +443,9 @@ public ListNode deleteMiddle(ListNode head) {
 
 # Java17 Best Feature
 
-Record:
+## Record:
 
-it is use to transfer the data and access the data, no need of creating DTO/POJO classes
+it is used to transfer the data and access the data, no need to create DTO/POJO classes
 
 ```
 record Alien(String alienId, String alienName) {
@@ -469,7 +469,7 @@ public class Test {
 }
 ```
 
-# CompletableFuture Example
+## CompletableFuture Example
 
 Please refer package: JavaCoreTopics/src/completablefuture
 
@@ -529,7 +529,7 @@ class Validator {
 
 ```
 
-# Volatile and AtominInteger
+## Volatile and AtominInteger
 Please refer package: src/volatileandatomicnumber/VolatileAndAtomicNumber.java
 
 ```
@@ -544,10 +544,10 @@ public class VolatileAndAtomicNumber {
     }
 }
 ```
-# Threading CountDownLatch, CyclicBarriar and Semaphore
+## Threading CountDownLatch, CyclicBarriar and Semaphore
 Please refer package: JavaCoreTopics/src/threadingconcepts/CountDownLatchMainClass.java
 
-# We want to check on which field the particular annotation is present, if yes, then update the value of the field.
+## We want to check on which field the particular annotation is present, if yes, then update the value of the field.
 
 ```
 public static void main(String[] args) throws IllegalAccessException {
