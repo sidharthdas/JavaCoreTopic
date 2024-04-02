@@ -1,11 +1,11 @@
 # JavaCoreTopic
 
--> To check the memory consumption of the application, 
+### -> To check the memory consumption of the application, 
 ``` java -> jdk17 -> bin -> jconsole.exe```
 Or you can download ``` the JDK Mission Control Application ```
 
 
--> ClassNotFoundException and NoClassDefFoundError:
+### -> ClassNotFoundException and NoClassDefFoundError:
 
 ```
 ClassNotFoundException:  ClassNotFoundException is thrown when looking up a class that isn't on the classpath or using an invalid name to look up a class that isn't on the runtime classpath.
