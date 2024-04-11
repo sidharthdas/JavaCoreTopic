@@ -6,7 +6,6 @@ Or you can download ``` the JDK Mission Control Application ```
 
 ## -> ClassNotFoundException and NoClassDefFoundError:
 
-
 ```
 ClassNotFoundException:  ClassNotFoundException is thrown when looking up a class that isn't on the classpath or using an invalid name to look up a class that isn't on the runtime classpath.
 NoClassDefFoundError: NoClassDefFoundError occurs when a compiled class references another class that isn't on the runtime classpath.
