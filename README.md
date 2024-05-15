@@ -1,6 +1,7 @@
 # JavaCoreTopic
 
 
+
 ## -> To check the memory consumption of the application, 
 ``` java -> jdk17 -> bin -> jconsole.exe```
 Or you can download ``` the JDK Mission Control Application ```
