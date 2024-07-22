@@ -1,5 +1,3 @@
-
-
 # JavaCoreTopic
 
 ## -> To check the memory consumption of the application, 
