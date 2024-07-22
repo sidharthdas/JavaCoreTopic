@@ -1,4 +1,8 @@
+
 # JavaCoreTopic
+
+## -> To test anything in spring boot application 
+implement CommandLineRunner
 
 ## -> To check the memory consumption of the application, 
 ``` java -> jdk17 -> bin -> jconsole.exe```
