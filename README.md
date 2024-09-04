@@ -1,4 +1,3 @@
-
 # JavaCoreTopic
 
 ## -> To test anything in spring boot application 
