@@ -1,6 +1,4 @@
-
-
-# JavaCoreTopic
+l# JavaCoreTopic
 
 ## -> To test anything in spring boot application 
 implement CommandLineRunner
